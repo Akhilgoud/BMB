@@ -1,0 +1,56 @@
+<ion-header>
+  <!-- <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar> -->
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="loginForm">
+            <ion-item *ngIf="isRegister">
+                <ion-label>
+                  <ion-icon name="person"></ion-icon>
+                </ion-label>
+                <ion-input formControlName="name"  [(ngModel)]="userObj.name" type="text" placeholder="Name"></ion-input>
+              </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="mail"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="email"  [(ngModel)]="userObj.email" type="email" placeholder="Email Id"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="key"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password"></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button (click)="authorize()" full class="signinbtn" >
+         <span *ngIf="isRegister"> Sign Up</span>
+         <span *ngIf="!isRegister"> Sign In</span>
+         
+        </button>
+      </ion-col>
+    </ion-row>
+    <div class="loginRegDiv">
+      <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
+      <div *ngIf="authRes == 'NODATA'" class="authError">Email Not Found. Please sign up</div>
+      <span class="loginRegText">
+          <span *ngIf="isRegister">Already have an account?</span>
+          <span *ngIf="!isRegister">Don't have an account yet?</span>
+        </span>
+      <a class="loginRegBtn" (click)="isRegister= !isRegister">
+        <span *ngIf="isRegister">Sign In</span>
+        <span *ngIf="!isRegister">Sign Up</span>
+      </a>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,28 @@
+page-login {
+    .signinbtn {
+        background-color: #089398;
+        border-radius: 25px;
+    }
+    .signinbtn .button-inner {
+        letter-spacing: 3px;
+        word-spacing: 8px;
+        font-family: serif;
+    }
+    .loginRegDiv {
+        text-align: center;
+    }
+
+    .loginRegText {
+        letter-spacing: 1px;
+        font-size: 16px;
+    }
+    
+    .loginRegBtn {
+        color: blue;
+    }
+    .authError {
+        color: red;
+        letter-spacing: 1px;
+        word-spacing: 2px;
+    }
+}

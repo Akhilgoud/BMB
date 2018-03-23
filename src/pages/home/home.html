@@ -1,14 +1,22 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu" id="menuIcon"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title (click)="changePage(booksinfoPage)">
+        <img alt="" src="./assets/imgs/titlelogo.jpg" width="44px">
+      <span id="apptitle">BMB</span>
     </ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="changePage(postbookPage)">
+          <ion-icon name="add-circle" id="postIcon" ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding >
+    <ion-nav  [root]="rootPage"></ion-nav>
 </ion-content>

@@ -1,0 +1,109 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class="appTitle">Post your book</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="postbookForm">
+          <ion-item>
+            <span style="color: #4856b1;font-family: sans-serif;">Upload max 3 images of book</span>
+            <button ion-button full (click)="takePhoto()" [disabled]="photos.length > 2">
+               <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+            </button>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-6 *ngFor="let photo of photos; let id = index">
+                  <ion-card class="block">
+                    <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                    <img [src]="photo" *ngIf="photo" />
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary"  floating>Book Name*</ion-label>
+            <ion-input formControlName="bookname" [(ngModel)]="bookObj.name" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Author</ion-label>
+            <ion-input formControlName="author" [(ngModel)]="bookObj.author" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Publisher</ion-label>
+            <ion-input formControlName="publisher" [(ngModel)]="bookObj.publisher" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Edition</ion-label>
+            <ion-input formControlName="edition" [(ngModel)]="bookObj.edition" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Price*</ion-label>
+            <ion-input formControlName="price" [(ngModel)]="bookObj.price" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Description</ion-label>
+            <ion-input formControlName="description" [(ngModel)]="bookObj.description" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Is Book related to Academic*</ion-label>
+            <ion-select formControlName="isAcademic" interface="popover" [(ngModel)]="bookObj.isAcademic">
+              <ion-option value="Y">Yes</ion-option>
+              <ion-option value="N">No</ion-option>
+            </ion-select>
+          </ion-item>
+          <span *ngIf="bookObj.isAcademic =='Y'">
+          <ion-item>
+            <ion-label color="primary" floating>Course</ion-label>
+            <ion-input formControlName="course" [(ngModel)]="bookObj.course" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Branch</ion-label>
+            <ion-input formControlName="branch" [(ngModel)]="bookObj.branch" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Year</ion-label>
+            <ion-input formControlName="year" [(ngModel)]="bookObj.year" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Semester</ion-label>
+            <ion-input formControlName="sem" [(ngModel)]="bookObj.sem" type="number"></ion-input>
+          </ion-item>
+          </span>
+          <ion-item>
+            <ion-label color="primary" floating>Phone Number</ion-label>
+            <ion-input formControlName="phoneNo" [(ngModel)]="bookObj.phoneNo" type="number" maxlength="10"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Address</ion-label>
+            <ion-input type="text" formControlName="address" [(ngModel)]="bookObj.address"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Landmark</ion-label>
+            <ion-input type="text" formControlName="landmark" [(ngModel)]="bookObj.landmark"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Pincode*</ion-label>
+            <ion-input formControlName="pincode" [(ngModel)]="bookObj.pincode" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>College</ion-label>
+            <ion-input formControlName="college" [(ngModel)]="bookObj.college" type="text"></ion-input>
+          </ion-item>
+         </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-4>
+        <button ion-button (click)="submit()" [disabled]="!postbookForm.valid">submit</button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

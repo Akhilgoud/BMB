@@ -1,0 +1,24 @@
+<ion-menu side="left" [content]="mycontent">
+  <ion-header>
+          <ion-toolbar>
+              <ion-title>
+                <span> Hello {{userObj.name}} </span>
+              </ion-title>
+          </ion-toolbar>
+      </ion-header>
+      <ion-content>
+          <ion-list>
+               <button ion-item menuClose (click)="changePage(loginPage)" *ngIf="!userObj.email">
+                  Login
+              </button>
+              <button ion-item menuClose (click)="logout()" *ngIf="userObj.email">
+                    Logout
+                </button>
+          </ion-list>
+      </ion-content>
+  
+  </ion-menu>
+  
+  <ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+  
+  

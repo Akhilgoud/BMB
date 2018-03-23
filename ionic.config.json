@@ -1,6 +1,8 @@
 {
-  "name": "BooksTrade",
+  "name": "BMB",
   "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

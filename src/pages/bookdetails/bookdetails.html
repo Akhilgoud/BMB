@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <span style="font-size: 18px;letter-spacing: 2px;font-family: serif;"> DETAILS</span>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+          <span ion-text color="primary" showWhen="ios">Cancel</span>
+          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="!showImgSlide">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4 *ngFor="let photo of bookObj.bookImages; let id = index">
+          <ion-card class="block" (click)="showImgSlide=true">
+            <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-segment [(ngModel)]="tabInfo">
+      <ion-segment-button value="bookInfo">
+        <span>Book Info</span>
+      </ion-segment-button>
+      <ion-segment-button value="sellerInfo">
+        <span>Seller Info</span>
+      </ion-segment-button>
+    </ion-segment>
+
+
+    <div [ngSwitch]="tabInfo">
+      <div *ngSwitchCase="'bookInfo'" style="text-align:center;">
+        <div>
+          <br>
+          <div style="font-weight: 500;font-size: 16px;">{{ bookObj.name}}</div>
+          <span style="margin-left: 25%;
+            font-size: 14px;" *ngIf="bookObj.author"> - {{ bookObj.author}}</span>
+        </div>
+        <br>
+        <div id="bookinfoDetails">
+          <ion-row>
+            <ion-col>Price</ion-col>
+            <ion-col>-</ion-col>
+            <ion-col> &#8377; {{ bookObj.price}} </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>publisher</ion-col>
+            <ion-col>-</ion-col>
+            <ion-col>{{ bookObj.publisher}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Edition</ion-col>
+            <ion-col>-</ion-col>
+            <ion-col>{{ bookObj.edition}}</ion-col>
+          </ion-row>
+          <div *ngIf="bookObj.isAcademic == 'Y'">
+            <ion-row>
+              <ion-col>Course</ion-col>
+              <ion-col>-</ion-col>
+              <ion-col>{{ bookObj.course}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Branch</ion-col>
+              <ion-col>-</ion-col>
+              <ion-col>{{ bookObj.branch}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Year/Sem</ion-col>
+              <ion-col>-</ion-col>
+              <ion-col><span *ngIf="bookObj.year|| bookObj.sem"> {{ bookObj.year}}/ {{ bookObj.sem}} </span></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>Course</ion-col>
+              <ion-col>-</ion-col>
+              <ion-col>{{ bookObj.course}}</ion-col>
+            </ion-row>
+          </div>
+
+          <div style="border-bottom: 1px solid #eae1e1;">
+            <div style="text-align: start;padding-top: 10px;">Description : </div>
+            <div style="text-align: start; padding-left: 12px;font-size: 15px;padding-top: 10px; padding-bottom: 11px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ bookObj.description}}
+            </div>
+          </div>
+
+
+          <div style="font-size: 13px;float: right;    margin-top: 8px;"> <span>Posted on  - </span><span>{{bookObj.created_date | date:'dd/MM/yyyy' }}</span></div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'sellerInfo'" style="text-align:center;">
+          <div id="sellerinfoDetails">
+          <ion-row>
+              <ion-col>Phone no</ion-col>
+              <ion-col>-</ion-col>
+              <ion-col> {{ bookObj.bookContact[0].phoneNo}} </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Address</ion-col>
+                <ion-col>-</ion-col>
+                <ion-col> {{ bookObj.bookContact[0].address}} </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Landmark</ion-col>
+                <ion-col>-</ion-col>
+                <ion-col> {{ bookObj.bookContact[0].landmark}} </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Pincode</ion-col>
+                <ion-col>-</ion-col>
+                <ion-col> {{ bookObj.bookContact[0].pincode}} </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>College</ion-col>
+                <ion-col>-</ion-col>
+                <ion-col> {{ bookObj.bookContact[0].college}} </ion-col>
+            </ion-row>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <span *ngIf="showImgSlide">
+    <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;" (click)="showImgSlide=false"></ion-icon>
+    <ion-slides zoom="true">
+    <ion-slide *ngFor="let photo of bookObj.bookImages; let id = index">
+        <div class="swiper-zoom-container">
+        <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
+        </div>
+     </ion-slide>
+    </ion-slides>
+   </span>
+</ion-content>
