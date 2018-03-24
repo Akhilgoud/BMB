@@ -6,12 +6,13 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
-import { HomePage, SidenavPage, PostbookPage, BooksinfoPage ,LoginPage, BookdetailsPage } from '../pages/pages';
+import { HomePage, SidenavPage, PostbookPage, BooksinfoPage ,LoginPage, BookdetailsPage, MypostsPage } from '../pages/pages';
 import {HomePageService} from '../pages/home/home.service';
 import {PostbookApi} from '../pages/postbook/postbook.service';
 import {LoginApi} from '../pages/login/login.service';
 import {UserInfoService, BooksInfoApi} from '../shared/shared';
 import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
+import {PostBookDataService} from '../pages/postbook/postbookdatakeeper.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
     BooksinfoPage,
     LoginPage,
     BookdetailsPage,
-    DaysagoPipe
+      DaysagoPipe,
+      MypostsPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
     PostbookPage,
     BooksinfoPage,
     LoginPage,
-    BookdetailsPage
+    BookdetailsPage,
+      MypostsPage
   ],
   providers: [
     StatusBar,
@@ -48,6 +51,7 @@ import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
     HomePageService,
     UserInfoService,
     BooksInfoApi,
+      PostBookDataService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
