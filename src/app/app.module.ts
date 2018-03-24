@@ -22,7 +22,7 @@ import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
     BooksinfoPage,
     LoginPage,
     BookdetailsPage,
-    DaysagoPipe
+    DaysagoPipe,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +37,7 @@ import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
     PostbookPage,
     BooksinfoPage,
     LoginPage,
-    BookdetailsPage
+    BookdetailsPage,
   ],
   providers: [
     StatusBar,

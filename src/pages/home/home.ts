@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import 'rxjs/add/operator/takeWhile';
 import { NavController } from 'ionic-angular';
-import { PostbookPage, BooksinfoPage, LoginPage } from '../pages';
+import { PostbookPage, BooksinfoPage, LoginPage , MypostsPage } from '../pages';
 import { HomePageService } from './home.service';
 @Component({
   selector: 'page-home',
@@ -19,7 +19,7 @@ export class HomePage {
       page => {
         this.rootPage = page;
       });
-    this.homePageService.setPage(this.booksinfoPage);
+    this.homePageService.setPage(MypostsPage);
   }
 
   changePage(pagename) {
