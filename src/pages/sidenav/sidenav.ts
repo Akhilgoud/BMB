@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage, LoginPage } from '../pages';
-import {HomePageService} from '../home/home.service';
-import {UserInfoService} from '../../shared/shared';
+import { HomePage, LoginPage, MypostsPage } from '../pages';
+import { HomePageService } from '../home/home.service';
+import { UserInfoService } from '../../shared/shared';
 import { IUserObj } from '../login/login.model';
+import { UserDbProvider } from '../../providers/userdatabase';
 
 @Component({
   selector: 'page-sidenav',
@@ -13,34 +14,45 @@ export class SidenavPage {
 
   private rootPage;
   private loginPage = LoginPage;
-  userObj: IUserObj = new IUserObj();
+  private mypostsPage = MypostsPage;
+  userObj: any = {};
+  err: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public homePageService:HomePageService,
-    public userInfoService: UserInfoService
+    public homePageService: HomePageService,
+    public userInfoService: UserInfoService,
+    private database: UserDbProvider
   ) {
     this.rootPage = HomePage;
     this.userInfoService.userInfoChange.subscribe(
       userinfo => {
         this.userObj = userinfo;
       });
-  }
-
-  openPage(p) {
-    this.rootPage = p;
+    // this.GetAllUser();
   }
 
   changePage(page) {
     this.homePageService.setPage(page);
   }
-  
-  logout(){
-    this.userObj = {
-      name: "",
-      email : "",
-      password : ""
-    };
-    this.userInfoService.setUserInfo(this.userObj);
+
+  logout() {
+    this.database.DeleteUserData().then((data) => {
+      console.log(data);
+    }, (error) => {
+      console.log(error);
+    });
+    this.userInfoService.clearUserInfo();
   }
+
+  GetAllUser() {
+    this.database.GetUserInfo().then((data) => {
+      this.err = data;
+      this.userInfoService.setUserInfo(data);
+    }, (error) => {
+      this.err = error;
+      console.log(error);
+    });
+  }
+
 }

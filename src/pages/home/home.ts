@@ -14,7 +14,8 @@ export class HomePage {
   private postbookPage = PostbookPage;
   private booksinfoPage = BooksinfoPage;
   private loginPage = LoginPage;
-  constructor(public navCtrl: NavController, public homePageService: HomePageService) {
+  constructor(public navCtrl: NavController, 
+    public homePageService: HomePageService) {
     this.homePageService.rootpageChange.subscribe(
       page => {
         this.rootPage = page;

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage, SidenavPage } from '../pages/pages';
 @Component({
   templateUrl: 'app.html'
@@ -16,6 +15,16 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+
+    //   var notificationOpenedCallback = function(jsonData) {
+    //     console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+    //   };
+  
+    //   window["plugins"].OneSignal
+    //     .startInit("8a936468-7b45-4af4-a20c-c466c04b17a4", "420714648564")
+    //     .handleNotificationOpened(notificationOpenedCallback)
+    //     .endInit();
+    // });
     });
   }
 }

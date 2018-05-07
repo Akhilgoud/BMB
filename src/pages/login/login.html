@@ -42,7 +42,9 @@
     </ion-row>
     <div class="loginRegDiv">
       <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
-      <div *ngIf="authRes == 'NODATA'" class="authError">Email Not Found. Please sign up</div>
+      <div *ngIf="authRes == 'NOTFOUND'" class="authError">Email Not Found. Please sign up</div>
+      <div *ngIf="authRes == 'WC'" class="authError">Invalid Password</div>
+      <div *ngIf="authRes == '501'" class="authError">Failed to Authorize. Please try again later</div>
       <span class="loginRegText">
           <span *ngIf="isRegister">Already have an account?</span>
           <span *ngIf="!isRegister">Don't have an account yet?</span>

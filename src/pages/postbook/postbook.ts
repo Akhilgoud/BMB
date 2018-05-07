@@ -1,18 +1,17 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
-import {Camera, CameraOptions} from '@ionic-native/camera';
-import {DomSanitizer} from '@angular/platform-browser';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {PostbookApi} from './postbook.service';
-import {IBookObj} from './postbook.model';
-import {BooksinfoPage} from "../pages";
-import {HomePageService} from '../home/home.service';
-import {MypostsPage} from "../myposts/myposts";
-import {LoginApi} from "../login/login.service";
-import {UserInfoService} from "../../shared/shared";
-import {IUserObj} from "../login/login.model";
-import {LoginPage} from "../login/login";
-import {PostBookDataService} from "./postbookdatakeeper.service";
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PostbookApi } from './postbook.service';
+import { IBookObj } from './postbook.model';
+import { BooksinfoPage } from "../pages";
+import { HomePageService } from '../home/home.service';
+import { MypostsPage } from "../myposts/myposts";
+import { LoginApi } from "../login/login.service";
+import { UserInfoService } from "../../shared/shared";
+import { LoginPage } from "../login/login";
+import { PostBookDataService } from "./postbookdata.service";
 
 @Component({
     selector: 'page-postbook',
@@ -25,33 +24,27 @@ export class PostbookPage {
     public error: any;
     public bookObj: IBookObj;
     postbookForm: FormGroup;
-    userObj: IUserObj = new IUserObj();
+    shownav: boolean = true;
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                private camera: Camera,
-                private sanitizer: DomSanitizer,
-                public formBuilder: FormBuilder,
-                private alertCtrl: AlertController,
-                public postbookApi: PostbookApi,
-                public userInfoService: UserInfoService,
-                public PostBookDataService: PostBookDataService,
-                public homePageService: HomePageService) {
-        this.userInfoService.userInfoChange.subscribe(
-            userinfo => {
-                this.userObj = userinfo;
-            })
-        this.PostBookDataService.getPostBookObj().subscribe(
-            bookinfo => {
-                this.bookObj = bookinfo;
-            })
+        public navParams: NavParams,
+        private camera: Camera,
+        private sanitizer: DomSanitizer,
+        public formBuilder: FormBuilder,
+        private alertCtrl: AlertController,
+        public postbookApi: PostbookApi,
+        public userInfoService: UserInfoService,
+        public postBookDataService: PostBookDataService,
+        public homePageService: HomePageService) {
+        this.bookObj = new IBookObj();
+        var postbookobj = this.postBookDataService.getPostBookObj();
+        if(postbookobj)
+        this.bookObj = postbookobj.bookObj;
     }
 
 
     ngOnInit() {
         this.photos = [];
         this.images = [];
-        this.bookObj = new IBookObj();
-        // this.getdata();
         this.bindForm();
     }
 
@@ -74,18 +67,6 @@ export class PostbookPage {
             pincode: ['', Validators.required],
             college: ['']
         });
-    }
-
-    getdata() {
-        this.postbookApi.getData().subscribe(
-            response => {
-                console.log(response);
-                this.images = response;
-            },
-            error => {
-                console.log("error authentication");
-            }
-        )
     }
 
     deletePhoto(index) {
@@ -141,20 +122,36 @@ export class PostbookPage {
             bookObj: this.bookObj,
             imageArr: this.photos
         }
-        if (this.userObj.email) {
+        var userobj = this.userInfoService.getUserInfo();
+        if (userobj && userobj.email) {
             this.postbookApi.postNewBook(obj).subscribe(
                 response => {
                     console.log(response);
                     this.homePageService.setPage(MypostsPage)
                 },
                 error => {
+                        let alert = this.alertCtrl.create({
+                          title: 'Failed to post!',
+                          subTitle: 'Please try again later',
+                          buttons: ['Dismiss']
+                        });
+                        alert.present();
                     console.log("error authentication" + error);
                 }
             )
         } else {
             var oldobj = obj;
-            this.PostBookDataService.setBookInfo(oldobj);
+            this.postBookDataService.setBookInfo(oldobj);
             this.homePageService.setPage(LoginPage);
         }
     }
+
+    // scrollingFun(e) {
+    //     if(e.directionY=='down'){
+    //        this.shownav = false;
+    //     } else {
+    //         this.shownav = true;
+    //     }
+    // }
+
 }

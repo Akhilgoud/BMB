@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import {Camera} from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
-import { HomePage, SidenavPage, PostbookPage, BooksinfoPage ,LoginPage, BookdetailsPage, MypostsPage } from '../pages/pages';
-import {HomePageService} from '../pages/home/home.service';
-import {PostbookApi} from '../pages/postbook/postbook.service';
-import {LoginApi} from '../pages/login/login.service';
-import {UserInfoService, BooksInfoApi} from '../shared/shared';
-import {DaysagoPipe} from '../pages/booksinfo/booksinfo.pipe';
-import {PostBookDataService} from '../pages/postbook/postbookdatakeeper.service';
-
+import {UserDbProvider} from '../providers/userdatabase';
+import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage } from '../pages/pages';
+import { HomePageService } from '../pages/home/home.service';
+import {BooksinfoPageService} from '../pages/booksinfo/booksinfo.service';
+import { PostbookApi } from '../pages/postbook/postbook.service';
+import { LoginApi } from '../pages/login/login.service';
+import { UserInfoService, BooksInfoApi } from '../shared/shared';
+import { DaysagoPipe } from '../pages/booksinfo/booksinfo.pipe';
+import { PostBookDataService } from '../pages/postbook/postbookdata.service';
+import { SQLite } from '@ionic-native/sqlite';
 @NgModule({
   declarations: [
     MyApp,
@@ -23,8 +25,8 @@ import {PostBookDataService} from '../pages/postbook/postbookdatakeeper.service'
     BooksinfoPage,
     LoginPage,
     BookdetailsPage,
-      DaysagoPipe,
-      MypostsPage
+    DaysagoPipe,
+    MypostsPage
   ],
   imports: [
     BrowserModule,
@@ -40,19 +42,22 @@ import {PostBookDataService} from '../pages/postbook/postbookdatakeeper.service'
     BooksinfoPage,
     LoginPage,
     BookdetailsPage,
-      MypostsPage
+    MypostsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
+    UserDbProvider,
     PostbookApi,
     LoginApi,
     HomePageService,
+    BooksinfoPageService,
     UserInfoService,
     BooksInfoApi,
-      PostBookDataService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PostBookDataService,
+    SQLite,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })
-export class AppModule {}
+export class AppModule { }
