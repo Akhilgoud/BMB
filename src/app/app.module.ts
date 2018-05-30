@@ -16,6 +16,8 @@ import { UserInfoService, BooksInfoApi } from '../shared/shared';
 import { DaysagoPipe } from '../pages/booksinfo/booksinfo.pipe';
 import { PostBookDataService } from '../pages/postbook/postbookdata.service';
 import { SQLite } from '@ionic-native/sqlite';
+import {CallNumber} from '@ionic-native/call-number';
+import {SocialSharing} from '@ionic-native/social-sharing';
 @NgModule({
   declarations: [
     MyApp,
@@ -57,6 +59,8 @@ import { SQLite } from '@ionic-native/sqlite';
     BooksInfoApi,
     PostBookDataService,
     SQLite,
+    CallNumber,
+    SocialSharing,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })

@@ -20,7 +20,7 @@ export class HomePage {
       page => {
         this.rootPage = page;
       });
-    this.homePageService.setPage(MypostsPage);
+    this.homePageService.setPage(BooksinfoPage);
   }
 
   changePage(pagename) {

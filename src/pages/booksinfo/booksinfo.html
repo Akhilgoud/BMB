@@ -1,6 +1,6 @@
 <ion-header>
   <!-- <ion-navbar>
-    <ion-title>booksinfo</ion-title>
+    <ion-title>My Posts</ion-title>
   </ion-navbar> -->
 </ion-header>
 
@@ -16,7 +16,7 @@
         <ion-col col-3>
           <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]" style="    width: 100%;"
           />
-          <img alt="No Image" src="../../assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
+          <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
         </ion-col>
         <ion-col col-7 style="padding-left: 18px;    padding-top: 12px;">
           <div id="bookname">{{book.name}}</div>

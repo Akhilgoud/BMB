@@ -1,7 +1,8 @@
 <ion-header>
 
   <ion-navbar *ngIf="shownav">
-    <ion-title class="appTitle">Post your book</ion-title>
+    <ion-title class="appTitle" *ngIf="!isUpdatePage">Post your book</ion-title>
+    <ion-title class="appTitle" *ngIf="isUpdatePage">Update book details</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +12,7 @@
       <ion-col>
         <form [formGroup]="postbookForm">
           <ion-item>
-            <span style="color: #4856b1;font-family: sans-serif;">Upload max 3 images of book</span>
+            <span style="color: #4856b1;font-family: sans-serif;">Upload max 3 images of books</span>
             <button ion-button full (click)="takePhoto()" [disabled]="photos.length > 2">
                <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
             </button>
@@ -20,7 +21,7 @@
                 <ion-col col-6 *ngFor="let photo of photos; let id = index">
                   <ion-card class="block">
                     <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
-                    <img [src]="photo" *ngIf="photo" />
+                    <img [src]="'data:image/jpeg;base64,' + photo" *ngIf="photo" />
                   </ion-card>
                 </ion-col>
               </ion-row>
@@ -101,7 +102,10 @@
     </ion-row>
     <ion-row>
       <ion-col offset-4>
-        <button ion-button (click)="submit()"   [disabled]="!postbookForm.valid">submit</button>
+        <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" *ngIf="!isUpdatePage">submit</button>
+        <button ion-button (click)="update()" [disabled]="!postbookForm.valid" *ngIf="isUpdatePage">Update</button>
+        <!-- <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" >submit</button> -->
+        
       </ion-col>
     </ion-row>
 

@@ -7,7 +7,7 @@ import { LoginApi } from './login.service';
 import { UserInfoService } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
 import { PostBookDataService } from "../postbook/postbookdata.service";
-import { PostbookPage } from "../postbook/postbook"
+import { PostbookPage } from "../postbook/postbook";
 import { UserDbProvider } from '../../providers/userdatabase';
 
 @Component({
@@ -87,10 +87,11 @@ export class LoginPage {
     }
 
     validUser(response) {
-        // this.CreateUser(response);
+        this.CreateUser(response);
         this.userInfoService.setUserInfo(response);
-        if (this.postBookDataService.getPostBookObj()) {
-            this.homePageService.setPage(PostbookPage);
+        var pageToRedirect = this.homePageService.getPreviousPage();
+        if (pageToRedirect) {
+            this.homePageService.setPage(pageToRedirect);
         }
         else {
             this.homePageService.setPage(BooksinfoPage);

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class HomePageService {
    private rootpage : any;
-
+   private previousPage: any;
    rootpageChange: Subject<any> = new Subject<any>();
 
    constructor(){
@@ -14,6 +14,11 @@ export class HomePageService {
    }
 
    setPage(page){
+       this.previousPage = this.rootpage ? this.rootpage : null;
        this.rootpageChange.next(page);
+   }
+
+   getPreviousPage(){
+       return this.previousPage;
    }
 }

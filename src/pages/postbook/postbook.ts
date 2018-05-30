@@ -23,6 +23,7 @@ export class PostbookPage {
     public base64Image: string;
     public error: any;
     public bookObj: IBookObj;
+    public isUpdatePage:boolean;
     postbookForm: FormGroup;
     shownav: boolean = true;
     constructor(public navCtrl: NavController,
@@ -35,15 +36,18 @@ export class PostbookPage {
         public userInfoService: UserInfoService,
         public postBookDataService: PostBookDataService,
         public homePageService: HomePageService) {
+        this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
-        if(postbookobj)
-        this.bookObj = postbookobj.bookObj;
+        if(postbookobj){
+            this.bookObj = postbookobj.bookObj;
+            this.photos = postbookobj.imageArr;
+        }
+        this.isUpdatePage = this.postBookDataService.getIsUpdatePage();
     }
 
 
     ngOnInit() {
-        this.photos = [];
         this.images = [];
         this.bindForm();
     }
@@ -106,7 +110,7 @@ export class PostbookPage {
 
         this.camera.getPicture(options).then(
             imageData => {
-                this.base64Image = "data:image/jpeg;base64," + imageData;
+                this.base64Image = imageData;
                 this.photos.push(this.base64Image);
                 this.photos.reverse();
             },
@@ -123,7 +127,8 @@ export class PostbookPage {
             imageArr: this.photos
         }
         var userobj = this.userInfoService.getUserInfo();
-        if (userobj && userobj.email) {
+        if (userobj && userobj._id) {
+            obj.bookObj.uid = userobj._id;
             this.postbookApi.postNewBook(obj).subscribe(
                 response => {
                     console.log(response);
@@ -132,6 +137,36 @@ export class PostbookPage {
                 error => {
                         let alert = this.alertCtrl.create({
                           title: 'Failed to post!',
+                          subTitle: 'Please try again later',
+                          buttons: ['Dismiss']
+                        });
+                        alert.present();
+                    console.log("error authentication" + error);
+                }
+            )
+        } else {
+            var oldobj = obj;
+            this.postBookDataService.setBookInfo(oldobj);
+            this.homePageService.setPage(LoginPage);
+        }
+    }
+
+    update(){
+        var obj = {
+            bookObj: this.bookObj,
+            imageArr: this.photos
+        }
+        var userobj = this.userInfoService.getUserInfo();
+        if (userobj && userobj._id) {
+            obj.bookObj.uid = userobj._id;
+            this.postbookApi.updateBookInfo(obj).subscribe(
+                response => {
+                    console.log(response);
+                    this.homePageService.setPage(MypostsPage)
+                },
+                error => {
+                        let alert = this.alertCtrl.create({
+                          title: 'Failed to update!',
                           subTitle: 'Please try again later',
                           buttons: ['Dismiss']
                         });

@@ -29,7 +29,7 @@ export class SidenavPage {
       userinfo => {
         this.userObj = userinfo;
       });
-    // this.GetAllUser();
+      this.GetAllUser();
   }
 
   changePage(page) {

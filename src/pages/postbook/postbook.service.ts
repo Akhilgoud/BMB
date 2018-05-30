@@ -10,6 +10,8 @@ export class PostbookApi {
     
     constructor(private http: Http) { }
     private postbookUrl = 'https://floating-cliffs-67240.herokuapp.com/postbook';
+    private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookInfo';
+    
   
     postNewBook(obj) {
         let headers = new Headers();
@@ -17,6 +19,18 @@ export class PostbookApi {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.postbookUrl, JSON.stringify(obj), options)
+            .map(response => {
+               return response.json();
+            })
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    updateBookInfo(obj) {
+        let headers = new Headers();
+        headers.append('Content-type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.updateBookUrl, JSON.stringify(obj), options)
             .map(response => {
                return response.json();
             })

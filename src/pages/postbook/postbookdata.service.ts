@@ -5,7 +5,7 @@ import {IBookObj} from "./postbook.model";
 @Injectable()
 export class PostBookDataService {
     private postBookObj: any = null;
-
+    private isUpdatePage: boolean = false;
 
     setBookInfo(obj) {
         this.postBookObj = obj;
@@ -13,5 +13,13 @@ export class PostBookDataService {
 
     getPostBookObj() {
         return this.postBookObj;
+    }
+
+    setIsUpdatePage(val){
+        this.isUpdatePage = val;
+    }
+
+    getIsUpdatePage(){
+        return this.isUpdatePage;
     }
 }
