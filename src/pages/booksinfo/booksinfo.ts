@@ -78,7 +78,7 @@ export class BooksinfoPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    this.booksInfoApi.getData().subscribe(response => {
+    this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
       refresher.complete();
@@ -95,7 +95,7 @@ export class BooksinfoPage {
     this.pageOffset = this.pageOffset + this.pageLimit;
     this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
       console.log(response);
-      this.booksinfoPageService.setBooksList(response);
+      this.booksinfoPageService.addBooksList(response);
       infiniteScroll.complete();
     },
       error => {

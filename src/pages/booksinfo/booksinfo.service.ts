@@ -9,18 +9,21 @@ export class BooksinfoPageService {
 
     constructor() {
         this.booksListChange.subscribe((value) => {
-            if (this.booksList) {
-                value.forEach(element => {
-                    this.booksList.push(element);
-                });
-            } else {
-                this.booksList = value;
-            }
+            this.booksList = value;
         });
     }
 
-    setBooksList(page) {
-        this.booksListChange.next(page);
+    setBooksList(data) {
+        this.booksListChange.next(data);
+    }
+
+    addBooksList(data) {
+        if (this.booksList) {
+            data.forEach(element => {
+               this.booksList.push(element);
+            });
+        } 
+        this.booksListChange.next(this.booksList);
     }
 
     getBooksList() {
