@@ -12,12 +12,12 @@ export class BooksInfoApi {
     private booksinfoUrl = 'https://floating-cliffs-67240.herokuapp.com/booksinfo';
     private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookStatus';
     
-    getData(){
+    getData(offset, limit){
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
         let options = new RequestOptions({ headers: headers});
-
-        return this.http.get(this.booksinfoUrl, options)
+        var obj= {offset: offset, limit: limit};
+        return this.http.post(this.booksinfoUrl, JSON.stringify(obj), options)
             .map(response => {
                 return response.json();
             })

@@ -23,6 +23,7 @@
     "@ionic-native/call-number": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/social-sharing": "^4.7.0",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/sqlite": "^4.6.0",
     "@ionic-native/status-bar": "4.4.0",

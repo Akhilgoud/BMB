@@ -23,9 +23,9 @@ export class MypostsPage {
     public userInfoService: UserInfoService,
     private loadingController: LoadingController) {
 
-    // this.userInfo = this.userInfoService.getUserInfo();
-    // this.getPosts(this.userInfo._id);
-    this.getPosts(this.uid);
+    this.userInfo = this.userInfoService.getUserInfo();
+    this.getPosts(this.userInfo._id);
+    // this.getPosts(this.uid);
   }
 
   getPosts(uid) {

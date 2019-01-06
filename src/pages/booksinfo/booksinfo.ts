@@ -13,6 +13,8 @@ export class BooksinfoPage {
   booksInfo: any;
   tempBooksInfo: any;
   currentDate = new Date();
+  pageLimit = 2;
+  pageOffset = 0;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -38,6 +40,7 @@ export class BooksinfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad BooksinfoPage');
   }
+   
 
   getBooks() {
     let loader = this.loadingController.create({
@@ -45,7 +48,7 @@ export class BooksinfoPage {
       dismissOnPageChange: true
     });
     loader.present();
-    this.booksInfoApi.getData().subscribe(response => {
+    this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
       loader.dismiss();
@@ -86,5 +89,33 @@ export class BooksinfoPage {
       }
     );
   }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+    this.pageOffset = this.pageOffset + this.pageLimit;
+    this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
+      console.log(response);
+      this.booksinfoPageService.setBooksList(response);
+      infiniteScroll.complete();
+    },
+      error => {
+        console.log("error authentication" + error);
+        infiniteScroll.complete();
+      }
+    );
+    
+  }
+
 }
+
+
+// return (checkfilter(this.filterObj.isacademic,item.isacademic) && 
+// checkfilter(this.filterObj.update,item.updatefee) &&
+// checkfilter(this.filterObj.update,item.updatefee)
+// )
+
+// checkfilter(item, filter){
+//  if(filter) return item == filter;
+//  else return true;
+// }
 
