@@ -10,13 +10,18 @@
       <span id="apptitle">BMB</span>
     </ion-title>
     <ion-buttons right>
-      <button ion-button (click)="changePage(postbookPage)">
+      <!-- <button ion-button (click)="changePage(postbookPage)">
           <ion-icon name="add-circle" id="postIcon" ></ion-icon>
+      </button> -->
+      <button ion-button (click)="openFilterModal($event)">
+          <ion-icon name="options" id="filterIcon"  ></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content padding #popoverContent>
+    <div #popoverText class="text-to-change">
+      </div>
     <ion-nav  [root]="rootPage"></ion-nav>
 </ion-content>

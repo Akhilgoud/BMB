@@ -7,7 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import {UserDbProvider} from '../providers/userdatabase';
-import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage } from '../pages/pages';
+import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage, FilterBooks } from '../pages/pages';
 import { HomePageService } from '../pages/home/home.service';
 import {BooksinfoPageService} from '../pages/booksinfo/booksinfo.service';
 import { PostbookApi } from '../pages/postbook/postbook.service';
@@ -28,7 +28,8 @@ import {SocialSharing} from '@ionic-native/social-sharing';
     LoginPage,
     BookdetailsPage,
     DaysagoPipe,
-    MypostsPage
+    MypostsPage,
+    FilterBooks
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import {SocialSharing} from '@ionic-native/social-sharing';
     BooksinfoPage,
     LoginPage,
     BookdetailsPage,
-    MypostsPage
+    MypostsPage,
+    FilterBooks
   ],
   providers: [
     StatusBar,

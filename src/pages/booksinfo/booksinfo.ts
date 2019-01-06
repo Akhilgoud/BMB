@@ -13,7 +13,7 @@ export class BooksinfoPage {
   booksInfo: any;
   tempBooksInfo: any;
   currentDate = new Date();
-  pageLimit = 2;
+  pageLimit = 4;
   pageOffset = 0;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -78,6 +78,8 @@ export class BooksinfoPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
+    this.pageOffset = 0;
+     this.pageLimit = 4;
     this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
