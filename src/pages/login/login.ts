@@ -89,7 +89,7 @@ export class LoginPage {
     }
 
     validUser(response) {
-        this.CreateUser(response);
+        // this.CreateUser(response);
         response.uid = response._id;
         this.userInfoService.setUserInfo(response);
         var pageToRedirect = this.homePageService.getPreviousPage();

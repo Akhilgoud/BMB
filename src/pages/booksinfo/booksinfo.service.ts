@@ -15,7 +15,7 @@ export class BooksinfoPageService {
     }
 
     setBooksList(data) {
-        this.tempBooksList = data;
+        this.tempBooksList = [...data];
         this.booksListChange.next(data);
     }
 
@@ -34,7 +34,7 @@ export class BooksinfoPageService {
     }
 
     filterItems(ev: any) {
-        this.booksList = this.tempBooksList;
+        this.booksList = [...this.tempBooksList];
         let val = ev.target.value;
         if (val && val.trim() != '') {
           this.booksList = this.booksList.filter((item) => {

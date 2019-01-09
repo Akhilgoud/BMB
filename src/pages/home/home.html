@@ -5,12 +5,12 @@
         <ion-icon name="menu" id="menuIcon"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title (click)="changePage(booksinfoPage)" style="    text-align: center;" >
-        <img alt="" src="./assets/imgs/titlelogo.jpg" width="44px">
+    <ion-title (click)="changePage(booksinfoPage)" style="margin-left: 12%;">
+      <img alt="" src="./assets/imgs/titlelogo.jpg" width="44px">
       <span id="apptitle">BMB</span>
-      <div id="apptitle" style="    font-size: 14px;
-      text-align: center;" *ngIf="pageTitle">{{pageTitle}}</div>
-      
+      <div id="apptitle" style="font-size: 14px;" *ngIf="pageTitle">
+        {{pageTitle}}</div>
+
     </ion-title>
     <ion-buttons right>
       <!-- <button ion-button (click)="changePage(postbookPage)">
@@ -19,7 +19,7 @@
       <!-- <button ion-button (click)="changePage(booksinfoPage);" *ngIf="appTitle != 'BMB'">
           <ion-icon name="home" id="homeIcon" ></ion-icon>
       </button> -->
-        <button ion-button (click)="searchClicked();" *ngIf="showSearchIcon">
+      <button ion-button (click)="searchClicked();" *ngIf="showSearchIcon">
           <ion-icon name="search" id="searchIcon" ></ion-icon>
       </button>
       <button ion-button (click)="openFilterModal($event)" *ngIf="showSearchIcon">
@@ -30,8 +30,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionInput)="filterItems($event)" *ngIf="showSearchBox"
-   style="z-index: 99;"
-  ></ion-searchbar>
-    <ion-nav  [root]="rootPage"></ion-nav>
+  <ion-searchbar (ionInput)="filterItems($event)" *ngIf="showSearchBox" style="z-index: 99;"></ion-searchbar>
+  <ion-nav [root]="rootPage"></ion-nav>
 </ion-content>

@@ -1,16 +1,16 @@
 <ion-header>
-  <ion-navbar>
+  <!-- <ion-navbar>
     <ion-title class="appTitle">My Posts
       <ion-icon name="search" style="float: right;" (click)="searchFilter = !searchFilter"></ion-icon>
     </ion-title>
-  </ion-navbar>
+  </ion-navbar> -->
 </ion-header>
 
 <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar (ionInput)="filterItems($event)" *ngIf="searchFilter"></ion-searchbar>
+  <!-- <ion-searchbar (ionInput)="filterItems($event)" *ngIf="searchFilter"></ion-searchbar> -->
   <div>
     <!-- <pre>{{userInfo | json}}</pre> -->
     <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv" >

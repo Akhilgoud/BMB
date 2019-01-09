@@ -47,7 +47,9 @@ export class PostbookPage {
     }
 
     ionViewWillEnter() {
-        this.homePageService.setPageTitle('Post my Book');
+        // this.homePageService.setPageTitle('Post my Book');
+        this.homePageService.setPageTitle('My Books');
+        
       }
 
       ionViewWillLeave() {

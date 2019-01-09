@@ -12,7 +12,7 @@ export class UserDbProvider {
 
     constructor(public http: Http,
         public storage: SQLite) {
-          this.connectDB();
+        //   this.connectDB();
     }
 
     connectDB() {
