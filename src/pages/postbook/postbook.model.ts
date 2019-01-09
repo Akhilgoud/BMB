@@ -8,6 +8,7 @@ export interface IBookObj {
     uid: string,
     status: string,
     isAcademic : string,
+    bookType : string,
     created_date : Date,
     updated_date : Date,
 
@@ -33,7 +34,8 @@ export class IBookObj implements IBookObj {
         this.description = "";        
         this.uid = "";        
         this.status = "";        
-        this.isAcademic = "";    
+        this.isAcademic = "";  
+        this.bookType = "";  
         this.created_date = null,
         this.updated_date = null,
         this.course = "";

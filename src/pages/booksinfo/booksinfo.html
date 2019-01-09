@@ -5,12 +5,12 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="position:absolute">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content ></ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
-  <div>
+  <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
+  <div class="searchSelected" >
     <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv" (click)="goToDetailsPage(book)">
       <ion-row style="padding-left: 16px;">
         <ion-col col-3>
@@ -22,7 +22,7 @@
           <div id="bookname">{{book.name}}</div>
           <div *ngIf="book.author" id="author">by {{book.author}}</div>
           <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
-          <div id="price">&#8377; {{book.price}}</div>
+          <div id="price"><i class="fa fa-rupee"></i>{{book.price}}</div>
         </ion-col>
         <ion-col col-1 offset-1 style="padding-top: 13%;">
           <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>

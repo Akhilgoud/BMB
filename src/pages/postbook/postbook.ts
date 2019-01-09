@@ -46,6 +46,13 @@ export class PostbookPage {
         this.isUpdatePage = this.postBookDataService.getIsUpdatePage();
     }
 
+    ionViewWillEnter() {
+        this.homePageService.setPageTitle('Post my Book');
+      }
+
+      ionViewWillLeave() {
+        this.homePageService.setPageTitle('');
+      }
 
     ngOnInit() {
         this.images = [];
@@ -61,6 +68,7 @@ export class PostbookPage {
             price: ['', Validators.required],
             description: [''],
             isAcademic: ['', Validators.required],
+            bookType: ['', Validators.required],
             course: [''],
             branch: [''],
             year: [''],

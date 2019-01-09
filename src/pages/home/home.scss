@@ -1,3 +1,7 @@
+// .searchSelected{
+//     // margin-top: 20%;
+// }
+
 page-home {
 #apptitle{
     font-size: 21px;
@@ -11,11 +15,10 @@ page-home {
     font-size:27px;color:#234c80
 }
 
-#filterIcon{
-    // font-size: 33px;
+#filterIcon, #searchIcon, #homeIcon{
+    font-size: 25px;
     color: #146d90;
 }
-
 
 
 // .no-scroll .scroll-content{

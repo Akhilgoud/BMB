@@ -35,6 +35,8 @@ export class LoginPage {
 
     }
 
+  
+
     bindForm() {
         this.loginForm = this.formBuilder.group({
             name: ['', Validators.required],
@@ -88,6 +90,7 @@ export class LoginPage {
 
     validUser(response) {
         this.CreateUser(response);
+        response.uid = response._id;
         this.userInfoService.setUserInfo(response);
         var pageToRedirect = this.homePageService.getPreviousPage();
         if (pageToRedirect) {

@@ -20,6 +20,7 @@ export class UserInfoService {
 
    clearUserInfo(){
        var obj={
+           id:null,
            uid: null,
            name: null,
            email: null,

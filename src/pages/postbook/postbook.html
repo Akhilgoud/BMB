@@ -1,9 +1,24 @@
 <ion-header>
 
-  <ion-navbar *ngIf="shownav">
+  <!-- <ion-navbar *ngIf="shownav">
     <ion-title class="appTitle" *ngIf="!isUpdatePage">Post your book</ion-title>
     <ion-title class="appTitle" *ngIf="isUpdatePage">Update book details</ion-title>
-  </ion-navbar>
+  </ion-navbar> -->
+  <!-- <ion-navbar>
+      <ion-buttons left>
+        <button ion-button menuToggle>
+          <ion-icon name="menu" id="menuIcon"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>
+        <span id="apptitle">Post Your Book</span>
+      </ion-title>
+      <ion-buttons right>
+        <button ion-button >
+            <ion-icon name="home" id="homeIcon" ></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar> -->
 </ion-header>
 
 <ion-content padding>
@@ -54,11 +69,26 @@
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Is Book related to Academic*</ion-label>
-            <ion-select formControlName="isAcademic" interface="popover" [(ngModel)]="bookObj.isAcademic">
+            <ion-select formControlName="isAcademic" interface="popover" [(ngModel)]="bookObj.isAcademic" (ionChange)="bookObj.bookType = ''">
               <ion-option value="Y">Yes</ion-option>
               <ion-option value="N">No</ion-option>
             </ion-select>
           </ion-item>
+
+          <ion-item>
+              <ion-label color="primary" floating >Book Type*</ion-label>
+              <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType" disabled = "{{!bookObj.isAcademic}}">
+                <ion-option value="ALLINONE" *ngIf="bookObj.isAcademic =='Y'">All In One</ion-option>
+                <ion-option value="TEXTBOOK" *ngIf="bookObj.isAcademic =='Y'">Text Book</ion-option>
+                <ion-option value="NOTEBOOK" *ngIf="bookObj.isAcademic =='Y'">Note Book</ion-option>
+                <ion-option value="STUDYMATERIAL" *ngIf="bookObj.isAcademic =='Y'">Study Material</ion-option>
+                <ion-option value="NOVEL" *ngIf="bookObj.isAcademic =='N'">Novel</ion-option>
+                <ion-option value="AUTOBIOGRAPHY" *ngIf="bookObj.isAcademic =='N'">AutoBiography</ion-option>
+                <ion-option value="MAGAZINE" *ngIf="bookObj.isAcademic =='N'">Magazines</ion-option>
+                <ion-option value="OTHERS">Others</ion-option>
+              </ion-select>
+            </ion-item>
+            
           <span *ngIf="bookObj.isAcademic =='Y'">
           <ion-item>
             <ion-label color="primary" floating>Course</ion-label>

@@ -37,9 +37,7 @@ export class BooksinfoPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BooksinfoPage');
-  }
+
    
 
   getBooks() {

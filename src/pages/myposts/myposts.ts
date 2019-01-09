@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { BooksInfoApi } from '../../shared/shared';
 import { UserInfoService } from '../../shared/shared';
 import { BookdetailsPage } from '../pages';
+import { HomePageService } from '../home/home.service';
 
 @Component({
   selector: 'page-myposts',
@@ -21,11 +22,20 @@ export class MypostsPage {
     private alertCtrl: AlertController,
     public booksInfoApi: BooksInfoApi,
     public userInfoService: UserInfoService,
-    private loadingController: LoadingController) {
+    private loadingController: LoadingController,
+    public homePageService: HomePageService) {
 
     this.userInfo = this.userInfoService.getUserInfo();
-    this.getPosts(this.userInfo._id);
+    this.getPosts(this.userInfo.uid);
     // this.getPosts(this.uid);
+  }
+
+  ionViewWillEnter() {
+    this.homePageService.setPageTitle('My Books');
+  }
+
+  ionViewWillLeave() {
+    this.homePageService.setPageTitle('');
   }
 
   getPosts(uid) {
@@ -67,7 +77,7 @@ export class MypostsPage {
     var obj = {
       bookId :id,
       status : status,
-      userId : this.uid
+      userId : this.userInfo.uid
     }
 
     let loader = this.loadingController.create({

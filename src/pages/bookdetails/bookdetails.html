@@ -48,10 +48,15 @@
         </div>
         <br>
         <div id="bookinfoDetails">
+            <ion-row>
+                <ion-col>Book Type</ion-col>
+                <ion-col>-</ion-col>
+                <ion-col>{{ bookObj.bookType}} </ion-col>
+              </ion-row>
           <ion-row>
             <ion-col>Price</ion-col>
             <ion-col>-</ion-col>
-            <ion-col> &#8377; {{ bookObj.price}} </ion-col>
+            <ion-col> <i class="fa fa-rupee"></i> {{ bookObj.price}} </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>publisher</ion-col>
