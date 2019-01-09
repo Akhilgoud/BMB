@@ -7,8 +7,9 @@ import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angu
   templateUrl: 'filterbooks.html',
 })
 export class FilterBooks {
- 
+
 structure: any = { lower: 0, upper: 10000 };
+books: string = "acadamic";
 
 priceRange = 0;
 constructor(private navParams: NavParams) {
