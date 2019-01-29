@@ -41,9 +41,14 @@ filter-books{
             cursor:pointer;
         }
 
-        .badge-md{
-            background-color: rgba(237, 234, 234, 0.49019607843137253) !important;
+        .badgeselected {
+            background-color: rgb(104, 159, 255) !important;
+            color: white;
         }
+
+        // .badge-md{
+        //     background-color: rgba(237, 234, 234, 0.49019607843137253) !important;
+        // }
         .label-md {
             margin: 0px 163px 0px 0px;
             font-size: 18px;
@@ -66,7 +71,5 @@ filter-books{
             font-size: 15px;
             line-height: 2;
         }
-        .textfilter{
-
-        }
+       
 }

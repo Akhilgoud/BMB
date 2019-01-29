@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
 import { BookdetailsPage } from '../pages';
@@ -13,8 +13,8 @@ export class BooksinfoPage {
   booksInfo: any;
   tempBooksInfo: any;
   currentDate = new Date();
-  pageLimit = 4;
-  pageOffset = 0;
+  // pageLimit = 4;
+  // pageOffset = 0;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
@@ -38,7 +38,7 @@ export class BooksinfoPage {
   }
 
 
-   
+
 
   getBooks() {
     let loader = this.loadingController.create({
@@ -46,7 +46,7 @@ export class BooksinfoPage {
       dismissOnPageChange: true
     });
     loader.present();
-    this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
+    this.booksInfoApi.getData().subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
       loader.dismiss();
@@ -76,9 +76,10 @@ export class BooksinfoPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    this.pageOffset = 0;
-     this.pageLimit = 4;
-    this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
+    // this.pageOffset = 0;
+    //  this.pageLimit = 4;
+    this.booksInfoApi.resetOffLimit();
+    this.booksInfoApi.getData().subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
       refresher.complete();
@@ -92,8 +93,9 @@ export class BooksinfoPage {
 
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
-    this.pageOffset = this.pageOffset + this.pageLimit;
-    this.booksInfoApi.getData(this.pageOffset, this.pageLimit).subscribe(response => {
+    // this.pageOffset = this.pageOffset + this.pageLimit;
+    this.booksInfoApi.incrementOffset();
+    this.booksInfoApi.getData().subscribe(response => {
       console.log(response);
       this.booksinfoPageService.addBooksList(response);
       infiniteScroll.complete();
@@ -103,7 +105,7 @@ export class BooksinfoPage {
         infiniteScroll.complete();
       }
     );
-    
+
   }
 
 }

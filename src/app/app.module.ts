@@ -10,6 +10,7 @@ import {UserDbProvider} from '../providers/userdatabase';
 import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage, FilterBooks } from '../pages/pages';
 import { HomePageService } from '../pages/home/home.service';
 import {BooksinfoPageService} from '../pages/booksinfo/booksinfo.service';
+import {FilterBooksService} from '../pages/filterbooks/filterbooks.service';
 import { PostbookApi } from '../pages/postbook/postbook.service';
 import { LoginApi } from '../pages/login/login.service';
 import { UserInfoService, BooksInfoApi } from '../shared/shared';
@@ -58,6 +59,7 @@ import {SocialSharing} from '@ionic-native/social-sharing';
     HomePageService,
     BooksinfoPageService,
     UserInfoService,
+    FilterBooksService,
     BooksInfoApi,
     PostBookDataService,
     SQLite,
