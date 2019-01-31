@@ -11,32 +11,31 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!-- <ion-searchbar (ionInput)="filterItems($event)" *ngIf="searchFilter"></ion-searchbar> -->
-  <div>
+  <div class="searchSelected">
     <!-- <pre>{{userInfo | json}}</pre> -->
-    <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv" >
+    <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
       <ion-row style="padding-left: 16px;" (click)="goToDetailsPage(book)">
         <ion-col col-3>
-          <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]" style="    width: 100%;"
-          />
+          <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
+            style="width: 100%;" />
           <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
         </ion-col>
         <ion-col col-7 style="padding-left: 18px;    padding-top: 12px;">
-          <div id="price"><i class="fa fa-rupee"></i> {{book.price}}</div>
           <div id="bookname">{{book.name}}</div>
           <div *ngIf="book.author" id="author">by {{book.author}}</div>
           <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
+          <div id="price"><i class="fa fa-rupee"></i> {{book.price}}</div>
         </ion-col>
         <ion-col col-1 offset-1 style="padding-top: 13%;">
           <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-
         </ion-col>
       </ion-row>
       <div>
         <span style="float: right">
-          <button ion-button (click)="changeStatus(book._id,'NEW')" *ngIf="book.status=='SOLD'">
+          <button ion-button (click)="changeStatus(book._id,'NEW')" *ngIf="book.status=='SOLD'" class="soldBtn">
             Sold
           </button>
-          <button ion-button (click)="changeStatus(book._id,'SOLD')" *ngIf="book.status=='NEW'">
+          <button ion-button (click)="changeStatus(book._id,'SOLD')" *ngIf="book.status=='NEW'" class="soldBtn">
             Unsold
           </button>
         </span>

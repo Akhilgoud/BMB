@@ -35,7 +35,7 @@ export class LoginPage {
 
     }
 
-  
+
 
     bindForm() {
         this.loginForm = this.formBuilder.group({
@@ -51,45 +51,46 @@ export class LoginPage {
             content: 'Authorizing...',
             dismissOnPageChange: true
         });
-        loader.present();
-        if (this.isRegister) {
-            this.loginApi.RegisterUser(this.userObj).subscribe(
-                response => {
-                    this.authRes = response.erroMsg;
-                    if (!response.erroMsg) {
-                        this.validUser(response);
+        loader.present().then(() => {
+            if (this.isRegister) {
+                this.loginApi.RegisterUser(this.userObj).subscribe(
+                    response => {
+                        this.authRes = response.erroMsg;
+                        if (!response.erroMsg) {
+                            this.validUser(response);
+                        }
+                        loader.dismiss();
+                    },
+                    error => {
+                        console.log("error authentication" + error);
+                        this.authRes = "501";
+                        loader.dismiss();
                     }
-                    loader.dismiss();
-                },
-                error => {
-                    console.log("error authentication" + error);
-                    this.authRes ="501"; 
-                    loader.dismiss();
-                }
-            )
-        } else {
-            this.loginApi.authorizeUser(this.userObj).subscribe(
-                response => {
-                    if (response && !response.erroMsg) {
-                        this.validUser(response);
-                    } else if (!response) {
-                        this.authRes = "WC";
-                    } else if (response && response.erroMsg) {
-                        this.authRes = "NOTFOUND";
+                )
+            } else {
+                this.loginApi.authorizeUser(this.userObj).subscribe(
+                    response => {
+                        if (response && !response.erroMsg) {
+                            this.validUser(response);
+                        } else if (!response) {
+                            this.authRes = "WC";
+                        } else if (response && response.erroMsg) {
+                            this.authRes = "NOTFOUND";
+                        }
+                        loader.dismiss();
+                    },
+                    error => {
+                        console.log("error authentication" + error);
+                        this.authRes = "501";
+                        loader.dismiss();
                     }
-                    loader.dismiss();
-                },
-                error => {
-                    console.log("error authentication" + error);
-                    this.authRes ="501"; 
-                    loader.dismiss();
-                }
-            )
-        }
+                )
+            }
+        });
     }
 
     validUser(response) {
-        // this.CreateUser(response);
+        this.CreateUser(response);
         response.uid = response._id;
         this.userInfoService.setUserInfo(response);
         var pageToRedirect = this.homePageService.getPreviousPage();

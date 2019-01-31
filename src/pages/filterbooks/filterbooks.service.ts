@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 @Injectable()
 export class FilterBooksService {
+    constructor(private http: Http) {
+        this.filterObjChange.subscribe((value) => {
+            this.filterObj = value;
+        });
+    }
+
     private filterObj: any = {
         isAcademic: "",
         bookType: [],
@@ -16,15 +23,7 @@ export class FilterBooksService {
         college: "",
         address: ""
     };
-
-
     filterObjChange: Subject<any> = new Subject<any>();
-
-    constructor() {
-        this.filterObjChange.subscribe((value) => {
-            this.filterObj = value;
-        });
-    }
 
     setFilterObj(data) {
         this.filterObjChange.next(data);

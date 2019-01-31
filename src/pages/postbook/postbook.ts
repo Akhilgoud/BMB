@@ -23,7 +23,7 @@ export class PostbookPage {
     public base64Image: string;
     public error: any;
     public bookObj: IBookObj;
-    public isUpdatePage:boolean;
+    public isUpdatePage: boolean;
     postbookForm: FormGroup;
     shownav: boolean = true;
     constructor(public navCtrl: NavController,
@@ -39,7 +39,7 @@ export class PostbookPage {
         this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
-        if(postbookobj){
+        if (postbookobj) {
             this.bookObj = postbookobj.bookObj;
             this.photos = postbookobj.imageArr;
         }
@@ -47,14 +47,14 @@ export class PostbookPage {
     }
 
     ionViewWillEnter() {
-        // this.homePageService.setPageTitle('Post my Book');
-        this.homePageService.setPageTitle('My Books');
-        
-      }
+        this.homePageService.setPageTitle('Post My Book');
+        // this.homePageService.setPageTitle('My Books');
 
-      ionViewWillLeave() {
+    }
+
+    ionViewWillLeave() {
         this.homePageService.setPageTitle('');
-      }
+    }
 
     ngOnInit() {
         this.images = [];
@@ -145,12 +145,12 @@ export class PostbookPage {
                     this.homePageService.setPage(MypostsPage)
                 },
                 error => {
-                        let alert = this.alertCtrl.create({
-                          title: 'Failed to post!',
-                          subTitle: 'Please try again later',
-                          buttons: ['Dismiss']
-                        });
-                        alert.present();
+                    let alert = this.alertCtrl.create({
+                        title: 'Failed to post!',
+                        subTitle: 'Please try again later',
+                        buttons: ['Dismiss']
+                    });
+                    alert.present();
                     console.log("error authentication" + error);
                 }
             )
@@ -161,7 +161,7 @@ export class PostbookPage {
         }
     }
 
-    update(){
+    update() {
         var obj = {
             bookObj: this.bookObj,
             imageArr: this.photos
@@ -175,12 +175,12 @@ export class PostbookPage {
                     this.homePageService.setPage(MypostsPage)
                 },
                 error => {
-                        let alert = this.alertCtrl.create({
-                          title: 'Failed to update!',
-                          subTitle: 'Please try again later',
-                          buttons: ['Dismiss']
-                        });
-                        alert.present();
+                    let alert = this.alertCtrl.create({
+                        title: 'Failed to update!',
+                        subTitle: 'Please try again later',
+                        buttons: ['Dismiss']
+                    });
+                    alert.present();
                     console.log("error authentication" + error);
                 }
             )
@@ -189,6 +189,10 @@ export class PostbookPage {
             this.postBookDataService.setBookInfo(oldobj);
             this.homePageService.setPage(LoginPage);
         }
+    }
+
+    cancel() {
+        this.homePageService.setPage(MypostsPage)
     }
 
     // scrollingFun(e) {

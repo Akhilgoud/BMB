@@ -37,25 +37,23 @@ export class BooksinfoPage {
     }
   }
 
-
-
-
   getBooks() {
     let loader = this.loadingController.create({
       content: 'Fetching books...',
       dismissOnPageChange: true
     });
-    loader.present();
-    this.booksInfoApi.getData().subscribe(response => {
-      console.log(response);
-      this.booksinfoPageService.setBooksList(response);
-      loader.dismiss();
-    },
-      error => {
-        console.log("error authentication" + error);
+    loader.present().then(() => {
+      this.booksInfoApi.getData().subscribe(response => {
+        console.log(response);
+        this.booksinfoPageService.setBooksList(response);
         loader.dismiss();
-      }
-    );
+      },
+        error => {
+          console.log("error authentication" + error);
+          loader.dismiss();
+        }
+      )
+    });
   }
 
   goToDetailsPage(book) {

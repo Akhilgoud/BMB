@@ -16,7 +16,7 @@ export class SidenavPage {
   private loginPage = LoginPage;
   private mypostsPage = MypostsPage;
   private postBookPage = PostbookPage;
-  private booksinfoPage= BooksinfoPage;
+  private booksinfoPage = BooksinfoPage;
   userObj: any = {};
   err: any;
   constructor(
@@ -31,7 +31,7 @@ export class SidenavPage {
       userinfo => {
         this.userObj = userinfo;
       });
-      this.GetAllUser();
+    this.GetAllUser();
   }
 
   changePage(page) {

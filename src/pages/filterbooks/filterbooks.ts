@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, LoadingController 
 import { FilterBooksService } from './filterbooks.service';
 import { BooksInfoApi } from '../../shared/shared';
 import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
-
+import { AutoCompleteListService } from './AutoCompleteListService';
 
 @Component({
   selector: 'filter-books',
@@ -11,12 +11,14 @@ import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
 })
 export class FilterBooks {
   filterObj: any = {};
+  collegesNames: any = {};
   constructor(private navParams: NavParams,
     private filterBooksService: FilterBooksService,
     private viewController: ViewController,
     public booksInfoApi: BooksInfoApi,
     private loadingController: LoadingController,
     public booksinfoPageService: BooksinfoPageService,
+    public autoCompleteListService: AutoCompleteListService
   ) {
     this.filterObj = this.filterBooksService.getFilterObj();
   }
@@ -81,17 +83,18 @@ export class FilterBooks {
       content: 'Applying Filters...',
       dismissOnPageChange: true
     });
-    loader.present();
-    this.booksInfoApi.getData().subscribe(response => {
-      console.log(response);
-      this.booksinfoPageService.setBooksList(response);
-      loader.dismiss();
-    },
-      error => {
-        console.log("error authentication" + error);
+    loader.present().then(() => {
+      this.booksInfoApi.getData().subscribe(response => {
+        console.log(response);
+        this.booksinfoPageService.setBooksList(response);
         loader.dismiss();
-      }
-    );
+      },
+        error => {
+          console.log("error authentication" + error);
+          loader.dismiss();
+        }
+      )
+    });
 
   }
 
@@ -104,16 +107,18 @@ export class FilterBooks {
       content: 'Fetching books...',
       dismissOnPageChange: true
     });
-    loader.present();
-    this.booksInfoApi.getData().subscribe(response => {
-      console.log(response);
-      this.booksinfoPageService.setBooksList(response);
-      loader.dismiss();
-    },
-      error => {
-        console.log("error authentication" + error);
+    loader.present().then(() => {
+      this.booksInfoApi.getData().subscribe(response => {
+        console.log(response);
+        this.booksinfoPageService.setBooksList(response);
         loader.dismiss();
-      }
-    );
+      },
+        error => {
+          console.log("error authentication" + error);
+          loader.dismiss();
+        }
+      )
+    });
   }
+
 }

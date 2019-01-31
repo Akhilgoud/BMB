@@ -29,7 +29,7 @@
           <ion-item>
             <span style="color: #4856b1;font-family: sans-serif;">Upload max 3 images of books</span>
             <button ion-button full (click)="takePhoto()" [disabled]="photos.length > 2">
-               <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+              <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
             </button>
             <ion-grid>
               <ion-row>
@@ -44,7 +44,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label color="primary"  floating>Book Name*</ion-label>
+            <ion-label color="primary" floating>Book Name*</ion-label>
             <ion-input formControlName="bookname" [(ngModel)]="bookObj.name" type="text"></ion-input>
           </ion-item>
           <ion-item>
@@ -76,36 +76,36 @@
           </ion-item>
 
           <ion-item>
-              <ion-label color="primary" floating >Book Type*</ion-label>
-              <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType" disabled = "{{!bookObj.isAcademic}}">
-                <ion-option value="ALLINONE" *ngIf="bookObj.isAcademic =='Y'">All In One</ion-option>
-                <ion-option value="TEXTBOOK" *ngIf="bookObj.isAcademic =='Y'">Text Book</ion-option>
-                <ion-option value="NOTEBOOK" *ngIf="bookObj.isAcademic =='Y'">Note Book</ion-option>
-                <ion-option value="STUDYMATERIAL" *ngIf="bookObj.isAcademic =='Y'">Study Material</ion-option>
-                <ion-option value="NOVEL" *ngIf="bookObj.isAcademic =='N'">Novel</ion-option>
-                <ion-option value="AUTOBIOGRAPHY" *ngIf="bookObj.isAcademic =='N'">AutoBiography</ion-option>
-                <ion-option value="MAGAZINE" *ngIf="bookObj.isAcademic =='N'">Magazines</ion-option>
-                <ion-option value="OTHERS">Others</ion-option>
-              </ion-select>
-            </ion-item>
-            
+            <ion-label color="primary" floating>Book Type*</ion-label>
+            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType" disabled="{{!bookObj.isAcademic}}">
+              <ion-option value="ALLINONE" *ngIf="bookObj.isAcademic =='Y'">All In One</ion-option>
+              <ion-option value="TEXTBOOK" *ngIf="bookObj.isAcademic =='Y'">Text Book</ion-option>
+              <ion-option value="NOTEBOOK" *ngIf="bookObj.isAcademic =='Y'">Note Book</ion-option>
+              <ion-option value="STUDYMATERIAL" *ngIf="bookObj.isAcademic =='Y'">Study Material</ion-option>
+              <ion-option value="NOVEL" *ngIf="bookObj.isAcademic =='N'">Novel</ion-option>
+              <ion-option value="AUTOBIOGRAPHY" *ngIf="bookObj.isAcademic =='N'">AutoBiography</ion-option>
+              <ion-option value="MAGAZINE" *ngIf="bookObj.isAcademic =='N'">Magazines</ion-option>
+              <ion-option value="OTHERS">Others</ion-option>
+            </ion-select>
+          </ion-item>
+
           <span *ngIf="bookObj.isAcademic =='Y'">
-          <ion-item>
-            <ion-label color="primary" floating>Course</ion-label>
-            <ion-input formControlName="course" [(ngModel)]="bookObj.course" type="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label color="primary" floating>Branch</ion-label>
-            <ion-input formControlName="branch" [(ngModel)]="bookObj.branch" type="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label color="primary" floating>Year</ion-label>
-            <ion-input formControlName="year" [(ngModel)]="bookObj.year" type="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label color="primary" floating>Semester</ion-label>
-            <ion-input formControlName="sem" [(ngModel)]="bookObj.sem" type="number"></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label color="primary" floating>Course</ion-label>
+              <ion-input formControlName="course" [(ngModel)]="bookObj.course" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" floating>Branch</ion-label>
+              <ion-input formControlName="branch" [(ngModel)]="bookObj.branch" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" floating>Year</ion-label>
+              <ion-input formControlName="year" [(ngModel)]="bookObj.year" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="primary" floating>Semester</ion-label>
+              <ion-input formControlName="sem" [(ngModel)]="bookObj.sem" type="number"></ion-input>
+            </ion-item>
           </span>
           <ion-item>
             <ion-label color="primary" floating>Phone Number</ion-label>
@@ -127,15 +127,15 @@
             <ion-label color="primary" floating>College</ion-label>
             <ion-input formControlName="college" [(ngModel)]="bookObj.college" type="text"></ion-input>
           </ion-item>
-         </form>
+        </form>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col offset-4>
         <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" *ngIf="!isUpdatePage">submit</button>
+        <button ion-button (click)="cancel()" *ngIf="isUpdatePage">Cancel</button>
         <button ion-button (click)="update()" [disabled]="!postbookForm.valid" *ngIf="isUpdatePage">Update</button>
         <!-- <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" >submit</button> -->
-        
       </ion-col>
     </ion-row>
 

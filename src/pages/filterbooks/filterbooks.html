@@ -1,85 +1,98 @@
-<div padding>
-  <ion-segment [(ngModel)]="filterObj.isAcademic" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="Y">
-      Acadamic
-    </ion-segment-button>
-    <ion-segment-button value="N">
-      Non-Acadamic
-    </ion-segment-button>
-  </ion-segment>
-</div>
-<div [ngSwitch]="filterObj.isAcademic">
-  <ion-list *ngSwitchCase="'Y'">
-    <div style="margin-left: 4%">
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['ALLINONE'] === true}" (click)="bookTypeClicked($event, 'ALLINONE')">All
-        In Ones</ion-badge>
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['TEXTBOOK'] === true}" (click)="bookTypeClicked($event, 'TEXTBOOK')">Text
-        Books</ion-badge>
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOTEBOOK'] === true}" (click)="bookTypeClicked($event, 'NOTEBOOK')">Note
-        Book</ion-badge>
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['STUDYMATERIAL'] === true}"
-        (click)="bookTypeClicked($event, 'STUDYMATERIAL')">Study Materials</ion-badge>
-      <div>
-        <ion-list>
-          <ion-item>
-            <ion-label floating>Course</ion-label>
-            <ion-input type="text" [(ngModel)]="filterObj.course"></ion-input>
-
-          </ion-item>
-        </ion-list>
-      </div>
-      <div>
-        <ion-list>
-          <ion-item>
-            <ion-label floating>Branch</ion-label>
-            <ion-input type="text" [(ngModel)]="filterObj.branch"></ion-input>
-
-          </ion-item>
-        </ion-list>
-      </div>
-      <div>
-        <ion-list>
-          <ion-item>
-            <ion-label floating>Year</ion-label>
-            <ion-input type="text" [(ngModel)]="filterObj.year"></ion-input>
-
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
-  </ion-list>
-  <ion-list *ngSwitchCase="'N'">
-    <div style="margin-left: 4%">
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}" (click)="bookTypeClicked($event, 'NOVEL')">Novels</ion-badge>
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['AUTOBIOGRAPHY'] === true}"
-        (click)="bookTypeClicked($event, 'AUTOBIOGRAPHY')">AutoBiography</ion-badge>
-      <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['MAGAZINE'] === true}" (click)="bookTypeClicked($event, 'MAGAZINE')">Magazines</ion-badge>
-    </div>
-  </ion-list>
-</div>
-<!-- <div style="border: 1px solid black;border: 1px solid #e8e2e2;width: 90%;margin-left: 5%;"></div> -->
-<div style="margin-top: 9px;">
-  <ion-item>
-    <ion-range min="0" max="2000" step="50" snaps="false" dualKnobs="true" pin="true" [(ngModel)]="filterObj.price"
-      color="grey">
-      <ion-icon range-left small>₹&nbsp;{{filterObj.price.lower}}</ion-icon>
-      <ion-icon range-right small>₹&nbsp;{{filterObj.price.upper}}</ion-icon>
-    </ion-range>
-  </ion-item>
-</div>
 <div>
-  <ion-list style="line-height:10px">
+  <div padding>
+    <ion-segment [(ngModel)]="filterObj.isAcademic" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="Y">
+        Acadamic
+      </ion-segment-button>
+      <ion-segment-button value="N">
+        Non-Acadamic
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="filterObj.isAcademic">
+    <ion-list *ngSwitchCase="'Y'">
+      <div style="margin-left: 4%">
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['ALLINONE'] === true}"
+          (click)="bookTypeClicked($event, 'ALLINONE')">All
+          In Ones</ion-badge>
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['TEXTBOOK'] === true}"
+          (click)="bookTypeClicked($event, 'TEXTBOOK')">Text
+          Books</ion-badge>
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOTEBOOK'] === true}"
+          (click)="bookTypeClicked($event, 'NOTEBOOK')">Note
+          Book</ion-badge>
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['STUDYMATERIAL'] === true}"
+          (click)="bookTypeClicked($event, 'STUDYMATERIAL')">Study Materials</ion-badge>
+        <div>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Course</ion-label>
+              <ion-input type="text" [(ngModel)]="filterObj.course"></ion-input>
+              <!-- <ion-select interface="popover" [(ngModel)]="filterObj.course">
+                  <ion-option value="BTECH">B.Tech</ion-option>
+                  <ion-option value="DEGREE">Degree</ion-option>
+                  <ion-option value="BCOM">B.Com</ion-option>
+
+                </ion-select> -->
+            </ion-item>
+          </ion-list>
+        </div>
+        <div>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Branch</ion-label>
+              <ion-input type="text" [(ngModel)]="filterObj.branch"></ion-input>
+
+            </ion-item>
+          </ion-list>
+        </div>
+        <div>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Year</ion-label>
+              <ion-input type="text" [(ngModel)]="filterObj.year"></ion-input>
+
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </ion-list>
+    <ion-list *ngSwitchCase="'N'">
+      <div style="margin-left: 4%">
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}" (click)="bookTypeClicked($event, 'NOVEL')">Novels</ion-badge>
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['AUTOBIOGRAPHY'] === true}"
+          (click)="bookTypeClicked($event, 'AUTOBIOGRAPHY')">AutoBiography</ion-badge>
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['MAGAZINE'] === true}"
+          (click)="bookTypeClicked($event, 'MAGAZINE')">Magazines</ion-badge>
+      </div>
+    </ion-list>
+  </div>
+  <!-- <div style="border: 1px solid black;border: 1px solid #e8e2e2;width: 90%;margin-left: 5%;"></div> -->
+  <div style="margin-top: 9px;">
     <ion-item>
-      <ion-label floating>College Name</ion-label>
-      <ion-input type="text" [(ngModel)]="filterObj.college"></ion-input>
+      <ion-range min="0" max="2000" step="50" snaps="false" dualKnobs="true" pin="true" [(ngModel)]="filterObj.price"
+        color="grey">
+        <ion-icon range-left small>₹&nbsp;{{filterObj.price.lower}}</ion-icon>
+        <ion-icon range-right small>₹&nbsp;{{filterObj.price.upper}}</ion-icon>
+      </ion-range>
     </ion-item>
-    <ion-item>
-      <ion-label floating>Area</ion-label>
-      <ion-input type="text" [(ngModel)]="filterObj.address"></ion-input>
-    </ion-item>
-  </ion-list>
-</div>
-<div style="float:right; padding-bottom: 20px">
-  <button ion-button round (click)="resetFilters()">Reset</button>
-  <button ion-button round (click)="applyFilters()">Apply</button>
+  </div>
+  <div>
+
+    <ion-list style="line-height:10px">
+      <!-- <ion-auto-complete [dataProvider]="autoCompleteListService" [(ngModel)]="filterObj.college" [options]="{ placeholder : 'College Name' }"></ion-auto-complete> -->
+      <ion-item>
+        <ion-label floating>College Name</ion-label>
+        <ion-input type="text" [(ngModel)]="filterObj.college"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Area</ion-label>
+        <ion-input type="text" [(ngModel)]="filterObj.address"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div style="float:right; padding-bottom: 20px">
+    <button ion-button round (click)="resetFilters()">Reset</button>
+    <button ion-button round (click)="applyFilters()">Apply</button>
+  </div>
 </div>

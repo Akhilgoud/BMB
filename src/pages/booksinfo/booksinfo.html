@@ -7,15 +7,15 @@
 
 <ion-content style="position:absolute">
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content ></ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
-  <div class="searchSelected" >
+  <div class="searchSelected">
     <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv" (click)="goToDetailsPage(book)">
       <ion-row style="padding-left: 16px;">
         <ion-col col-3>
-          <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]" style="    width: 100%;"
-          />
+          <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
+            style="    width: 100%;" />
           <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
         </ion-col>
         <ion-col col-7 style="padding-left: 18px;    padding-top: 12px;">
@@ -26,7 +26,6 @@
         </ion-col>
         <ion-col col-1 offset-1 style="padding-top: 13%;">
           <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-
         </ion-col>
       </ion-row>
       <div style="font-size: 15px;

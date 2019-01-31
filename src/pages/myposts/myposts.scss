@@ -7,4 +7,59 @@ page-myposts {
         word-spacing: 1px !important;
         font-family: sans-serif !important;
     }    
+    .card-content-md {
+        padding: 0px;
+    }
+    #bookname {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: auto;
+        white-space: normal;
+        font-size: 17px;
+        font-weight: 500;
+    }
+    #author{
+        font-size: 15px;
+        color: grey;
+        padding-top: 5px;
+    }
+    #publisher{
+        font-size: 15px;
+        color: grey;
+        padding-top: 5px;
+    }
+    #price{
+        color: #64a980;
+        padding-top: 5px;
+        font-size: 17px
+    }
+
+    .item item-block{
+        padding-left: 0px;
+    }
+    
+    .scroll-content {
+        // padding: 0px !important;
+    }
+
+    .item-inner {
+        padding-right: 0px !important; 
+    }
+
+    #cardDiv .label {
+        margin-right:0 !important;
+        margin-bottom: 6px;
+    }
+    
+    .soldBtn {
+        border-radius: 7px;
+        text-transform: none;
+        background-color: #2f5f84;
+        padding: 14px !important;
+        font-size: 13px !important;
+    }
+    
 }

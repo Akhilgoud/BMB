@@ -8,11 +8,14 @@
     </ion-header>
     <ion-content>
         <ion-list>
+            <button ion-item menuClose (click)="changePage(booksinfoPage)">
+                Home
+            </button>
             <button ion-item menuClose (click)="changePage(postBookPage)">
-                        Post my book
-                  </button>
+                Post my book
+            </button>
             <button ion-item menuClose (click)="changePage(loginPage)" *ngIf="!userObj.email">
-                  Login
+                Login
             </button>
 
             <div *ngIf="userObj.email">
