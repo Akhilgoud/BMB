@@ -1,1 +1,15 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<div *ngIf="showSplash" class="splash">
+    <div class="demo-1">
+        <div class="container">
+            <section class="content">
+                <ul class="list">
+                    <li class="list__item color-1">
+                        <h3 class="list__text my_text">TAG Ideas</h3>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>
+
+<ion-nav [root]="rootPage" *ngIf="!showSplash"></ion-nav>

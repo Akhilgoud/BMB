@@ -30,7 +30,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-segment [(ngModel)]="tabInfo">
+    <ion-segment [(ngModel)]="tabInfo" (ionChange)="onSegmentChange($event)">
       <ion-segment-button value="bookInfo">
         <span>Book Info</span>
       </ion-segment-button>
@@ -135,7 +135,7 @@
           </div>
       </div> -->
       <div *ngSwitchCase="'sellerInfo'" style="text-align:center;">
-        <div id="sellerinfoDetails">
+        <div id="sellerinfoDetails" *ngIf="userInfo && userInfo._id">
           <ion-row>
             <ion-col style="text-align: inherit">Phone:</ion-col>
             <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.phoneNo}}</span>
@@ -144,6 +144,13 @@
             </ion-col>
 
           </ion-row>
+
+          <ion-row>
+            <ion-col style="text-align: inherit">Email:</ion-col>
+            <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.email}}</span>
+            </ion-col>
+          </ion-row>
+
           <ion-row>
             <ion-col style="text-align: inherit">Address:</ion-col>
             <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.address}}</span>

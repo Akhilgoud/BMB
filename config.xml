@@ -15,10 +15,14 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreen" value="true" />
+    <preference name="FadeSplashScreen" value="true" />
+     <!-- <preference name="ShowSplashScreenSpinner" value="false"/> -->
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -89,5 +93,5 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.0" />
     <engine name="browser" spec="~5.0.3" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="7.1.4" />
 </widget>

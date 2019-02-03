@@ -6,33 +6,46 @@
 
 
 <ion-content style="position:absolute">
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
-  <div class="searchSelected">
-    <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv" (click)="goToDetailsPage(book)">
-      <ion-row style="padding-left: 16px;">
-        <ion-col col-3>
-          <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
-            style="    width: 100%;" />
-          <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
-        </ion-col>
-        <ion-col col-7 style="padding-left: 18px;    padding-top: 12px;">
-          <div id="bookname">{{book.name}}</div>
-          <div *ngIf="book.author" id="author">by {{book.author}}</div>
-          <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
-          <div id="price"><i class="fa fa-rupee"></i>{{book.price}}</div>
-        </ion-col>
-        <ion-col col-1 offset-1 style="padding-top: 13%;">
-          <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <div style="font-size: 15px;
-    color: grey;float:right">{{book.created_date | daysago}} days ago</div>
+  <div *ngIf="!showImgSlide">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
+    <div class="searchSelected">
+      <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
+        <ion-row style="padding-left: 16px;">
+          <ion-col col-3 (click)="bookImageClicked(book)">
+            <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
+              style="width: 100%;" />
+            <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
+          </ion-col>
+          <ion-col col-7 style="padding-left: 18px;padding-top: 12px;" (click)="goToDetailsPage(book)">
+            <div id="bookname">{{book.name}}</div>
+            <div *ngIf="book.author" id="author">by {{book.author}}</div>
+            <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
+            <div id="price"><i class="fa fa-rupee"></i>{{book.price}}</div>
+          </ion-col>
+          <ion-col col-1 offset-1 style="padding-top: 13%;" (click)="goToDetailsPage(book)">
+            <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <div style="font-size: 15px;color: grey;float:right" (click)="goToDetailsPage(book)">
+          {{book.created_date | daysago}} days ago
+        </div>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="showImgSlide">
+    <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;" (click)="showImgSlide=false"></ion-icon>
+    <ion-slides zoom="true">
+      <ion-slide *ngFor="let photo of clickedBookImg; let id = index">
+        <div class="swiper-zoom-container">
+          <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
+        </div>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>

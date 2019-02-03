@@ -13,6 +13,8 @@ export class BooksinfoPage {
   booksInfo: any;
   tempBooksInfo: any;
   currentDate = new Date();
+  showImgSlide = false;
+  clickedBookImg: any = {};
   // pageLimit = 4;
   // pageOffset = 0;
   constructor(public navCtrl: NavController,
@@ -104,6 +106,14 @@ export class BooksinfoPage {
       }
     );
 
+  }
+
+  bookImageClicked(book) {
+    this.clickedBookImg = {};
+    if (book.bookImages[0]) {
+      this.showImgSlide = true;
+      this.clickedBookImg = book.bookImages;
+    }
   }
 
 }

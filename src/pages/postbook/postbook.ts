@@ -139,6 +139,7 @@ export class PostbookPage {
         var userobj = this.userInfoService.getUserInfo();
         if (userobj && userobj._id) {
             obj.bookObj.uid = userobj._id;
+            obj.bookObj.email = userobj.email;
             this.postbookApi.postNewBook(obj).subscribe(
                 response => {
                     console.log(response);
@@ -169,6 +170,8 @@ export class PostbookPage {
         var userobj = this.userInfoService.getUserInfo();
         if (userobj && userobj._id) {
             obj.bookObj.uid = userobj._id;
+            obj.bookObj.email = userobj.email;
+
             this.postbookApi.updateBookInfo(obj).subscribe(
                 response => {
                     console.log(response);

@@ -6,6 +6,7 @@ import { UserInfoService } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
 import { PostbookPage } from "../postbook/postbook";
 import { PostBookDataService } from "../postbook/postbookdata.service";
+import { LoginPage } from "../login/login";
 
 @Component({
     selector: 'page-bookdetails',
@@ -16,6 +17,8 @@ export class BookdetailsPage {
     showImgSlide: boolean = false;
     tabInfo = 'bookInfo';
     allowEdit: boolean = true;
+    userInfo = this.userInfoService.getUserInfo();
+
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public userInfoService: UserInfoService,
@@ -27,8 +30,7 @@ export class BookdetailsPage {
         console.log(navParams.get('bookObj'));
         this.allowEdit = false;
         this.bookObj = navParams.get('bookObj');
-        var userInfo = this.userInfoService.getUserInfo();
-        if (userInfo && this.bookObj.uid == userInfo._id) {
+        if (this.userInfo && this.bookObj.uid == this.userInfo._id) {
             this.allowEdit = true;
         }
 
@@ -84,19 +86,20 @@ export class BookdetailsPage {
     }
 
     share() {
-        this.socialSharing.share('Body', 'Subject', '', 'www.bmb.com').then(() => {
+        var body = this.getMessageBody();
+        this.socialSharing.share(body, 'Interested to buy book' + this.bookObj.name, '', 'BMB').then(() => {
             console.log('Share')
         }).catch((err) => {
-            // alert(JSON.stringify(err))
             console.log('error sharing book');
         });
     }
 
     sendEmail() {
         // Check if sharing via email is supported
-        var emailTo = "test@gmail.com";
+        var emailTo = this.bookObj.bookContact[0].email;
+        var body = this.getMessageBody();
         this.socialSharing.canShareViaEmail().then(() => {
-            this.socialSharing.shareViaEmail('Body', 'Subject', [emailTo]).then(() => {
+            this.socialSharing.shareViaEmail(body, 'Interested to buy book' + this.bookObj.name, [emailTo]).then(() => {
                 console.log('email working')
             }).catch((err) => {
                 // alert(JSON.stringify(err))
@@ -111,12 +114,8 @@ export class BookdetailsPage {
     sendWhatsAppMsg() {
         if (this.bookObj && this.bookObj.bookContact[0] && this.bookObj.bookContact[0].phoneNo) {
             var phone = this.bookObj.bookContact[0].phoneNo;
-            var msg = "Hi, I am interested in buying this Book.";
-            msg = msg + "Book Name:" + this.bookObj.name + '';
-            msg = msg + "Book Price:" + this.bookObj.price + '';
-            msg = msg + "Please let me know where and how can I collect it.";
-            msg = msg + "-Thanks";
-            this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, msg, '../src/assets/imgs/BMB.PNG', "www.bmb.com").then(() => {
+            var msg = this.getMessageBody();
+            this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, msg, '../src/assets/imgs/BMBLogo.png', "BMB").then(() => {
                 console.log('success!')
             }).catch((err) => {
                 // alert(JSON.stringify(err))
@@ -125,4 +124,19 @@ export class BookdetailsPage {
         }
     }
 
+    onSegmentChange(ev: any) {
+        if (ev.value == "sellerInfo" && (!this.userInfo || !this.userInfo._id)) {
+            this.viewCtrl.dismiss();
+            this.homePageService.setPage(LoginPage);
+        }
+    }
+
+    getMessageBody() {
+        var msg = "Hi, I am interested in buying this Book.";
+        msg = msg + "Book Name:" + this.bookObj.name + '';
+        msg = msg + "Book Price:" + this.bookObj.price + '';
+        msg = msg + "Please let me know where and how can I collect it.";
+        msg = msg + "-Thanks";
+        return msg;
+    }
 }
