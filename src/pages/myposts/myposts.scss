@@ -43,7 +43,14 @@ page-myposts {
     
     .scroll-content {
         // padding: 0px !important;
+        // padding: 0px 12px 0 0 !important; 
+        // padding-top: 16px;
     }
+    
+    // ion-app.md [padding] .scroll-content {
+    //     /* padding: 16px; */
+    //     padding: 16px 5px;
+    // }
 
     .item-inner {
         padding-right: 0px !important; 

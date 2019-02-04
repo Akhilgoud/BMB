@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Platform, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -26,7 +26,8 @@ export class PostbookPage {
     public isUpdatePage: boolean;
     postbookForm: FormGroup;
     shownav: boolean = true;
-    constructor(public navCtrl: NavController,
+    constructor(public platform: Platform,
+        public navCtrl: NavController,
         public navParams: NavParams,
         private camera: Camera,
         private sanitizer: DomSanitizer,
@@ -36,6 +37,7 @@ export class PostbookPage {
         public userInfoService: UserInfoService,
         public postBookDataService: PostBookDataService,
         public homePageService: HomePageService) {
+
         this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
@@ -44,12 +46,18 @@ export class PostbookPage {
             this.photos = postbookobj.imageArr;
         }
         this.isUpdatePage = this.postBookDataService.getIsUpdatePage();
+        this.platform.registerBackButtonAction(() => {
+            if (this.isUpdatePage)
+                this.homePageService.setPage(MypostsPage);
+            else
+                this.homePageService.setPage(BooksinfoPage);
+        });
+
     }
 
     ionViewWillEnter() {
         this.homePageService.setPageTitle('Post My Book');
         // this.homePageService.setPageTitle('My Books');
-
     }
 
     ionViewWillLeave() {
@@ -195,7 +203,7 @@ export class PostbookPage {
     }
 
     cancel() {
-        this.homePageService.setPage(MypostsPage)
+        this.homePageService.setPage(MypostsPage);
     }
 
     // scrollingFun(e) {

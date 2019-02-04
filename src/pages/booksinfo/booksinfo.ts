@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { App, Platform, ToastController, IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
 import { BookdetailsPage } from '../pages';
@@ -15,9 +15,16 @@ export class BooksinfoPage {
   currentDate = new Date();
   showImgSlide = false;
   clickedBookImg: any = {};
+
+
+  lastBack = Date.now();
+  allowClose = false;
   // pageLimit = 4;
   // pageOffset = 0;
-  constructor(public navCtrl: NavController,
+  constructor(public app: App,
+    public platform: Platform,
+    public toastCtrl: ToastController,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public booksInfoApi: BooksInfoApi,
@@ -25,6 +32,78 @@ export class BooksinfoPage {
     public booksinfoPageService: BooksinfoPageService,
     private loadingController: LoadingController) {
 
+    // this.platform.registerBackButtonAction(() => {
+    //   console.log('in');
+    //   if (this.showImgSlide) {
+    //     this.showImgSlide = false
+    //     console.log('in if');
+    //   } else {
+    //     console.log('in ell');
+    //     this.platform.exitApp();
+    //     console.log('af el');
+    //   }
+    // });
+
+    this.platform.registerBackButtonAction(() => {
+      console.log('in');
+      const closeDelay = 2000;
+      const spamDelay = 500;
+      if (this.showImgSlide) {
+        this.showImgSlide = false
+        console.log('in if');
+      } else if (Date.now() - this.lastBack > spamDelay && !this.allowClose) {
+        this.allowClose = true;
+        let toast = this.toastCtrl.create({
+          message: 'Press back again to Close',
+          position: 'bottom',
+          duration: closeDelay,
+          dismissOnPageChange: true
+        });
+        toast.onDidDismiss(() => {
+          this.allowClose = false;
+        });
+        toast.present();
+      } else if (Date.now() - this.lastBack < closeDelay && this.allowClose) {
+        this.platform.exitApp();
+      }
+      this.lastBack = Date.now();
+    });
+
+
+    // platform.registerBackButtonAction(() => {
+    //   const overlay = this.app._appRoot._overlayPortal.getActive();
+    //   const nav = this.app.getActiveNav();
+    //   const closeDelay = 2000;
+    //   const spamDelay = 500;
+    //   console.log(overlay);
+    //   if (this.showImgSlide) {
+    //     this.showImgSlide = false
+    //     console.log('in if');
+    //   }
+    //   else if (overlay && overlay.dismiss) {
+    //     overlay.dismiss();
+    //   } else if (nav.canGoBack()) {
+    //     nav.pop();
+    //   } else if (Date.now() - this.lastBack > spamDelay && !this.allowClose) {
+    //     this.allowClose = true;
+    //     let toast = this.toastCtrl.create({
+    //       message: 'Press back again to Close',
+    //       position: 'bottom',
+    //       duration: closeDelay,
+    //       dismissOnPageChange: true
+    //     });
+    //     toast.onDidDismiss(() => {
+    //       this.allowClose = false;
+    //     });
+    //     toast.present();
+    //   } else if (Date.now() - this.lastBack < closeDelay && this.allowClose) {
+    //     this.platform.exitApp();
+    //   }
+    //   this.lastBack = Date.now();
+    // });
+
+
+    /////////////////////////////////////
     this.booksinfoPageService.booksListChange.subscribe(
       data => {
         this.booksInfo = data;
@@ -61,6 +140,17 @@ export class BooksinfoPage {
   goToDetailsPage(book) {
     let modal = this.modalCtrl.create(BookdetailsPage, { bookObj: book });
     modal.present();
+    // modal.present().then(() => {
+    //   var deregisterFunction = this.platform.registerBackButtonAction(() => {
+    //     // if (this.showImgSlide) {
+    //     //   this.showImgSlide = false;
+    //     // }
+    //     // else {
+    //     modal.dismiss();
+    //     // }
+    //     modal.onWillDismiss(() => { deregisterFunction(); });
+    //   });
+    // });
     // this.homePageService.setPage(BookdetailsPage);
   }
 

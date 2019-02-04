@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { Platform, IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { FilterBooksService } from './filterbooks.service';
 import { BooksInfoApi } from '../../shared/shared';
 import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
@@ -12,7 +12,8 @@ import { AutoCompleteListService } from './AutoCompleteListService';
 export class FilterBooks {
   filterObj: any = {};
   collegesNames: any = {};
-  constructor(private navParams: NavParams,
+  constructor(
+    public platform: Platform, private navParams: NavParams,
     private filterBooksService: FilterBooksService,
     private viewController: ViewController,
     public booksInfoApi: BooksInfoApi,
@@ -21,6 +22,10 @@ export class FilterBooks {
     public autoCompleteListService: AutoCompleteListService
   ) {
     this.filterObj = this.filterBooksService.getFilterObj();
+
+    this.platform.registerBackButtonAction(() => {
+      this.viewController.dismiss();
+    });
   }
 
   ngOnInit() {
@@ -120,5 +125,7 @@ export class FilterBooks {
       )
     });
   }
+
+
 
 }

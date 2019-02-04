@@ -13,13 +13,13 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-fab style="margin-left: 85%;" (click)="gotoEditPage()" *ngIf="allowEdit">
+<ion-content [ngClass]="{'no-scroll': showImgSlide}">
+  <ion-fab style="margin-left: 85%;" (click)="gotoEditPage()" *ngIf="allowEdit && !showImgSlide">
     <button ion-fab mini>
       <ion-icon name="create"></ion-icon>
     </button>
   </ion-fab>
-  <div *ngIf="!showImgSlide">
+  <div style="position: absolute;width: 100%;">
     <ion-grid>
       <ion-row>
         <ion-col col-4 *ngFor="let photo of bookObj.bookImages; let id = index">
@@ -176,8 +176,8 @@
             <ion-col no-padding>
               <ion-icon name="mail" (click)="sendEmail() && bookObj.bookContact[0]"></ion-icon>
             </ion-col>
-            <ion-col no-padding>
-              <ion-icon name="logo-whatsapp" (click)="sendWhatsAppMsg()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo"></ion-icon>
+            <ion-col no-padding *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
+              <ion-icon name="logo-whatsapp" (click)="sendWhatsAppMsg()"></ion-icon>
             </ion-col>
             <ion-col no-padding>
               <ion-icon name="share" (click)="share()"></ion-icon>
@@ -190,14 +190,29 @@
 
   </div>
 
-  <span *ngIf="showImgSlide">
-    <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;" (click)="showImgSlide=false"></ion-icon>
-    <ion-slides zoom="true">
+  <div *ngIf="showImgSlide" class="imagePopUp">
+    <!-- <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;" (click)="showImgSlide=false"></ion-icon> -->
+    <!-- <ion-fab style="margin-left: 85%;" (click)="showImgSlide=false">
+      <button ion-fab mini style="background-color: #488aff73;">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-fab> -->
+    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <button ion-fab-button>
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-fab> -->
+    <ion-fab class="imgBackFabBtn">
+      <button ion-fab mini style="background-color: #488aff73;" (click)="showImgSlide=false">
+        <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-slides zoom="true" pager="true">
       <ion-slide *ngFor="let photo of bookObj.bookImages; let id = index">
         <div class="swiper-zoom-container">
           <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
         </div>
       </ion-slide>
     </ion-slides>
-  </span>
+  </div>
 </ion-content>

@@ -77,9 +77,10 @@ export class HomePage {
         this.searchBar.setFocus();
       }, 150);
       // Keyboard.show();
-    } else {
-      document.getElementsByClassName('searchSelected')[0]["style"].marginTop = "0%";
-    }
+    } else if (this.rootPage == this.mypostsPage) {
+      document.getElementsByClassName('searchSelected')[0]["style"].marginTop = "20px";
+    } else
+      document.getElementsByClassName('searchSelected')[0]["style"].marginTop = "0px";
   }
 
   filterItems(ev: any) {

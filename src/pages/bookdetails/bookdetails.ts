@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Platform, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { UserInfoService } from '../../shared/shared';
@@ -16,10 +16,12 @@ export class BookdetailsPage {
     bookObj: any
     showImgSlide: boolean = false;
     tabInfo = 'bookInfo';
-    allowEdit: boolean = true;
+    allowEdit: boolean = false;
     userInfo = this.userInfoService.getUserInfo();
+    deregisterFunction: any;
 
-    constructor(public navCtrl: NavController,
+    constructor(public platform: Platform,
+        public navCtrl: NavController,
         public navParams: NavParams,
         public userInfoService: UserInfoService,
         public homePageService: HomePageService,
@@ -27,13 +29,35 @@ export class BookdetailsPage {
         public viewCtrl: ViewController,
         private callSvc: CallNumber,
         private socialSharing: SocialSharing) {
+
+        // this.platform.registerBackButtonAction(() => {
+        //     if (this.showImgSlide) {
+        //         this.showImgSlide = false;
+        //     } else {
+        //         this.viewCtrl.dismiss();
+        //     }
+        // });
+        this.deregisterFunction = this.platform.registerBackButtonAction(() => {
+            if (this.showImgSlide) {
+                this.showImgSlide = false;
+            }
+            else {
+                this.viewCtrl.dismiss();
+            }
+        });
+
+
         console.log(navParams.get('bookObj'));
         this.allowEdit = false;
         this.bookObj = navParams.get('bookObj');
-        if (this.userInfo && this.bookObj.uid == this.userInfo._id) {
+        if (this.userInfo && this.bookObj.uid == this.userInfo.uid) {
             this.allowEdit = true;
         }
 
+    }
+
+    ionViewWillLeave() {
+        this.deregisterFunction();
     }
 
     ionViewDidLoad() {

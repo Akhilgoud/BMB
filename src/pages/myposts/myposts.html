@@ -6,44 +6,60 @@
   </ion-navbar> -->
 </ion-header>
 
-<ion-content padding>
+<ion-content [ngClass]="{'no-scroll': showImgSlide}">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <!-- <ion-searchbar (ionInput)="filterItems($event)" *ngIf="searchFilter"></ion-searchbar> -->
-  <div class="searchSelected">
-    <!-- <pre>{{userInfo | json}}</pre> -->
-    <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
-      <ion-row style="padding-left: 16px;" (click)="goToDetailsPage(book)">
-        <ion-col col-3>
-          <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
-            style="width: 100%;" />
-          <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
-        </ion-col>
-        <ion-col col-7 style="padding-left: 18px;    padding-top: 12px;">
-          <div id="bookname">{{book.name}}</div>
-          <div *ngIf="book.author" id="author">by {{book.author}}</div>
-          <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
-          <div id="price"><i class="fa fa-rupee"></i> {{book.price}}</div>
-        </ion-col>
-        <ion-col col-1 offset-1 style="padding-top: 13%;">
-          <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <div>
-        <span style="float: right">
-          <button ion-button (click)="changeStatus(book._id,'NEW')" *ngIf="book.status=='SOLD'" class="soldBtn">
-            Status - Sold
-          </button>
-          <button ion-button (click)="changeStatus(book._id,'SOLD')" *ngIf="book.status=='NEW'" class="soldBtn">
-            Stauts - UnSold
-          </button>
-        </span>
-        <!-- <span style="font-size: 15px;color: grey;float:right">
+  <div style="position:absolute">
+    <!-- <ion-searchbar (ionInput)="filterItems($event)" *ngIf="searchFilter"></ion-searchbar> -->
+    <div class="searchSelected" style="margin-top: 20px;">
+      <!-- <pre>{{userInfo | json}}</pre> -->
+      <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
+        <ion-row style="padding-left: 16px;">
+          <ion-col col-3 (click)="bookImageClicked(book)">
+            <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
+              style="width: 100%;" />
+            <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="width: 100%;" />
+          </ion-col>
+          <ion-col col-7 style="padding-left: 18px;padding-top: 12px;" (click)="goToDetailsPage(book)">
+            <div id="bookname">{{book.name}}</div>
+            <div *ngIf="book.author" id="author">by {{book.author}}</div>
+            <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
+            <div id="price"><i class="fa fa-rupee"></i> {{book.price}}</div>
+          </ion-col>
+          <ion-col col-1 offset-1 style="padding-top: 13%;" (click)="goToDetailsPage(book)">
+            <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <div>
+          <span style="float: right">
+            <button ion-button (click)="changeStatus(book._id,'NEW')" *ngIf="book.status=='SOLD'" class="soldBtn">
+              Status - Sold
+            </button>
+            <button ion-button (click)="changeStatus(book._id,'SOLD')" *ngIf="book.status=='NEW'" class="soldBtn">
+              Stauts - UnSold
+            </button>
+          </span>
+          <!-- <span style="font-size: 15px;color: grey;float:right">
             {{book.created_date | daysago}} days ago
         </span> -->
+        </div>
       </div>
-    </div>
 
+    </div>
+  </div>
+  <div *ngIf="showImgSlide" class="imagePopUp">
+    <ion-fab class="imgBackFabBtn">
+      <button ion-fab mini style="background-color: #488aff73;" (click)="showImgSlide=false">
+        <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-slides zoom="true" pager="true">
+      <ion-slide *ngFor="let photo of clickedBookImg; let id = index">
+        <div class="swiper-zoom-container">
+          <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
+        </div>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>

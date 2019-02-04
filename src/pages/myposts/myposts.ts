@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, IonicPage, NavController, NavParams, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { BooksInfoApi } from '../../shared/shared';
 import { UserInfoService } from '../../shared/shared';
-import { BookdetailsPage } from '../pages';
+import { BookdetailsPage, BooksinfoPage } from '../pages';
 import { HomePageService } from '../home/home.service';
 import { MyPostsPageService } from './myposts.service';
 @Component({
@@ -16,7 +16,11 @@ export class MypostsPage {
   booksInfo: any;
   tempBooksInfo: any;
   searchFilter: boolean = false;
-  constructor(public navCtrl: NavController,
+  showImgSlide = false;
+  clickedBookImg: any = {};
+
+  constructor(public platform: Platform,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
@@ -25,6 +29,14 @@ export class MypostsPage {
     private loadingController: LoadingController,
     public homePageService: HomePageService,
     public myPostsPageService: MyPostsPageService) {
+
+    this.platform.registerBackButtonAction(() => {
+      if (this.showImgSlide) {
+        this.showImgSlide = false
+      } else {
+        this.homePageService.setPage(BooksinfoPage);
+      }
+    });
 
     this.userInfo = this.userInfoService.getUserInfo();
 
@@ -130,6 +142,14 @@ export class MypostsPage {
         refresher.complete();
       }
     )
+  }
+
+  bookImageClicked(book) {
+    this.clickedBookImg = {};
+    if (book.bookImages[0]) {
+      this.showImgSlide = true;
+      this.clickedBookImg = book.bookImages;
+    }
   }
 
 }

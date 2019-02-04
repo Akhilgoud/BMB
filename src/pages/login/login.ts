@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Platform, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUserObj } from './login.model';
 import { BooksinfoPage } from '../pages';
@@ -21,7 +21,8 @@ export class LoginPage {
     isRegister = false;
     authRes: any;
     err: any;
-    constructor(public navCtrl: NavController,
+    constructor(public platform: Platform,
+        public navCtrl: NavController,
         public navParams: NavParams,
         public formBuilder: FormBuilder,
         public loginApi: LoginApi,
@@ -30,6 +31,10 @@ export class LoginPage {
         public homePageService: HomePageService,
         private database: UserDbProvider,
         private loadingController: LoadingController) {
+
+        this.platform.registerBackButtonAction(() => {
+            this.homePageService.setPage(BooksinfoPage);
+        });
 
         this.bindForm();
 

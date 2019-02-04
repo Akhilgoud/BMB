@@ -5,11 +5,12 @@
 </ion-header>
 
 
-<ion-content style="position:absolute">
-  <div *ngIf="!showImgSlide">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+<ion-content [ngClass]="{'no-scroll': showImgSlide}">
+  <ion-refresher (ionRefresh)="doRefresh($event)" [enabled]="!showImgSlide">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <div style="position:absolute">
     <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
     <div class="searchSelected">
       <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
@@ -33,19 +34,24 @@
           {{book.created_date | daysago}} days ago
         </div>
       </div>
-      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="!showImgSlide">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>
   </div>
-  <div *ngIf="showImgSlide">
-    <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;" (click)="showImgSlide=false"></ion-icon>
-    <ion-slides zoom="true">
+  <div *ngIf="showImgSlide" class="imagePopUp">
+    <ion-fab class="imgBackFabBtn">
+      <button ion-fab mini style="background-color: #488aff73;" (click)="showImgSlide=false">
+        <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-slides zoom="true" pager="true">
       <ion-slide *ngFor="let photo of clickedBookImg; let id = index">
         <div class="swiper-zoom-container">
           <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
         </div>
       </ion-slide>
     </ion-slides>
+
   </div>
 </ion-content>

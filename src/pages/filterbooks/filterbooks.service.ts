@@ -30,7 +30,7 @@ export class FilterBooksService {
     }
 
     getFilterObj() {
-        return this.filterObj;
+        return { ...this.filterObj };
     }
 
     resetFilterObj() {
