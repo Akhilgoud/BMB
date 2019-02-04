@@ -6,37 +6,39 @@
 
 
 <ion-content padding>
-  <div>
+  <div *ngIf="!isForgotP">
     <ion-row>
       <ion-col>
         <form [formGroup]="loginForm">
-            <ion-item *ngIf="isRegister">
-                <ion-label>
-                  <ion-icon name="person"></ion-icon>
-                </ion-label>
-                <ion-input formControlName="name"  [(ngModel)]="userObj.name" type="text" placeholder="Name"></ion-input>
-              </ion-item>
+          <ion-item *ngIf="isRegister">
+            <ion-label>
+              <ion-icon name="person"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text" placeholder="Name"></ion-input>
+          </ion-item>
+
           <ion-item>
             <ion-label>
               <ion-icon name="mail"></ion-icon>
             </ion-label>
-            <ion-input formControlName="email"  [(ngModel)]="userObj.email" type="email" placeholder="Email Id"></ion-input>
+            <ion-input formControlName="email" [(ngModel)]="userObj.email" type="email"  placeholder="Email Id"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>
               <ion-icon name="key"></ion-icon>
             </ion-label>
-            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password"></ion-input>
+            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password"
+                       placeholder="Password"></ion-input>
           </ion-item>
         </form>
       </ion-col>
     </ion-row>
+    <a class="forgot_p" (click)="isForgotP = true"  *ngIf="!isRegister">Forgot Password</a>
     <ion-row>
       <ion-col>
-        <button ion-button (click)="authorize()" full class="signinbtn" >
-         <span *ngIf="isRegister"> Sign Up</span>
-         <span *ngIf="!isRegister"> Sign In</span>
-         
+        <button ion-button (click)="authorize()" full class="signinbtn">
+          <span *ngIf="isRegister"> Sign Up</span>
+          <span *ngIf="!isRegister"> Sign In</span>
         </button>
       </ion-col>
     </ion-row>
@@ -54,5 +56,24 @@
         <span *ngIf="!isRegister">Sign Up</span>
       </a>
     </div>
+  </div>
+  <div *ngIf="isForgotP">
+      <ion-buttons left (click)="goToLogin(userObj)">
+          <ion-icon style="font-size: 1.6em;" name="arrow-back"></ion-icon>
+      </ion-buttons>
+    <ion-item>
+      <ion-label>
+        <ion-icon name="mail"></ion-icon>
+      </ion-label>
+      <ion-input [(ngModel)]="userObj.email" type="email" placeholder="Email Id"></ion-input>
+    </ion-item>
+    <button ion-button (click)="sendReset(userObj)" full class="signinbtn">
+      <span>Reset Password</span>
+    </button>
+  </div>
+  <div *ngIf="afterReset">
+    <div>Password has been sent to your registered email ID. Please <a (click)="goToLogin(userObj)">
+      Login
+    </a> with your new password.</div>
   </div>
 </ion-content>

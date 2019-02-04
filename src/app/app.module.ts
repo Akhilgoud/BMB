@@ -18,6 +18,9 @@ import { PostBookDataService } from '../pages/postbook/postbookdata.service';
 import { SQLite } from '@ionic-native/sqlite';
 import {CallNumber} from '@ionic-native/call-number';
 import {SocialSharing} from '@ionic-native/social-sharing';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -63,6 +66,7 @@ import {SocialSharing} from '@ionic-native/social-sharing';
     SQLite,
     CallNumber,
     SocialSharing,
+    BarcodeScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })

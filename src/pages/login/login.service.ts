@@ -7,11 +7,11 @@ import 'rxjs/add/operator/do';
 
 @Injectable()
 export class LoginApi {
-    
+
     constructor(private http: Http) { }
     private authorizeUrl = 'https://floating-cliffs-67240.herokuapp.com/login';
     private registerUrl = 'https://floating-cliffs-67240.herokuapp.com/register';
-    
+
     RegisterUser(obj) {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
@@ -22,7 +22,7 @@ export class LoginApi {
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-    
+
     authorizeUser(obj){
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
@@ -34,4 +34,5 @@ export class LoginApi {
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
+
 }

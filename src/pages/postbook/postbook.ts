@@ -12,6 +12,8 @@ import { LoginApi } from "../login/login.service";
 import { UserInfoService } from "../../shared/shared";
 import { LoginPage } from "../login/login";
 import { PostBookDataService } from "./postbookdata.service";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @Component({
     selector: 'page-postbook',
@@ -35,6 +37,7 @@ export class PostbookPage {
         public postbookApi: PostbookApi,
         public userInfoService: UserInfoService,
         public postBookDataService: PostBookDataService,
+                private barcodeScanner: BarcodeScanner,
         public homePageService: HomePageService) {
         this.photos = [];
         this.bookObj = new IBookObj();
@@ -188,6 +191,15 @@ export class PostbookPage {
             this.homePageService.setPage(LoginPage);
         }
     }
+
+  scanBarCode(){
+      console.log("test")
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+    }).catch(err => {
+      console.log('Error', err);
+    });
+  }
 
     // scrollingFun(e) {
     //     if(e.directionY=='down'){
