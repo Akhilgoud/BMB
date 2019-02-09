@@ -20,6 +20,7 @@
     "@angular/http": "5.0.3",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
+    "@ionic-native/barcode-scanner": "^4.20.0",
     "@ionic-native/call-number": "^4.7.0",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "4.4.0",
@@ -69,7 +70,8 @@
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
       },
-      "call-number": {}
+      "call-number": {},
+      "phonegap-plugin-barcodescanner": {}
     },
     "platforms": [
       "browser",

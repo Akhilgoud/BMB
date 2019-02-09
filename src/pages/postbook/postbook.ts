@@ -12,6 +12,7 @@ import { LoginApi } from "../login/login.service";
 import { UserInfoService } from "../../shared/shared";
 import { LoginPage } from "../login/login";
 import { PostBookDataService } from "./postbookdata.service";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @Component({
     selector: 'page-postbook',
@@ -36,8 +37,8 @@ export class PostbookPage {
         public postbookApi: PostbookApi,
         public userInfoService: UserInfoService,
         public postBookDataService: PostBookDataService,
-        public homePageService: HomePageService) {
-
+        public homePageService: HomePageService,
+        private barcodeScanner: BarcodeScanner, ) {
         this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
@@ -113,8 +114,7 @@ export class PostbookPage {
         confirm.present();
     }
 
-    takePhoto() {
-        console.log("coming here");
+    takePhoto(btnType) {
 
         const options: CameraOptions = {
             quality: 50,
@@ -122,10 +122,14 @@ export class PostbookPage {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             targetWidth: 450,
-            targetHeight: 450,
-            saveToPhotoAlbum: false
+            targetHeight: 450
         };
 
+        if (btnType == 'btnGallery') {
+            options.sourceType = this.camera.PictureSourceType.SAVEDPHOTOALBUM;
+        } else {
+            options.saveToPhotoAlbum = false;
+        }
         this.camera.getPicture(options).then(
             imageData => {
                 this.base64Image = imageData;
@@ -206,6 +210,44 @@ export class PostbookPage {
         this.homePageService.setPage(MypostsPage);
     }
 
+
+    scanBarCode() {
+        var obj = {
+            bookObj: this.bookObj,
+        };
+        this.barcodeScanner.scan().then(barcodeData => {
+            this.postbookApi.getBookdataFromBarCode(barcodeData.text).subscribe(
+                response => {
+                    if (response.totalItems > 0) {
+                        obj.bookObj.name = response.items[0]["volumeInfo"]["title"];
+                        obj.bookObj.author = response.items[0]["volumeInfo"]["authors"];
+                        obj.bookObj.publisher = response.items[0]["volumeInfo"]["publisher"];
+                        obj.bookObj.description = response.items[0]["volumeInfo"]["description"];
+                    } else {
+                        obj.bookObj = null;
+                        let alert = this.alertCtrl.create({
+                            title: 'message',
+                            subTitle: 'Unable to fetch information!',
+                            buttons: ['Dismiss']
+                        });
+                        alert.present();
+                    }
+                },
+                error => {
+                    obj.bookObj = null;
+                    let alert = this.alertCtrl.create({
+                        title: 'message',
+                        subTitle: 'Unable to fetch information!',
+                        buttons: ['Dismiss']
+                    });
+                    alert.present();
+                }
+            )
+        }).catch(err => {
+            obj.bookObj = null;
+            console.log('Error', err);
+        });
+    }
     // scrollingFun(e) {
     //     if(e.directionY=='down'){
     //        this.shownav = false;
