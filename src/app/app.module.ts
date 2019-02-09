@@ -22,6 +22,8 @@ import { SQLite } from '@ionic-native/sqlite';
 import { CallNumber } from '@ionic-native/call-number';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -71,6 +73,7 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
     SQLite,
     CallNumber,
     SocialSharing,
+    BarcodeScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })

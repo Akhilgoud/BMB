@@ -27,22 +27,35 @@
       <ion-col>
         <form [formGroup]="postbookForm">
           <ion-item>
-            <span style="color: #4856b1;font-family: sans-serif;">Upload max 3 images of books</span>
-            <button ion-button full (click)="takePhoto()" [disabled]="photos.length > 2">
-              <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
-            </button>
-            <ion-grid>
-              <ion-row>
-                <ion-col col-6 *ngFor="let photo of photos; let id = index">
-                  <ion-card class="block">
-                    <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
-                    <img [src]="'data:image/jpeg;base64,' + photo" *ngIf="photo" />
-                  </ion-card>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
+            <div class="row">
+              <div class="col" style="width: 75%">
+                <span style="color: #4856b1;font-family: sans-serif;">Upload max 3 images of books</span>
+                <div>
+                  <button ion-button full (click)="takePhoto('btnCamera')" [disabled]="photos.length > 2">
+                    <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+                  </button>
+                  <span style="color: #4856b1;font-family: sans-serif;margin-left: 38%;">Or</span>
+                  <button ion-button full (click)="takePhoto('btnGallery')" [disabled]="photos.length > 2">
+                    <ion-icon name="gallery"></ion-icon>&nbsp;Upload From Gallery
+                  </button>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-6 *ngFor="let photo of photos; let id = index">
+                        <ion-card class="block">
+                          <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+                          <img [src]="'data:image/jpeg;base64,' + photo" *ngIf="photo" />
+                        </ion-card>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+              </div>
+              <div class="col" style="border: 1px solid lightgray; height: 76px; margin-top: 29px;">
+                <ion-icon name="barcode" style="font-size: 52px; margin: 5px 0px 0px 5px;" (click)="scanBarCode()">
+                </ion-icon>
+              </div>
+            </div>
           </ion-item>
-
           <ion-item>
             <ion-label color="primary" floating>Book Name*</ion-label>
             <ion-input formControlName="bookname" [(ngModel)]="bookObj.name" type="text"></ion-input>
@@ -69,7 +82,8 @@
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Is Book related to Academic*</ion-label>
-            <ion-select formControlName="isAcademic" interface="popover" [(ngModel)]="bookObj.isAcademic" (ionChange)="bookObj.bookType = ''">
+            <ion-select formControlName="isAcademic" interface="popover" [(ngModel)]="bookObj.isAcademic"
+              (ionChange)="bookObj.bookType = ''">
               <ion-option value="Y">Yes</ion-option>
               <ion-option value="N">No</ion-option>
             </ion-select>
@@ -77,7 +91,8 @@
 
           <ion-item>
             <ion-label color="primary" floating>Book Type*</ion-label>
-            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType" disabled="{{!bookObj.isAcademic}}">
+            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType"
+              disabled="{{!bookObj.isAcademic}}">
               <ion-option value="ALLINONE" *ngIf="bookObj.isAcademic =='Y'">All In One</ion-option>
               <ion-option value="TEXTBOOK" *ngIf="bookObj.isAcademic =='Y'">Text Book</ion-option>
               <ion-option value="NOTEBOOK" *ngIf="bookObj.isAcademic =='Y'">Note Book</ion-option>
