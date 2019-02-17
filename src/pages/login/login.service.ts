@@ -7,28 +7,42 @@ import 'rxjs/add/operator/do';
 
 @Injectable()
 export class LoginApi {
-    
+
     constructor(private http: Http) { }
     private authorizeUrl = 'https://floating-cliffs-67240.herokuapp.com/login';
     private registerUrl = 'https://floating-cliffs-67240.herokuapp.com/register';
-    
+    private baseUrl = 'https://floating-cliffs-67240.herokuapp.com/';
+
+
     RegisterUser(obj) {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.registerUrl, JSON.stringify(obj), options)
             .map(response => {
-               return response.json();
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-    
-    authorizeUser(obj){
+
+    authorizeUser(obj) {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({ headers: headers});
+        let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.authorizeUrl,JSON.stringify(obj), options)
+        return this.http.post(this.authorizeUrl, JSON.stringify(obj), options)
+            .map(response => {
+                return response.json();
+            })
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    forgotPwd(email) {
+        let headers = new Headers();
+        headers.append('Content-type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(this.baseUrl + "forgotPwd/" + email, options)
             .map(response => {
                 return response.json();
             })

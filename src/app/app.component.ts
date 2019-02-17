@@ -17,12 +17,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      if (document.getElementsByClassName("loading-md")[0]["style"])
+      if (document.getElementsByClassName("loading-md")[0] && document.getElementsByClassName("loading-md")[0]["style"])
         document.getElementsByClassName("loading-md")[0]["style"].display = "none";
 
       timer(2000).subscribe(() => {
         this.showSplash = false;
-        if (document.getElementsByClassName("loading-md")[0]["style"])
+        if (document.getElementsByClassName("loading-md")[0] && document.getElementsByClassName("loading-md")[0]["style"])
           document.getElementsByClassName("loading-md")[0]["style"].display = "flex";
       });
 

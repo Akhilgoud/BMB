@@ -39,15 +39,17 @@ export class UserDbProvider {
 
     CreateUser(obj) {
         return new Promise((resolve, reject) => {
-            this.connectDB().then((db) => {
-                let sql = "INSERT INTO users (uid, name, email, created_date, updated_date) VALUES (?, ?, ?, ?, ?)";
-                this.db.executeSql(sql, [obj._id, obj.name, obj.email,
-                obj.created_date, obj.updated_date]).then((data) => {
-                    resolve(data);
-                }, (error) => {
-                    reject(error);
+            this.DeleteUserData().then(() => {
+                this.connectDB().then((db) => {
+                    let sql = "INSERT INTO users (uid, name, email, created_date, updated_date) VALUES (?, ?, ?, ?, ?)";
+                    this.db.executeSql(sql, [obj._id, obj.name, obj.email,
+                    obj.created_date, obj.updated_date]).then((data) => {
+                        resolve(data);
+                    }, (error) => {
+                        reject(error);
+                    });
                 });
-            });
+            })
         });
     }
 

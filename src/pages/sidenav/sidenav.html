@@ -2,7 +2,11 @@
     <ion-header>
         <ion-toolbar>
             <ion-title>
-                <span> Hello {{userObj.name}} </span>
+                <span>
+                    Hello {{userObj.name}}
+                    <ion-icon name="settings" style="float:right" *ngIf="userObj.name"
+                        (click)="changePage(userProfilePage)" menuClose></ion-icon>
+                </span>
             </ion-title>
         </ion-toolbar>
     </ion-header>

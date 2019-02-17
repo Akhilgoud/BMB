@@ -7,13 +7,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { UserDbProvider } from '../providers/userdatabase';
-import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage, FilterBooks } from '../pages/pages';
+import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage, FilterBooks, UserProfilePage } from '../pages/pages';
 import { HomePageService } from '../pages/home/home.service';
 import { BooksinfoPageService } from '../pages/booksinfo/booksinfo.service';
 import { FilterBooksService } from '../pages/filterbooks/filterbooks.service';
 import { MyPostsPageService } from '../pages/myposts/myposts.service';
 import { PostbookApi } from '../pages/postbook/postbook.service';
 import { LoginApi } from '../pages/login/login.service';
+import { UserProfileApi } from '../pages/userprofile/userprofile.service';
 import { UserInfoService, BooksInfoApi } from '../shared/shared';
 import { DaysagoPipe } from '../pages/booksinfo/booksinfo.pipe';
 import { AutoCompleteListService } from '../pages/filterbooks/AutoCompleteListService';
@@ -35,7 +36,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     BookdetailsPage,
     DaysagoPipe,
     MypostsPage,
-    FilterBooks
+    FilterBooks,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     LoginPage,
     BookdetailsPage,
     MypostsPage,
-    FilterBooks
+    FilterBooks,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
@@ -62,6 +65,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     UserDbProvider,
     PostbookApi,
     LoginApi,
+    UserProfileApi,
     HomePageService,
     BooksinfoPageService,
     UserInfoService,

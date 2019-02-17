@@ -1,0 +1,84 @@
+<ion-header>
+    <!-- <ion-navbar>
+          <ion-title>login</ion-title>
+        </ion-navbar> -->
+</ion-header>
+
+
+<ion-content padding>
+    <div>
+        <ion-row>
+            <ion-col>
+                <form [formGroup]="userProfileForm">
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="mail"></ion-icon>
+                        </ion-label>
+                        <ion-input formControlName="email" [(ngModel)]="userObj.email" type="email"
+                            placeholder="Email Id">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="person"></ion-icon>
+                        </ion-label>
+                        <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text" placeholder="Name">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item class="resetPwd">
+                        <!-- <label class="checkbox-inline">
+                            <input type="checkbox" value="isResetPassword" name="isResetPassword"
+                                [formControl]="userProfileForm.controls['isResetPassword']">
+                            {{ 'USER_PROFILE_MODEL.RESET_PASSWORD' | translate }}
+                        </label> -->
+                        <!-- <ion-label>
+                            <ion-icon name="person"></ion-icon>
+                        </ion-label> -->
+                        <!-- <ion-input formControlName="resetPassword" [(ngModel)]="userObj.resetPassword" type="checkbox">
+                        </ion-input> -->
+                        <ion-label>Reset Password</ion-label>
+                        <ion-checkbox formControlName="resetPassword" [(ngModel)]="userObj.resetPassword">
+                        </ion-checkbox>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="key"></ion-icon>
+                        </ion-label>
+                        <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password"
+                            placeholder="Current Password" [disabled]="!userObj.resetPassword">
+                        </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="key"></ion-icon>
+                        </ion-label>
+                        <ion-input formControlName="newPassword" [(ngModel)]="userObj.newPassword" type="password"
+                            placeholder="New Password" [disabled]="!userObj.resetPassword">
+                        </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="key"></ion-icon>
+                        </ion-label>
+                        <ion-input formControlName="confirmPassword" [(ngModel)]="userObj.confirmPassword"
+                            type="password" placeholder="Confirm Password" [disabled]="!userObj.resetPassword">
+                        </ion-input>
+                    </ion-item>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button (click)="udpateProfile()" full class="signinbtn"
+                    [disabled]="!userObj.name || !userObj.email || (userObj.resetPassword && (!userObj.password || !userObj.newPassword || !userObj.confirmPassword))">
+                    Update Profile
+                </button>
+            </ion-col>
+        </ion-row>
+    </div>
+
+
+</ion-content>
