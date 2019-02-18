@@ -7,7 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { UserDbProvider } from '../providers/userdatabase';
-import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage, FilterBooks, UserProfilePage } from '../pages/pages';
+import { HomePage, SidenavPage, PostbookPage, BooksinfoPage, LoginPage, BookdetailsPage, MypostsPage, FilterBooks, UserProfilePage, FeedbackPage } from '../pages/pages';
 import { HomePageService } from '../pages/home/home.service';
 import { BooksinfoPageService } from '../pages/booksinfo/booksinfo.service';
 import { FilterBooksService } from '../pages/filterbooks/filterbooks.service';
@@ -16,6 +16,7 @@ import { PostbookApi } from '../pages/postbook/postbook.service';
 import { LoginApi } from '../pages/login/login.service';
 import { UserProfileApi } from '../pages/userprofile/userprofile.service';
 import { UserInfoService, BooksInfoApi } from '../shared/shared';
+import { FeedbackApi } from '../pages/feedback/feedback.service';
 import { DaysagoPipe } from '../pages/booksinfo/booksinfo.pipe';
 import { AutoCompleteListService } from '../pages/filterbooks/AutoCompleteListService';
 import { PostBookDataService } from '../pages/postbook/postbookdata.service';
@@ -37,7 +38,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     DaysagoPipe,
     MypostsPage,
     FilterBooks,
-    UserProfilePage
+    UserProfilePage,
+    FeedbackPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     BookdetailsPage,
     MypostsPage,
     FilterBooks,
-    UserProfilePage
+    UserProfilePage,
+    FeedbackPage
   ],
   providers: [
     StatusBar,
@@ -71,6 +74,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     UserInfoService,
     FilterBooksService,
     BooksInfoApi,
+    FeedbackApi,
     PostBookDataService,
     AutoCompleteListService,
     MyPostsPageService,

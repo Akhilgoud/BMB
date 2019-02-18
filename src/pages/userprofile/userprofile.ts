@@ -73,10 +73,10 @@ export class UserProfilePage {
                             duration: 2000,
                             dismissOnPageChange: false
                         });
-                        toast.onDidDismiss(() => {
-                            this.homePageService.setPage(BooksinfoPage);
-                        });
                         toast.present();
+                        this.homePageService.setPage(BooksinfoPage);
+                        // toast.onDidDismiss(() => {
+                        // });
                         loader.dismiss();
                     },
                     error => {

@@ -10,3 +10,4 @@ export { BookdetailsPage } from './bookdetails/bookdetails';
 export { MypostsPage } from './myposts/myposts';
 export { FilterBooks } from './filterbooks/filterbooks';
 export { UserProfilePage } from './userprofile/userprofile';
+export { FeedbackPage } from './feedback/feedback';

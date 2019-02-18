@@ -1,0 +1,73 @@
+<ion-header>
+</ion-header>
+
+<ion-content padding>
+    <div>
+        <ion-row>
+            <ion-col>
+                <form [formGroup]="feedbackForm">
+                    <ion-item>
+                        <div class="row">
+                            <div class="col" style="width: 75%">
+                                <span style="color: #4856b1;font-family: sans-serif;">Upload max 2 images of
+                                    Issue</span>
+                                <div>
+                                    <button ion-button full (click)="takePhoto('btnCamera')"
+                                        [disabled]="photos.length > 2">
+                                        <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+                                    </button>
+                                    <span style="color: #4856b1;font-family: sans-serif;margin-left: 38%;">Or</span>
+                                    <button ion-button full (click)="takePhoto('btnGallery')"
+                                        [disabled]="photos.length > 2">
+                                        <ion-icon name="gallery"></ion-icon>&nbsp;Upload From Gallery
+                                    </button>
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col col-6 *ngFor="let photo of photos; let id = index">
+                                                <ion-card class="block">
+                                                    <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)">
+                                                    </ion-icon>
+                                                    <img [src]="'data:image/jpeg;base64,' + photo" *ngIf="photo" />
+                                                </ion-card>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Complaint or Compliment</ion-label>
+                        <ion-select formControlName="issueType" interface="popover" [(ngModel)]="feedbackObj.issueType">
+                            <ion-option value="COMPLAINT">Complaint</ion-option>
+                            <ion-option value="COMPLIMENT">Compliment</ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Your Phone Model</ion-label>
+                        <ion-input formControlName="phoneModel" [(ngModel)]="feedbackObj.phoneModel" type="text">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Severity Of Issue </ion-label>
+                        <ion-range color="secondary" pin="true" [(ngModel)]="feedbackObj.severity" min="0" max="5"
+                            step="1" snaps="true" formControlName="severity"></ion-range>
+                        <!-- <ion-input formControlName="Severity" [(ngModel)]="feedbackObj.Severity" type="number">
+                        </ion-input> -->
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="primary" floating>Description</ion-label>
+                        <ion-textarea formControlName="description" [(ngModel)]="feedbackObj.description" type="text">
+                        </ion-textarea>
+                    </ion-item>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-4>
+                <button ion-button (click)="submit()" [disabled]="!feedbackForm.valid">submit</button>
+            </ion-col>
+        </ion-row>
+
+    </div>
+</ion-content>
