@@ -216,36 +216,30 @@ export class PostbookPage {
             bookObj: this.bookObj,
         };
         this.barcodeScanner.scan().then(barcodeData => {
-            this.postbookApi.getBookdataFromBarCode(barcodeData.text).subscribe(
-                response => {
-                    if (response.totalItems > 0) {
-                        obj.bookObj.name = response.items[0]["volumeInfo"]["title"];
-                        obj.bookObj.author = response.items[0]["volumeInfo"]["authors"];
-                        obj.bookObj.publisher = response.items[0]["volumeInfo"]["publisher"];
-                        obj.bookObj.description = response.items[0]["volumeInfo"]["description"];
-                    } else {
+            if (barcodeData) {
+                this.postbookApi.getBookdataFromBarCode(barcodeData.text).subscribe(
+                    response => {
+                        if (response.totalItems > 0) {
+                            obj.bookObj.name = response.items[0]["volumeInfo"]["title"];
+                            obj.bookObj.author = response.items[0]["volumeInfo"]["authors"];
+                            obj.bookObj.publisher = response.items[0]["volumeInfo"]["publisher"];
+                            obj.bookObj.description = response.items[0]["volumeInfo"]["description"];
+                        } else {
+                            obj.bookObj = null;
+                            let alert = this.alertCtrl.create({
+                                title: 'message',
+                                subTitle: 'Sorry! Cannot fetch this book!',
+                                buttons: ['Dismiss']
+                            });
+                            alert.present();
+                        }
+                    },
+                    error => {
                         obj.bookObj = null;
-                        let alert = this.alertCtrl.create({
-                            title: 'message',
-                            subTitle: 'Unable to fetch information!',
-                            buttons: ['Dismiss']
-                        });
-                        alert.present();
+                        console.log(error)
                     }
-                },
-                error => {
-                    obj.bookObj = null;
-                    let alert = this.alertCtrl.create({
-                        title: 'message',
-                        subTitle: 'Unable to fetch information!',
-                        buttons: ['Dismiss']
-                    });
-                    alert.present();
-                }
-            )
-        }).catch(err => {
-            obj.bookObj = null;
-            console.log('Error', err);
+                )
+            }
         });
     }
     // scrollingFun(e) {
