@@ -228,7 +228,7 @@ export class PostbookPage {
                             obj.bookObj = null;
                             let alert = this.alertCtrl.create({
                                 title: 'message',
-                                subTitle: 'Sorry! Cannot fetch this book',
+                                subTitle: 'Sorry! Cannot fetch this book!',
                                 buttons: ['Dismiss']
                             });
                             alert.present();
