@@ -71,6 +71,8 @@ export class MypostsPage {
     });
     loader.present().then(() => {
       this.booksInfoApi.getPostsById(uid).subscribe(response => {
+        this.booksInfo = response;
+        this.tempBooksInfo = response;
         console.log(response);
         this.myPostsPageService.setMyBooksList(response);
         loader.dismiss();

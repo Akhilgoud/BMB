@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage, LoginPage, MypostsPage, PostbookPage, BooksinfoPage } from '../pages';
+import { HomePage, LoginPage, MypostsPage, PostbookPage, BooksinfoPage, UserProfilePage, FeedbackPage } from '../pages';
 import { HomePageService } from '../home/home.service';
 import { UserInfoService } from '../../shared/shared';
 import { IUserObj } from '../login/login.model';
@@ -17,6 +17,8 @@ export class SidenavPage {
   private mypostsPage = MypostsPage;
   private postBookPage = PostbookPage;
   private booksinfoPage = BooksinfoPage;
+  private userProfilePage = UserProfilePage;
+  public feedbackPage = FeedbackPage;
   userObj: any = {};
   err: any;
   constructor(

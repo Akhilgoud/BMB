@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { IUserObj } from './login.model';
 import { BooksinfoPage } from '../pages';
 import { LoginApi } from './login.service';
@@ -16,11 +16,15 @@ import { UserDbProvider } from '../../providers/userdatabase';
 })
 export class LoginPage {
     loginForm: FormGroup;
+    loginFgtPwdForm: FormGroup;
     userObj: IUserObj = new IUserObj();
     bookObj: any;
     isRegister = false;
     authRes: any;
     err: any;
+    forgotPwd = false;
+    forgotPwdEmail = "";
+    forgotPwdSuccess = null;
     constructor(public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -43,10 +47,22 @@ export class LoginPage {
 
 
     bindForm() {
+        // this.loginForm = new FormGroup({
+        //     'name': new FormControl(this.userObj.name, [
+        //         Validators.required
+        //     ]),
+        //     'email': new FormControl(this.userObj.email, Validators.required),
+        //     'password': new FormControl(this.userObj.password, Validators.required)
+        // });
+
         this.loginForm = this.formBuilder.group({
             name: ['', Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required]
+        });
+
+        this.loginFgtPwdForm = this.formBuilder.group({
+            email: ['', Validators.required]
         });
     }
 
@@ -115,4 +131,27 @@ export class LoginPage {
         })
     }
 
+    forgotPwdSubmit() {
+        let loader = this.loadingController.create({
+            content: 'Please wait...',
+            dismissOnPageChange: true
+        });
+        loader.present().then(() => {
+            this.loginApi.forgotPwd(this.forgotPwdEmail).subscribe(
+                response => {
+                    // this.authRes = response.erroMsg;
+                    // if (!response.erroMsg) {
+                    //     this.validUser(response);
+                    // }
+                    this.forgotPwdSuccess = response.accepted && response.accepted.length > 1;
+                    loader.dismiss();
+                },
+                error => {
+                    console.log("error authentication" + error);
+                    // this.authRes = "501";
+                    loader.dismiss();
+                }
+            )
+        });
+    }
 }

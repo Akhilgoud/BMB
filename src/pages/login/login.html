@@ -6,53 +6,92 @@
 
 
 <ion-content padding>
-  <div>
+  <div *ngIf="!forgotPwd">
     <ion-row>
       <ion-col>
         <form [formGroup]="loginForm">
-            <ion-item *ngIf="isRegister">
-                <ion-label>
-                  <ion-icon name="person"></ion-icon>
-                </ion-label>
-                <ion-input formControlName="name"  [(ngModel)]="userObj.name" type="text" placeholder="Name"></ion-input>
-              </ion-item>
+          <ion-item *ngIf="isRegister">
+            <ion-label>
+              <ion-icon name="person"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text" placeholder="Name"></ion-input>
+          </ion-item>
           <ion-item>
             <ion-label>
               <ion-icon name="mail"></ion-icon>
             </ion-label>
-            <ion-input formControlName="email"  [(ngModel)]="userObj.email" type="email" placeholder="Email Id"></ion-input>
+            <ion-input formControlName="email" [(ngModel)]="userObj.email" type="email" placeholder="Email Id">
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label>
               <ion-icon name="key"></ion-icon>
             </ion-label>
-            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password"></ion-input>
+            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password">
+            </ion-input>
           </ion-item>
         </form>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button (click)="authorize()" full class="signinbtn" >
-         <span *ngIf="isRegister"> Sign Up</span>
-         <span *ngIf="!isRegister"> Sign In</span>
-         
+        <button ion-button (click)="authorize()" full class="signinbtn"
+          [disabled]="!userObj.name || !userObj.email || !userObj.password" *ngIf="isRegister">
+          Sign Up
+        </button>
+        <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!userObj.email || !userObj.password"
+          *ngIf="!isRegister">
+          Sign In
         </button>
       </ion-col>
     </ion-row>
     <div class="loginRegDiv">
+      <div (click)="forgotPwd = true" *ngIf="!isRegister">Forgot Password? </div>
       <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
       <div *ngIf="authRes == 'NOTFOUND'" class="authError">Email Not Found. Please sign up</div>
       <div *ngIf="authRes == 'WC'" class="authError">Invalid Password</div>
       <div *ngIf="authRes == '501'" class="authError">Failed to Authorize. Please try again later</div>
       <span class="loginRegText">
-          <span *ngIf="isRegister">Already have an account?</span>
-          <span *ngIf="!isRegister">Don't have an account yet?</span>
-        </span>
+        <span *ngIf="isRegister">Already have an account?</span>
+        <span *ngIf="!isRegister">Don't have an account yet?</span>
+      </span>
       <a class="loginRegBtn" (click)="isRegister= !isRegister">
         <span *ngIf="isRegister">Sign In</span>
         <span *ngIf="!isRegister">Sign Up</span>
       </a>
     </div>
+  </div>
+
+  <div *ngIf="forgotPwd">
+    <div class="fgtPwdTxt"> Forgot Password</div>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="loginFgtPwdForm">
+          <ion-item>
+            <ion-label>
+              <ion-icon name="mail"></ion-icon>
+            </ion-label>
+            <ion-input formControlName="email" [(ngModel)]="forgotPwdEmail" type="email" placeholder="Email Id">
+            </ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn">
+          Submit
+        </button>
+      </ion-col>
+    </ion-row>
+    <div class="loginRegDiv">
+      <span class="loginRegText">
+        <span></span>
+      </span>
+      <a class="loginRegBtn" (click)="forgotPwd = false">
+        <span>Sign In/Sign Up</span>
+      </a>
+    </div>
+    <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">Mail has been sent to your Email Id</div>
   </div>
 </ion-content>

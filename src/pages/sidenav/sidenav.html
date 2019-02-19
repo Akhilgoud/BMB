@@ -2,7 +2,11 @@
     <ion-header>
         <ion-toolbar>
             <ion-title>
-                <span> Hello {{userObj.name}} </span>
+                <span>
+                    Hello {{userObj.name}}
+                    <ion-icon name="settings" style="float:right" *ngIf="userObj.name"
+                        (click)="changePage(userProfilePage)" menuClose></ion-icon>
+                </span>
             </ion-title>
         </ion-toolbar>
     </ion-header>
@@ -22,6 +26,9 @@
                 <button ion-item menuClose (click)="changePage(mypostsPage)">My Books </button>
                 <button ion-item menuClose (click)="logout()">Logout </button>
             </div>
+            <button ion-item menuClose (click)="changePage(feedbackPage)">
+                Feedback
+            </button>
 
             <!-- <button ion-button block (click)="GetAllUser();"> Listar Usuarios</button>
                 
