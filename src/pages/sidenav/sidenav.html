@@ -26,9 +26,9 @@
                 <button ion-item menuClose (click)="changePage(mypostsPage)">My Books </button>
                 <button ion-item menuClose (click)="logout()">Logout </button>
             </div>
-            <button ion-item menuClose (click)="changePage(feedbackPage)">
+            <!-- <button ion-item menuClose (click)="changePage(feedbackPage)">
                 Feedback
-            </button>
+            </button> -->
 
             <!-- <button ion-button block (click)="GetAllUser();"> Listar Usuarios</button>
                 
@@ -100,6 +100,14 @@
 
 
     </ion-content>
+    <ion-footer class="bar-stable">
+        <button ion-item menuClose (click)="changePage(feedbackPage)">
+            Feedback
+        </button>
+
+        <!-- <ion-item nav-clear menu-close href="#" style="left:0;right:0;margin:0; width: 100%;position: fixed;bottom:0;">
+            Feedback</ion-item> -->
+    </ion-footer>
 
 </ion-menu>
 
