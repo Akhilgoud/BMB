@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Platform, IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { FilterBooksService } from './filterbooks.service';
 import { BooksInfoApi } from '../../shared/shared';
@@ -10,9 +10,13 @@ import { AutoCompleteListService } from './AutoCompleteListService';
   templateUrl: 'filterbooks.html',
 })
 export class FilterBooks {
+    autocompleteItems: any[];
+    autocomplete: { input: string; };
+    GoogleAutocomplete: google.maps.places.AutocompleteService;
   filterObj: any = {};
   collegesNames: any = {};
   constructor(
+    private zone: NgZone,
     public platform: Platform, private navParams: NavParams,
     private filterBooksService: FilterBooksService,
     private viewController: ViewController,
@@ -26,10 +30,31 @@ export class FilterBooks {
     this.platform.registerBackButtonAction(() => {
       this.viewController.dismiss();
     });
+
+this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+this.autocomplete = { input: '' };
+this.autocompleteItems = [];
   }
 
   ngOnInit() {
   }
+
+updateSearchResults(){
+  console.log("coming here"+this.autocomplete.input);
+  if (this.autocomplete.input == '') {
+    this.autocompleteItems = [];
+    return;
+  }
+  this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
+	(predictions, status) => {
+    this.autocompleteItems = [];
+    this.zone.run(() => {
+      predictions.forEach((prediction) => {
+        this.autocompleteItems.push(prediction);
+      });
+    });
+  });
+}
 
   segmentChanged(ev: any) {
     this.filterObj.bookType = {};
