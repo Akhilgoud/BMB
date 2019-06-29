@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Platform, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -19,6 +19,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     templateUrl: 'postbook.html'
 })
 export class PostbookPage {
+    geocoder: any;
+    autocompleteItems: any[];
+    GoogleAutocomplete: google.maps.places.AutocompleteService;
     public photos: any;
     public images: any;
     public base64Image: string;
@@ -27,7 +30,9 @@ export class PostbookPage {
     public isUpdatePage: boolean;
     postbookForm: FormGroup;
     shownav: boolean = true;
-    constructor(public platform: Platform,
+    constructor(
+        private zone: NgZone,
+        public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
         private camera: Camera,
@@ -54,7 +59,42 @@ export class PostbookPage {
                 this.homePageService.setPage(BooksinfoPage);
         });
 
+        this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+        this.bookObj.address = '';
+        this.autocompleteItems = [];
+        this.geocoder = new google.maps.Geocoder();
     }
+
+    updateSearchResults(){
+    if (this.bookObj.address == '') {
+      this.autocompleteItems = [];
+    return;
+    }
+   this.GoogleAutocomplete.getPlacePredictions({ input: this.bookObj.address },
+	   (predictions, status) => {
+       this.autocompleteItems = [];
+       this.zone.run(() => {
+          predictions.forEach((prediction) => {
+          this.autocompleteItems.push(prediction);
+        });
+       });
+     });  
+   }
+
+
+  selectSearchResult(item){
+   this.autocompleteItems = [];
+   this.bookObj.address = item.description;
+   this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {
+   if(status === 'OK' && results[0]){
+     let position = {
+       lat: results[0].geometry.location.lat,
+       lng: results[0].geometry.location.lng
+     };
+     console.log("What the lattitude"+JSON.stringify(position));
+     }
+    })
+   }
 
     ionViewWillEnter() {
         this.homePageService.setPageTitle('Post My Book');

@@ -46,4 +46,24 @@ page-booksinfo {
         margin-right:0 !important;
         margin-bottom: 6px;
     }
+
+    .filterBand {
+        height: 30px;
+        border-bottom: 2px solid #dedede;
+    }
+
+    .filterBandLeft{
+      border-right: 2px solid #dedede;
+      text-align:center;
+  
+    }
+
+    .filterBandMiddle{
+      border-right: 2px solid #dedede;
+      text-align:center;
+    }
+
+    .filterBandRight{
+      text-align:center;
+    }
 }

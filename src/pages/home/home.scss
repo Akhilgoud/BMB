@@ -4,24 +4,29 @@
 
 page-home {
 
-    .toolbar-title-md{
-        width: auto;
-    }
+ .toolbar-title-md{
+      width: auto;
+ }
+
+.toolbar-background-md {
+    border-color: #b2b2b2;
+    background: #232f3e;
+}    
 #apptitle{
     font-size: 21px;
     letter-spacing: 3px;
     word-spacing: 8px;
-    color: #234c80;
+    color: #f3f5f7;
     vertical-align: super;
 }
 
 #menuIcon{
-    font-size:27px;color:#234c80
+    font-size:27px;color:#f3f5f7
 }
 
 #filterIcon, #searchIcon, #homeIcon{
     font-size: 25px;
-    color: #146d90;
+    color: #f3f5f7;
 }
 
 

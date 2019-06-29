@@ -87,15 +87,9 @@
       </ion-item>
       <ion-item>
         <ion-label floating>Area</ion-label>
-        <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="autocomplete.input"></ion-input>
+        <ion-input type="text" [(ngModel)]="filterObj.address"></ion-input>
       </ion-item>
-    <!-- <ion-searchbar (ionInput)="updateSearchResults()" [(ngModel)]="autocomplete.input" placeholder="Search for a place"></ion-searchbar> -->
     </ion-list>
-    <ion-list [hidden]="autocompleteItems.length == 0">
-  <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
-    {{ item.description }}
-  </ion-item>
-</ion-list>
   </div>
   <div style="float:right; padding-bottom: 20px">
     <button ion-button round (click)="resetFilters()">Reset</button>

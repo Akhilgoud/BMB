@@ -128,8 +128,13 @@
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Address</ion-label>
-            <ion-input type="text" formControlName="address" [(ngModel)]="bookObj.address"></ion-input>
+            <ion-input type="text" formControlName="address" (ngModelChange)="updateSearchResults()" [(ngModel)]="bookObj.address"></ion-input>
           </ion-item>
+          <ion-list [hidden]="autocompleteItems.length == 0">
+                <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+                  {{ item.description }}
+               </ion-item>
+          </ion-list>
           <ion-item>
             <ion-label color="primary" floating>Landmark</ion-label>
             <ion-input type="text" formControlName="landmark" [(ngModel)]="bookObj.landmark"></ion-input>
