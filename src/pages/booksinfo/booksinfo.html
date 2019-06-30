@@ -12,12 +12,10 @@
   </ion-refresher>
   <div class="filterBand"><ion-row>
     <ion-col> <div class="filterBandLeft">Over 200 results</div></ion-col>
-    <ion-col class="filterBandMiddle">
-      <div style="display: inline-block;">
-        <img alt="" src="./assets/imgs/engineering.jpg" width="42px">
-      </div>
+    <ion-col>
+      <div class="filterBandMiddle">Eng. <ion-checkbox></ion-checkbox></div>
     </ion-col>
-    <ion-col class="filterBandRight">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></ion-col>
+    <ion-col><div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div></ion-col>
     </ion-row></div>
   <div style="position:absolute">
     <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->

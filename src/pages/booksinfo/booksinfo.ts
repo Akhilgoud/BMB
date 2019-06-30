@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { App, Platform, ToastController, IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { App, Platform, PopoverController, ToastController, IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
-import { BookdetailsPage } from '../pages';
+import { BookdetailsPage, FilterBooks } from '../pages';
 import { BooksinfoPageService } from './booksinfo.service';
 @Component({
   selector: 'page-booksinfo',
@@ -23,6 +23,7 @@ export class BooksinfoPage {
   // pageOffset = 0;
   constructor(public app: App,
     public platform: Platform,
+    public popoverCtrl: PopoverController,
     public toastCtrl: ToastController,
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -137,6 +138,15 @@ export class BooksinfoPage {
     });
   }
 
+  openFilterModal(ev) {
+    // const popover = this.popoverCtrl.create(FilterBooks);
+    // popover.present();
+    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
+    popover.present({
+      ev: ev
+    });
+  }
+
   goToDetailsPage(book) {
     let modal = this.modalCtrl.create(BookdetailsPage, { bookObj: book });
     modal.present();
@@ -209,7 +219,7 @@ export class BooksinfoPage {
 }
 
 
-// return (checkfilter(this.filterObj.isacademic,item.isacademic) && 
+// return (checkfilter(this.filterObj.isacademic,item.isacademic) &&
 // checkfilter(this.filterObj.update,item.updatefee) &&
 // checkfilter(this.filterObj.update,item.updatefee)
 // )

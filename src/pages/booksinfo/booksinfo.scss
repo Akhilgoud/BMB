@@ -1,5 +1,5 @@
 page-booksinfo {
-    
+
     .card-content-md {
         padding: 0px;
     }
@@ -33,13 +33,13 @@ page-booksinfo {
     .item item-block{
         padding-left: 0px;
     }
-    
+
     .scroll-content {
         padding: 0px !important;
     }
 
     .item-inner {
-        padding-right: 0px !important; 
+        padding-right: 0px !important;
     }
 
     #cardDiv .label {
@@ -48,22 +48,31 @@ page-booksinfo {
     }
 
     .filterBand {
-        height: 30px;
+        height: 36px;
         border-bottom: 2px solid #dedede;
     }
 
     .filterBandLeft{
       border-right: 2px solid #dedede;
       text-align:center;
-  
+      line-height: 25px;
+      width: 137%;
+
     }
 
     .filterBandMiddle{
       border-right: 2px solid #dedede;
-      text-align:center;
+      line-height: 25px;
+      text-align: right;
+      font-family: Times;
+      font-size: 15px;
+      color: #069af1;
+      font-weight: 800;
+      padding-right: 7px;
     }
 
     .filterBandRight{
       text-align:center;
+      line-height: 25px;
     }
 }

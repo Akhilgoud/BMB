@@ -26,7 +26,6 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     public homePageService: HomePageService,
-    public popoverCtrl: PopoverController,
     public booksinfoPageService: BooksinfoPageService,
     public myPostsPageService: MyPostsPageService) {
     this.homePageService.rootpageChange.subscribe(
@@ -56,14 +55,6 @@ export class HomePage {
     this.homePageService.setPage(pagename);
   }
 
-  openFilterModal(ev) {
-    // const popover = this.popoverCtrl.create(FilterBooks);
-    // popover.present();
-    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
-    popover.present({
-      ev: ev
-    });
-  }
 
   searchClicked() {
     this.showSearchBox = !this.showSearchBox;
