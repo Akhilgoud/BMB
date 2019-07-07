@@ -13,13 +13,18 @@
   <div class="filterBand"><ion-row>
     <ion-col> <div class="filterBandLeft">Over 200 results</div></ion-col>
     <ion-col>
-      <div class="filterBandMiddle">Eng. <ion-checkbox></ion-checkbox></div>
+      <div class="filterBandMiddle">Eng.
+        <label class="switch">
+          <input type="checkbox" />
+            <span class="slider round"></span>
+      </label>
+      </div>
     </ion-col>
     <ion-col><div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div></ion-col>
     </ion-row></div>
   <div style="position:absolute">
     <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
-    <div class="searchSelected">
+    <div class="searchSelected fadeInLeft">
       <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
         <ion-row style="padding-left: 16px;">
           <ion-col col-3 (click)="bookImageClicked(book)">
