@@ -138,14 +138,21 @@ export class BooksinfoPage {
     });
   }
 
-  openFilterModal(ev) {
-    // const popover = this.popoverCtrl.create(FilterBooks);
-    // popover.present();
-    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
-    popover.present({
-      ev: ev
-    });
+  ionViewWillEnter() {
+    this.homePageService.setPageTitle('BUY MY BOOK');
   }
+
+  ionViewWillLeave() {
+    this.homePageService.setPageTitle('');
+  }
+  // openFilterModal(ev) {
+  //   // const popover = this.popoverCtrl.create(FilterBooks);
+  //   // popover.present();
+  //   let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
+  //   popover.present({
+  //     ev: ev
+  //   });
+  // }
 
   goToDetailsPage(book) {
     let modal = this.modalCtrl.create(BookdetailsPage, { bookObj: book });

@@ -1,8 +1,8 @@
-import { Component, NgZone } from '@angular/core';
-import { Platform, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { Platform, IonicPage, NavController, NavParams, AlertController, LoadingController, Item } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { PostbookApi } from './postbook.service';
 import { IBookObj } from './postbook.model';
 import { BooksinfoPage } from "../pages";
@@ -13,15 +13,15 @@ import { UserInfoService } from "../../shared/shared";
 import { LoginPage } from "../login/login";
 import { PostBookDataService } from "./postbookdata.service";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { AutoCompleteListService } from '../filterbooks/AutoCompleteListService';
+import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
+
 
 @Component({
     selector: 'page-postbook',
     templateUrl: 'postbook.html'
 })
 export class PostbookPage {
-    geocoder: any;
-    autocompleteItems: any[];
-    GoogleAutocomplete: google.maps.places.AutocompleteService;
     public photos: any;
     public images: any;
     public base64Image: string;
@@ -30,9 +30,12 @@ export class PostbookPage {
     public isUpdatePage: boolean;
     postbookForm: FormGroup;
     shownav: boolean = true;
-    constructor(
-        private zone: NgZone,
-        public platform: Platform,
+    form: FormGroup;
+    autocompleteItems = [];
+    selectedAddress = "";
+    timer: any;
+
+    constructor(public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
         private camera: Camera,
@@ -43,7 +46,9 @@ export class PostbookPage {
         public userInfoService: UserInfoService,
         public postBookDataService: PostBookDataService,
         public homePageService: HomePageService,
-        private barcodeScanner: BarcodeScanner, ) {
+        private loadingController: LoadingController,
+        private barcodeScanner: BarcodeScanner,
+        private autoCompleteListService: AutoCompleteListService) {
         this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
@@ -59,42 +64,7 @@ export class PostbookPage {
                 this.homePageService.setPage(BooksinfoPage);
         });
 
-        this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
-        this.bookObj.address = '';
-        this.autocompleteItems = [];
-        this.geocoder = new google.maps.Geocoder();
     }
-
-    updateSearchResults(){
-    if (this.bookObj.address == '') {
-      this.autocompleteItems = [];
-    return;
-    }
-   this.GoogleAutocomplete.getPlacePredictions({ input: this.bookObj.address },
-	   (predictions, status) => {
-       this.autocompleteItems = [];
-       this.zone.run(() => {
-          predictions.forEach((prediction) => {
-          this.autocompleteItems.push(prediction);
-        });
-       });
-     });  
-   }
-
-
-  selectSearchResult(item){
-   this.autocompleteItems = [];
-   this.bookObj.address = item.description;
-   this.geocoder.geocode({'placeId': item.place_id}, (results, status) => {
-   if(status === 'OK' && results[0]){
-     let position = {
-       lat: results[0].geometry.location.lat,
-       lng: results[0].geometry.location.lng
-     };
-     console.log("What the lattitude"+JSON.stringify(position));
-     }
-    })
-   }
 
     ionViewWillEnter() {
         this.homePageService.setPageTitle('Post My Book');
@@ -107,7 +77,49 @@ export class PostbookPage {
 
     ngOnInit() {
         this.images = [];
-        this.bindForm();
+        // this.bindForm();
+        this.postbookForm = new FormGroup({
+            bookname: new FormControl({ value: '' },
+                [Validators.required]),
+            author: new FormControl(false),
+            publisher: new FormControl(false),
+            edition: new FormControl(false),
+            isFree: new FormControl(false),
+            price: new FormControl({ value: '' },
+                [Validators.required]),
+            description: new FormControl(false),
+            isAcademic: new FormControl({ value: '' },
+                [Validators.required]),
+            bookType: new FormControl({ value: '' },
+                [Validators.required]),
+            course: new FormControl(false),
+            branch: new FormControl(false),
+            year: new FormControl(false),
+            sem: new FormControl(false),
+            phoneNo: new FormControl(false),
+            address: new FormControl(false),
+            landmark: new FormControl(false),
+            pincode: new FormControl({ value: '' },
+                [Validators.required]),
+            college: new FormControl(false),
+
+        });
+        this.isFree.valueChanges.subscribe(checked => {
+            if (checked) {
+                this.price.setValidators(null);
+            } else {
+                this.price.setValidators([Validators.required]);
+            }
+            this.price.updateValueAndValidity();
+            this.price.reset(this.price.value);
+        });
+    }
+
+    get isFree() {
+        return this.postbookForm.get('isFree') as FormControl;
+    }
+    get price() {
+        return this.postbookForm.get('price') as FormControl;
     }
 
     bindForm() {
@@ -116,6 +128,7 @@ export class PostbookPage {
             author: [''],
             publisher: [''],
             edition: [''],
+            isFree: [false],
             price: ['', Validators.required],
             description: [''],
             isAcademic: ['', Validators.required],
@@ -131,6 +144,8 @@ export class PostbookPage {
             college: ['']
         });
     }
+
+
 
     deletePhoto(index) {
         let confirm = this.alertCtrl.create({
@@ -184,66 +199,85 @@ export class PostbookPage {
     }
 
     submit() {
-        var obj = {
-            bookObj: this.bookObj,
-            imageArr: this.photos
-        }
-        var userobj = this.userInfoService.getUserInfo();
-        if (userobj && userobj._id) {
-            obj.bookObj.uid = userobj._id;
-            obj.bookObj.email = userobj.email;
-            this.postbookApi.postNewBook(obj).subscribe(
-                response => {
-                    console.log(response);
-                    this.homePageService.setPage(MypostsPage)
-                },
-                error => {
-                    let alert = this.alertCtrl.create({
-                        title: 'Failed to post!',
-                        subTitle: 'Please try again later',
-                        buttons: ['Dismiss']
-                    });
-                    alert.present();
-                    console.log("error authentication" + error);
-                }
-            )
-        } else {
-            var oldobj = obj;
-            this.postBookDataService.setBookInfo(oldobj);
-            this.homePageService.setPage(LoginPage);
-        }
+        let loader = this.loadingController.create({
+            content: 'Posting Your Book...',
+            dismissOnPageChange: true
+        });
+        loader.present().then(() => {
+            if (this.bookObj.isFree) this.bookObj.price = 0;
+            var obj = {
+                bookObj: this.bookObj,
+                imageArr: this.photos
+            }
+            var userobj = this.userInfoService.getUserInfo();
+            if (userobj && userobj._id) {
+                obj.bookObj.uid = userobj._id;
+                obj.bookObj.email = userobj.email;
+                this.postbookApi.postNewBook(obj).subscribe(
+                    response => {
+                        loader.dismiss();
+                        console.log(response);
+                        this.homePageService.setPage(MypostsPage)
+                    },
+                    error => {
+                        loader.dismiss();
+                        let alert = this.alertCtrl.create({
+                            title: 'Failed to post!',
+                            subTitle: 'Please try again later',
+                            buttons: ['Dismiss']
+                        });
+                        alert.present();
+                        console.log("error authentication" + error);
+                    }
+                )
+            } else {
+                loader.dismiss();
+                var oldobj = obj;
+                this.postBookDataService.setBookInfo(oldobj);
+                this.homePageService.setPage(LoginPage);
+            }
+        });
     }
 
     update() {
-        var obj = {
-            bookObj: this.bookObj,
-            imageArr: this.photos
-        }
-        var userobj = this.userInfoService.getUserInfo();
-        if (userobj && userobj._id) {
-            obj.bookObj.uid = userobj._id;
-            obj.bookObj.email = userobj.email;
+        let loader = this.loadingController.create({
+            content: 'Updating Your Book...',
+            dismissOnPageChange: true
+        });
+        loader.present().then(() => {
+            var obj = {
+                bookObj: this.bookObj,
+                imageArr: this.photos
+            }
+            var userobj = this.userInfoService.getUserInfo();
+            if (userobj && userobj._id) {
+                obj.bookObj.uid = userobj._id;
+                obj.bookObj.email = userobj.email;
 
-            this.postbookApi.updateBookInfo(obj).subscribe(
-                response => {
-                    console.log(response);
-                    this.homePageService.setPage(MypostsPage)
-                },
-                error => {
-                    let alert = this.alertCtrl.create({
-                        title: 'Failed to update!',
-                        subTitle: 'Please try again later',
-                        buttons: ['Dismiss']
-                    });
-                    alert.present();
-                    console.log("error authentication" + error);
-                }
-            )
-        } else {
-            var oldobj = obj;
-            this.postBookDataService.setBookInfo(oldobj);
-            this.homePageService.setPage(LoginPage);
-        }
+                this.postbookApi.updateBookInfo(obj).subscribe(
+                    response => {
+                        loader.dismiss();
+                        console.log(response);
+                        this.homePageService.setPage(MypostsPage)
+                    },
+                    error => {
+                        loader.dismiss();
+                        let alert = this.alertCtrl.create({
+                            title: 'Failed to update!',
+                            subTitle: 'Please try again later',
+                            buttons: ['Dismiss']
+                        });
+                        alert.present();
+                        console.log("error authentication" + error);
+                    }
+                )
+            } else {
+                loader.dismiss();
+                var oldobj = obj;
+                this.postBookDataService.setBookInfo(oldobj);
+                this.homePageService.setPage(LoginPage);
+            }
+        });
     }
 
     cancel() {
@@ -256,7 +290,7 @@ export class PostbookPage {
             bookObj: this.bookObj,
         };
         this.barcodeScanner.scan().then(barcodeData => {
-            if (barcodeData.text) {
+            if (barcodeData) {
                 this.postbookApi.getBookdataFromBarCode(barcodeData.text).subscribe(
                     response => {
                         if (response.totalItems > 0) {
@@ -282,6 +316,44 @@ export class PostbookPage {
             }
         });
     }
+
+
+    updateSearchResults() {
+        if (this.bookObj.address.length < 4 || this.bookObj.address == this.selectedAddress) {
+            this.autocompleteItems = [];
+            return;
+        }
+
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            this.autoCompleteListService.getAddress(this.bookObj.address).subscribe(response => {
+                console.log(response);
+                this.autocompleteItems = [];
+                if (response && response.candidates) {
+                    response.candidates.forEach((val) => {
+                        this.autocompleteItems.push(val);
+                    });
+                }
+            }, error => {
+                console.log(error);
+            }
+            )
+        }, 500)
+    };
+
+    selectSearchResult(item) {
+        this.bookObj.address = item.address;
+        this.selectedAddress = item.address;
+        if (item.location) {
+            this.bookObj.latLong = {
+                type: 'Point',
+                coordinates: [item.location.x, item.location.y]
+            };
+        }
+        this.autocompleteItems = [];
+        console.log(JSON.stringify(item))
+    }
+
     // scrollingFun(e) {
     //     if(e.directionY=='down'){
     //        this.shownav = false;

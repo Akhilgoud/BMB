@@ -73,8 +73,17 @@
             <ion-input formControlName="edition" [(ngModel)]="bookObj.edition" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label color="primary" floating>Price*</ion-label>
-            <ion-input formControlName="price" [(ngModel)]="bookObj.price" type="number"></ion-input>
+            <ion-label color="primary">Sell For Free</ion-label>
+            <ion-checkbox formControlName="isFree" [(ngModel)]="bookObj.isFree"
+              (ionChange)="bookObj.isFree ? null : null">
+            </ion-checkbox>
+            <!-- <ion-label color="primary" floating>Edition</ion-label>
+            <ion-input formControlName="edition" [(ngModel)]="bookObj.edition" type="text"></ion-input> -->
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating [ngClass]="bookObj.isFree ? 'disableCheckbox' : ''">Price*</ion-label>
+            <ion-input formControlName="price" [(ngModel)]="bookObj.price" type="number" disabled="{{bookObj.isFree}}">
+            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Description</ion-label>
@@ -126,14 +135,19 @@
             <ion-label color="primary" floating>Phone Number</ion-label>
             <ion-input formControlName="phoneNo" [(ngModel)]="bookObj.phoneNo" type="number" maxlength="10"></ion-input>
           </ion-item>
+          <!-- <ion-item>
+            <ion-label color="primary" floating>Address</ion-label>
+            <ion-input type="text" formControlName="address" [(ngModel)]="bookObj.address"></ion-input>
+          </ion-item> -->
           <ion-item>
             <ion-label color="primary" floating>Address</ion-label>
-            <ion-input type="text" formControlName="address" (ngModelChange)="updateSearchResults()" [(ngModel)]="bookObj.address"></ion-input>
+            <ion-input type="text" formControlName="address" (ngModelChange)="updateSearchResults()"
+              [(ngModel)]="bookObj.address"></ion-input>
           </ion-item>
           <ion-list [hidden]="autocompleteItems.length == 0">
-                <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
-                  {{ item.description }}
-               </ion-item>
+            <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+              {{ item.address }}
+            </ion-item>
           </ion-list>
           <ion-item>
             <ion-label color="primary" floating>Landmark</ion-label>

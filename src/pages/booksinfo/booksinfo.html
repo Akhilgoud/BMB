@@ -10,7 +10,7 @@
     <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>
-  <div class="filterBand"><ion-row>
+  <!-- <div class="filterBand"><ion-row>
     <ion-col> <div class="filterBandLeft">Over 200 results</div></ion-col>
     <ion-col>
       <div class="filterBandMiddle">Eng.
@@ -21,7 +21,7 @@
       </div>
     </ion-col>
     <ion-col><div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div></ion-col>
-    </ion-row></div>
+    </ion-row></div> -->
   <div style="position:absolute">
     <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
     <div class="searchSelected fadeInLeft">
@@ -43,7 +43,9 @@
           </ion-col>
         </ion-row>
         <div style="font-size: 15px;color: grey;float:right" (click)="goToDetailsPage(book)">
-          {{book.updated_date | daysago}} days ago
+          <div *ngIf="book.distance" style="font-weight: bold;color: #232f3e;">
+            {{book.distance | number : '1.2-2'}} KMS</div>
+          <div> {{book.updated_date | daysago}} days ago</div>
         </div>
       </div>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="!showImgSlide">

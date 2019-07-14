@@ -5,15 +5,17 @@
         <ion-icon name="menu" id="menuIcon"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title (click)="changePage(booksinfoPage)" style="margin-left: 7%;">
-      <div style="display: inline-block;">
-        <img alt="" src="./assets/imgs/logoFinal.png" width="75px">
+    <ion-title (click)="changePage(booksinfoPage)">
+      <div>
+        <img alt="" src="./assets/imgs/logoFinal.png" style="width: 60px;float: left;">
+        <div id="apptitle" style="font-size: 14px;font-weight: 400;" *ngIf="pageTitle">
+          {{pageTitle}}
+        </div>
       </div>
       <!-- <div style="float: right;margin-top: 10px;padding-left: 10px;padding-right: 60px;">
         <div id="apptitle">BMB</div>
       </div> -->
-      <div id="apptitle" style="font-size: 14px;font-weight: 400;" *ngIf="pageTitle">
-        {{pageTitle}}</div>
+
     </ion-title>
     <ion-buttons right>
       <!-- <button ion-button (click)="changePage(postbookPage)">
@@ -25,9 +27,9 @@
       <button ion-button (click)="searchClicked();" *ngIf="showSearchIcon">
         <ion-icon name="search" id="searchIcon"></ion-icon>
       </button>
-      <!-- <button ion-button (click)="openFilterModal($event)" *ngIf="showFilterIcon">
+      <button ion-button (click)="openFilterModal($event)" *ngIf="showFilterIcon">
         <ion-icon name="options" id="filterIcon"></ion-icon>
-      </button> -->
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

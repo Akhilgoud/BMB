@@ -3,6 +3,7 @@ export interface IBookObj {
     author: string,
     publisher: string,
     edition: string,
+    isFree: boolean,
     price: number,
     description: string,
     uid: string,
@@ -19,6 +20,7 @@ export interface IBookObj {
 
     phoneNo: number,
     address: string,
+    latLong: Object,
     landmark: string,
     pincode: number,
     college: string,
@@ -31,15 +33,16 @@ export class IBookObj implements IBookObj {
         this.author = "";
         this.publisher = "";
         this.edition = "";
+        this.isFree = false;
         this.price = null;
         this.description = "";
         this.uid = "";
         this.status = "";
         this.isAcademic = "";
         this.bookType = "";
-        this.created_date = null,
-            this.updated_date = null,
-            this.course = "";
+        this.created_date = null;
+        this.updated_date = null;
+        this.course = "";
         this.branch = "";
         this.year = null;
         this.sem = null;
@@ -48,5 +51,6 @@ export class IBookObj implements IBookObj {
         this.landmark = "";
         this.pincode = null;
         this.college = "";
+        this.latLong = {};
     }
 }
