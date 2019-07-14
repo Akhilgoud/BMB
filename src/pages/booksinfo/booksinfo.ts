@@ -19,7 +19,6 @@ export class BooksinfoPage {
 
   lastBack = Date.now();
   allowClose = false;
-  hideFilter = false;
   // pageLimit = 4;
   // pageOffset = 0;
   private postBookPage = PostbookPage;

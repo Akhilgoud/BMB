@@ -44,7 +44,13 @@ export class LoginPage {
 
     }
 
+    ionViewWillEnter() {
+        this.homePageService.setPageTitle('Login');
+    }
 
+    ionViewWillLeave() {
+        this.homePageService.setPageTitle('');
+    }
 
     bindForm() {
         // this.loginForm = new FormGroup({

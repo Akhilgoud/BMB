@@ -1,4 +1,4 @@
-<div class="hero">
+<div>
   <div padding>
     <ion-segment [(ngModel)]="filterObj.isAcademic" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="Y">
@@ -59,7 +59,8 @@
     </ion-list>
     <ion-list *ngSwitchCase="'N'">
       <div style="margin-left: 4%">
-        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}" (click)="bookTypeClicked($event, 'NOVEL')">Novels</ion-badge>
+        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}"
+          (click)="bookTypeClicked($event, 'NOVEL')">Novels</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['AUTOBIOGRAPHY'] === true}"
           (click)="bookTypeClicked($event, 'AUTOBIOGRAPHY')">AutoBiography</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['MAGAZINE'] === true}"
@@ -68,6 +69,12 @@
     </ion-list>
   </div>
   <!-- <div style="border: 1px solid black;border: 1px solid #e8e2e2;width: 90%;margin-left: 5%;"></div> -->
+  <ion-item>
+    <ion-label>Only Free Books</ion-label>
+    <ion-checkbox [(ngModel)]="filterObj.isFree">
+    </ion-checkbox>
+  </ion-item>
+
   <div style="margin-top: 9px;">
     <ion-item>
       <ion-range min="0" max="2000" step="50" snaps="false" dualKnobs="true" pin="true" [(ngModel)]="filterObj.price"
@@ -85,14 +92,25 @@
         <ion-label floating>College Name</ion-label>
         <ion-input type="text" [(ngModel)]="filterObj.college"></ion-input>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label floating>Area</ion-label>
         <ion-input type="text" [(ngModel)]="filterObj.address"></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label color="primary" floating>Area</ion-label>
+        <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="filterObj.address"></ion-input>
       </ion-item>
+      <ion-list [hidden]="autocompleteItems.length == 0">
+        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+          {{ item.address }}
+        </ion-item>
+      </ion-list>
     </ion-list>
+    <!-- <ion-searchbar #searchbar></ion-searchbar> -->
   </div>
   <div style="float:right; padding-bottom: 20px">
     <button ion-button round (click)="resetFilters()">Reset</button>
     <button ion-button round (click)="applyFilters()">Apply</button>
   </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
