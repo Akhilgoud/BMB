@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { App, Platform, PopoverController, ToastController, IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
-import { BookdetailsPage, FilterBooks } from '../pages';
+import { BookdetailsPage, PostbookPage, FilterBooks } from '../pages';
 import { BooksinfoPageService } from './booksinfo.service';
 @Component({
   selector: 'page-booksinfo',
@@ -19,8 +19,10 @@ export class BooksinfoPage {
 
   lastBack = Date.now();
   allowClose = false;
+  hideFilter = false;
   // pageLimit = 4;
   // pageOffset = 0;
+  private postBookPage = PostbookPage;
   constructor(public app: App,
     public platform: Platform,
     public popoverCtrl: PopoverController,
@@ -206,6 +208,10 @@ export class BooksinfoPage {
       }
     );
 
+  }
+
+  changePage(page) {
+    this.homePageService.setPage(page);
   }
 
   bookImageClicked(book) {

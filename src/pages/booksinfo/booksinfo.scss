@@ -49,7 +49,7 @@ page-booksinfo {
 
     .filterBand {
         height: 36px;
-        border-bottom: 2px solid #dedede;
+        top: 0px;
     }
 
     .filterBandLeft{
@@ -135,6 +135,17 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 90%;
+}
+
+.addIcon {
+    position: -webkit-sticky;
+    position: fixed;
+    /* position: sticky; */
+    top: 90%;
+    left: 80%;
+    font-size: 3.5em;
+    /* margin: 128% 0 0 81%; */
+    color: #232f3e;
 }
 
 }

@@ -1,17 +1,8 @@
-<ion-header>
-  <!-- <ion-navbar>
-    <ion-title>My Posts</ion-title>
-  </ion-navbar> -->
-</ion-header>
-
-
-<ion-content [ngClass]="{'no-scroll': showImgSlide}">
-  <ion-refresher (ionRefresh)="doRefresh($event)" [enabled]="!showImgSlide">
-    <ion-refresher-content>
-    </ion-refresher-content>
-  </ion-refresher>
-  <div class="filterBand"><ion-row>
-    <ion-col> <div class="filterBandLeft">Over 200 results</div></ion-col>
+<ion-header #filterBand>
+  <div class="filterBand">
+  <ion-row>
+    <ion-col>
+       <div class="filterBandLeft">Over 200 books</div></ion-col>
     <ion-col>
       <div class="filterBandMiddle">Eng.
         <label class="switch">
@@ -20,10 +11,20 @@
       </label>
       </div>
     </ion-col>
-    <ion-col><div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div></ion-col>
+    <ion-col>
+      <div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div>
+    </ion-col>
     </ion-row></div>
-  <div style="position:absolute">
-    <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
+</ion-header>
+
+
+<ion-content [ngClass]="{'no-scroll': showImgSlide}" padding hide-content [passHideContentToHide]="filterBand">
+  <ion-refresher (ionRefresh)="doRefresh($event)" [enabled]="!showImgSlide">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <div style="position: relative;">
+   <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
     <div class="searchSelected fadeInLeft">
       <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
         <ion-row style="padding-left: 16px;">
@@ -66,4 +67,5 @@
     </ion-slides>
 
   </div>
+  <ion-icon name="add-circle" class="addIcon" (click)="changePage(postBookPage)"></ion-icon>
 </ion-content>

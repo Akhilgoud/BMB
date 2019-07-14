@@ -25,6 +25,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { HideContentDirective } from '../directives/hide-content/hide-content';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     MypostsPage,
     FilterBooks,
     UserProfilePage,
-    FeedbackPage
+    FeedbackPage, 
+    HideContentDirective
   ],
   imports: [
     BrowserModule,
