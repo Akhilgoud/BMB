@@ -7,39 +7,39 @@ import 'rxjs/add/operator/do';
 
 @Injectable()
 export class BooksInfoApi {
-    
+
     constructor(private http: Http) { }
     private booksinfoUrl = 'https://floating-cliffs-67240.herokuapp.com/booksinfo';
     private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookStatus';
-    offsetConst = 0; limitConst = 4;
+    offsetConst = 0; limitConst = 6;
 
     private configObj = {
         offset: this.offsetConst,
         limit: this.limitConst,
-        filters:{}
+        filters: {}
     };
 
-    resetOffLimit(){
+    resetOffLimit() {
         this.configObj.offset = this.offsetConst;
         this.configObj.limit = this.limitConst;
     }
 
-    resetFilters(){
+    resetFilters() {
         this.configObj.filters = {};
     }
 
-    incrementOffset(){
+    incrementOffset() {
         this.configObj.offset = this.configObj.offset + this.configObj.limit;
     }
 
-    setFilterConditions(filters){
+    setFilterConditions(filters) {
         this.configObj.filters = filters;
     }
 
-    getData(){
+    getData() {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({ headers: headers});
+        let options = new RequestOptions({ headers: headers });
         // var obj= {offset: offset, limit: limit};
         return this.http.post(this.booksinfoUrl, JSON.stringify(this.configObj), options)
             .map(response => {
@@ -48,10 +48,10 @@ export class BooksInfoApi {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    getPostsById(uid){
+    getPostsById(uid) {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({ headers: headers});
+        let options = new RequestOptions({ headers: headers });
 
         return this.http.get(this.booksinfoUrl + "/" + uid, options)
             .map(response => {
@@ -67,9 +67,9 @@ export class BooksInfoApi {
 
         return this.http.post(this.updateBookUrl, JSON.stringify(obj), options)
             .map(response => {
-               return response.json();
+                return response.json();
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-    
+
 }
