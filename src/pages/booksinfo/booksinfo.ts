@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { App, Platform, PopoverController, ToastController, IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
-import { BookdetailsPage, PostbookPage, FilterBooks } from '../pages';
+import { BookdetailsPage, FilterBooks } from '../pages';
 import { BooksinfoPageService } from './booksinfo.service';
 @Component({
   selector: 'page-booksinfo',
@@ -21,7 +21,6 @@ export class BooksinfoPage {
   allowClose = false;
   // pageLimit = 4;
   // pageOffset = 0;
-  private postBookPage = PostbookPage;
   constructor(public app: App,
     public platform: Platform,
     public popoverCtrl: PopoverController,
@@ -139,14 +138,21 @@ export class BooksinfoPage {
     });
   }
 
-  openFilterModal(ev) {
-    // const popover = this.popoverCtrl.create(FilterBooks);
-    // popover.present();
-    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
-    popover.present({
-      ev: ev
-    });
+  ionViewWillEnter() {
+    this.homePageService.setPageTitle('BUY MY BOOK');
   }
+
+  ionViewWillLeave() {
+    this.homePageService.setPageTitle('');
+  }
+  // openFilterModal(ev) {
+  //   // const popover = this.popoverCtrl.create(FilterBooks);
+  //   // popover.present();
+  //   let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
+  //   popover.present({
+  //     ev: ev
+  //   });
+  // }
 
   goToDetailsPage(book) {
     let modal = this.modalCtrl.create(BookdetailsPage, { bookObj: book });
@@ -207,10 +213,6 @@ export class BooksinfoPage {
       }
     );
 
-  }
-
-  changePage(page) {
-    this.homePageService.setPage(page);
   }
 
   bookImageClicked(book) {

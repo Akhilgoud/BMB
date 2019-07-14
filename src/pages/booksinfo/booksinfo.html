@@ -1,4 +1,5 @@
-<ion-header #filterBand>
+<ion-header>
+  <!-- <ion-header #filterBand> -->
   <!--<div class="filterBand"><ion-row>
     <ion-col> <div class="filterBandLeft">Over 200 results</div></ion-col>
     <ion-col>
@@ -14,8 +15,8 @@
   </div> -->
 </ion-header>
 
-
-<ion-content [ngClass]="{'no-scroll': showImgSlide}" hide-content [passContentToHide]="filterBand">
+<ion-content [ngClass]="{'no-scroll': showImgSlide}">
+  <!-- <ion-content [ngClass]="{'no-scroll': showImgSlide}" hide-content [passContentToHide]="filterBand"> -->
   <ion-refresher (ionRefresh)="doRefresh($event)" [enabled]="!showImgSlide">
     <ion-refresher-content>
     </ion-refresher-content>

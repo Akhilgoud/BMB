@@ -1,22 +1,25 @@
 page-postbook {
     .block {
         position: relative;
+
         .deleteIcon {
-          position: absolute !important;
-          color: #ffffff !important;
-          margin-left: 80% !important;
-        }
-        .deleteIcon:before {
-          font-size: 30px !important;
-        }
+            position: absolute !important;
+            color: #ffffff !important;
+            margin-left: 80% !important;
         }
 
-        .appTitle .toolbar-title-md  {
-          color: #3949AB !important;
-          font-size: 22px !important;
-          text-align: center !important;
-          letter-spacing: 3px !important;
-          word-spacing: 1px !important;
-          font-family: sans-serif !important;
-      }    
+        .deleteIcon:before {
+            font-size: 30px !important;
+        }
+    }
+
+    .appTitle .toolbar-title-md {
+        color: #3949AB !important;
+        font-size: 22px !important;
+        text-align: center !important;
+        letter-spacing: 3px !important;
+        word-spacing: 1px !important;
+        font-family: sans-serif !important;
+    }
+
 }

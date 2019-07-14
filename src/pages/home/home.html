@@ -5,9 +5,12 @@
         <ion-icon name="menu" id="menuIcon"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title (click)="changePage(booksinfoPage)" style="margin-left: 7%;">
-      <div style="display: inline-block;">
-        <img alt="" src="./assets/imgs/logoFinal1.png" width="75px">
+    <ion-title (click)="changePage(booksinfoPage)">
+      <div>
+        <img alt="" src="./assets/imgs/logoFinal.png" style="width: 60px;float: left;">
+        <div id="apptitle" style="font-size: 14px;font-weight: 400;" *ngIf="pageTitle">
+          {{pageTitle}}
+        </div>
       </div>
       <!-- <div style="float: right;margin-top: 10px;padding-left: 10px;padding-right: 60px;">
         <div id="apptitle">BMB</div>
