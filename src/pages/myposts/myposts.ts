@@ -17,6 +17,7 @@ export class MypostsPage {
   tempBooksInfo: any;
   searchFilter: boolean = false;
   showImgSlide = false;
+  noBooks = false;
   clickedBookImg: any = {};
 
   constructor(public platform: Platform,
@@ -73,7 +74,7 @@ export class MypostsPage {
       this.booksInfoApi.getPostsById(uid).subscribe(response => {
         this.booksInfo = response;
         this.tempBooksInfo = response;
-        console.log(response);
+        this.noBooks = response? false : true;
         this.myPostsPageService.setMyBooksList(response);
         loader.dismiss();
       },

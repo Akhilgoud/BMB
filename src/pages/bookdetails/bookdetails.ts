@@ -99,7 +99,7 @@ export class BookdetailsPage {
 
     call() {
         if (this.bookObj && this.bookObj.bookContact[0] && this.bookObj.bookContact[0].phoneNo) {
-            var phone = this.bookObj.bookContact[0].phoneNo;
+            let phone = this.bookObj.bookContact[0].phoneNo;
             this.callSvc.callNumber(phone, true).then(() => {
                 console.log('call working')
             }).catch((err) => {
@@ -110,8 +110,7 @@ export class BookdetailsPage {
     }
 
     share() {
-        var body = this.getMessageBody();
-        this.socialSharing.share(body, 'Interested to buy book' + this.bookObj.name, '', 'BMB').then(() => {
+        this.socialSharing.share(this.getMessageBody(), 'Interested to buy ' + this.bookObj.name, '', 'BMB').then(() => {
             console.log('Share')
         }).catch((err) => {
             console.log('error sharing book');
@@ -120,10 +119,9 @@ export class BookdetailsPage {
 
     sendEmail() {
         // Check if sharing via email is supported
-        var emailTo = this.bookObj.bookContact[0].email;
-        var body = this.getMessageBody();
+        let emailTo = this.bookObj.bookContact[0].email;
         this.socialSharing.canShareViaEmail().then(() => {
-            this.socialSharing.shareViaEmail(body, 'Interested to buy book' + this.bookObj.name, [emailTo]).then(() => {
+            this.socialSharing.shareViaEmail(this.getMessageBody(), 'Interested to buy ' + this.bookObj.name, [emailTo]).then(() => {
                 console.log('email working')
             }).catch((err) => {
                 // alert(JSON.stringify(err))
@@ -137,9 +135,10 @@ export class BookdetailsPage {
 
     sendWhatsAppMsg() {
         if (this.bookObj && this.bookObj.bookContact[0] && this.bookObj.bookContact[0].phoneNo) {
-            var phone = this.bookObj.bookContact[0].phoneNo;
-            var msg = this.getMessageBody();
-            this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, msg, '../src/assets/imgs/BMBLogo.png', "BMB").then(() => {
+            let phone = this.bookObj.bookContact[0].phoneNo;
+            let img = this.bookObj.bookImages? this.bookObj.bookImages.image: null;
+            console.log(this.bookObj.bookImages)
+            this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, this.getMessageBody(), img, "BMB").then(() => {
                 console.log('success!')
             }).catch((err) => {
                 // alert(JSON.stringify(err))

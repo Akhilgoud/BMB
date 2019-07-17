@@ -62,4 +62,8 @@
       </ion-slide>
     </ion-slides>
   </div>
+  <div *ngIf="noBooks">
+    <img class="noBooksFound" src="../../assets/imgs/nodata.png" width="200" height="200"/>
+    <p style="margin:5%;">Oh No! It looks like you have not added any books. Please add some!</p>
+  </div>
 </ion-content>
