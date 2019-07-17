@@ -7,6 +7,9 @@
       <ion-segment-button value="N">
         Non-Acadamic
       </ion-segment-button>
+      <ion-segment-button value="">
+        Both
+      </ion-segment-button>
     </ion-segment>
   </div>
   <div [ngSwitch]="filterObj.isAcademic">
@@ -75,15 +78,24 @@
     </ion-checkbox>
   </ion-item>
 
-  <div style="margin-top: 9px;">
-    <ion-item>
+  <div>
+    <!-- <ion-item>
       <ion-range min="0" max="2000" step="50" snaps="false" dualKnobs="true" pin="true" [(ngModel)]="filterObj.price"
         color="grey">
         <ion-icon range-left small>₹&nbsp;{{filterObj.price.lower}}</ion-icon>
         <ion-icon range-right small>₹&nbsp;{{filterObj.price.upper}}</ion-icon>
       </ion-range>
+    </ion-item> -->
+    <ion-item style="width: 50%;display: inline-block;">
+      <ion-label floating>Min₹</ion-label>
+      <ion-input type="number" [(ngModel)]="filterObj.price.lower" [disabled]="filterObj.isFree"></ion-input>
+    </ion-item>
+    <ion-item style="width: 50%;float: right;">
+      <ion-label floating>Max₹</ion-label>
+      <ion-input type="number" [(ngModel)]="filterObj.price.upper" [disabled]="filterObj.isFree"></ion-input>
     </ion-item>
   </div>
+
   <div>
 
     <ion-list style="line-height:10px">
@@ -97,7 +109,7 @@
         <ion-input type="text" [(ngModel)]="filterObj.address"></ion-input>
       </ion-item> -->
       <ion-item>
-        <ion-label color="primary" floating>Area</ion-label>
+        <ion-label floating>Area</ion-label>
         <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="filterObj.address"></ion-input>
       </ion-item>
       <ion-list [hidden]="autocompleteItems.length == 0">
@@ -108,7 +120,7 @@
     </ion-list>
     <!-- <ion-searchbar #searchbar></ion-searchbar> -->
   </div>
-  <div style="float:right; padding-bottom: 20px">
+  <div style="float:right; padding: 13px 0px;">
     <button ion-button round (click)="resetFilters()">Reset</button>
     <button ion-button round (click)="applyFilters()">Apply</button>
   </div>

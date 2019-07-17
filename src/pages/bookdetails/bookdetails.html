@@ -140,7 +140,8 @@
             <ion-col style="text-align: inherit">Phone:</ion-col>
             <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.phoneNo}}</span>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <ion-icon name="call" (click)="call()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo"></ion-icon>
+              <ion-icon name="call" (click)="call()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
+              </ion-icon>
             </ion-col>
 
           </ion-row>

@@ -98,26 +98,97 @@
             </ion-select>
           </ion-item>
 
+          <!-- <ion-item *ngIf="bookObj.isAcademic ==''">
+            <ion-label color="primary" floating>Book Type*</ion-label>
+            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType"
+              [disabled]="!bookObj.isAcademic">
+              <ion-option>
+              </ion-option>
+            </ion-select>
+          </ion-item> -->
           <ion-item>
             <ion-label color="primary" floating>Book Type*</ion-label>
             <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType"
-              disabled="{{!bookObj.isAcademic}}">
-              <ion-option value="ALLINONE" *ngIf="bookObj.isAcademic =='Y'">All In One</ion-option>
+              [disabled]="!bookObj.isAcademic">
+              <ng-container *ngIf="bookObj.isAcademic =='Y'">
+                <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.ACADEMIC" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ng-container>
+              <ng-container *ngIf="bookObj.isAcademic =='N'">
+                <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.NONACADEMIC" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ng-container>
+              <!-- <ion-option *ngIf="bookObj.isAcademic =='N'" *ngFor="obj in lookupData?.BOOKTYPES?.NONACADEMIC"
+                value="obj.key">
+                {{obj.value}}</ion-option> -->
+              <!-- <ion-option value="ALLINONE" *ngIf="bookObj.isAcademic =='Y'">All In One</ion-option>
               <ion-option value="TEXTBOOK" *ngIf="bookObj.isAcademic =='Y'">Text Book</ion-option>
               <ion-option value="NOTEBOOK" *ngIf="bookObj.isAcademic =='Y'">Note Book</ion-option>
               <ion-option value="STUDYMATERIAL" *ngIf="bookObj.isAcademic =='Y'">Study Material</ion-option>
               <ion-option value="NOVEL" *ngIf="bookObj.isAcademic =='N'">Novel</ion-option>
               <ion-option value="AUTOBIOGRAPHY" *ngIf="bookObj.isAcademic =='N'">AutoBiography</ion-option>
               <ion-option value="MAGAZINE" *ngIf="bookObj.isAcademic =='N'">Magazines</ion-option>
-              <ion-option value="OTHERS">Others</ion-option>
+              <ion-option value="OTHERS">Others</ion-option> -->
             </ion-select>
           </ion-item>
+          <!-- <ion-item *ngIf="bookObj.isAcademic =='N'">
+            <ion-label color="primary" floating>Book Type*</ion-label>
+            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType">
+              <ion-option *ngFor="let obj of lookupData.BOOKTYPES.NONACADEMIC" [value]="obj.key">
+                {{obj.value}}
+              </ion-option>
+            </ion-select>
+          </ion-item> -->
 
           <span *ngIf="bookObj.isAcademic =='Y'">
             <ion-item>
               <ion-label color="primary" floating>Course</ion-label>
-              <ion-input formControlName="course" [(ngModel)]="bookObj.course" type="text"></ion-input>
+              <ion-select formControlName="course" interface="popover" [(ngModel)]="bookObj.course">
+                <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.COURSE" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+                <!-- <ion-option value="SCHOOL">Schooling</ion-option>
+                <ion-option value="INTER">Intermediate/Diploma</ion-option>
+                <ion-option value="GRAD">Graduation</ion-option>
+                <ion-option value="PG">Post Graduation</ion-option>
+                <ion-option value="COURSEOTHERS">Others</ion-option> -->
+              </ion-select>
+              <!-- <ion-input formControlName="course" [(ngModel)]="bookObj.course" type="text"></ion-input> -->
             </ion-item>
+
+
+            <ion-item *ngIf="showDegreeOption()">
+              <ion-label color="primary" floating>Degree</ion-label>
+              <ion-select formControlName="subcourse" interface="popover" [(ngModel)]="bookObj.subcourse">
+                <ion-option *ngFor="let obj of lookupData?.subcourse" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+
+
+
+            <!-- <ion-item *ngIf="bookObj.course =='GRAD' || bookObj.course =='PG'">
+              <ion-label color="primary" floating>Degree</ion-label>
+              <ion-select formControlName="subcourse" interface="popover" [(ngModel)]="bookObj.subcourse"
+                *ngIf="bookObj.course =='GRAD'">
+                <ion-option value="BTECH">Btech</ion-option>
+                <ion-option value="BCOM">BCOM</ion-option>
+                <ion-option value="BSC">BSC</ion-option>
+                <ion-option value="BA">BA</ion-option>
+                <ion-option value="GRADOTHERS">Others</ion-option>
+              </ion-select>
+              <ion-select formControlName="subcourse" interface="popover" [(ngModel)]="bookObj.subcourse"
+                *ngIf="bookObj.course =='PG'">
+                <ion-option value="MTECH">Mtech</ion-option>
+                <ion-option value="MCOM">MCOM</ion-option>
+                <ion-option value="MSC">MSC</ion-option>
+                <ion-option value="MA">MA</ion-option>
+                <ion-option value="PGOTHERS">Others</ion-option>
+              </ion-select>
+            </ion-item> -->
             <ion-item>
               <ion-label color="primary" floating>Branch</ion-label>
               <ion-input formControlName="branch" [(ngModel)]="bookObj.branch" type="text"></ion-input>
@@ -133,7 +204,8 @@
           </span>
           <ion-item>
             <ion-label color="primary" floating>Phone Number</ion-label>
-            <ion-input formControlName="phoneNo" [(ngModel)]="bookObj.phoneNo" type="number" maxlength="10"></ion-input>
+            <ion-input formControlName="phoneNo" [(ngModel)]="bookObj.phoneNo" type="number" maxlength="10">
+            </ion-input>
           </ion-item>
           <!-- <ion-item>
             <ion-label color="primary" floating>Address</ion-label>

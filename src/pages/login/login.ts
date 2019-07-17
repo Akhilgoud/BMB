@@ -45,7 +45,7 @@ export class LoginPage {
     }
 
     ionViewWillEnter() {
-        this.homePageService.setPageTitle('Login');
+        this.homePageService.setPageTitle('Login/Register');
     }
 
     ionViewWillLeave() {

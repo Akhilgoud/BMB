@@ -17,8 +17,8 @@ export class FilterBooksService {
         branch: "",
         year: "",
         price: {
-            lower: 0,
-            upper: 2000
+            lower: null,
+            upper: null
         },
         college: "",
         address: ""
@@ -41,8 +41,8 @@ export class FilterBooksService {
             branch: "",
             year: "",
             price: {
-                lower: 0,
-                upper: 2000
+                lower: null,
+                upper: null
             },
             college: "",
             address: ""

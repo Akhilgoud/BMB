@@ -14,13 +14,17 @@ export interface IBookObj {
     updated_date: Date,
 
     course: string,
+    subcourse: string,
     branch: string,
     year: number,
     sem: number,
 
     phoneNo: number,
     address: string,
-    latLong: Object,
+    latLong: {
+        coordinates: any,
+        type: string
+    },
     landmark: string,
     pincode: number,
     college: string,
@@ -43,6 +47,7 @@ export class IBookObj implements IBookObj {
         this.created_date = null;
         this.updated_date = null;
         this.course = "";
+        this.subcourse = "";
         this.branch = "";
         this.year = null;
         this.sem = null;
@@ -51,6 +56,9 @@ export class IBookObj implements IBookObj {
         this.landmark = "";
         this.pincode = null;
         this.college = "";
-        this.latLong = {};
+        this.latLong = {
+            coordinates: [],
+            type: ""
+        };
     }
 }

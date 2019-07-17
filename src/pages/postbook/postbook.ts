@@ -34,7 +34,7 @@ export class PostbookPage {
     autocompleteItems = [];
     selectedAddress = "";
     timer: any;
-
+    public lookupData: any;
     constructor(public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -52,6 +52,20 @@ export class PostbookPage {
         this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
+        this.lookupData = this.postBookDataService.getLookupData();
+        if (!this.lookupData) {
+            this.postbookApi.getLookupData().subscribe(
+                response => {
+                    console.log(response[0]);
+                    this.postBookDataService.setLookupData(response[0])
+                    this.lookupData = response[0];
+                },
+                error => {
+                    console.log("error authentication" + error);
+                }
+            );
+        }
+
         if (postbookobj) {
             this.bookObj = postbookobj.bookObj;
             this.photos = postbookobj.imageArr;
@@ -93,6 +107,7 @@ export class PostbookPage {
             bookType: new FormControl({ value: '' },
                 [Validators.required]),
             course: new FormControl(false),
+            subcourse: new FormControl(false),
             branch: new FormControl(false),
             year: new FormControl(false),
             sem: new FormControl(false),
@@ -204,6 +219,12 @@ export class PostbookPage {
             dismissOnPageChange: true
         });
         loader.present().then(() => {
+            if (!this.bookObj.latLong.coordinates.length) {
+                this.bookObj.latLong = {
+                    type: 'Point',
+                    coordinates: [0, 0]
+                };
+            }
             if (this.bookObj.isFree) this.bookObj.price = 0;
             var obj = {
                 bookObj: this.bookObj,
@@ -245,6 +266,12 @@ export class PostbookPage {
             dismissOnPageChange: true
         });
         loader.present().then(() => {
+            if (!this.bookObj.latLong.coordinates.length) {
+                this.bookObj.latLong = {
+                    type: 'Point',
+                    coordinates: [0, 0]
+                };
+            }
             var obj = {
                 bookObj: this.bookObj,
                 imageArr: this.photos
@@ -253,6 +280,7 @@ export class PostbookPage {
             if (userobj && userobj._id) {
                 obj.bookObj.uid = userobj._id;
                 obj.bookObj.email = userobj.email;
+
 
                 this.postbookApi.updateBookInfo(obj).subscribe(
                     response => {
@@ -352,6 +380,19 @@ export class PostbookPage {
         }
         this.autocompleteItems = [];
         console.log(JSON.stringify(item))
+    };
+
+    showDegreeOption() {
+        if (this.bookObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
+            var selArr = this.lookupData.BOOKTYPES.COURSE.filter(item => item.key == this.bookObj.course);
+            if (selArr && selArr[0] && selArr[0].subCategory) {
+                this.lookupData.subcourse = selArr[0].subCategory;
+                return true;
+            }
+        } else {
+            return false;
+        }
+
     }
 
     // scrollingFun(e) {

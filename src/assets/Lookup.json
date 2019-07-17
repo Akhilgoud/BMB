@@ -1,0 +1,110 @@
+{
+    "BOOKTYPES": {
+        "ACADEMIC": [
+            {
+                "key": "ALLINONE",
+                "value": "All In One"
+            },
+            {
+                "key": "TEXTBOOK",
+                "value": "Text Book"
+            },
+            {
+                "key": "NOTEBOOK",
+                "value": "Note Book"
+            },
+            {
+                "key": "STUDYMATERIAL",
+                "value": "Study Material"
+            },
+            {
+                "key": "ACAOTHERS",
+                "value": "Others"
+            }
+        ],
+        "NONACADEMIC": [
+            {
+                "key": "NOVEL",
+                "value": "Novel"
+            },
+            {
+                "key": "AUTOBIOGRAPHY",
+                "value": "AutoBiography"
+            },
+            {
+                "key": "MAGAZINE",
+                "value": "Magazine"
+            },
+            {
+                "key": "NONACAOTHERS",
+                "value": "Others"
+            }
+        ],
+        "COURSE": [
+            {
+                "key": "SCHOOL",
+                "value": "Schooling"
+            },
+            {
+                "key": "INTER",
+                "value": "Intermediate/Diploma"
+            },
+            {
+                "key": "GRAD",
+                "value": "Graduation",
+                "subCategory": [
+                    {
+                        "key": "BTECH",
+                        "value": "Btech"
+                    },
+                    {
+                        "key": "BCOM",
+                        "value": "BCOM"
+                    },
+                    {
+                        "key": "BSC",
+                        "value": "BSC"
+                    },
+                    {
+                        "key": "BA",
+                        "value": "BA"
+                    },
+                    {
+                        "key": "GRADOTHERS",
+                        "value": "Others"
+                    }
+                ]
+            },
+            {
+                "key": "PG",
+                "value": "Post Graduation",
+                "subCategory": [
+                    {
+                        "key": "MTECH",
+                        "value": "Mtech"
+                    },
+                    {
+                        "key": "MCOM",
+                        "value": "MCOM"
+                    },
+                    {
+                        "key": "MSC",
+                        "value": "MSC"
+                    },
+                    {
+                        "key": "MA",
+                        "value": "MA"
+                    },
+                    {
+                        "key": "PGOTHERS",
+                        "value": "Others"
+                    }
+                ]
+            },
+            {
+                "key": "COURSEOTHERS",
+                "value": "Others"
+            }
+        ]
+    }
+}

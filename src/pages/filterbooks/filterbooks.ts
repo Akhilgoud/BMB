@@ -74,9 +74,12 @@ export class FilterBooks {
     if (this.filterObj.branch) filterConditions["bookAcademic.branch"] = this.filterObj.branch;
     if (this.filterObj.year) filterConditions["bookAcademic.year"] = this.filterObj.year;
     if (this.filterObj.college) filterConditions["college"] = this.filterObj.college;
-    if (this.filterObj.price && this.filterObj.price.lower) filterConditions["price"] = { "$gte": this.filterObj.price.lower };
-    if (this.filterObj.price && this.filterObj.price.upper) filterConditions["price"] = { ...filterConditions["price"], "$lte": this.filterObj.price.upper };
+
     if (this.filterObj.isFree) filterConditions["isFree"] = this.filterObj.isFree;
+    else {
+      if (this.filterObj.price && this.filterObj.price.lower) filterConditions["price"] = { "$gte": this.filterObj.price.lower };
+      if (this.filterObj.price && this.filterObj.price.upper) filterConditions["price"] = { ...filterConditions["price"], "$lte": this.filterObj.price.upper };
+    }
     // if (this.filterObj.address) filterConditions["bookContact.address"] = this.filterObj.address;
     if (this.filterObj.latLong) filterConditions["latLong"] = this.filterObj.latLong;
 
