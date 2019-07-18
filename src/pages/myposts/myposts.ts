@@ -45,6 +45,7 @@ export class MypostsPage {
       data => {
         this.booksInfo = data;
         this.tempBooksInfo = data;
+        this.noBooks = data ? false : true;
       });
     var availableData = this.myPostsPageService.getMyBooksList();
 
@@ -74,7 +75,7 @@ export class MypostsPage {
       this.booksInfoApi.getPostsById(uid).subscribe(response => {
         this.booksInfo = response;
         this.tempBooksInfo = response;
-        this.noBooks = response? false : true;
+        // this.noBooks = response ? false : true;
         this.myPostsPageService.setMyBooksList(response);
         loader.dismiss();
       },
