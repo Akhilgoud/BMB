@@ -48,6 +48,7 @@ export class BooksinfoPageService {
                     (item.publisher ? item.publisher.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||
                     (item.bookAcademic[0] && item.bookAcademic[0].branch ? item.bookAcademic[0].branch.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||
                     (item.bookAcademic[0] && item.bookAcademic[0].course ? item.bookAcademic[0].course.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||
+                    (item.bookAcademic[0] && item.bookAcademic[0].subcourse ? item.bookAcademic[0].subcourse.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||
                     (item.bookContact[0] && item.bookContact[0].address ? item.bookContact[0].address.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||
                     (item.bookContact[0] && item.bookContact[0].landmark ? item.bookContact[0].landmark.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||
                     (item.bookContact[0] && item.bookContact[0].college ? item.bookContact[0].college.toLowerCase().indexOf(val.toLowerCase()) > -1 : false) ||

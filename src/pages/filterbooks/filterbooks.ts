@@ -66,8 +66,10 @@ export class FilterBooks {
   segmentChanged(ev: any) {
     this.filterObj.bookType = {};
     this.filterObj.course = "";
+    this.filterObj.subcourse = "";
     this.filterObj.branch = "";
     this.filterObj.year = "";
+    this.filterObj.sem = "";
   }
 
   bookTypeClicked(ev, booktype) {
@@ -90,8 +92,10 @@ export class FilterBooks {
 
     if (this.filterObj.isAcademic) filterConditions["isAcademic"] = this.filterObj.isAcademic;
     if (this.filterObj.course) filterConditions["bookAcademic.course"] = this.filterObj.course;
+    if (this.filterObj.subcourse) filterConditions["bookAcademic.subcourse"] = this.filterObj.subcourse;
     if (this.filterObj.branch) filterConditions["bookAcademic.branch"] = this.filterObj.branch;
     if (this.filterObj.year) filterConditions["bookAcademic.year"] = this.filterObj.year;
+    if (this.filterObj.sem) filterConditions["bookAcademic.sem"] = this.filterObj.sem;
     if (this.filterObj.college) filterConditions["college"] = this.filterObj.college;
 
     if (this.filterObj.isFree) filterConditions["isFree"] = this.filterObj.isFree;
@@ -195,6 +199,56 @@ export class FilterBooks {
     console.log(JSON.stringify(item))
   }
 
+  courseSelected() {
+    this.filterObj.subcourse = "";
+    this.filterObj.branch = "";
+    this.filterObj.year = null;
+    this.filterObj.sem = null;
+
+    this.lookupData.branch = [];
+    this.lookupData.subcourse = [];
+    this.lookupData.year = [];
+    this.lookupData.sem = [];
+
+    if (this.filterObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
+      var selArr = this.lookupData.BOOKTYPES.COURSE.filter(item => item.key == this.filterObj.course);
+      if (selArr && selArr[0] && selArr[0].subCategory) {
+        this.lookupData.subcourse = selArr[0].subCategory;
+      }
+      if (selArr && selArr[0] && selArr[0].Branch) {
+        this.lookupData.branch = selArr[0].Branch;
+      }
+      if (selArr && selArr[0] && selArr[0].Year) {
+        this.lookupData.year = selArr[0].Year;
+      }
+      if (selArr && selArr[0] && selArr[0].Sem) {
+        this.lookupData.sem = selArr[0].Sem;
+      }
+    }
+  }
+
+  degreeSelected() {
+    this.filterObj.branch = "";
+    this.filterObj.year = null;
+    this.filterObj.sem = null;
+
+    this.lookupData.branch = [];
+    this.lookupData.year = [];
+    this.lookupData.sem = [];
+    if (this.filterObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
+      var selArr = this.lookupData.subcourse.filter(item => item.key == this.filterObj.subcourse);
+      if (selArr && selArr[0] && selArr[0].Branch) {
+        this.lookupData.branch = selArr[0].Branch;
+      }
+      if (selArr && selArr[0] && selArr[0].Year) {
+        this.lookupData.year = selArr[0].Year;
+      }
+      if (selArr && selArr[0] && selArr[0].Sem) {
+        this.lookupData.sem = selArr[0].Sem;
+      }
+    }
+  }
+
 }
     // const legend = new esri.Legend()
 
@@ -232,7 +286,7 @@ export class FilterBooks {
     //   return;
     // }
 
-    // this.GoogleAutocomplete.getPlacePredictions({ input: this.bookObj.address },
+    // this.GoogleAutocomplete.getPlacePredictions({ input: this.filterObj.address },
     //   (predictions, status) => {
     //     this.autocompleteItems = [];
     //     this.zone.run(() => {

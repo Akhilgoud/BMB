@@ -3,6 +3,7 @@ page-booksinfo {
     .card-content-md {
         padding: 0px;
     }
+
     #bookname {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -14,23 +15,26 @@ page-booksinfo {
         font-size: 17px;
         font-weight: 500;
     }
-    #author{
+
+    #author {
         font-size: 15px;
         color: grey;
         padding-top: 5px;
     }
-    #publisher{
+
+    #publisher {
         font-size: 15px;
         color: grey;
         padding-top: 5px;
     }
-    #price{
+
+    #price {
         color: #64a980;
         padding-top: 5px;
         font-size: 17px
     }
 
-    .item item-block{
+    .item item-block {
         padding-left: 0px;
     }
 
@@ -43,7 +47,7 @@ page-booksinfo {
     }
 
     #cardDiv .label {
-        margin-right:0 !important;
+        margin-right: 0 !important;
         margin-bottom: 6px;
     }
 
@@ -52,100 +56,110 @@ page-booksinfo {
         top: 0px;
     }
 
-    .filterBandLeft{
-      border-right: 2px solid #dedede;
-      text-align:left;
-      line-height: 25px;
-      width: 130%;
+    .filterBandLeft {
+        border-right: 2px solid #dedede;
+        text-align: left;
+        line-height: 25px;
+        width: 130%;
 
     }
 
-    .filterBandMiddle{
-      border-right: 2px solid #dedede;
-      line-height: 25px;
-      text-align: right;
-      font-family: Times;
-      font-size: 15px;
-      color: #069af1;
-      font-weight: 800;
-      padding-right: 7px;
+    .filterBandMiddle {
+        border-right: 2px solid #dedede;
+        line-height: 25px;
+        text-align: right;
+        font-family: Times;
+        font-size: 15px;
+        color: #069af1;
+        font-weight: 800;
+        padding-right: 7px;
     }
 
-    .filterBandRight{
-      text-align:center;
-      line-height: 25px;
+    .filterBandRight {
+        text-align: center;
+        line-height: 25px;
     }
 
     .switch {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 12px;
-  top:3px;
+        position: relative;
+        display: inline-block;
+        width: 32px;
+        height: 12px;
+        top: 3px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 0px;
+        top: -3px;
+        background-color: rgb(247, 240, 240);
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #f3a847;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px#f3a847;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(15px);
+        -ms-transform: translateX(15px);
+        transform: translateX(15px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 40px;
+    }
+
+    .slider.round:before {
+        border-radius: 90%;
+    }
+
+    .addIcon {
+        position: -webkit-sticky;
+        position: fixed;
+        /* position: sticky; */
+        top: 90%;
+        left: 80%;
+        font-size: 3.5em;
+        /* margin: 128% 0 0 81%; */
+        color: #232f3e;
+    }
+
+
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+// .loading-wrapper {
+    //     width: 34% !important;
+    //     padding: 0 !important;
+    // }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 0px;
-  top: -3px;
-  background-color: rgb(247, 240, 240);
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #f3a847;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px#f3a847;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(15px);
-  -ms-transform: translateX(15px);
-  transform: translateX(15px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 40px;
-}
-
-.slider.round:before {
-  border-radius: 90%;
-}
-
-.addIcon {
-    position: -webkit-sticky;
-    position: fixed;
-    /* position: sticky; */
-    top: 90%;
-    left: 80%;
-    font-size: 3.5em;
-    /* margin: 128% 0 0 81%; */
-    color: #232f3e;
-}
-
-}
+    // #loadingIcon {
+    //     display: inherit;
+    // }

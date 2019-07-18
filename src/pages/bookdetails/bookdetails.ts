@@ -80,6 +80,7 @@ export class BookdetailsPage {
         if (this.bookObj.bookAcademic.length) {
             obj.branch = this.bookObj.bookAcademic[0].branch;
             obj.course = this.bookObj.bookAcademic[0].course;
+            obj.subcourse = this.bookObj.bookAcademic[0].subcourse;
             obj.sem = this.bookObj.bookAcademic[0].sem;
             obj.year = this.bookObj.bookAcademic[0].year;
         }
