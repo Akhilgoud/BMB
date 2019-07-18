@@ -121,6 +121,13 @@ export class BooksinfoPage {
 
   getBooks() {
     let loader = this.loadingController.create({
+      // spinner: 'hide',
+      // content: `
+      // <div class="custom-spinner-container">
+      //   <div class="custom-spinner-box">
+      //      <img src="assets/imgs/loadingbooks.gif" id="loadingIcon"  />
+      //   </div>
+      // </div>`,
       content: 'Fetching books...',
       dismissOnPageChange: true
     });
@@ -128,7 +135,7 @@ export class BooksinfoPage {
       this.booksInfoApi.getData().subscribe(response => {
         console.log(response);
         this.booksinfoPageService.setBooksList(response);
-        loader.dismiss();
+        // loader.dismiss();
       },
         error => {
           console.log("error authentication" + error);
