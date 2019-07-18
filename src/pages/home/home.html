@@ -22,8 +22,8 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-searchbar (ionInput)="filterItems($event)" (ionCancel)="this.showSearchBox = false" *ngIf="showSearchBox"
-    style="width:70%" #mainSearchbar>
+  <ion-searchbar (ionInput)="filterItems($event)" (ionCancel)="showSearchBox = false" *ngIf="showSearchBox"
+    style="width:70%" #mainSearchbar [(ngModel)]="searchText">
   </ion-searchbar>
 </ion-header>
 
