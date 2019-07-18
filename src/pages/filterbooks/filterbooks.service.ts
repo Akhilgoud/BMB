@@ -14,8 +14,10 @@ export class FilterBooksService {
         isAcademic: "",
         bookType: [],
         course: "",
+        subcourse: "",
         branch: "",
         year: "",
+        sem: "",
         price: {
             lower: null,
             upper: null
@@ -38,8 +40,10 @@ export class FilterBooksService {
             isAcademic: "",
             bookType: [],
             course: "",
+            subcourse: "",
             branch: "",
             year: "",
+            sem: "",
             price: {
                 lower: null,
                 upper: null

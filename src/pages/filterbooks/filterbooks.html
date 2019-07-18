@@ -15,7 +15,10 @@
   <div [ngSwitch]="filterObj.isAcademic">
     <ion-list *ngSwitchCase="'Y'">
       <div style="margin-left: 4%">
-        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['ALLINONE'] === true}"
+        <ion-badge *ngFor="let obj of lookupData?.BOOKTYPES?.ACADEMIC" item-end class="badges"
+          [ngClass]="{'badgeselected': filterObj.bookType[obj.key] === true}"
+          (click)="bookTypeClicked($event, obj.key)"> {{obj.value}}</ion-badge>
+        <!-- <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['ALLINONE'] === true}"
           (click)="bookTypeClicked($event, 'ALLINONE')">All
           In Ones</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['TEXTBOOK'] === true}"
@@ -25,7 +28,7 @@
           (click)="bookTypeClicked($event, 'NOTEBOOK')">Note
           Book</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['STUDYMATERIAL'] === true}"
-          (click)="bookTypeClicked($event, 'STUDYMATERIAL')">Study Materials</ion-badge>
+          (click)="bookTypeClicked($event, 'STUDYMATERIAL')">Study Materials</ion-badge> -->
         <div>
           <ion-list>
             <ion-item>
@@ -51,36 +54,62 @@
                 </ion-option>
               </ion-select>
             </ion-item>
-          </ion-list>
+            <!-- </ion-list>
         </div>
         <div>
-          <ion-list>
-            <ion-item>
+          <ion-list> -->
+            <ion-item *ngIf="filterObj.course && lookupData?.branch?.length">
+              <ion-label floating>Branch</ion-label>
+              <ion-select interface="popover" [(ngModel)]="filterObj.branch">
+                <ion-option *ngFor="let obj of lookupData?.branch" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+
+            <!-- <ion-item>
               <ion-label floating>Branch</ion-label>
               <ion-input type="text" [(ngModel)]="filterObj.branch"></ion-input>
-
-            </ion-item>
-          </ion-list>
+            </ion-item> -->
+            <!-- </ion-list>
         </div>
         <div>
-          <ion-list>
-            <ion-item>
+          <ion-list> -->
+            <ion-item *ngIf="filterObj.course && lookupData?.year?.length">
+              <ion-label floating>Year</ion-label>
+              <ion-select interface="popover" [(ngModel)]="filterObj.year">
+                <ion-option *ngFor="let obj of lookupData?.year" [value]="obj">
+                  {{obj}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="filterObj.course && lookupData?.sem?.length">
+              <ion-label floating>Semester</ion-label>
+              <ion-select interface="popover" [(ngModel)]="filterObj.sem">
+                <ion-option *ngFor="let obj of lookupData?.sem" [value]="obj">
+                  {{obj}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <!-- <ion-item>
               <ion-label floating>Year</ion-label>
               <ion-input type="text" [(ngModel)]="filterObj.year"></ion-input>
-
-            </ion-item>
+            </ion-item> -->
           </ion-list>
         </div>
       </div>
     </ion-list>
     <ion-list *ngSwitchCase="'N'">
       <div style="margin-left: 4%">
-        <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}"
+        <ion-badge *ngFor="let obj of lookupData?.BOOKTYPES?.NONACADEMIC" item-end class="badges"
+          [ngClass]="{'badgeselected': filterObj.bookType[obj.key] === true}"
+          (click)="bookTypeClicked($event, obj.key)"> {{obj.value}}</ion-badge>
+        <!-- <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}"
           (click)="bookTypeClicked($event, 'NOVEL')">Novels</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['AUTOBIOGRAPHY'] === true}"
           (click)="bookTypeClicked($event, 'AUTOBIOGRAPHY')">AutoBiography</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['MAGAZINE'] === true}"
-          (click)="bookTypeClicked($event, 'MAGAZINE')">Magazines</ion-badge>
+          (click)="bookTypeClicked($event, 'MAGAZINE')">Magazines</ion-badge> -->
       </div>
     </ion-list>
   </div>
