@@ -12,6 +12,7 @@ import { MyPostsPageService } from '../myposts/myposts.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild('mainSearchbar') searchBar: Searchbar;
   private alive: boolean = true;
   private rootPage;
   private postbookPage = PostbookPage;
@@ -54,6 +55,14 @@ export class HomePage {
     this.homePageService.setPage(pagename);
   }
 
+  searchBtnClicked() {
+    this.showSearchBox = !this.showSearchBox;
+    if (this.showSearchBox)
+      setTimeout(() => {
+        this.searchBar.setFocus();
+      }, 100);
+  }
+
   openFilterModal(ev) {
     let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
     popover.present({
@@ -69,7 +78,8 @@ export class HomePage {
 
   }
 
-  ionViewDidLeave() {
+  ionVieDidLeave() {
     this.alive = false;
   }
+
 }
