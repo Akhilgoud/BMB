@@ -11,8 +11,6 @@ export class BooksInfoApi {
     constructor(private http: Http) { }
     private booksinfoUrl = 'https://floating-cliffs-67240.herokuapp.com/booksinfo';
     private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookStatus';
-    private baseUrl = 'https://floating-cliffs-67240.herokuapp.com/';
-
     offsetConst = 0; limitConst = 6;
 
     private configObj = {
@@ -73,18 +71,5 @@ export class BooksInfoApi {
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-
-    getLookupData() {
-        let headers = new Headers();
-        headers.append('Content-type', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.get(this.baseUrl + 'lookupData', options)
-            .map(response => {
-                return response.json();
-            })
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
-
 
 }

@@ -4,6 +4,9 @@ import { FilterBooksService } from './filterbooks.service';
 import { BooksInfoApi } from '../../shared/shared';
 import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
 import { AutoCompleteListService } from './AutoCompleteListService';
+import { PostBookDataService } from "../postbook/postbookdata.service";
+import { PostbookApi } from '../postbook/postbook.service';
+
 // import { googlemaps } from 'googlemaps';
 // import { loadModules } from 'esri-loader';
 
@@ -18,6 +21,8 @@ export class FilterBooks {
   autocompleteItems = [];
   selectedAddress = "";
   timer: any;
+  public lookupData: any;
+
   //@ViewChild('searchbar') searchBar: Searchbar;
   // @ViewChild('searchbar', { read: IonSearchbar }) searchbar: IonSearchbar;
   constructor(
@@ -27,10 +32,24 @@ export class FilterBooks {
     public booksInfoApi: BooksInfoApi,
     private loadingController: LoadingController,
     public booksinfoPageService: BooksinfoPageService,
-    public autoCompleteListService: AutoCompleteListService
+    public autoCompleteListService: AutoCompleteListService,
+    public postBookDataService: PostBookDataService,
+    public postbookApi: PostbookApi
   ) {
     this.filterObj = this.filterBooksService.getFilterObj();
-
+    this.lookupData = this.postBookDataService.getLookupData();
+    if (!this.lookupData) {
+      this.postbookApi.getLookupData().subscribe(
+        response => {
+          console.log(response[0]);
+          this.postBookDataService.setLookupData(response[0])
+          this.lookupData = response[0];
+        },
+        error => {
+          console.log("error authentication" + error);
+        }
+      );
+    }
     this.platform.registerBackButtonAction(() => {
       this.viewController.dismiss();
     });

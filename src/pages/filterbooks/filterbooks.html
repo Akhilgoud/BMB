@@ -30,13 +30,26 @@
           <ion-list>
             <ion-item>
               <ion-label floating>Course</ion-label>
-              <ion-input type="text" [(ngModel)]="filterObj.course"></ion-input>
+              <ion-select interface="popover" [(ngModel)]="filterObj.course" (ionChange)="courseSelected()">
+                <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.COURSE" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ion-select>
+              <!-- <ion-input type="text" [(ngModel)]="filterObj.course"></ion-input> -->
               <!-- <ion-select interface="popover" [(ngModel)]="filterObj.course">
                   <ion-option value="BTECH">B.Tech</ion-option>
                   <ion-option value="DEGREE">Degree</ion-option>
                   <ion-option value="BCOM">B.Com</ion-option>
 
                 </ion-select> -->
+            </ion-item>
+            <ion-item *ngIf="filterObj.course && lookupData?.subcourse?.length">
+              <ion-label floating>Degree</ion-label>
+              <ion-select interface="popover" [(ngModel)]="filterObj.subcourse" (ionChange)="degreeSelected()">
+                <ion-option *ngFor="let obj of lookupData?.subcourse" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ion-select>
             </ion-item>
           </ion-list>
         </div>
