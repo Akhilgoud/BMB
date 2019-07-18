@@ -2,108 +2,301 @@
     "BOOKTYPES": {
         "ACADEMIC": [
             {
-                "key": "ALLINONE",
+                "key": "All In One",
                 "value": "All In One"
             },
             {
-                "key": "TEXTBOOK",
+                "key": "Text Book",
                 "value": "Text Book"
             },
             {
-                "key": "NOTEBOOK",
+                "key": "Note Book",
                 "value": "Note Book"
             },
             {
-                "key": "STUDYMATERIAL",
+                "key": "Study Material",
                 "value": "Study Material"
             },
             {
-                "key": "ACAOTHERS",
-                "value": "Others"
+                "key": "Others In Academic",
+                "value": "Others In Academic"
             }
         ],
         "NONACADEMIC": [
             {
-                "key": "NOVEL",
+                "key": "Novel",
                 "value": "Novel"
             },
             {
-                "key": "AUTOBIOGRAPHY",
+                "key": "AutoBiography",
                 "value": "AutoBiography"
             },
             {
-                "key": "MAGAZINE",
+                "key": "Magazine",
                 "value": "Magazine"
             },
             {
-                "key": "NONACAOTHERS",
-                "value": "Others"
+                "key": "Others In NonAcademic",
+                "value": "Others In NonAcademic"
             }
         ],
         "COURSE": [
             {
-                "key": "SCHOOL",
-                "value": "Schooling"
+                "key": "Schooling",
+                "value": "Schooling",
+                "Branch": [
+                    {
+                        "key": "CBSE",
+                        "value": "CBSE"
+                    },
+                    {
+                        "key": "SSC",
+                        "value": "SSC"
+                    },
+                    {
+                        "key": "ICSE",
+                        "value": "ICSE"
+                    },
+                    {
+                        "key": "Others In Schooling",
+                        "value": "Others In Schooling"
+                    }
+                ],
+                "Year": [
+                    "<1",
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ]
             },
             {
-                "key": "INTER",
-                "value": "Intermediate/Diploma"
+                "key": "Intermediate/Diploma",
+                "value": "Intermediate/Diploma",
+                "Branch": [
+                    {
+                        "key": "MPC",
+                        "value": "MPC"
+                    },
+                    {
+                        "key": "BIPC",
+                        "value": "BIPC"
+                    },
+                    {
+                        "key": "CEC",
+                        "value": "CEC"
+                    },
+                    {
+                        "key": "Others In Inter/Diploma",
+                        "value": "Others In Inter/Diploma"
+                    }
+                ],
+                "Year": [
+                    1,
+                    2,
+                    3
+                ]
             },
             {
-                "key": "GRAD",
+                "key": "Graduation",
                 "value": "Graduation",
                 "subCategory": [
                     {
-                        "key": "BTECH",
-                        "value": "Btech"
+                        "key": "BTech",
+                        "value": "BTech",
+                        "Branch": [
+                            {
+                                "key": "ECE",
+                                "value": "ECE"
+                            },
+                            {
+                                "key": "CSE",
+                                "value": "CSE"
+                            },
+                            {
+                                "key": "MECH",
+                                "value": "MECH"
+                            },
+                            {
+                                "key": "IT",
+                                "value": "IT"
+                            },
+                            {
+                                "key": "EIE",
+                                "value": "EIE"
+                            },
+                            {
+                                "key": "EEE",
+                                "value": "EEE"
+                            },
+                            {
+                                "key": "CIVIL",
+                                "value": "CIVIL"
+                            },
+                            {
+                                "key": "Others In BTech",
+                                "value": "Others In BTech"
+                            }
+                        ],
+                        "Year": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
                         "key": "BCOM",
-                        "value": "BCOM"
+                        "value": "BCOM",
+                        "Year": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
                         "key": "BSC",
-                        "value": "BSC"
+                        "value": "BSC",
+                        "Year": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
                         "key": "BA",
-                        "value": "BA"
+                        "value": "BA",
+                        "Year": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
-                        "key": "GRADOTHERS",
-                        "value": "Others"
+                        "key": "Others in Graduation",
+                        "value": "Others in Graduation"
                     }
                 ]
             },
             {
-                "key": "PG",
+                "key": "Post Graduation",
                 "value": "Post Graduation",
                 "subCategory": [
                     {
-                        "key": "MTECH",
-                        "value": "Mtech"
+                        "key": "MTech",
+                        "value": "MTech",
+                        "Branch": [
+                            {
+                                "key": "ECE",
+                                "value": "ECE"
+                            },
+                            {
+                                "key": "CSE",
+                                "value": "CSE"
+                            },
+                            {
+                                "key": "MECH",
+                                "value": "MECH"
+                            },
+                            {
+                                "key": "IT",
+                                "value": "IT"
+                            },
+                            {
+                                "key": "EIE",
+                                "value": "EIE"
+                            },
+                            {
+                                "key": "EEE",
+                                "value": "EEE"
+                            },
+                            {
+                                "key": "CIVIL",
+                                "value": "CIVIL"
+                            },
+                            {
+                                "key": "Others In MTech",
+                                "value": "Others In MTech"
+                            }
+                        ],
+                        "Year": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
                         "key": "MCOM",
-                        "value": "MCOM"
+                        "value": "MCOM",
+                        "Year": [
+                            1,
+                            2
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
                         "key": "MSC",
-                        "value": "MSC"
+                        "value": "MSC",
+                        "Year": [
+                            1,
+                            2
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
                         "key": "MA",
-                        "value": "MA"
+                        "value": "MA",
+                        "Year": [
+                            1,
+                            2
+                        ],
+                        "Sem": [
+                            1,
+                            2
+                        ]
                     },
                     {
-                        "key": "PGOTHERS",
-                        "value": "Others"
+                        "key": "Others In PG",
+                        "value": "Others In PG"
                     }
                 ]
             },
             {
-                "key": "COURSEOTHERS",
-                "value": "Others"
+                "key": "Others in Course",
+                "value": "Others in Course"
             }
         ]
     }

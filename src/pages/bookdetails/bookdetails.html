@@ -74,22 +74,23 @@
             <ion-row>
               <ion-col>Course</ion-col>
               <ion-col>-</ion-col>
-              <ion-col>{{ bookObj.course}}</ion-col>
+              <ion-col>{{ bookObj.bookAcademic[0]?.course}}</ion-col>
+            </ion-row>
+            <ion-row *ngIf="bookObj.bookAcademic[0]?.subcourse">
+              <ion-col>Degree</ion-col>
+              <ion-col>-</ion-col>
+              <ion-col>{{ bookObj.bookAcademic[0]?.subcourse}}</ion-col>
             </ion-row>
             <ion-row>
               <ion-col>Branch</ion-col>
               <ion-col>-</ion-col>
-              <ion-col>{{ bookObj.branch}}</ion-col>
+              <ion-col>{{ bookObj.bookAcademic[0]?.branch}}</ion-col>
             </ion-row>
             <ion-row>
               <ion-col>Year/Sem</ion-col>
               <ion-col>-</ion-col>
-              <ion-col><span *ngIf="bookObj.year|| bookObj.sem"> {{ bookObj.year}}/ {{ bookObj.sem}} </span></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>Course</ion-col>
-              <ion-col>-</ion-col>
-              <ion-col>{{ bookObj.course}}</ion-col>
+              <ion-col><span *ngIf="bookObj.year || bookObj.sem"> {{ bookObj.bookAcademic[0]?.year}}/
+                  {{ bookObj.bookAcademic[0]?.sem}} </span></ion-col>
             </ion-row>
           </div>
 

@@ -15,6 +15,8 @@ import { PostBookDataService } from "./postbookdata.service";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AutoCompleteListService } from '../filterbooks/AutoCompleteListService';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
+import { MyPostsPageService } from '../myposts/myposts.service';
+import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
 
 
 @Component({
@@ -48,7 +50,9 @@ export class PostbookPage {
         public homePageService: HomePageService,
         private loadingController: LoadingController,
         private barcodeScanner: BarcodeScanner,
-        private autoCompleteListService: AutoCompleteListService) {
+        private autoCompleteListService: AutoCompleteListService,
+        public myPostsPageService: MyPostsPageService,
+        public booksinfoPageService: BooksinfoPageService) {
         this.photos = [];
         this.bookObj = new IBookObj();
         var postbookobj = this.postBookDataService.getPostBookObj();
@@ -238,6 +242,8 @@ export class PostbookPage {
                     response => {
                         loader.dismiss();
                         console.log(response);
+                        this.myPostsPageService.setMyBooksList(null);
+                        this.booksinfoPageService.setBooksList(null);
                         this.homePageService.setPage(MypostsPage)
                     },
                     error => {
@@ -286,6 +292,8 @@ export class PostbookPage {
                     response => {
                         loader.dismiss();
                         console.log(response);
+                        this.myPostsPageService.setMyBooksList(null);
+                        this.booksinfoPageService.setBooksList(null);
                         this.homePageService.setPage(MypostsPage)
                     },
                     error => {
@@ -382,19 +390,81 @@ export class PostbookPage {
         console.log(JSON.stringify(item))
     };
 
-    showDegreeOption() {
+    courseSelected() {
+        this.bookObj.subcourse = "";
+        this.bookObj.branch = "";
+        this.bookObj.year = null;
+        this.bookObj.sem = null;
+
+        this.lookupData.branch = [];
+        this.lookupData.subcourse = [];
+        this.lookupData.year = [];
+        this.lookupData.sem = [];
+
         if (this.bookObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
             var selArr = this.lookupData.BOOKTYPES.COURSE.filter(item => item.key == this.bookObj.course);
             if (selArr && selArr[0] && selArr[0].subCategory) {
                 this.lookupData.subcourse = selArr[0].subCategory;
-                return true;
             }
-        } else {
-            return false;
+            if (selArr && selArr[0] && selArr[0].Branch) {
+                this.lookupData.branch = selArr[0].Branch;
+            }
+            if (selArr && selArr[0] && selArr[0].Year) {
+                this.lookupData.year = selArr[0].Year;
+            }
+            if (selArr && selArr[0] && selArr[0].Sem) {
+                this.lookupData.sem = selArr[0].Sem;
+            }
         }
-
     }
 
+    degreeSelected() {
+        this.bookObj.branch = "";
+        this.bookObj.year = null;
+        this.bookObj.sem = null;
+
+        this.lookupData.branch = [];
+        this.lookupData.year = [];
+        this.lookupData.sem = [];
+        if (this.bookObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
+            var selArr = this.lookupData.subcourse.filter(item => item.key == this.bookObj.subcourse);
+            if (selArr && selArr[0] && selArr[0].Branch) {
+                this.lookupData.branch = selArr[0].Branch;
+            }
+            if (selArr && selArr[0] && selArr[0].Year) {
+                this.lookupData.year = selArr[0].Year;
+            }
+            if (selArr && selArr[0] && selArr[0].Sem) {
+                this.lookupData.sem = selArr[0].Sem;
+            }
+        }
+    }
+
+    // showDegreeOption() {
+    //     this.bookObj.subcourse = "";
+    //     if (this.bookObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
+    //         var selArr = this.lookupData.BOOKTYPES.COURSE.filter(item => item.key == this.bookObj.course);
+    //         if (selArr && selArr[0] && selArr[0].subCategory) {
+    //             this.lookupData.subcourse = selArr[0].subCategory;
+    //             return true;
+    //         }
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    // showBranchOption() {
+    //     this.bookObj.branch = "";
+    //     if (this.bookObj.course && this.lookupData && this.lookupData.BOOKTYPES && this.lookupData.BOOKTYPES.COURSE) {
+    //         var selArr = this.lookupData.BOOKTYPES.COURSE.filter(item => item.key == this.bookObj.course);
+    //         if (selArr && selArr[0] && selArr[0].subCategory) {
+    //             this.lookupData.branch = selArr[0].Branch;
+    //             return true;
+    //         }
+    //     } else {
+    //         return false;
+    //     }
+    // }
     // scrollingFun(e) {
     //     if(e.directionY=='down'){
     //        this.shownav = false;

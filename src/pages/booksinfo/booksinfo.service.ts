@@ -15,7 +15,7 @@ export class BooksinfoPageService {
     }
 
     setBooksList(data) {
-        this.tempBooksList = [...data];
+        this.tempBooksList = data ? [...data] : [];
         this.booksListChange.next(data);
     }
 

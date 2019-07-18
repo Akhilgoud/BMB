@@ -145,7 +145,8 @@
           <span *ngIf="bookObj.isAcademic =='Y'">
             <ion-item>
               <ion-label color="primary" floating>Course</ion-label>
-              <ion-select formControlName="course" interface="popover" [(ngModel)]="bookObj.course">
+              <ion-select formControlName="course" interface="popover" [(ngModel)]="bookObj.course"
+                (ionChange)="courseSelected()">
                 <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.COURSE" [value]="obj.key">
                   {{obj.value}}
                 </ion-option>
@@ -159,9 +160,10 @@
             </ion-item>
 
 
-            <ion-item *ngIf="showDegreeOption()">
+            <ion-item *ngIf="bookObj.course && lookupData?.subcourse?.length">
               <ion-label color="primary" floating>Degree</ion-label>
-              <ion-select formControlName="subcourse" interface="popover" [(ngModel)]="bookObj.subcourse">
+              <ion-select formControlName="subcourse" interface="popover" [(ngModel)]="bookObj.subcourse"
+                (ionChange)="degreeSelected()">
                 <ion-option *ngFor="let obj of lookupData?.subcourse" [value]="obj.key">
                   {{obj.value}}
                 </ion-option>
@@ -189,17 +191,31 @@
                 <ion-option value="PGOTHERS">Others</ion-option>
               </ion-select>
             </ion-item> -->
-            <ion-item>
+            <ion-item *ngIf="bookObj.course && lookupData?.branch?.length">
               <ion-label color="primary" floating>Branch</ion-label>
-              <ion-input formControlName="branch" [(ngModel)]="bookObj.branch" type="text"></ion-input>
+              <ion-select formControlName="branch" interface="popover" [(ngModel)]="bookObj.branch">
+                <ion-option *ngFor="let obj of lookupData?.branch" [value]="obj.key">
+                  {{obj.value}}
+                </ion-option>
+              </ion-select>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="bookObj.course && lookupData?.year?.length">
               <ion-label color="primary" floating>Year</ion-label>
-              <ion-input formControlName="year" [(ngModel)]="bookObj.year" type="number"></ion-input>
+              <ion-select formControlName="year" interface="popover" [(ngModel)]="bookObj.year">
+                <ion-option *ngFor="let obj of lookupData?.year" [value]="obj">
+                  {{obj}}
+                </ion-option>
+              </ion-select>
+              <!-- <ion-input formControlName="year" [(ngModel)]="bookObj.year" type="number"></ion-input> -->
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="bookObj.course && lookupData?.sem?.length">
               <ion-label color="primary" floating>Semester</ion-label>
-              <ion-input formControlName="sem" [(ngModel)]="bookObj.sem" type="number"></ion-input>
+              <ion-select formControlName="sem" interface="popover" [(ngModel)]="bookObj.sem">
+                <ion-option *ngFor="let obj of lookupData?.sem" [value]="obj">
+                  {{obj}}
+                </ion-option>
+              </ion-select>
+              <!-- <ion-input formControlName="sem" [(ngModel)]="bookObj.sem" type="number"></ion-input> -->
             </ion-item>
           </span>
           <ion-item>

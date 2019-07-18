@@ -15,7 +15,7 @@ export class MyPostsPageService {
     }
 
     setMyBooksList(data) {
-        this.tempBooksList = [...data];
+        this.tempBooksList = data ? [...data] : [];
         this.myBooksListChange.next(data);
     }
 
