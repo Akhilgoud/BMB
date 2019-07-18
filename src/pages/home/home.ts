@@ -12,7 +12,6 @@ import { MyPostsPageService } from '../myposts/myposts.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  @ViewChild('mainSearchbar') searchBar: Searchbar;
   private alive: boolean = true;
   private rootPage;
   private postbookPage = PostbookPage;
@@ -52,35 +51,14 @@ export class HomePage {
 
 
   changePage(pagename) {
-    // if(pagename == this.homePageService )
     this.homePageService.setPage(pagename);
   }
 
   openFilterModal(ev) {
-    // const popover = this.popoverCtrl.create(FilterBooks);
-    // popover.present();
     let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
     popover.present({
       ev: ev
     });
-  }
-
-  searchClicked() {
-    this.showSearchBox = !this.showSearchBox;
-    if (this.showSearchBox) {
-      document.getElementsByClassName('searchSelected')[0]["style"].marginTop = "17%";
-      if (this.rootPage == this.mypostsPage) {
-        document.getElementsByClassName('homeSearchBar')[0]["style"].marginTop = "15px";
-      } else document.getElementsByClassName('homeSearchBar')[0]["style"].marginTop = "0";
-
-      setTimeout(() => {
-        this.searchBar.setFocus();
-      }, 150);
-      // Keyboard.show();
-    } else if (this.rootPage == this.mypostsPage) {
-      document.getElementsByClassName('searchSelected')[0]["style"].marginTop = "20px";
-    } else
-      document.getElementsByClassName('searchSelected')[0]["style"].marginTop = "0px";
   }
 
   filterItems(ev: any) {

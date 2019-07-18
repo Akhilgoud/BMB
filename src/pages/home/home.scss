@@ -1,7 +1,3 @@
-// .searchSelected{
-//     // margin-top: 20%;
-// }
-
 page-home {
 
     .toolbar-title-md {
@@ -40,10 +36,29 @@ page-home {
         color: #f3f5f7;
     }
 
+    .searchbar-md {
+     margin-top: -57px;
+    }
 
-    // .no-scroll .scroll-content{
-    //     overflow: hidden;
-    // }
+   .searchbar-ios-cancel{
+     margin-right: 0px !important;
+     opacity: 1!important;
+     padding-left: 10px !important;
+   }
+
+   .searchbar-md .searchbar-md-cancel{
+     display: inline-flex !important;
+     background-color: white !important;
+   }
+
+  .searchbar-search-icon{
+    display: none;
+  }
+
+  .searchbar-md .searchbar-clear-icon {
+    right: -100px;
+  }
+
 }
 
 .contact-popover .popover-content {
@@ -57,7 +72,7 @@ page-home {
 }
 
 // .contact-popover .popover-arrow {
-//     // top: 38.5px !important; 
+//     // top: 38.5px !important;
 //     // left: 287.734px !important;
 //     // position: absolute;
 //     // display: block;

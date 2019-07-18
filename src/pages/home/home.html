@@ -12,19 +12,9 @@
           {{pageTitle}}
         </div>
       </div>
-      <!-- <div style="float: right;margin-top: 10px;padding-left: 10px;padding-right: 60px;">
-        <div id="apptitle">BMB</div>
-      </div> -->
-
     </ion-title>
     <ion-buttons right>
-      <!-- <button ion-button (click)="changePage(postbookPage)">
-          <ion-icon name="add-circle" id="postIcon" ></ion-icon>
-      </button> -->
-      <!-- <button ion-button (click)="changePage(booksinfoPage);" *ngIf="appTitle != 'BMB'">
-          <ion-icon name="home" id="homeIcon" ></ion-icon>
-      </button> -->
-      <button ion-button (click)="searchClicked();" *ngIf="showSearchIcon">
+      <button ion-button (click)="this.showSearchBox = !this.showSearchBox;" *ngIf="showSearchIcon">
         <ion-icon name="search" id="searchIcon"></ion-icon>
       </button>
       <button ion-button (click)="openFilterModal($event)" *ngIf="showFilterIcon">
@@ -32,13 +22,15 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-searchbar
+        (ionInput)="filterItems($event)"
+        (ionCancel)="this.showSearchBox = false"
+        *ngIf="showSearchBox"
+        style="width:70%">
+  </ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <div class="homeSearchBar">
-    <ion-searchbar (ionInput)="filterItems($event)" *ngIf="showSearchBox" style="z-index: 99;" #mainSearchbar>
-    </ion-searchbar>
-  </div>
   <ion-nav [root]="rootPage">
   </ion-nav>
 </ion-content>
