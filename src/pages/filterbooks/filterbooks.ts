@@ -22,6 +22,13 @@ export class FilterBooks {
   selectedAddress = "";
   timer: any;
   public lookupData: any;
+  offsetConst = 0; limitConst = 6;
+
+  private configObj = {
+     offset: this.offsetConst,
+     limit: this.limitConst,
+     filters: {}
+  };
 
   //@ViewChild('searchbar') searchBar: Searchbar;
   // @ViewChild('searchbar', { read: IonSearchbar }) searchbar: IonSearchbar;
@@ -122,16 +129,14 @@ export class FilterBooks {
     // address: ""
 
 
-    this.booksInfoApi.setFilterConditions(filterConditions);
-    this.booksInfoApi.resetOffLimit();
+    this.configObj.filters = filterConditions;
     this.viewController.dismiss();
     let loader = this.loadingController.create({
       content: 'Applying Filters...',
       dismissOnPageChange: true
     });
     loader.present().then(() => {
-      this.booksInfoApi.getData().subscribe(response => {
-        console.log(response);
+      this.booksInfoApi.getData(this.configObj).subscribe(response => {
         this.booksinfoPageService.setBooksList(response);
         loader.dismiss();
       },
@@ -146,15 +151,13 @@ export class FilterBooks {
 
   resetFilters() {
     this.filterBooksService.resetFilterObj();
-    this.booksInfoApi.resetOffLimit();
-    this.booksInfoApi.resetFilters();
     this.viewController.dismiss();
     let loader = this.loadingController.create({
       content: 'Fetching books...',
       dismissOnPageChange: true
     });
     loader.present().then(() => {
-      this.booksInfoApi.getData().subscribe(response => {
+      this.booksInfoApi.getData(this.configObj).subscribe(response => {
         console.log(response);
         this.booksinfoPageService.setBooksList(response);
         loader.dismiss();

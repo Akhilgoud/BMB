@@ -11,37 +11,14 @@ export class BooksInfoApi {
     constructor(private http: Http) { }
     private booksinfoUrl = 'https://floating-cliffs-67240.herokuapp.com/booksinfo';
     private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookStatus';
-    offsetConst = 0; limitConst = 6;
 
-    private configObj = {
-        offset: this.offsetConst,
-        limit: this.limitConst,
-        filters: {}
-    };
 
-    resetOffLimit() {
-        this.configObj.offset = this.offsetConst;
-        this.configObj.limit = this.limitConst;
-    }
-
-    resetFilters() {
-        this.configObj.filters = {};
-    }
-
-    incrementOffset() {
-        this.configObj.offset = this.configObj.offset + this.configObj.limit;
-    }
-
-    setFilterConditions(filters) {
-        this.configObj.filters = filters;
-    }
-
-    getData() {
+    getData(configObj) {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');
         let options = new RequestOptions({ headers: headers });
         // var obj= {offset: offset, limit: limit};
-        return this.http.post(this.booksinfoUrl, JSON.stringify(this.configObj), options)
+        return this.http.post(this.booksinfoUrl, JSON.stringify(configObj), options)
             .map(response => {
                 return response.json();
             })

@@ -4,6 +4,7 @@ import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
 import { BookdetailsPage, FilterBooks } from '../pages';
 import { BooksinfoPageService } from './booksinfo.service';
+
 @Component({
   selector: 'page-booksinfo',
   templateUrl: 'booksinfo.html',
@@ -15,12 +16,17 @@ export class BooksinfoPage {
   currentDate = new Date();
   showImgSlide = false;
   clickedBookImg: any = {};
+  bookCount: Number;
+  offsetConst = 0; limitConst = 6;
 
+  private configObj = {
+     offset: this.offsetConst,
+     limit: this.limitConst,
+     filters: {}
+  };
 
   lastBack = Date.now();
   allowClose = false;
-  // pageLimit = 4;
-  // pageOffset = 0;
   constructor(public app: App,
     public platform: Platform,
     public popoverCtrl: PopoverController,
@@ -44,6 +50,11 @@ export class BooksinfoPage {
     //     console.log('af el');
     //   }
     // });
+    {
+    this.configObj.limit = 10000
+    this.booksInfoApi.getData(this.configObj).subscribe(response => {
+        this.bookCount = response.length;
+    })}
 
     this.platform.registerBackButtonAction(() => {
       console.log('in');
@@ -119,6 +130,25 @@ export class BooksinfoPage {
     }
   }
 
+ getFreeBooks(){
+   let loader = this.loadingController.create({
+      content: 'Applying Filters...',
+      dismissOnPageChange: true
+    });
+      loader.present().then(() => {
+      this.configObj.filters = {'isFree': true};
+      this.booksInfoApi.getData(this.configObj).subscribe(response => {
+        this.booksinfoPageService.setBooksList(response);
+        loader.dismiss();
+      },
+        error => {
+          console.log("error authentication" + error);
+          loader.dismiss();
+        }
+      )
+    });
+   
+ }
   getBooks() {
     let loader = this.loadingController.create({
       // spinner: 'hide',
@@ -132,7 +162,7 @@ export class BooksinfoPage {
       dismissOnPageChange: true
     });
     loader.present().then(() => {
-      this.booksInfoApi.getData().subscribe(response => {
+      this.booksInfoApi.getData(this.configObj).subscribe(response => {
         console.log(response);
         this.booksinfoPageService.setBooksList(response);
         loader.dismiss();
@@ -152,14 +182,13 @@ export class BooksinfoPage {
   ionViewWillLeave() {
     this.homePageService.setPageTitle('');
   }
-  // openFilterModal(ev) {
-  //   // const popover = this.popoverCtrl.create(FilterBooks);
-  //   // popover.present();
-  //   let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
-  //   popover.present({
-  //     ev: ev
-  //   });
-  // }
+
+  openFilterModal(ev) {
+    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
+    popover.present({
+      ev: ev
+    });
+  }
 
   goToDetailsPage(book) {
     let modal = this.modalCtrl.create(BookdetailsPage, { bookObj: book });
@@ -190,10 +219,7 @@ export class BooksinfoPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    // this.pageOffset = 0;
-    //  this.pageLimit = 4;
-    this.booksInfoApi.resetOffLimit();
-    this.booksInfoApi.getData().subscribe(response => {
+    this.booksInfoApi.getData(this.configObj).subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
       refresher.complete();
@@ -208,8 +234,8 @@ export class BooksinfoPage {
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
     // this.pageOffset = this.pageOffset + this.pageLimit;
-    this.booksInfoApi.incrementOffset();
-    this.booksInfoApi.getData().subscribe(response => {
+    this.configObj.offset = this.configObj.offset + this.configObj.limit;
+    this.booksInfoApi.getData(this.configObj).subscribe(response => {
       console.log(response);
       this.booksinfoPageService.addBooksList(response);
       infiniteScroll.complete();

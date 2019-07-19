@@ -1,28 +1,29 @@
-<ion-header>
-  <!-- <ion-header #filterBand> -->
-  <!--<div class="filterBand"><ion-row>
-    <ion-col> <div class="filterBandLeft">Over 200 results</div></ion-col>
-    <ion-col>
-      <div class="filterBandMiddle">Eng.
-        <label class="switch">
-          <input type="checkbox" />
-            <span class="slider round"></span>
-      </label>
-      </div>
-    </ion-col>
-    <ion-col><div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div></ion-col>
-    </ion-row>
-  </div> -->
+ <ion-header #filterBand>
+  <div class="filterBand">
+   <ion-row>
+     <ion-col>
+       <div class="filterBandLeft">Over {{bookCount}} Books</div>
+     </ion-col>
+     <ion-col>
+       <div class="filterBandMiddle">Free
+         <label class="switch">
+           <input type="checkbox" (change)="getFreeBooks()"/>
+             <span class="slider round"></span>
+         </label>
+       </div>
+     </ion-col>
+     <ion-col>
+       <div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div>
+     </ion-col>
+   </ion-row>
+  </div>
 </ion-header>
 
-<ion-content [ngClass]="{'no-scroll': showImgSlide}">
-  <!-- <ion-content [ngClass]="{'no-scroll': showImgSlide}" hide-content [passContentToHide]="filterBand"> -->
+<ion-content [ngClass]="{'no-scroll': showImgSlide}" hide-content [passContentToHide]="filterBand">
   <ion-refresher (ionRefresh)="doRefresh($event)" [enabled]="!showImgSlide">
-    <ion-refresher-content>
-    </ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div style="position:absolute">
-    <!-- <ion-searchbar (ionInput)="filterItems($event)" ></ion-searchbar> -->
     <div class="searchSelected fadeInLeft">
       <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
         <ion-row style="padding-left: 16px;">

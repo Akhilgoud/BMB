@@ -40,7 +40,7 @@ import { HideContentDirective } from '../directives/hide-content/hide-content';
     MypostsPage,
     FilterBooks,
     UserProfilePage,
-    FeedbackPage, 
+    FeedbackPage,
     HideContentDirective
   ],
   imports: [
@@ -75,6 +75,7 @@ import { HideContentDirective } from '../directives/hide-content/hide-content';
     BooksinfoPageService,
     UserInfoService,
     FilterBooksService,
+    FilterBooks,
     BooksInfoApi,
     FeedbackApi,
     PostBookDataService,
