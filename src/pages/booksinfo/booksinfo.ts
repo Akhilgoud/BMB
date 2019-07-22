@@ -15,6 +15,7 @@ export class BooksinfoPage {
   currentDate = new Date();
   showImgSlide = false;
   clickedBookImg: any = {};
+  filterObj: any = {};
 
 
   lastBack = Date.now();
