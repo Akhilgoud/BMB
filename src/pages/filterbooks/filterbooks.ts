@@ -98,7 +98,6 @@ export class FilterBooks {
     if (this.filterObj.sem) filterConditions["bookAcademic.sem"] = this.filterObj.sem;
     if (this.filterObj.college) filterConditions["college"] = this.filterObj.college;
 
-    if (this.filterObj.isFree) filterConditions["isFree"] = this.filterObj.isFree;
     else {
       if (this.filterObj.price && this.filterObj.price.lower) filterConditions["price"] = { "$gte": this.filterObj.price.lower };
       if (this.filterObj.price && this.filterObj.price.upper) filterConditions["price"] = { ...filterConditions["price"], "$lte": this.filterObj.price.upper };

@@ -46,7 +46,7 @@
       </ion-col>
     </ion-row>
     <div class="loginRegDiv">
-      <div (click)="forgotPwd = true" *ngIf="!isRegister">Forgot Password? </div>
+      <div (click)="forgotPwd = true" *ngIf="!isRegister" class="loginRegBtn">Forgot Password? </div>
       <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
       <div *ngIf="authRes == 'NOTFOUND'" class="authError">Email Not Found. Please sign up</div>
       <div *ngIf="authRes == 'WC'" class="authError">Invalid Password</div>
@@ -63,7 +63,7 @@
   </div>
 
   <div *ngIf="forgotPwd">
-    <div class="fgtPwdTxt"> Forgot Password</div>
+    <div class="fgtPwdTxt">Forgot Password</div>
     <ion-row>
       <ion-col>
         <form [formGroup]="loginFgtPwdForm">

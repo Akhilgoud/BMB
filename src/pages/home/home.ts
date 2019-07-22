@@ -63,12 +63,6 @@ export class HomePage {
       }, 100);
   }
 
-  openFilterModal(ev) {
-    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
-    popover.present({
-      ev: ev
-    });
-  }
 
   filterItems(ev: any) {
     if (this.rootPage == this.booksinfoPage)

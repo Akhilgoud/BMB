@@ -119,6 +119,13 @@ export class BooksinfoPage {
     }
   }
 
+  getFreeBooks(event){
+     event.target.checked
+     ? this.booksInfoApi.setFilterConditions({"isFree":true})
+     : this.booksInfoApi.setFilterConditions({})
+     this.getBooks();
+  }
+
   getBooks() {
     let loader = this.loadingController.create({
       // spinner: 'hide',
@@ -152,14 +159,12 @@ export class BooksinfoPage {
   ionViewWillLeave() {
     this.homePageService.setPageTitle('');
   }
-  // openFilterModal(ev) {
-  //   // const popover = this.popoverCtrl.create(FilterBooks);
-  //   // popover.present();
-  //   let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
-  //   popover.present({
-  //     ev: ev
-  //   });
-  // }
+  openFilterModal(ev) {
+    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
+    popover.present({
+      ev: ev
+    });
+  }
 
   goToDetailsPage(book) {
     let modal = this.modalCtrl.create(BookdetailsPage, { bookObj: book });

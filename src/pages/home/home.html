@@ -17,9 +17,6 @@
       <button ion-button (click)="searchBtnClicked()" *ngIf="showSearchIcon">
         <ion-icon name="search" id="searchIcon"></ion-icon>
       </button>
-      <button ion-button (click)="openFilterModal($event)" *ngIf="showFilterIcon">
-        <ion-icon name="options" id="filterIcon"></ion-icon>
-      </button>
     </ion-buttons>
   </ion-navbar>
   <ion-searchbar (ionInput)="filterItems($event)" (ionCancel)="showSearchBox = false" *ngIf="showSearchBox"

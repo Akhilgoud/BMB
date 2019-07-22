@@ -17,9 +17,7 @@ export class HideContentDirective {
   @Input("passContentToHide") passContentToHide: HTMLElement;
   bandHight;
   scrollContent;
-  constructor(public element: ElementRef, public renderer: Renderer) {
-    console.log('Hello HideContentDirective Directive being initialized');
-  }
+  constructor(public element: ElementRef, public renderer: Renderer) { }
 
   ngOnInit() {
     this.bandHight = this.passContentToHide.clientHeight;
