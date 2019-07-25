@@ -20,6 +20,7 @@ export class SidenavPage {
   private userProfilePage = UserProfilePage;
   public feedbackPage = FeedbackPage;
   userObj: any = {};
+  pages: any =[];
   err: any;
   constructor(
     public navCtrl: NavController,
@@ -34,8 +35,19 @@ export class SidenavPage {
         this.userObj = userinfo;
       });
     this.GetAllUser();
+
+    this.pages = [
+      { title: 'Rate App',  icon: 'star', func: this.changePage },
+      { title: 'Share this App', icon: 'share',  func: this.changePage },
+      { title: 'Feedback & help', icon: 'paper', func: this.changePage },
+      { title: 'Policy Privacy', icon: 'lock', func: this.changePage},
+      { title: 'Exit', icon: 'exit', func: this.exitApp },
+    ];
   }
 
+  exitApp(BooksinfoPage){
+    console.log("exited")
+  }
   changePage(page) {
     this.homePageService.setPage(page);
   }

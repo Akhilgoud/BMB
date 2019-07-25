@@ -1,114 +1,49 @@
-<ion-menu side="left" [content]="mycontent">
+<ion-menu side="left" [content]="mycontent" id="menu-material">
     <ion-header>
         <ion-toolbar>
-            <ion-title>
-                <span>
-                    Hello {{userObj.name}}
-                    <ion-icon name="settings" style="float:right" *ngIf="userObj.name"
-                        (click)="changePage(userProfilePage)" menuClose></ion-icon>
-                </span>
-            </ion-title>
+          <div class="menu-header">
+           <img class="user-avatar round" width="34%" src="../../assets/imgs/avatar.png" />
+          </div>
+          <ion-title>
+             <span>
+                Hello {{userObj.name}}
+                <ion-icon name="settings" style="float:right" *ngIf="userObj.name"
+               (click)="changePage(userProfilePage)" menuClose></ion-icon>
+            </span>
+           </ion-title>
         </ion-toolbar>
     </ion-header>
-    <ion-content>
-        <ion-list>
-            <button ion-item menuClose (click)="changePage(booksinfoPage)">
-                Home
+     <ion-content class="side-nav-content app-applications">
+        <ion-list no-lines>
+            <button menuClose="left" ion-item detail-none  (click)="changePage(booksinfoPage)">
+              <ion-icon size="small" name="home" item-left></ion-icon>
+               Home
             </button>
-            <button ion-item menuClose (click)="changePage(postBookPage)">
-                Post my book
+            <button menuClose="left" ion-item detail-none  (click)="changePage(postBookPage)">
+              <ion-icon size="small" name="add" item-left></ion-icon>
+               Post My Book
             </button>
             <button ion-item menuClose (click)="changePage(loginPage)" *ngIf="!userObj.email">
-                Login
+                <ion-icon size="small" name="log-in" item-left></ion-icon>
+                Login / Register
             </button>
-
-            <div *ngIf="userObj.email">
-                <button ion-item menuClose (click)="changePage(mypostsPage)">My Books </button>
-                <button ion-item menuClose (click)="logout()">Logout </button>
-            </div>
-            <!-- <button ion-item menuClose (click)="changePage(feedbackPage)">
-                Feedback
-            </button> -->
-
-            <!-- <button ion-button block (click)="GetAllUser();"> Listar Usuarios</button>
-                
-                  <pre>{{err | json}}</pre> -->
-            <!-- <div class="filterOptions">
-                <ion-item>
-                    <ion-label>All in ones</ion-label>
-                    <ion-checkbox color="dark" checked="true"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                    <ion-range min="0" max="2000" [(ngModel)]="saturation" color="secondary">
-                        <ion-label range-left>Price: 0</ion-label>
-                        <ion-label range-right>2000</ion-label>
-                    </ion-range>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="primary">Posted days before</ion-label>
-                    <ion-input placeholder="days"></ion-input>
-                </ion-item>
-                <div>
-                    <ion-row>
-                        <ion-col>
-                            <ion-label>Academic</ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-radio value="academic" name="academic" checked></ion-radio>
-                        </ion-col>
-                        <ion-col>
-                            <ion-label>Non Academic</ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-radio value="nonacademic" name="academic"></ion-radio>
-                        </ion-col>
-                    </ion-row>
-                </div>
-                <div>
-                    <ion-row>
-                        <ion-col>
-                            <ion-label color="primary">Book Edition:</ion-label>
-                        </ion-col>
-                        <ion-col style="padding-left: 0px">
-                            <ion-input placeholder="edition"></ion-input>
-                        </ion-col>
-                        <ion-col>
-                            <ion-label color="primary">Author:</ion-label>
-                        </ion-col>
-                        <ion-col style="padding-left: 0px">
-                            <ion-input placeholder="author"></ion-input>
-                        </ion-col>
-                    </ion-row>
-                </div>
-                <ion-item>
-                    <ion-label color="primary" floating>Language</ion-label>
-                    <ion-select>
-                        <ion-option value="english">English</ion-option>
-                        <ion-option value="telugu">Telugu</ion-option>
-                        <ion-option value="hindhi">Hindi</ion-option>
-                    </ion-select>
-                    <ion-item>
-                        <ion-label color="primary">Area:</ion-label>
-                        <ion-input placeholder="area"></ion-input>
-                        <ion-label color="primary">College:</ion-label>
-                        <ion-input placeholder="college"></ion-input>
-                    </ion-item>
-                </ion-item>
-            </div> -->
+            <button ion-item menuClose (click)="changePage(mypostsPage)" *ngIf="userObj.email">
+                <ion-icon name="book" item-left></ion-icon>
+                My Books 
+            </button>
+             <button ion-item menuClose (click)="logout()" *ngIf="userObj.email">
+               <ion-icon name="log-out" item-left></ion-icon>
+               Logout 
+            </button>
+           <div class="app-applications">
+            <div class="app-text">Applications</div>
+            <button ion-item menuClose *ngFor="let p of pages" (click)="p.func()">
+              <ion-icon size="small" name="{{p.icon}}" item-left></ion-icon>
+               {{p.title}}
+            </button>  
+           </div> 
         </ion-list>
-
-
-
     </ion-content>
-    <ion-footer class="bar-stable">
-        <button ion-item menuClose (click)="changePage(feedbackPage)">
-            Feedback
-        </button>
-
-        <!-- <ion-item nav-clear menu-close href="#" style="left:0;right:0;margin:0; width: 100%;position: fixed;bottom:0;">
-            Feedback</ion-item> -->
-    </ion-footer>
-
 </ion-menu>
 
 <ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>
