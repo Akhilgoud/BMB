@@ -29,19 +29,19 @@
             </button>
             <button ion-item menuClose (click)="changePage(mypostsPage)" *ngIf="userObj.email">
                 <ion-icon name="book" item-left></ion-icon>
-                My Books 
+                My Books
             </button>
              <button ion-item menuClose (click)="logout()" *ngIf="userObj.email">
                <ion-icon name="log-out" item-left></ion-icon>
-               Logout 
+               Logout
             </button>
            <div class="app-applications">
             <div class="app-text">Applications</div>
             <button ion-item menuClose *ngFor="let p of pages" (click)="p.func()">
               <ion-icon size="small" name="{{p.icon}}" item-left></ion-icon>
                {{p.title}}
-            </button>  
-           </div> 
+            </button>
+           </div>
         </ion-list>
     </ion-content>
 </ion-menu>

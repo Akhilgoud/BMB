@@ -27,7 +27,7 @@ export class HideContentDirective {
   }
 
   onContentScroll(event) {
-    if (event.scrollTop > 36) {
+    if (event.scrollTop > 36 && event.directionY == "down") {
       this.renderer.setElementStyle(this.passContentToHide, 'top', '-36px');
       this.renderer.setElementStyle(this.scrollContent, 'margin-top', '0px');
     } else {
