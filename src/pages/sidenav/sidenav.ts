@@ -5,6 +5,7 @@ import { HomePageService } from '../home/home.service';
 import { UserInfoService } from '../../shared/shared';
 import { IUserObj } from '../login/login.model';
 import { UserDbProvider } from '../../providers/userdatabase';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-sidenav',
@@ -22,12 +23,14 @@ export class SidenavPage {
   userObj: any = {};
   pages: any =[];
   err: any;
+  playStoreURL = ""
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public homePageService: HomePageService,
     public userInfoService: UserInfoService,
-    private database: UserDbProvider
+    private database: UserDbProvider,
+    private socialSharing: SocialSharing
   ) {
     this.rootPage = HomePage;
     this.userInfoService.userInfoChange.subscribe(
@@ -37,11 +40,23 @@ export class SidenavPage {
     this.GetAllUser();
 
     this.pages = [
-      { title: 'Rate App',  icon: 'star', func: this.changePage},
-      { title: 'Share this App', icon: 'share',  func: this.changePage },
-      { title: 'Feedback & help', icon: 'paper', func:  this.changePage },
-      { title: 'Policy Privacy', icon: 'lock', func: this.changePage}
+      { title: 'Rate App',  icon: 'star', func: this.rateApp},
+      { title: 'Share this App', icon: 'share',  func: this.shareApp },
+      { title: 'Feedback & help', icon: 'paper', func:  this.changePage.bind(this, FeedbackPage) },
+      { title: 'Policy Privacy', icon: 'lock', func: this.changePage.bind(this, FeedbackPage) }
     ];
+  }
+
+  rateApp(){
+
+  }
+
+  shareApp(){
+   this.socialSharing.share('Download BMB From: ', '', '', this.playStoreURL).then(()=> {
+     console.log("app shared")
+   }).catch((err) => {
+      console.log('error sharing book');
+   });
   }
 
   changePage(page) {
