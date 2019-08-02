@@ -161,7 +161,7 @@ export class BooksinfoPage {
     this.homePageService.setPageTitle('');
   }
   openFilterModal(ev) {
-    let popover = this.popoverCtrl.create(FilterBooks, {}, { cssClass: 'contact-popover' });
+    let popover = this.popoverCtrl.create(FilterBooks, {}, {showBackdrop: true, cssClass: 'contact-popover' });
     popover.present({
       ev: ev
     });

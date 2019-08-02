@@ -5,6 +5,7 @@ page-home {
         padding: 0;
     }
 
+    .toolbar-background-ios,
     .toolbar-background-md {
         border-color: #b2b2b2;
         background: #232f3e;
@@ -16,12 +17,8 @@ page-home {
         display: inline;
         vertical-align: -webkit-baseline-middle;
         padding: 15px;
-
-        // font-size: 21px;
         letter-spacing: 3px;
-        // word-spacing: 8px;
         color: #f3f5f7;
-        // vertical-align: super;
     }
 
     #menuIcon {
@@ -36,57 +33,47 @@ page-home {
         color: #f3f5f7;
     }
 
-    .searchbar-md {
-     margin-top: -57px;
+   @-webkit-keyframes slidein {
+       from {
+          margin-left: 100%;
+          width: 300%;
+       }
+       to {
+         margin-left: 0%;
+         width: 100%;
+        }
     }
 
-   .searchbar-ios-cancel{
-     margin-right: 0px !important;
-     opacity: 1!important;
-     padding-left: 10px !important;
+   .searchbar-ios,
+   .searchbar-md {
+       margin-top: -57px;
+       -webkit-animation-duration: 500ms;
+       -webkit-animation-name: slidein;
+       padding: 0px;
    }
+
+   .searchbar-ios .searchbar-input{
+      height: 4.3rem;
+      margin-top: 12px;
+   }
+   .searchbar-md .searchbar-input {
+        line-height: 4.5rem;
+    }
+
+   .searchbar-md  .searchbar-ios-cancel{
+        margin-right: 0px !important;
+        opacity: 1!important;
+        padding-left: 10px !important;
+        display: none;
+    }
 
    .searchbar-md .searchbar-md-cancel{
-     display: inline-flex !important;
-     background-color: white !important;
-   }
+        display: inline-flex !important;
+        background-color: white !important;
+    }
 
   .searchbar-search-icon{
-    display: none;
-  }
-
-  .searchbar-md .searchbar-clear-icon {
-    right: -100px;
-  }
+        display: none;
+   }
 
 }
-
-.contact-popover .popover-content {
-        top: 14.5% !important;
-        left: 8% !important;
-        width: 92%;
-    }
-
-    .contact-popover .popover-arrow {
-      top: 13% !important;
-        left: 87% !important;
-        position: absolute;
-        display: block;
-        overflow: hidden;
-        width: 7%;
-        height: 1.7%;
-    }
-
-    .contact-popover  .popover-arrow::after {
-        left: 10%;
-        top: 34%;
-        border-radius: 2px;
-        position: absolute;
-        z-index: 10;
-        width: 14px;
-        height: 14px;
-        background-color: #999494;
-        content: "";
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
