@@ -46,6 +46,7 @@ export class MypostsPage {
         this.booksInfo = data;
         this.tempBooksInfo = data;
         if (!data || !data.length) this.noBooks = true;
+        else this.noBooks = false;
       });
     var availableData = this.myPostsPageService.getMyBooksList();
 
@@ -53,6 +54,7 @@ export class MypostsPage {
       this.booksInfo = availableData;
       this.tempBooksInfo = availableData;
       if (!availableData || !availableData.length) this.noBooks = true;
+      else this.noBooks = false;
 
     } else {
       this.getPosts(this.userInfo.uid);
@@ -78,6 +80,7 @@ export class MypostsPage {
         this.booksInfo = response;
         this.tempBooksInfo = response;
         if (!response || !response.length) this.noBooks = true;
+        else this.noBooks = false;
         // this.noBooks = response ? false : true;
         this.myPostsPageService.setMyBooksList(response);
         loader.dismiss();

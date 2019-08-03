@@ -127,6 +127,7 @@ export class BooksinfoPage {
         this.booksInfo = data;
         this.tempBooksInfo = data;
         if (!data || !data.length) this.noBooks = true;
+        else this.noBooks = false;
 
       });
     var availableData = this.booksinfoPageService.getBooksList();
@@ -134,6 +135,7 @@ export class BooksinfoPage {
       this.booksInfo = availableData;
       this.tempBooksInfo = availableData;
       if (!availableData || !availableData.length) this.noBooks = true;
+      else this.noBooks = false;
 
     } else {
       this.getBooks();
@@ -186,6 +188,7 @@ export class BooksinfoPage {
         console.log(response);
         this.booksinfoPageService.setBooksList(response);
         if (!response.length) this.noBooks = true;
+        else this.noBooks = false;
         loader.dismiss();
       },
         error => {
@@ -246,6 +249,7 @@ export class BooksinfoPage {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
       if (!response.length) this.noBooks = true;
+      else this.noBooks = false;
       refresher.complete();
     },
       error => {
