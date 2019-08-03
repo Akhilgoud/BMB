@@ -45,13 +45,15 @@ export class MypostsPage {
       data => {
         this.booksInfo = data;
         this.tempBooksInfo = data;
-        this.noBooks = data ? false : true;
+        if (!data || !data.length) this.noBooks = true;
       });
     var availableData = this.myPostsPageService.getMyBooksList();
 
     if (availableData) {
       this.booksInfo = availableData;
       this.tempBooksInfo = availableData;
+      if (!availableData || !availableData.length) this.noBooks = true;
+
     } else {
       this.getPosts(this.userInfo.uid);
     }
@@ -75,6 +77,7 @@ export class MypostsPage {
       this.booksInfoApi.getPostsById(uid).subscribe(response => {
         this.booksInfo = response;
         this.tempBooksInfo = response;
+        if (!response || !response.length) this.noBooks = true;
         // this.noBooks = response ? false : true;
         this.myPostsPageService.setMyBooksList(response);
         loader.dismiss();

@@ -21,7 +21,7 @@ export class SidenavPage {
   private userProfilePage = UserProfilePage;
   public feedbackPage = FeedbackPage;
   userObj: any = {};
-  pages: any =[];
+  pages: any = [];
   err: any;
   playStoreURL = ""
   constructor(
@@ -40,23 +40,23 @@ export class SidenavPage {
     this.GetAllUser();
 
     this.pages = [
-      { title: 'Rate App',  icon: 'star', func: this.rateApp},
-      { title: 'Share this App', icon: 'share',  func: this.shareApp },
-      { title: 'Feedback & help', icon: 'paper', func:  this.changePage.bind(this, FeedbackPage) },
-      { title: 'Policy Privacy', icon: 'lock', func: this.changePage.bind(this, FeedbackPage) }
+      // { title: 'Rate App',  icon: 'star', func: this.rateApp},
+      // { title: 'Share this App', icon: 'share',  func: this.shareApp },
+      { title: 'Feedback & help', icon: 'paper', func: this.changePage.bind(this, FeedbackPage) },
+      // { title: 'Policy Privacy', icon: 'lock', func: this.changePage.bind(this, FeedbackPage) }
     ];
   }
 
-  rateApp(){
+  rateApp() {
 
   }
 
-  shareApp(){
-   this.socialSharing.share('Download BMB From: ', '', '', this.playStoreURL).then(()=> {
-     console.log("app shared")
-   }).catch((err) => {
+  shareApp() {
+    this.socialSharing.share('Download BMB From: ', '', '', this.playStoreURL).then(() => {
+      console.log("app shared")
+    }).catch((err) => {
       console.log('error sharing book');
-   });
+    });
   }
 
   changePage(page) {

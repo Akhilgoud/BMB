@@ -126,11 +126,15 @@ export class BooksinfoPage {
       data => {
         this.booksInfo = data;
         this.tempBooksInfo = data;
+        if (!data || !data.length) this.noBooks = true;
+
       });
     var availableData = this.booksinfoPageService.getBooksList();
     if (availableData) {
       this.booksInfo = availableData;
       this.tempBooksInfo = availableData;
+      if (!availableData || !availableData.length) this.noBooks = true;
+
     } else {
       this.getBooks();
     }

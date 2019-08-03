@@ -17,8 +17,8 @@
       <div ion-item *ngFor="let book of booksInfo" style="padding-left:0px !important" id="cardDiv">
         <ion-row style="padding-left: 16px;">
           <ion-col col-3 (click)="bookImageClicked(book)">
-            <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data" *ngIf="book.bookImages[0]"
-              style="width: 100%;" />
+            <img alt="No Image" [src]="'data:image/jpeg;base64,' + book.bookImages[0].image.data"
+              *ngIf="book.bookImages[0]" style="width: 100%;" />
             <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="width: 100%;" />
           </ion-col>
           <ion-col col-7 style="padding-left: 18px;padding-top: 12px;" (click)="goToDetailsPage(book)">
@@ -62,8 +62,8 @@
       </ion-slide>
     </ion-slides>
   </div>
-  <div *ngIf="noBooks">
-    <img class="noBooksFound" src="../../assets/imgs/nodata.png" width="200" height="200"/>
-    <p style="margin:5%;">Oh No! It looks like you have not added any books. Please add some!</p>
+  <div *ngIf="noBooks" class="noBooksDiv">
+    <img class="noBooksFound" src="../../assets/imgs/nodata.png" width="200" height="200" />
+    <p class="noBooksText">You Have Not Posted Any Books Yet.</p>
   </div>
 </ion-content>

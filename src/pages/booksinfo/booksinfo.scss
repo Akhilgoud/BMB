@@ -152,8 +152,19 @@ page-booksinfo {
         color: #232f3e;
     }
 
+    .noBooksDiv {
+        text-align: center;
+    }
+
     .noBooksFound {
-        margin: 21%;
+        margin-top: 15%;
+    }
+
+    .noBooksText {
+        margin: 6%;
+        font-family: inherit;
+        font-size: initial;
+        color: #666666;
     }
 
 }
