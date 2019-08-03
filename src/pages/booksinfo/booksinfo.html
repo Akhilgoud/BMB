@@ -1,21 +1,25 @@
- <ion-header #filterBand>
+<ion-header #filterBand>
   <div class="filterBand">
-   <ion-row>
-     <ion-col>
-       <div class="filterBandLeft">Over {{bookCount}} Books</div>
-     </ion-col>
-     <ion-col>
-       <div class="filterBandMiddle">Free
-         <label class="switch">
-           <input type="checkbox" (click)="getFreeBooks($event)"/>
-             <span class="slider round"></span>
-         </label>
-       </div>
-     </ion-col>
-     <ion-col>
-       <div class="filterBandRight" (click)="openFilterModal($event)">Filter(5)<ion-icon name="arrow-dropdown"></ion-icon></div>
-     </ion-col>
-   </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="filterBandLeft">
+          <span *ngIf="booksCount"> Over {{booksCount}} Books </span>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="filterBandMiddle">Free
+          <label class="switch">
+            <input type="checkbox" (click)="getFreeBooks($event)" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="filterBandRight" (click)="openFilterModal($event)">Filter<ion-icon name="arrow-dropdown">
+          </ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-header>
 

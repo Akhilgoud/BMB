@@ -16,7 +16,7 @@ export class BooksinfoPage {
   showImgSlide = false;
   clickedBookImg: any = {};
   filterObj: any = {};
-
+  booksCount: any;
 
   lastBack = Date.now();
   allowClose = false;
@@ -106,6 +106,15 @@ export class BooksinfoPage {
 
 
     /////////////////////////////////////
+
+    var availableBooksCountData = this.booksinfoPageService.getBooksCount();
+    if (availableBooksCountData) {
+      this.booksCount = availableBooksCountData;
+    } else {
+      this.getBooksCount();
+    }
+
+
     this.booksinfoPageService.booksListChange.subscribe(
       data => {
         this.booksInfo = data;
@@ -120,11 +129,25 @@ export class BooksinfoPage {
     }
   }
 
-  getFreeBooks(event){
-     event.target.checked
-     ? this.booksInfoApi.setFilterConditions({"isFree":true})
-     : this.booksInfoApi.setFilterConditions({})
-     this.getBooks();
+  getFreeBooks(event) {
+    event.target.checked
+      ? this.booksInfoApi.setFilterConditions({ "isFree": true })
+      : this.booksInfoApi.setFilterConditions({})
+    this.getBooks();
+  }
+
+  getBooksCount() {
+    this.booksInfoApi.getBooksCountData().subscribe(response => {
+      console.log(response);
+      if (response && response[0] && response[0].totalbooks) {
+        this.booksinfoPageService.setBooksCount(response[0].totalbooks);
+        this.booksCount = response[0].totalbooks;
+      }
+    },
+      error => {
+        console.log("error authentication" + error);
+      }
+    )
   }
 
   getBooks() {

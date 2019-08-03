@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 export class BooksinfoPageService {
     private booksList: any;
     private tempBooksList: any;
+    private booksCount: any;
 
     booksListChange: Subject<any> = new Subject<any>();
 
@@ -31,6 +32,14 @@ export class BooksinfoPageService {
 
     getBooksList() {
         return this.booksList;
+    }
+
+    getBooksCount() {
+        return this.booksCount;
+    }
+
+    setBooksCount(data) {
+        this.booksCount = data;
     }
 
     filterItems(ev: any) {
