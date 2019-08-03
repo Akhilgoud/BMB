@@ -1,37 +1,44 @@
 page-sidenav {
-    .radio-md {
-      position: relative;
-      display: inline-block;
-      padding-top: 13px;
-    }
-    .app-applications {
-      border-top: 1px solid lightgray;
-      margin-top: 4%;
-      font-size: 17px;
-      color: darkgrey;
-      font-family: serif;
-      font-weight: bolder;
-    }
-    .app-text {
-       padding: 12px 0px 4px 10px;
-    }
-    #menu-material {
-      .menu-header {
-        text-align: center;
-        height: 120px;
+  .radio-md {
+    position: relative;
+    display: inline-block;
+    padding-top: 13px;
+  }
 
-      }
-     .user-avatar {
-        padding: .5em;
-        height: 14vh;
-       }
+  .app-applications {
+    border-top: 1px solid lightgray;
+    margin-top: 4%;
+    font-size: 17px;
+    color: darkgrey;
+    font-family: inherit;
+    font-weight: bolder;
+  }
+
+  .app-text {
+    padding: 12px 0px 4px 10px;
+  }
+
+  #menu-material {
+    .menu-header {
+      text-align: center;
+      height: 120px;
+      display: none;
+    }
+
+    .user-avatar {
+      padding: .5em;
+      height: 14vh;
+    }
+
     .round {
-     border-radius: 50%;
+      border-radius: 50%;
     }
+
     ion-icon {
-    color: #777;
+      color: #777;
     }
-    .side-nav-content{
+
+    .side-nav-content {
       margin-top: 7%;
     }
   }

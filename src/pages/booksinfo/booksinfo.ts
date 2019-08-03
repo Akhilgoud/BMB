@@ -4,6 +4,8 @@ import { BooksInfoApi } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
 import { BookdetailsPage, FilterBooks } from '../pages';
 import { BooksinfoPageService } from './booksinfo.service';
+import { FilterBooksService } from '../filterbooks/filterbooks.service';
+
 @Component({
   selector: 'page-booksinfo',
   templateUrl: 'booksinfo.html',
@@ -17,6 +19,7 @@ export class BooksinfoPage {
   clickedBookImg: any = {};
   filterObj: any = {};
   booksCount: any;
+  noBooks = false;
 
   lastBack = Date.now();
   allowClose = false;
@@ -32,7 +35,8 @@ export class BooksinfoPage {
     public booksInfoApi: BooksInfoApi,
     public homePageService: HomePageService,
     public booksinfoPageService: BooksinfoPageService,
-    private loadingController: LoadingController) {
+    private loadingController: LoadingController,
+    private filterBooksService: FilterBooksService) {
 
     // this.platform.registerBackButtonAction(() => {
     //   console.log('in');
@@ -45,6 +49,9 @@ export class BooksinfoPage {
     //     console.log('af el');
     //   }
     // });
+
+    this.filterObj = this.filterBooksService.getFilterObj();
+
 
     this.platform.registerBackButtonAction(() => {
       console.log('in');
@@ -129,10 +136,18 @@ export class BooksinfoPage {
     }
   }
 
-  getFreeBooks(event) {
-    event.target.checked
-      ? this.booksInfoApi.setFilterConditions({ "isFree": true })
-      : this.booksInfoApi.setFilterConditions({})
+  getFreeBooks(isFree) {
+    if (isFree) {
+      this.filterBooksService.setFilterObj(this.filterObj);
+      var filterConditions: any = {}
+      filterConditions["isFree"] = true;
+      this.booksInfoApi.setFilterConditions(filterConditions);
+      this.booksInfoApi.resetOffLimit();
+    } else {
+      this.filterBooksService.resetFilterObj();
+      this.booksInfoApi.resetOffLimit();
+      this.booksInfoApi.resetFilters();
+    }
     this.getBooks();
   }
 
@@ -166,6 +181,7 @@ export class BooksinfoPage {
       this.booksInfoApi.getData().subscribe(response => {
         console.log(response);
         this.booksinfoPageService.setBooksList(response);
+        if (!response.length) this.noBooks = true;
         loader.dismiss();
       },
         error => {
@@ -184,7 +200,7 @@ export class BooksinfoPage {
     this.homePageService.setPageTitle('');
   }
   openFilterModal(ev) {
-    let popover = this.popoverCtrl.create(FilterBooks, {}, {showBackdrop: true, cssClass: 'contact-popover' });
+    let popover = this.popoverCtrl.create(FilterBooks, {}, { showBackdrop: true, cssClass: 'contact-popover' });
     popover.present({
       ev: ev
     });
@@ -225,6 +241,7 @@ export class BooksinfoPage {
     this.booksInfoApi.getData().subscribe(response => {
       console.log(response);
       this.booksinfoPageService.setBooksList(response);
+      if (!response.length) this.noBooks = true;
       refresher.complete();
     },
       error => {
