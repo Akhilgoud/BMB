@@ -50,8 +50,8 @@
                   </ion-grid>
                 </div>
               </div>
-              <div class="col" style="border: 1px solid lightgray; height: 76px; margin-top: 29px;">
-                <ion-icon name="barcode" style="font-size: 52px; margin: 5px 0px 0px 5px;" (click)="scanBarCode()">
+              <div class="col">
+                <ion-icon name="barcode" style="font-size: 52px; margin: 35px 0px 0px 8px" (click)="scanBarCode()">
                 </ion-icon>
               </div>
             </div>
@@ -72,18 +72,18 @@
             <ion-label color="primary" floating>Edition</ion-label>
             <ion-input formControlName="edition" [(ngModel)]="bookObj.edition" type="text"></ion-input>
           </ion-item>
-          <ion-item>
+          <ion-item style="width:40%; display: inline-block;">
+            <ion-label color="primary" floating [ngClass]="bookObj.isFree ? 'disableCheckbox' : ''">Price*</ion-label>
+            <ion-input formControlName="price" [(ngModel)]="bookObj.price" type="number" disabled="{{bookObj.isFree}}">
+            </ion-input>
+          </ion-item>
+          <ion-item style="width: 60%; float:right; margin-top:6%">
             <ion-label color="primary">Sell For Free</ion-label>
             <ion-checkbox formControlName="isFree" [(ngModel)]="bookObj.isFree"
               (ionChange)="bookObj.isFree ? null : null">
             </ion-checkbox>
             <!-- <ion-label color="primary" floating>Edition</ion-label>
             <ion-input formControlName="edition" [(ngModel)]="bookObj.edition" type="text"></ion-input> -->
-          </ion-item>
-          <ion-item>
-            <ion-label color="primary" floating [ngClass]="bookObj.isFree ? 'disableCheckbox' : ''">Price*</ion-label>
-            <ion-input formControlName="price" [(ngModel)]="bookObj.price" type="number" disabled="{{bookObj.isFree}}">
-            </ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Description</ion-label>
