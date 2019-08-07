@@ -73,7 +73,7 @@
         <ion-row>
             <ion-col>
                 <button ion-button (click)="udpateProfile()" full class="signinbtn"
-                    [disabled]="!userObj.name || !userObj.email || (userObj.resetPassword && (!userObj.password || !userObj.newPassword || !userObj.confirmPassword))">
+                    [disabled]="!userObj.name || !userObj.email || (userObj.resetPassword && (!userObj.password || !userObj.newPassword || !userObj.confirmPassword)) || (!userProfileForm.dirty && !userProfileForm.touched)">
                     Update Profile
                 </button>
             </ion-col>

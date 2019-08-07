@@ -25,6 +25,7 @@ export class LoginPage {
     forgotPwd = false;
     forgotPwdEmail = "";
     forgotPwdSuccess = null;
+    forgotPwdFailed = null;
     constructor(public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -138,6 +139,8 @@ export class LoginPage {
     }
 
     forgotPwdSubmit() {
+        this.forgotPwdSuccess = null;
+        this.forgotPwdFailed = null;
         let loader = this.loadingController.create({
             content: 'Please wait...',
             dismissOnPageChange: true
@@ -149,10 +152,14 @@ export class LoginPage {
                     // if (!response.erroMsg) {
                     //     this.validUser(response);
                     // }
-                    this.forgotPwdSuccess = response.accepted && response.accepted.length > 1;
+                    this.forgotPwdSuccess = response.accepted && response.accepted.length > 0;
+                    if (this.forgotPwdSuccess)
+                        this.forgotPwdFailed = true;
+
                     loader.dismiss();
                 },
                 error => {
+                    this.forgotPwdFailed = true;
                     console.log("error authentication" + error);
                     // this.authRes = "501";
                     loader.dismiss();

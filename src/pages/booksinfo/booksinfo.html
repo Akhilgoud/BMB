@@ -43,16 +43,17 @@
             <div id="bookname">{{book.name}}</div>
             <div *ngIf="book.author" id="author">by {{book.author}}</div>
             <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
-            <div id="price"><i class="fa fa-rupee"></i>{{book.price}}</div>
+            <div id="price" *ngIf="!book.isFree"><i class="fa fa-rupee"></i>{{book.price}}</div>
+            <div id="price" *ngIf="book.isFree">Free</div>
           </ion-col>
           <ion-col col-1 offset-1 style="padding-top: 13%;" (click)="goToDetailsPage(book)">
             <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
           </ion-col>
         </ion-row>
-        <div style="font-size: 15px;color: grey;float:right" (click)="goToDetailsPage(book)">
+        <div style="font-size: 15px;color: grey;float:right;margin-right: 15px;" (click)="goToDetailsPage(book)">
           <div *ngIf="book.distance" style="font-weight: bold;color: #232f3e;">
             {{book.distance | number : '1.2-2'}} KMS</div>
-          <div> {{book.updated_date | daysago}} days ago</div>
+          <div> {{book.updated_date | daysago}}</div>
         </div>
       </div>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="!showImgSlide">

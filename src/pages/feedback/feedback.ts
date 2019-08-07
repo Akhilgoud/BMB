@@ -122,8 +122,8 @@ export class FeedbackPage {
                 imageArr: this.photos
             }
             var userobj = this.userInfoService.getUserInfo();
-            if (userobj && userobj._id) {
-                obj.feedbackObj.userId = userobj._id;
+            if (userobj && userobj.uid) {
+                obj.feedbackObj.userId = userobj.uid;
             }
             this.feedbackApi.postFeedback(obj).subscribe(
                 response => {

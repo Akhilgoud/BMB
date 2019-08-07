@@ -73,6 +73,8 @@ export class PostbookPage {
         if (postbookobj) {
             this.bookObj = postbookobj.bookObj;
             this.photos = postbookobj.imageArr;
+            this.selectedAddress = this.bookObj.address;
+
         }
         this.isUpdatePage = this.postBookDataService.getIsUpdatePage();
         this.platform.registerBackButtonAction(() => {
@@ -85,7 +87,11 @@ export class PostbookPage {
     }
 
     ionViewWillEnter() {
-        this.homePageService.setPageTitle('Post My Book');
+        if (this.isUpdatePage)
+            this.homePageService.setPageTitle('Update Book Details');
+        else
+            this.homePageService.setPageTitle('Post My Book');
+
         // this.homePageService.setPageTitle('My Books');
     }
 
@@ -119,7 +125,7 @@ export class PostbookPage {
             address: new FormControl(false),
             landmark: new FormControl(false),
             pincode: new FormControl({ value: '' },
-                [Validators.required]),
+                [Validators.required, Validators.minLength(5)]),
             college: new FormControl(false),
 
         });
@@ -235,8 +241,8 @@ export class PostbookPage {
                 imageArr: this.photos
             }
             var userobj = this.userInfoService.getUserInfo();
-            if (userobj && userobj._id) {
-                obj.bookObj.uid = userobj._id;
+            if (userobj && userobj.uid) {
+                obj.bookObj.uid = userobj.uid;
                 obj.bookObj.email = userobj.email;
                 this.postbookApi.postNewBook(obj).subscribe(
                     response => {
@@ -244,7 +250,9 @@ export class PostbookPage {
                         console.log(response);
                         this.myPostsPageService.setMyBooksList(null);
                         this.booksinfoPageService.setBooksList(null);
-                        this.homePageService.setPage(MypostsPage)
+                        this.homePageService.setPage(MypostsPage);
+                        this.postBookDataService.setBookInfo(null);
+                        this.postBookDataService.setIsUpdatePage(false);
                     },
                     error => {
                         loader.dismiss();
@@ -283,8 +291,8 @@ export class PostbookPage {
                 imageArr: this.photos
             }
             var userobj = this.userInfoService.getUserInfo();
-            if (userobj && userobj._id) {
-                obj.bookObj.uid = userobj._id;
+            if (userobj && userobj.uid) {
+                obj.bookObj.uid = userobj.uid;
                 obj.bookObj.email = userobj.email;
 
 
@@ -294,7 +302,9 @@ export class PostbookPage {
                         console.log(response);
                         this.myPostsPageService.setMyBooksList(null);
                         this.booksinfoPageService.setBooksList(null);
-                        this.homePageService.setPage(MypostsPage)
+                        this.homePageService.setPage(MypostsPage);
+                        this.postBookDataService.setBookInfo(null);
+                        this.postBookDataService.setIsUpdatePage(false);
                     },
                     error => {
                         loader.dismiss();
@@ -317,6 +327,8 @@ export class PostbookPage {
     }
 
     cancel() {
+        this.postBookDataService.setBookInfo(null);
+        this.postBookDataService.setIsUpdatePage(false);
         this.homePageService.setPage(MypostsPage);
     }
 

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <span style="font-size: 18px;letter-spacing: 2px;font-family: serif;"> DETAILS</span>
+      <span style="font-size: 18px;letter-spacing: 2px;font-family: serif;"> Details</span>
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -48,6 +48,17 @@
           <span style="margin-left: 25%;
             font-size: 14px;" *ngIf="bookObj.author"> - {{ bookObj.author}}</span>
         </div>
+        <div>
+          <span *ngIf="bookObj.description">
+            <p>[ {{ bookObj.description}} ]</p>
+          </span>
+        </div>
+        <!-- <div style="border-bottom: 1px solid #eae1e1;">
+          <div style="text-align: start;padding-top: 10px;">Description : </div>
+          <div style="text-align: start; padding-left: 12px;font-size: 15px;padding-top: 10px; padding-bottom: 11px;">
+            <span style="padding-left:24%">&nbsp;</span><span>{{ bookObj.description}}</span>
+          </div>
+        </div> -->
         <br>
         <div id="bookinfoDetails">
           <ion-row>
@@ -94,14 +105,6 @@
             </ion-row>
           </div>
 
-          <div style="border-bottom: 1px solid #eae1e1;">
-            <div style="text-align: start;padding-top: 10px;">Description : </div>
-            <div style="text-align: start; padding-left: 12px;font-size: 15px;padding-top: 10px; padding-bottom: 11px;">
-              <span style="padding-left:24%">&nbsp;</span><span>{{ bookObj.description}}</span>
-            </div>
-          </div>
-
-
           <div style="font-size: 13px;float: right;    margin-top: 8px;"> <span>Posted on - </span><span>{{bookObj.created_date
               | date:'dd/MM/yyyy' }}</span></div>
         </div>
@@ -136,7 +139,7 @@
           </div>
       </div> -->
       <div *ngSwitchCase="'sellerInfo'" style="text-align:center;">
-        <div id="sellerinfoDetails" *ngIf="userInfo && userInfo._id">
+        <div id="sellerinfoDetails" *ngIf="userInfo && userInfo.uid">
           <ion-row>
             <ion-col style="text-align: inherit">Phone:</ion-col>
             <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.phoneNo}}</span>
