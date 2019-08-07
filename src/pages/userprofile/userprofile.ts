@@ -97,7 +97,15 @@ export class UserProfilePage {
                 )
             });
         } else {
-            alert("Password does not match");
+            // alert("Password does not match");
+            var message = 'Confirm password does not match';
+            let toast = this.toastCtrl.create({
+                message: message,
+                position: 'bottom',
+                duration: 3000,
+                dismissOnPageChange: false
+            });
+            toast.present();
         }
     }
 

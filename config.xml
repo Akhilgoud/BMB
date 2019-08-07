@@ -91,7 +91,8 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.0" />
     <plugin name="phonegap-plugin-barcodescanner" spec="~8.0.1" />
-    <engine name="browser" spec="~5.0.3" />
     <plugin name="cordova-sqlite-storage" spec="^3.2.1" />
-    <engine name="android" spec="~7.1.4" />
+    <engine name="browser" spec="~5.0.3" />
+    <engine name="android" spec="^7.1.4" />
+    <engine name="ios" spec="^5.0.1" />
 </widget>

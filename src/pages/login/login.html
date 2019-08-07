@@ -92,6 +92,8 @@
         <span>Sign In/Sign Up</span>
       </a>
     </div>
-    <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">Mail has been sent to your Email Id</div>
+    <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">Recovery email has been sent to your Email Id</div>
+    <div *ngIf="forgotPwdFailed" class="fgtPwdSuc">Error occured while resetting the password</div>
+
   </div>
 </ion-content>

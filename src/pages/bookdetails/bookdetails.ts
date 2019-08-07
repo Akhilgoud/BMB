@@ -149,7 +149,7 @@ export class BookdetailsPage {
     }
 
     onSegmentChange(ev: any) {
-        if (ev.value == "sellerInfo" && (!this.userInfo || (!this.userInfo._id && !this.userInfo.uid))) {
+        if (ev.value == "sellerInfo" && (!this.userInfo || !this.userInfo.uid)) {
             this.viewCtrl.dismiss();
             this.homePageService.setPage(LoginPage);
         }

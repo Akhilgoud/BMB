@@ -2,19 +2,31 @@ page-bookdetails {
     ion-slides {
         height: 86%;
     }
-    #bookinfoDetails .row{
+
+    #bookinfoDetails .row {
         border-bottom: #eae1e1 1px solid;
         padding: 9px;
     }
-    #sellerinfoDetails .row{
+
+    #sellerinfoDetails .row {
         border-bottom: #eae1e1 1px solid;
         padding: 9px;
     }
+
     #sellerinfoDetails ion-icon {
         display: inline-block;
         font-size: 1.5em;
-      }
+    }
+
     .swiper-container {
-          margin-top: 30px;
+        margin-top: 30px;
+    }
+
+    .segment-md .segment-button {
+        padding: 0 6px;
+        font-size: initial;
+        letter-spacing: 1px;
+        font-family: serif;
+        text-transform: none;
     }
 }
