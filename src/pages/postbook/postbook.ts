@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform, IonicPage, NavController, NavParams, AlertController, LoadingController, Item } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -24,6 +24,7 @@ import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
     templateUrl: 'postbook.html'
 })
 export class PostbookPage {
+    // @ViewChild('description') description: ElementRef;
     public photos: any;
     public images: any;
     public base64Image: string;
@@ -170,7 +171,10 @@ export class PostbookPage {
         });
     }
 
-
+    // resize() {
+    //     this.description.nativeElement.style.height = 'auto'
+    //     this.description.nativeElement.style.height = this.description.nativeElement.scrollHeight + 'px';
+    // }
 
     deletePhoto(index) {
         let confirm = this.alertCtrl.create({

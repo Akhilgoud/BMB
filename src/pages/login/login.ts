@@ -63,13 +63,13 @@ export class LoginPage {
         // });
 
         this.loginForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            email: ['', Validators.required],
+            name: [''],
+            email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
 
         this.loginFgtPwdForm = this.formBuilder.group({
-            email: ['', Validators.required]
+            email: [null, [Validators.required, Validators.email]]
         });
     }
 
@@ -153,7 +153,7 @@ export class LoginPage {
                     //     this.validUser(response);
                     // }
                     this.forgotPwdSuccess = response.accepted && response.accepted.length > 0;
-                    if (this.forgotPwdSuccess)
+                    if (!this.forgotPwdSuccess)
                         this.forgotPwdFailed = true;
 
                     loader.dismiss();
@@ -166,5 +166,11 @@ export class LoginPage {
                 }
             )
         });
+    }
+
+    forgotPwdClicked() {
+        if (this.userObj && this.userObj.email)
+            this.forgotPwdEmail = this.userObj.email;
+        this.forgotPwd = true;
     }
 }

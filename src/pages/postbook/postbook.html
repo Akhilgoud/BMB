@@ -87,7 +87,10 @@
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Description</ion-label>
-            <ion-textarea formControlName="description" [(ngModel)]="bookObj.description" type="text"></ion-textarea>
+            <!-- <textarea formControlName="description" #description id="description" rows="1" maxLength="500"
+              (keyup)="resize()" [(ngModel)]="bookObj.description"></textarea> -->
+            <ion-textarea formControlName="description" [(ngModel)]="bookObj.description" type="text" rows="3">
+            </ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Is Book related to Academic*</ion-label>

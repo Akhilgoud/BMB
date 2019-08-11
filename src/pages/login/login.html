@@ -7,9 +7,9 @@
 
 <ion-content padding>
   <div *ngIf="!forgotPwd">
-    <ion-row>
-      <ion-col>
-        <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm">
+      <ion-row>
+        <ion-col>
           <ion-item *ngIf="isRegister">
             <ion-label>
               <ion-icon name="person"></ion-icon>
@@ -30,23 +30,24 @@
             <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password">
             </ion-input>
           </ion-item>
-        </form>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button (click)="authorize()" full class="signinbtn"
-          [disabled]="!userObj.name || !userObj.email || !userObj.password" *ngIf="isRegister">
-          Sign Up
-        </button>
-        <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!userObj.email || !userObj.password"
-          *ngIf="!isRegister">
-          Sign In
-        </button>
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!loginForm.valid || !userObj.name"
+            *ngIf="isRegister">
+            Sign Up
+          </button>
+          <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!loginForm.valid"
+            *ngIf="!isRegister">
+            Sign In
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
     <div class="loginRegDiv">
-      <div (click)="forgotPwd = true" *ngIf="!isRegister" class="loginRegBtn">Forgot Password? </div>
+      <div (click)="forgotPwdClicked()" *ngIf="!isRegister" class="loginRegBtn">Forgot Password? </div>
       <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
       <div *ngIf="authRes == 'NOTFOUND'" class="authError">Email Not Found. Please sign up</div>
       <div *ngIf="authRes == 'WC'" class="authError">Invalid Password</div>
@@ -64,9 +65,9 @@
 
   <div *ngIf="forgotPwd">
     <div class="fgtPwdTxt">Forgot Password</div>
-    <ion-row>
-      <ion-col>
-        <form [formGroup]="loginFgtPwdForm">
+    <form [formGroup]="loginFgtPwdForm">
+      <ion-row>
+        <ion-col>
           <ion-item>
             <ion-label>
               <ion-icon name="mail"></ion-icon>
@@ -74,16 +75,17 @@
             <ion-input formControlName="email" [(ngModel)]="forgotPwdEmail" type="email" placeholder="Email Id">
             </ion-input>
           </ion-item>
-        </form>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn">
-          Submit
-        </button>
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn" [disabled]="!loginFgtPwdForm.valid">
+            Submit
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+
     <div class="loginRegDiv">
       <span class="loginRegText">
         <span></span>

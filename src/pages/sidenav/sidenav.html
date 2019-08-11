@@ -1,49 +1,49 @@
 <ion-menu side="left" [content]="mycontent" id="menu-material">
-    <ion-header>
-        <ion-toolbar>
-          <div class="menu-header">
-           <img class="user-avatar round" width="34%" src="../../assets/imgs/avatar.png" />
-          </div>
-          <ion-title>
-             <span>
-                Hello {{userObj.name}}
-                <ion-icon name="settings" style="float:right" *ngIf="userObj.name"
-               (click)="changePage(userProfilePage)" menuClose></ion-icon>
-            </span>
-           </ion-title>
-        </ion-toolbar>
-    </ion-header>
-     <ion-content class="side-nav-content app-applications">
-        <ion-list no-lines>
-            <button menuClose="left" ion-item detail-none  (click)="changePage(booksinfoPage)">
-              <ion-icon size="small" name="home" item-left></ion-icon>
-               Home
-            </button>
-            <button menuClose="left" ion-item detail-none  (click)="changePage(postBookPage)">
-              <ion-icon size="small" name="add" item-left></ion-icon>
-               Post My Book
-            </button>
-            <button ion-item menuClose (click)="changePage(loginPage)" *ngIf="!userObj.email">
-                <ion-icon size="small" name="log-in" item-left></ion-icon>
-                Login / Register
-            </button>
-            <button ion-item menuClose (click)="changePage(mypostsPage)" *ngIf="userObj.email">
-                <ion-icon name="book" item-left></ion-icon>
-                My Books
-            </button>
-             <button ion-item menuClose (click)="logout()" *ngIf="userObj.email">
-               <ion-icon name="log-out" item-left></ion-icon>
-               Logout
-            </button>
-           <div class="app-applications">
-            <div class="app-text">Applications</div>
-            <button ion-item menuClose *ngFor="let p of pages" (click)="p.func()">
-              <ion-icon size="small" name="{{p.icon}}" item-left></ion-icon>
-               {{p.title}}
-            </button>
-           </div>
-        </ion-list>
-    </ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <div class="menu-header">
+        <img class="user-avatar round" width="34%" src="../../assets/imgs/avatar.png" />
+      </div>
+      <ion-title>
+        <span>
+          Hello {{userObj.name}}
+          <ion-icon name="settings" style="float:right" *ngIf="userObj.name" (click)="changePage(userProfilePage)"
+            menuClose></ion-icon>
+        </span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="side-nav-content app-applications">
+    <ion-list no-lines>
+      <button menuClose="left" ion-item detail-none (click)="changePage(booksinfoPage)">
+        <ion-icon size="small" name="home" item-left></ion-icon>
+        Home
+      </button>
+      <button menuClose="left" ion-item detail-none (click)="changePage(postBookPage)">
+        <ion-icon size="small" name="add" item-left></ion-icon>
+        Post My Book
+      </button>
+      <button ion-item menuClose (click)="changePage(loginPage)" *ngIf="!userObj.email">
+        <ion-icon size="small" name="log-in" item-left></ion-icon>
+        Login / Register
+      </button>
+      <button ion-item menuClose (click)="changePage(mypostsPage)" *ngIf="userObj.email">
+        <ion-icon name="book" item-left></ion-icon>
+        My Books
+      </button>
+      <button ion-item menuClose (click)="logout()" *ngIf="userObj.email">
+        <ion-icon name="log-out" item-left></ion-icon>
+        Logout
+      </button>
+      <div class="app-applications">
+        <!-- <div class="app-text">Applications</div> -->
+        <button ion-item menuClose *ngFor="let p of pages" (click)="p.func()">
+          <ion-icon size="small" name="{{p.icon}}" item-left></ion-icon>
+          {{p.title}}
+        </button>
+      </div>
+    </ion-list>
+  </ion-content>
 </ion-menu>
 
 <ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>
