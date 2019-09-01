@@ -1,4 +1,3 @@
-
 filter-books {
     .badges {
         background-color: rgba(237, 234, 234, 0.49019607843137253) !important;
@@ -53,45 +52,49 @@ filter-books {
     }
 
     .badgesDiv {
-      margin-left: 10%;
+        margin-left: 10%;
     }
 }
 
 /* Popover CSS outside filter books*/
 
-   .contact-popover{
-      ion-backdrop
-        {
-          opacity:0.3;
-        }
+.contact-popover {
+    ion-backdrop {
+        opacity: 0.3;
     }
-   .contact-popover .popover-content {
+}
 
-        top: 14.5% !important;
-        left: 8% !important;
-        width: 92%;
-    }
+.contact-popover .popover-content {
 
-    .contact-popover .popover-arrow {
-        top: 13% !important;
-        left: 87% !important;
-        position: absolute;
-        display: block;
-        overflow: hidden;
-        width: 7%;
-        height: 1.7%;
-    }
+    top: 14.5% !important;
+    left: 8% !important;
+    width: 92%;
+}
 
-    .contact-popover  .popover-arrow::after {
-        left: 10%;
-        top: 34%;
-        border-radius: 2px;
-        position: absolute;
-        z-index: 10;
-        width: 14px;
-        height: 14px;
-        background-color: #fff;
-        content: "";
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
+.contact-popover .popover-arrow {
+    top: 13% !important;
+    left: 87% !important;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    width: 7%;
+    height: 1.7%;
+}
+
+.contact-popover .popover-arrow::after {
+    left: 10%;
+    top: 34%;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 10;
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    content: "";
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.disbleOpacity {
+    opacity: 0.3;
+}

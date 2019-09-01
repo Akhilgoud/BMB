@@ -2,10 +2,10 @@
   <div padding>
     <ion-segment [(ngModel)]="filterObj.isAcademic" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="Y">
-        Acadamic
+        Academic
       </ion-segment-button>
       <ion-segment-button value="N">
-        Non-Acadamic
+        Non-Academic
       </ion-segment-button>
       <ion-segment-button value="">
         Both
@@ -14,12 +14,12 @@
   </div>
   <div [ngSwitch]="filterObj.isAcademic">
     <ion-list *ngSwitchCase="'Y'">
-        <div class="badgesDiv">
+      <div class="badgesDiv">
         <ion-badge *ngFor="let obj of lookupData?.BOOKTYPES?.ACADEMIC" item-end class="badges"
           [ngClass]="{'badgeselected': filterObj.bookType[obj.key] === true}"
           (click)="bookTypeClicked($event, obj.key)"> {{obj.value}}</ion-badge>
-        </div>
-        <!-- <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['ALLINONE'] === true}"
+      </div>
+      <!-- <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['ALLINONE'] === true}"
           (click)="bookTypeClicked($event, 'ALLINONE')">All
           In Ones</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['TEXTBOOK'] === true}"
@@ -30,82 +30,82 @@
           Book</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['STUDYMATERIAL'] === true}"
           (click)="bookTypeClicked($event, 'STUDYMATERIAL')">Study Materials</ion-badge> -->
-        <ion-card>
-          <ion-list>
-            <ion-item>
-              <ion-label floating>Course</ion-label>
-              <ion-select [(ngModel)]="filterObj.course" (ionChange)="courseSelected()">
-                <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.COURSE" [value]="obj.key">
-                  {{obj.value}}
-                </ion-option>
-              </ion-select>
-              <!-- <ion-input type="text" [(ngModel)]="filterObj.course"></ion-input> -->
-              <!-- <ion-select interface="popover" [(ngModel)]="filterObj.course">
+      <ion-card>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Course</ion-label>
+            <ion-select [(ngModel)]="filterObj.course" (ionChange)="courseSelected()">
+              <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.COURSE" [value]="obj.key">
+                {{obj.value}}
+              </ion-option>
+            </ion-select>
+            <!-- <ion-input type="text" [(ngModel)]="filterObj.course"></ion-input> -->
+            <!-- <ion-select interface="popover" [(ngModel)]="filterObj.course">
                   <ion-option value="BTECH">B.Tech</ion-option>
                   <ion-option value="DEGREE">Degree</ion-option>
                   <ion-option value="BCOM">B.Com</ion-option>
 
                 </ion-select> -->
-            </ion-item>
-            <ion-item *ngIf="filterObj.course && lookupData?.subcourse?.length">
-              <ion-label floating>Degree</ion-label>
-              <ion-select [(ngModel)]="filterObj.subcourse" (ionChange)="degreeSelected()">
-                <ion-option *ngFor="let obj of lookupData?.subcourse" [value]="obj.key">
-                  {{obj.value}}
-                </ion-option>
-              </ion-select>
-            </ion-item>
-            <!-- </ion-list>
+          </ion-item>
+          <ion-item *ngIf="filterObj.course && lookupData?.subcourse?.length">
+            <ion-label floating>Degree</ion-label>
+            <ion-select [(ngModel)]="filterObj.subcourse" (ionChange)="degreeSelected()">
+              <ion-option *ngFor="let obj of lookupData?.subcourse" [value]="obj.key">
+                {{obj.value}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+          <!-- </ion-list>
         </div>
         <div>
           <ion-list> -->
-            <ion-item *ngIf="filterObj.course && lookupData?.branch?.length">
-              <ion-label floating>Branch</ion-label>
-              <ion-select [(ngModel)]="filterObj.branch">
-                <ion-option *ngFor="let obj of lookupData?.branch" [value]="obj.key">
-                  {{obj.value}}
-                </ion-option>
-              </ion-select>
-            </ion-item>
+          <ion-item *ngIf="filterObj.course && lookupData?.branch?.length">
+            <ion-label floating>Branch</ion-label>
+            <ion-select [(ngModel)]="filterObj.branch">
+              <ion-option *ngFor="let obj of lookupData?.branch" [value]="obj.key">
+                {{obj.value}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
 
-            <!-- <ion-item>
+          <!-- <ion-item>
               <ion-label floating>Branch</ion-label>
               <ion-input type="text" [(ngModel)]="filterObj.branch"></ion-input>
             </ion-item> -->
-            <!-- </ion-list>
+          <!-- </ion-list>
         </div>
         <div>
           <ion-list> -->
-            <ion-item *ngIf="filterObj.course && lookupData?.year?.length">
-              <ion-label floating>Year</ion-label>
-              <ion-select [(ngModel)]="filterObj.year">
-                <ion-option *ngFor="let obj of lookupData?.year" [value]="obj">
-                  {{obj}}
-                </ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item  *ngIf="filterObj.course && lookupData?.sem?.length">
-              <ion-label floating>Semester</ion-label>
-              <ion-select  [(ngModel)]="filterObj.sem">
-                <ion-option *ngFor="let obj of lookupData?.sem" [value]="obj">
-                  {{obj}}
-                </ion-option>
-              </ion-select>
-            </ion-item>
-            <!-- <ion-item>
+          <ion-item *ngIf="filterObj.course && lookupData?.year?.length">
+            <ion-label floating>Year</ion-label>
+            <ion-select [(ngModel)]="filterObj.year">
+              <ion-option *ngFor="let obj of lookupData?.year" [value]="obj">
+                {{obj}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="filterObj.course && lookupData?.sem?.length">
+            <ion-label floating>Semester</ion-label>
+            <ion-select [(ngModel)]="filterObj.sem">
+              <ion-option *ngFor="let obj of lookupData?.sem" [value]="obj">
+                {{obj}}
+              </ion-option>
+            </ion-select>
+          </ion-item>
+          <!-- <ion-item>
               <ion-label floating>Year</ion-label>
               <ion-input type="text" [(ngModel)]="filterObj.year"></ion-input>
             </ion-item> -->
-          </ion-list>
-        </ion-card>
+        </ion-list>
+      </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'N'">
-        <div class="badgesDiv">
+      <div class="badgesDiv">
         <ion-badge *ngFor="let obj of lookupData?.BOOKTYPES?.NONACADEMIC" item-end class="badges"
           [ngClass]="{'badgeselected': filterObj.bookType[obj.key] === true}"
           (click)="bookTypeClicked($event, obj.key)"> {{obj.value}}</ion-badge>
-        </div>
-        <!-- <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}"
+      </div>
+      <!-- <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['NOVEL'] === true}"
           (click)="bookTypeClicked($event, 'NOVEL')">Novels</ion-badge>
         <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['AUTOBIOGRAPHY'] === true}"
           (click)="bookTypeClicked($event, 'AUTOBIOGRAPHY')">AutoBiography</ion-badge>
@@ -122,11 +122,11 @@
         <ion-icon range-right small>₹&nbsp;{{filterObj.price.upper}}</ion-icon>
       </ion-range>
     </ion-item> -->
-    <ion-item style="width: 50%;display: inline-block;">
+    <ion-item style="width: 50%;display: inline-block;" [ngClass]="{'disbleOpacity': filterObj.isFree}">
       <ion-label floating>Min₹</ion-label>
       <ion-input type="number" [(ngModel)]="filterObj.price.lower" [disabled]="filterObj.isFree"></ion-input>
     </ion-item>
-    <ion-item style="width: 50%;float: right;">
+    <ion-item style="width: 50%;float: right;" [ngClass]="{'disbleOpacity': filterObj.isFree}">
       <ion-label floating>Max₹</ion-label>
       <ion-input type="number" [(ngModel)]="filterObj.price.upper" [disabled]="filterObj.isFree"></ion-input>
     </ion-item>
