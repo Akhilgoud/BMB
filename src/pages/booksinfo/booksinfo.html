@@ -40,19 +40,22 @@
             <img alt="No Image" src="assets/imgs/noimage.jpg" *ngIf="!book.bookImages[0]" style="    width: 100%;" />
           </ion-col>
           <ion-col col-7 style="padding-left: 18px;padding-top: 12px;" (click)="goToDetailsPage(book)">
-            <div id="bookname">{{book.name}}</div>
-            <div *ngIf="book.author" id="author">by {{book.author}}</div>
+            <div id="bookname" style="font-size:14,font-weight: bold; color: #444">{{book.name}}</div>
+            <div *ngIf="book.author" id="author" style="white-space: initial">by {{book.author}}</div>
             <div *ngIf="!book.author && book.publisher" id="publisher">by {{book.publisher}}</div>
             <div id="price" *ngIf="!book.isFree"><i class="fa fa-rupee"></i>{{book.price}}</div>
             <div id="price" *ngIf="book.isFree">Free</div>
+            <div class="location-near-me" *ngIf="book.distance">
+              <i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;{{book.distance | number : '1.2-2'}} kms
+            </div>
           </ion-col>
           <ion-col col-1 offset-1 style="padding-top: 13%;" (click)="goToDetailsPage(book)">
             <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
           </ion-col>
         </ion-row>
-        <div style="font-size: 15px;color: grey;float:right;margin-right: 15px;" (click)="goToDetailsPage(book)">
-          <div *ngIf="book.distance" style="font-weight: bold;color: #232f3e;">
-            {{book.distance | number : '1.2-2'}} KMS</div>
+        <div style="font-size: 15px;color: grey;float:right;margin-right: 15px; margin-top: -28px;" (click)="goToDetailsPage(book)">
+          <!-- <div *ngIf="book.distance" style="font-weight: bold;color: #232f3e;">
+            {{book.distance | number : '1.2-2'}} kms</div> -->
           <div> {{book.updated_date | daysago}}</div>
         </div>
       </div>

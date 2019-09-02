@@ -29,4 +29,64 @@ page-bookdetails {
         font-family: serif;
         text-transform: none;
     }
+    .slideBookImages{
+       height: 120px;
+       width: 95px;
+    }
+    .book-name {
+       font-size: 16px;
+       color: #444;
+       margin-left:3%;
+       margin-top: 4%;
+       line-height: 1.2em;
+       font-weight:500;
+    }
+    .book-author {
+      font-size: 14px;
+      color: #3a8bbb;
+      margin-left:3%;
+      margin-top: 2%;
+      font-weight: 500;
+    }
+   .a-price-symbol{
+      font-size: 12px;
+      color:#B12704;
+   }
+   .a-price-whole{
+    font-size: 21px;
+    color:#B12704;
+    line-height: 2.2em;
+    font-weight: 500;
+   }
+   .a-price-text{
+     margin-left: 7%;
+   }
+   .book-posted-on {
+    font-size: 13px;
+    margin-left: 56%;
+    padding: 7px;
+   }
+    .book-info-div-card {
+      border-top:1px solid #dedede;
+      border-bottom:3px solid #dedede;
+    }
+    .book-info-div-card-content{
+      padding: 4%;
+    }
+    .book-info-grid{
+      margin-top: 5%;
+      border-top: 0.4px solid #dedede;
+    }
+    .book-info-grid-header{
+      background-color: #eff1f3;
+      border-bottom: 0.4px solid #dedede;
+      padding: 4%;
+    }
+    .book-info-grid-content{
+      border-bottom: 0.4px solid #dedede;
+      padding: 4%;
+    }
+    ion-col.my-thin-col {
+      flex: 0.4 0 0px;
+    }
 }

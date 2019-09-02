@@ -12,7 +12,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [ngClass]="{'no-scroll': showImgSlide}">
   <ion-fab style="margin-left: 85%;" (click)="gotoEditPage()" *ngIf="allowEdit && !showImgSlide">
     <button ion-fab mini>
@@ -20,15 +19,86 @@
     </button>
   </ion-fab>
   <div style="position: absolute;width: 100%;">
-    <ion-grid>
+    <div>
       <ion-row>
-        <ion-col col-4 *ngFor="let photo of bookObj.bookImages; let id = index">
-          <ion-card class="block" (click)="showImgSlide=true">
-            <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
-          </ion-card>
+        <ion-col>
+          <ion-row>
+            <span class="book-name">{{ bookObj.name}}</span>
+          </ion-row>
+          <ion-row>
+            <span class="book-author" *ngIf="bookObj.author">
+              <span style="color:#999; padding-right:2px;">by</span> {{ bookObj.author}}</span>
+          </ion-row>
         </ion-col>
+        <div style="margin-left:90%;color: #555;font-size:1.5em;margin-top:-28px;">
+          <ion-icon name="share" (click)="share()"></ion-icon>
+        </div>
       </ion-row>
-    </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 *ngFor="let photo of bookObj.bookImages; let id = index">
+            <ion-card class="block" (click)="showImgSlide=true">
+              <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="book-price">
+        <span class="a-price-text">Price: </span>
+        <span class="a-price-symbol">₹</span>
+        <span class="a-price-whole">{{ bookObj.price}}</span>
+        <div class="book-posted-on"> <span>Posted on - </span><span>{{bookObj.created_date | date:'dd/MM/yyyy' }}</span> </div>
+      </div>
+    </div>
+
+    <div class="book-info-div-card">
+      <div class="book-info-div-card-content">
+        <strong>Description</strong>
+        <span *ngIf="bookObj.description">
+           <p> {{ bookObj.description}} </p>
+         </span>
+      </div>
+    </div>
+    <div class="info-div-card">
+      <div class="book-info-div-card-content">
+        <strong>Book information</strong>
+        <div class="book-info-grid">
+          <ion-row>
+            <ion-col class="book-info-grid-header my-thin-col"> Book Type</ion-col>
+            <ion-col class="book-info-grid-content"> {{ bookObj.bookType}}</ion-col>
+          </ion-row>
+         <ion-row>
+            <ion-col  class="book-info-grid-header my-thin-col"> Publisher</ion-col>
+            <ion-col class="book-info-grid-content"> {{ bookObj.publisher}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="book-info-grid-header my-thin-col"> Edition</ion-col>
+            <ion-col class="book-info-grid-content"> {{ bookObj.edition}}</ion-col>
+          </ion-row>
+          <div *ngIf="bookObj.isAcademic == 'Y'">
+            <ion-row>
+              <ion-col class="book-info-grid-header my-thin-col"> Course</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.course}}</ion-col>
+            </ion-row>
+            <ion-row *ngIf="bookObj.bookAcademic[0]?.subcourse">
+              <ion-col class="book-info-grid-header my-thin-col"> Degree</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.subcourse}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="book-info-grid-header my-thin-col"> Branch</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.branch}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="book-info-grid-header my-thin-col"> Year/Sem</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.year}}
+                    {{ bookObj.bookAcademic[0]?.sem}}</ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <ion-segment [(ngModel)]="tabInfo" (ionChange)="onSegmentChange($event)">
       <ion-segment-button value="bookInfo">
@@ -100,7 +170,7 @@
             <ion-row>
               <ion-col>Year/Sem</ion-col>
               <ion-col>-</ion-col>
-              <ion-col><span *ngIf="bookObj.year || bookObj.sem"> {{ bookObj.bookAcademic[0]?.year}}/
+              <ion-col><span *ngIf="bookObj.year || bookObj.sem"> {{ bookObj.bookAcademic[0]?.year}} ||
                   {{ bookObj.bookAcademic[0]?.sem}} </span></ion-col>
             </ion-row>
           </div>
@@ -221,3 +291,5 @@
     </ion-slides>
   </div>
 </ion-content>
+
+
