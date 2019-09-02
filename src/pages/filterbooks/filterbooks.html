@@ -138,8 +138,14 @@
       <!-- <ion-auto-complete [dataProvider]="autoCompleteListService" [(ngModel)]="filterObj.college" [options]="{ placeholder : 'College Name' }"></ion-auto-complete> -->
       <ion-item>
         <ion-label floating>College Name</ion-label>
-        <ion-input type="text" [(ngModel)]="filterObj.college"></ion-input>
+        <ion-input type="text" [(ngModel)]="filterObj.college" (ngModelChange)="collegeAutoComplete()"></ion-input>
       </ion-item>
+      <ion-list [hidden]="collegeAutoCompleteData.length == 0">
+        <ion-item *ngFor="let item of collegeAutoCompleteData" tappable
+          (click)="collegeAutoCompleteSelected(item.college)">
+          {{ item.college }}
+        </ion-item>
+      </ion-list>
       <!-- <ion-item>
         <ion-label floating>Area</ion-label>
         <ion-input type="text" [(ngModel)]="filterObj.address"></ion-input>

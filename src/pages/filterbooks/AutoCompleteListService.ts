@@ -27,4 +27,12 @@ export class AutoCompleteListService implements AutoCompleteService {
           return result.json();
         }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  collegeAutoComplete(keyword: string) {
+    return this.http.get("https://floating-cliffs-67240.herokuapp.com/collegeAutoComplete/" + keyword)
+      .map(
+        result => {
+          return result.json();
+        }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

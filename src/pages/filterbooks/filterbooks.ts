@@ -19,6 +19,7 @@ export class FilterBooks {
   collegesNames: any = {};
   googleAutocomplete: any = {}
   autocompleteItems = [];
+  collegeAutoCompleteData = [];
   selectedAddress = "";
   timer: any;
   public lookupData: any;
@@ -248,6 +249,28 @@ export class FilterBooks {
         this.lookupData.sem = selArr[0].Sem;
       }
     }
+  }
+
+  collegeAutoComplete() {
+    this.collegeAutoCompleteData = [];
+    if (!this.filterObj.college) return;
+    this.autoCompleteListService.collegeAutoComplete(this.filterObj.college).subscribe(response => {
+      console.log(response);
+      if (response) {
+        this.collegeAutoCompleteData = response;
+        // response.forEach((val) => {
+        //   this.collegeAutoCompleteData.push(val);
+        // });
+      }
+    }, error => {
+      console.log(error);
+    }
+    )
+  }
+
+  collegeAutoCompleteSelected(item) {
+    this.collegeAutoCompleteData = [];
+    this.filterObj.college = item;
   }
 
 }
