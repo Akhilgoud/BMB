@@ -1,8 +1,8 @@
-<ion-header #filterBand >
+<ion-header #filterBand>
   <div class="filterBand">
     <ion-row>
       <ion-col>
-        <div class="filterBandLeft">Over {{booksCount}} Books</div>
+        <div class="filterBandLeft">Total Books - {{booksCount}}</div>
       </ion-col>
       <ion-col class="freeBox">
         <!-- <ion-item style="margin-top: -9px;">
@@ -12,7 +12,7 @@
 
         <div class="filterBandMiddle">Free
           <label class="switch">
-            <input type="checkbox" [(ngModel)]="filterObj.isFree"  (click)="getFreeBooks($event.target.checked)"  />
+            <input type="checkbox" [(ngModel)]="filterObj.isFree" (click)="getFreeBooks($event.target.checked)" />
             <span class="slider round"></span>
           </label>
         </div>

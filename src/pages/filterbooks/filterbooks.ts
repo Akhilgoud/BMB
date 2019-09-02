@@ -96,7 +96,9 @@ export class FilterBooks {
     if (this.filterObj.branch) filterConditions["bookAcademic.branch"] = this.filterObj.branch;
     if (this.filterObj.year) filterConditions["bookAcademic.year"] = this.filterObj.year;
     if (this.filterObj.sem) filterConditions["bookAcademic.sem"] = this.filterObj.sem;
-    if (this.filterObj.college) filterConditions["bookContact.college"] = this.filterObj.college;
+    if (this.filterObj.college) filterConditions["bookContact.college"] = { $regex: '.*' + this.filterObj.college + '.*', $options: 'i' };
+    // { name: { $regex: req.params.keyword, $options: 'i' } }
+    // $text: {$search: searchString}
     // if (this.filterObj.isFree) filterConditions["isFree"] = this.filterObj.isFree;
     // else {
     if (this.filterObj.price && this.filterObj.price.lower) filterConditions["price"] = { "$gte": parseInt(this.filterObj.price.lower) };

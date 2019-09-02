@@ -77,7 +77,7 @@
             <ion-input formControlName="price" [(ngModel)]="bookObj.price" type="number" disabled="{{bookObj.isFree}}">
             </ion-input>
           </ion-item>
-          <ion-item style="width: 60%; float:right; margin-top:6%">
+          <ion-item style="width: 60%; float:right; margin-top:6%;overflow: visble">
             <ion-label color="primary">Give It For Free</ion-label>
             <ion-checkbox formControlName="isFree" [(ngModel)]="bookObj.isFree"
               (ionChange)="bookObj.isFree ? null : null">
