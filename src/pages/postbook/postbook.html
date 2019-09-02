@@ -250,8 +250,16 @@
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>College</ion-label>
-            <ion-input formControlName="college" [(ngModel)]="bookObj.college" type="text"></ion-input>
+            <ion-input formControlName="college" [(ngModel)]="bookObj.college" type="text"
+              (ngModelChange)="collegeAutoComplete()"></ion-input>
           </ion-item>
+          <ion-list [hidden]="collegeAutoCompleteData.length == 0">
+            <ion-item *ngFor="let item of collegeAutoCompleteData" tappable
+              (click)="collegeAutoCompleteSelected(item.college)">
+              {{ item.college }}
+            </ion-item>
+          </ion-list>
+
         </form>
       </ion-col>
     </ion-row>

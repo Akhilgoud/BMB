@@ -35,7 +35,10 @@ export class PostbookPage {
     shownav: boolean = true;
     form: FormGroup;
     autocompleteItems = [];
+    collegeAutoCompleteData = [];
     selectedAddress = "";
+    selectedCollege = "";
+
     timer: any;
     public lookupData: any;
     constructor(public platform: Platform,
@@ -75,6 +78,7 @@ export class PostbookPage {
             this.bookObj = postbookobj.bookObj;
             this.photos = postbookobj.imageArr;
             this.selectedAddress = this.bookObj.address;
+            this.selectedCollege = this.bookObj.college;
 
         }
         this.isUpdatePage = this.postBookDataService.getIsUpdatePage();
@@ -454,6 +458,28 @@ export class PostbookPage {
                 this.lookupData.sem = selArr[0].Sem;
             }
         }
+    }
+
+    collegeAutoComplete() {
+        this.collegeAutoCompleteData = [];
+        if (!this.bookObj.college || this.selectedCollege == this.bookObj.college) return;
+        this.autoCompleteListService.collegeAutoComplete(this.bookObj.college).subscribe(response => {
+            console.log(response);
+            if (response && this.bookObj.college) {
+                this.collegeAutoCompleteData = response;
+            } else {
+                this.collegeAutoCompleteData = [];
+            }
+        }, error => {
+            console.log(error);
+        }
+        )
+    }
+
+    collegeAutoCompleteSelected(item) {
+        this.collegeAutoCompleteData = [];
+        this.bookObj.college = item;
+        this.selectedCollege = item;
     }
 
     // showDegreeOption() {
