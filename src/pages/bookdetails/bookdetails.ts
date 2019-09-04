@@ -19,6 +19,7 @@ export class BookdetailsPage {
     allowEdit: boolean = false;
     userInfo = this.userInfoService.getUserInfo();
     deregisterFunction: any;
+    showSellerInfo: boolean = false;
 
     constructor(public platform: Platform,
         public navCtrl: NavController,
@@ -66,6 +67,16 @@ export class BookdetailsPage {
 
     dismiss() {
         this.viewCtrl.dismiss();
+    }
+    sellerDetails(){
+     if (!this.userInfo || !this.userInfo.uid) {
+           this.viewCtrl.dismiss();
+          this.homePageService.setPage(LoginPage)
+          ?this.showSellerInfo = true
+          :this.showSellerInfo = false
+        } else {
+          this.showSellerInfo = true
+        }
     }
 
     gotoEditPage() {
@@ -148,12 +159,12 @@ export class BookdetailsPage {
         }
     }
 
-    onSegmentChange(ev: any) {
-        if (ev.value == "sellerInfo" && (!this.userInfo || !this.userInfo.uid)) {
-            this.viewCtrl.dismiss();
-            this.homePageService.setPage(LoginPage);
-        }
-    }
+    // onSegmentChange(ev: any) {
+    //     if (ev.value == "sellerInfo" && (!this.userInfo || !this.userInfo.uid)) {
+    //         this.viewCtrl.dismiss();
+    //         this.homePageService.setPage(LoginPage);
+    //     }
+    // }
 
     getMessageBody() {
         var msg = "Hi, I am interested in buying this Book. ";
