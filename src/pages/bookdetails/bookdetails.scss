@@ -48,6 +48,21 @@ page-bookdetails {
       margin-top: 2%;
       font-weight: 500;
     }
+    .seller-name {
+      font-size: 25px;
+      color: #444;
+      margin-left:30%;
+      font-weight:500;
+    }
+    .seller-email {
+      margin-left:30%;
+      margin-top: 2%;
+    }
+    .contact-text{
+      font-weight:500;
+      font-size: 1.0em;
+      padding: 5px;
+    }
    .a-price-symbol{
       font-size: 12px;
       color:#B12704;
@@ -93,7 +108,7 @@ page-bookdetails {
     ion-col.my-thin-col {
       flex: 0.4 0 0px;
     }
-    .buy-book{
+    .buy-book-button{
        height: 70px;
     }
   .btn-buy {
@@ -104,31 +119,44 @@ page-bookdetails {
     text-transform: none;
     }
   .btn-buy:hover { background-position: right center; }
-  .show-buy-options{
-     position: fixed;
-     top: 90%;
+  .seller-address{
+    margin-top: 5%;
+    margin-left: 15%;
+    font-weight:500;
+    font-size: 1.1em;
+    padding: 5px;
+    line-height: 1.6em;
   }
-
-.fragment {
+  .seller-address-row{
+    padding-left: 10px;
+  }
+  .seller-address-row1{
+    padding-left: 20px;
+  }
+  .seller-address-head {
+    margin-left: -10%;
+    border-bottom: 0.5px solid #dedede;
+    width: 60px;
+  }
+  .contact-seller {
+    margin-top: 2%;
+    margin-left: 10%;
+    font-weight:500;
+    font-size: 1.1em;
+    padding: 5px;
+    line-height: 1.6em;
+  }
+  .contact-seller-head{
+    margin-left: -10%;
+    border-bottom: 0.5px solid #dedede;
+    width: 60px;
+  }
+  .fragment {
     font-size: 12px;
     font-family: tahoma;
-    height: 140px;
-    border: 1px solid #ccc;
     color: #555;
-    display: block;
-    padding: 10px;
-    box-sizing: border-box;
+    padding: 3%;
     text-decoration: none;
-    position: relative;
-    box-shadow: 2px 2px 5px rgba(0,0,0,.2);
-    background-color: #fff;
-}
-
-
-.closeButton {
-    position: absolute;
-    top: -18px;
-    right: 1px;
-}
+  }
 
 }

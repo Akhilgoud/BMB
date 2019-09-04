@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <span style="font-size: 18px;letter-spacing: 2px;font-family: serif;"> Details</span>
+      <span style="font-size: 18px;letter-spacing: 2px;font-family: serif;" *ngIf="!showSellerInfo">Details</span>
+      <span style="font-size: 18px;letter-spacing: 2px;font-family: serif;" *ngIf="showSellerInfo">Seller  Info</span>
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -13,104 +14,163 @@
 </ion-header>
 
 <ion-content [ngClass]="{'no-scroll': showImgSlide}">
-  <ion-fab style="margin-left: 85%;" (click)="gotoEditPage()" *ngIf="allowEdit && !showImgSlide">
-    <button ion-fab mini>
-      <ion-icon name="create"></ion-icon>
-    </button>
-  </ion-fab>
-  <div style="position: absolute;width: 100%;">
-    <div>
-      <ion-row>
-        <ion-col>
+ <div style="position: absolute;width: 100%;">
+    <div class="buy-book-section" *ngIf="!showSellerInfo">
+        <ion-fab style="margin-left: 85%;" (click)="gotoEditPage()" *ngIf="allowEdit && !showImgSlide">
+        <button ion-fab mini>
+          <ion-icon name="create"></ion-icon>
+        </button>
+        </ion-fab>
+        <div>
+        <div>
           <ion-row>
-            <span class="book-name">{{ bookObj.name}}</span>
+            <ion-col>
+                <ion-row><span class="book-name">{{ bookObj.name}}</span></ion-row>
+                <ion-row>
+                  <span class="book-author" *ngIf="bookObj.author">
+                      <span style="color:#999; padding-right:2px;">by</span>
+                      {{ bookObj.author}}
+                  </span>
+                </ion-row>
+            </ion-col>
+            <div style="margin-left:90%;color: #555;font-size:1.5em;margin-top:-28px;">
+              <ion-icon name="share" (click)="share()"></ion-icon>
+            </div>
           </ion-row>
-          <ion-row>
-            <span class="book-author" *ngIf="bookObj.author">
-              <span style="color:#999; padding-right:2px;">by</span> {{ bookObj.author}}</span>
-          </ion-row>
-        </ion-col>
-        <div style="margin-left:90%;color: #555;font-size:1.5em;margin-top:-28px;">
-          <ion-icon name="share" (click)="share()"></ion-icon>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 *ngFor="let photo of bookObj.bookImages; let id = index">
+                <ion-card class="block" (click)="showImgSlide=true">
+                  <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <div class="book-price">
+            <span class="a-price-text">Price: </span>
+            <span class="a-price-symbol">₹</span>
+            <span class="a-price-whole">{{bookObj.price}}</span>
+            <div class="book-posted-on"> <span>Posted on - </span><span>{{bookObj.created_date | date:'dd/MM/yyyy' }}</span> </div>
+          </div>
         </div>
-      </ion-row>
+        </div>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col col-4 *ngFor="let photo of bookObj.bookImages; let id = index">
-            <ion-card class="block" (click)="showImgSlide=true">
-              <img alt="No Image" [src]="'data:image/jpeg;base64,' + photo.image.data" />
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <div class="book-price">
-        <span class="a-price-text">Price: </span>
-        <span class="a-price-symbol">₹</span>
-        <span class="a-price-whole">{{bookObj.price}}</span>
-        <div class="book-posted-on"> <span>Posted on - </span><span>{{bookObj.created_date | date:'dd/MM/yyyy' }}</span> </div>
+      <div class="book-info-div-card" *ngIf="bookObj.description">
+        <div class="book-info-div-card-content">
+          <strong>Description</strong>
+          <span>
+            <p>{{bookObj.description}} </p>
+          </span>
+        </div>
       </div>
-    </div>
-
-    <div class="book-info-div-card" *ngIf="bookObj.description">
-      <div class="book-info-div-card-content">
-        <strong>Description</strong>
-        <span>
-           <p> {{ bookObj.description}} </p>
-         </span>
-      </div>
-    </div>
-    <div class="info-div-card">
-      <div class="book-info-div-card-content">
-        <strong>Book information</strong>
-        <div class="book-info-grid">
-          <ion-row>
-            <ion-col class="book-info-grid-header my-thin-col"> Book Type</ion-col>
-            <ion-col class="book-info-grid-content"> {{ bookObj.bookType}}</ion-col>
-          </ion-row>
-         <ion-row>
-            <ion-col  class="book-info-grid-header my-thin-col"> Publisher</ion-col>
-            <ion-col class="book-info-grid-content"> {{ bookObj.publisher}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="book-info-grid-header my-thin-col"> Edition</ion-col>
-            <ion-col class="book-info-grid-content"> {{ bookObj.edition}}</ion-col>
-          </ion-row>
-          <div *ngIf="bookObj.isAcademic == 'Y'">
+      <div class="info-div-card">
+        <div class="book-info-div-card-content">
+          <strong>Book Information</strong>
+          <div class="book-info-grid">
             <ion-row>
-              <ion-col class="book-info-grid-header my-thin-col"> Course</ion-col>
-              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.course}}</ion-col>
-            </ion-row>
-            <ion-row *ngIf="bookObj.bookAcademic[0]?.subcourse">
-              <ion-col class="book-info-grid-header my-thin-col"> Degree</ion-col>
-              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.subcourse}}</ion-col>
+              <ion-col class="book-info-grid-header my-thin-col"> Book Type</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.bookType}}</ion-col>
             </ion-row>
             <ion-row>
-              <ion-col class="book-info-grid-header my-thin-col"> Branch</ion-col>
-              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.branch}}</ion-col>
+              <ion-col  class="book-info-grid-header my-thin-col"> Publisher</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.publisher}}</ion-col>
             </ion-row>
             <ion-row>
-              <ion-col class="book-info-grid-header my-thin-col"> Year/Sem</ion-col>
-              <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.year}}
-                    {{ bookObj.bookAcademic[0]?.sem}}</ion-col>
+              <ion-col class="book-info-grid-header my-thin-col"> Edition</ion-col>
+              <ion-col class="book-info-grid-content"> {{ bookObj.edition}}</ion-col>
             </ion-row>
+            <div *ngIf="bookObj.isAcademic == 'Y'">
+              <ion-row>
+                <ion-col class="book-info-grid-header my-thin-col"> Course</ion-col>
+                <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.course}}</ion-col>
+              </ion-row>
+              <ion-row *ngIf="bookObj.bookAcademic[0]?.subcourse">
+                <ion-col class="book-info-grid-header my-thin-col"> Degree</ion-col>
+                <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.subcourse}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="book-info-grid-header my-thin-col"> Branch</ion-col>
+                <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.branch}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="book-info-grid-header my-thin-col"> Year/Sem</ion-col>
+                <ion-col class="book-info-grid-content"> {{ bookObj.bookAcademic[0]?.year}}
+                      {{ bookObj.bookAcademic[0]?.sem}}</ion-col>
+              </ion-row>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="buy-book">
-       <button  ion-button class="btn-buy" (click)="showBuyOptions(book)"> Buy This Book</button>
+    <div class="buy-book-button" *ngIf="!showSellerInfo">
+      <button  ion-button class="btn-buy" (click)="sellerDetails(book)"> Buy This Book</button>
     </div>
-      <div *ngIf="showBuyOptionsFlag" class="show-buy-options">
-       <div class="fragment">
-        <i class="material-icons closeButton">close</i>
-    <div>
-    <p class="text">
-        this is a short description yada yada peanuts etc this is a short description yada yada peanuts etc this is a short description yada yada peanuts etc this is a short description yada yada peanuts etcthis is a short description yada yada peanuts etc
-    </p>
-</div>
-</div>
-  </div>
+
+    <div *ngIf="showSellerInfo" class="sell-book-section">
+      <div class="fragment">
+        <ion-icon style="font-size:20px" ios="ios-arrow-back" md="md-arrow-back" (click)="closeBuyOptions()"></ion-icon>
+        <div class="seller-profile">
+          <ion-avatar style="margin-left: 25%">
+              <img src="assets/imgs/seller.png" height="120px" width="150px">
+          </ion-avatar>
+          <ion-row>
+            <span class="seller-name">Raju Thota</span>
+          </ion-row>
+           <ion-row>
+             <span class="seller-email">
+               <ion-icon name="mail">
+                 <span class="contact-text">raju.thota@gmail.com </span>
+                </ion-icon>
+              </span>
+            </ion-row>
+            <ion-row>
+              <span class="seller-email">
+                 <ion-icon name="call" (click)="call()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
+                    <span class="contact-text">{{ bookObj.bookContact[0]?.phoneNo}}</span>
+                 </ion-icon>
+                </span>
+            </ion-row>
+            <ion-row>
+              <div class="seller-address">
+                <div class="seller-address-head"><strong>Address</strong></div>
+                  <div style="margin-top: 7%;">
+                    <ion-row>
+                      <ion-icon name="pin"></ion-icon>
+                      <span class="seller-address-row"> {{ bookObj.bookContact[0]?.address}}</span>
+                    </ion-row>
+                    <ion-row>
+                      <span class="seller-address-row1">{{ bookObj.bookContact[0]?.landmark}}</span>
+                    </ion-row>
+                    <ion-row>
+                      <span class="seller-address-row1">{{ bookObj.bookContact[0]?.pincode}} </span>
+                    </ion-row>
+                    <ion-row>
+                      <span class="seller-address-row1">{{ bookObj.bookContact[0]?.college}}</span>
+                    </ion-row>
+                  </div>
+              </div>
+            </ion-row>
+            <ion-row>
+                <div class="contact-seller">
+                  <div class="contact-seller-head"><strong>Contact</strong></div>
+                  <ion-row>
+                     <ion-col class="contact-seller-options">
+                       <ion-icon name="mail" (click)="sendEmail() && bookObj.bookContact[0]"></ion-icon>
+                     </ion-col>
+                     <ion-col  *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
+                       <ion-icon name="logo-whatsapp" (click)="sendWhatsAppMsg()"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <ion-icon name="share" (click)="share()"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+            </ion-row>
+          </div>
+        </div>
+    </div>
+ </div>
 
 
 
@@ -278,20 +338,7 @@
 
     </div> -->
 
-  </div>
-
   <div *ngIf="showImgSlide" class="imagePopUp">
-    <!-- <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;" (click)="showImgSlide=false"></ion-icon> -->
-    <!-- <ion-fab style="margin-left: 85%;" (click)="showImgSlide=false">
-      <button ion-fab mini style="background-color: #488aff73;">
-        <ion-icon name="close-circle"></ion-icon>
-      </button>
-    </ion-fab> -->
-    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <button ion-fab-button>
-        <ion-icon name="close-circle"></ion-icon>
-      </button>
-    </ion-fab> -->
     <ion-fab class="imgBackFabBtn">
       <button ion-fab mini style="background-color: #488aff73;" (click)="showImgSlide=false">
         <ion-icon ios="ios-arrow-round-back" md="ios-arrow-round-back" style="font-size: 35px;"></ion-icon>

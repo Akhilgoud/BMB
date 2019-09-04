@@ -19,7 +19,7 @@ export class BookdetailsPage {
     allowEdit: boolean = false;
     userInfo = this.userInfoService.getUserInfo();
     deregisterFunction: any;
-    showBuyOptionsFlag: boolean = false;
+    showSellerInfo: boolean = false;
 
     constructor(public platform: Platform,
         public navCtrl: NavController,
@@ -68,11 +68,12 @@ export class BookdetailsPage {
     dismiss() {
         this.viewCtrl.dismiss();
     }
-    showBuyOptions(){
-     this.showBuyOptionsFlag = true;
+    sellerDetails(book){
+      console.log("sdkjaskjsdkj raju=>", this.bookObj)
+     this.showSellerInfo = true;
     }
    closeBuyOptions(){
-     this.showBuyOptionsFlag = false;
+     this.showSellerInfo = false;
    }
     gotoEditPage() {
         var obj = this.bookObj;
