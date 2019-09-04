@@ -68,13 +68,17 @@ export class BookdetailsPage {
     dismiss() {
         this.viewCtrl.dismiss();
     }
-    sellerDetails(book){
-      console.log("sdkjaskjsdkj raju=>", this.bookObj)
-     this.showSellerInfo = true;
+    sellerDetails(){
+     if (!this.userInfo || !this.userInfo.uid) {
+           this.viewCtrl.dismiss();
+          this.homePageService.setPage(LoginPage)
+          ?this.showSellerInfo = true
+          :this.showSellerInfo = false
+        } else {
+          this.showSellerInfo = true
+        }
     }
-   closeBuyOptions(){
-     this.showSellerInfo = false;
-   }
+
     gotoEditPage() {
         var obj = this.bookObj;
         if (this.bookObj.bookContact.length) {
@@ -155,12 +159,12 @@ export class BookdetailsPage {
         }
     }
 
-    onSegmentChange(ev: any) {
-        if (ev.value == "sellerInfo" && (!this.userInfo || !this.userInfo.uid)) {
-            this.viewCtrl.dismiss();
-            this.homePageService.setPage(LoginPage);
-        }
-    }
+    // onSegmentChange(ev: any) {
+    //     if (ev.value == "sellerInfo" && (!this.userInfo || !this.userInfo.uid)) {
+    //         this.viewCtrl.dismiss();
+    //         this.homePageService.setPage(LoginPage);
+    //     }
+    // }
 
     getMessageBody() {
         var msg = "Hi, I am interested in buying this Book. ";

@@ -2,32 +2,8 @@ page-bookdetails {
     ion-slides {
         height: 86%;
     }
-
-    #bookinfoDetails .row {
-        border-bottom: #eae1e1 1px solid;
-        padding: 9px;
-    }
-
-    #sellerinfoDetails .row {
-        border-bottom: #eae1e1 1px solid;
-        padding: 9px;
-    }
-
-    #sellerinfoDetails ion-icon {
-        display: inline-block;
-        font-size: 1.5em;
-    }
-
     .swiper-container {
         margin-top: 30px;
-    }
-
-    .segment-md .segment-button {
-        padding: 0 6px;
-        font-size: initial;
-        letter-spacing: 1px;
-        font-family: serif;
-        text-transform: none;
     }
     .slideBookImages{
        height: 120px;
@@ -120,7 +96,7 @@ page-bookdetails {
     }
   .btn-buy:hover { background-position: right center; }
   .seller-address{
-    margin-top: 5%;
+    margin-top: 7%;
     margin-left: 15%;
     font-weight:500;
     font-size: 1.1em;
@@ -134,12 +110,11 @@ page-bookdetails {
     padding-left: 20px;
   }
   .seller-address-head {
-    margin-left: -10%;
     border-bottom: 0.5px solid #dedede;
     width: 60px;
   }
   .contact-seller {
-    margin-top: 2%;
+    margin-top: 5%;
     margin-left: 10%;
     font-weight:500;
     font-size: 1.1em;
@@ -147,9 +122,13 @@ page-bookdetails {
     line-height: 1.6em;
   }
   .contact-seller-head{
-    margin-left: -10%;
+    margin-left: 5%;
     border-bottom: 0.5px solid #dedede;
     width: 60px;
+  }
+  .contact-seller-options{
+    padding: 35px;
+    font-size: 1.6em;
   }
   .fragment {
     font-size: 12px;
@@ -157,6 +136,13 @@ page-bookdetails {
     color: #555;
     padding: 3%;
     text-decoration: none;
+  }
+  .edit-icon {
+    margin-left: 73%;
+    margin-top: 5%;
+  }
+  .fab-md {
+    background-color: #fff;
   }
 
 }

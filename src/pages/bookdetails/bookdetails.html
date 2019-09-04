@@ -16,9 +16,9 @@
 <ion-content [ngClass]="{'no-scroll': showImgSlide}">
  <div style="position: absolute;width: 100%;">
     <div class="buy-book-section" *ngIf="!showSellerInfo">
-        <ion-fab style="margin-left: 85%;" (click)="gotoEditPage()" *ngIf="allowEdit && !showImgSlide">
+        <ion-fab class="edit-icon" (click)="gotoEditPage()" *ngIf="allowEdit && !showImgSlide">
         <button ion-fab mini>
-          <ion-icon name="create"></ion-icon>
+          <ion-icon name="create" style="color:#555"></ion-icon>
         </button>
         </ion-fab>
         <div>
@@ -109,7 +109,7 @@
 
     <div *ngIf="showSellerInfo" class="sell-book-section">
       <div class="fragment">
-        <ion-icon style="font-size:20px" ios="ios-arrow-back" md="md-arrow-back" (click)="closeBuyOptions()"></ion-icon>
+        <ion-icon style="font-size:20px" ios="ios-arrow-back" md="md-arrow-back" (click)="showSellerInfo=false"></ion-icon>
         <div class="seller-profile">
           <ion-avatar style="margin-left: 25%">
               <img src="assets/imgs/seller.png" height="120px" width="150px">
@@ -120,15 +120,15 @@
            <ion-row>
              <span class="seller-email">
                <ion-icon name="mail">
-                 <span class="contact-text">raju.thota@gmail.com </span>
+                 <span class="contact-text">raju.thota@gmail.com</span>
                 </ion-icon>
               </span>
             </ion-row>
             <ion-row>
               <span class="seller-email">
                  <ion-icon name="call" (click)="call()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
+                   </ion-icon>
                     <span class="contact-text">{{ bookObj.bookContact[0]?.phoneNo}}</span>
-                 </ion-icon>
                 </span>
             </ion-row>
             <ion-row>
@@ -156,13 +156,13 @@
                   <div class="contact-seller-head"><strong>Contact</strong></div>
                   <ion-row>
                      <ion-col class="contact-seller-options">
-                       <ion-icon name="mail" (click)="sendEmail() && bookObj.bookContact[0]"></ion-icon>
+                       <ion-icon name="call" (click)="call()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo"></ion-icon>
                      </ion-col>
-                     <ion-col  *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
+                     <ion-col class="contact-seller-options" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
                        <ion-icon name="logo-whatsapp" (click)="sendWhatsAppMsg()"></ion-icon>
                     </ion-col>
-                    <ion-col>
-                      <ion-icon name="share" (click)="share()"></ion-icon>
+                    <ion-col class="contact-seller-options">
+                      <ion-icon name="mail" (click)="sendEmail() && bookObj.bookContact[0]"></ion-icon>
                     </ion-col>
                   </ion-row>
                 </div>
@@ -171,173 +171,6 @@
         </div>
     </div>
  </div>
-
-
-
-
-    <!-- <ion-segment [(ngModel)]="tabInfo" (ionChange)="onSegmentChange($event)">
-      <ion-segment-button value="bookInfo">
-        <span>Book Info</span>
-      </ion-segment-button>
-      <ion-segment-button value="sellerInfo">
-        <span>Seller Info</span>
-      </ion-segment-button>
-    </ion-segment> -->
-
-
-    <!-- <div [ngSwitch]="tabInfo">
-      <div *ngSwitchCase="'bookInfo'" style="text-align:center;">
-        <div>
-          <br>
-          <div style="font-weight: 500;font-size: 16px;">{{ bookObj.name}}</div>
-          <span style="margin-left: 25%;
-            font-size: 14px;" *ngIf="bookObj.author"> - {{ bookObj.author}}</span>
-        </div>
-        <div>
-          <span *ngIf="bookObj.description">
-            <p>[ {{ bookObj.description}} ]</p>
-          </span>
-        </div> -->
-        <!-- <div style="border-bottom: 1px solid #eae1e1;">
-          <div style="text-align: start;padding-top: 10px;">Description : </div>
-          <div style="text-align: start; padding-left: 12px;font-size: 15px;padding-top: 10px; padding-bottom: 11px;">
-            <span style="padding-left:24%">&nbsp;</span><span>{{ bookObj.description}}</span>
-          </div>
-        </div> -->
-        <!-- <br>
-        <div id="bookinfoDetails">
-          <ion-row>
-            <ion-col>Book Type</ion-col>
-            <ion-col>-</ion-col>
-            <ion-col>{{ bookObj.bookType}} </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>Price</ion-col>
-            <ion-col>-</ion-col>
-            <ion-col> <i class="fa fa-rupee"></i> {{ bookObj.price}} </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>publisher</ion-col>
-            <ion-col>-</ion-col>
-            <ion-col>{{ bookObj.publisher}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>Edition</ion-col>
-            <ion-col>-</ion-col>
-            <ion-col>{{ bookObj.edition}}</ion-col>
-          </ion-row>
-          <div *ngIf="bookObj.isAcademic == 'Y'">
-            <ion-row>
-              <ion-col>Course</ion-col>
-              <ion-col>-</ion-col>
-              <ion-col>{{ bookObj.bookAcademic[0]?.course}}</ion-col>
-            </ion-row>
-            <ion-row *ngIf="bookObj.bookAcademic[0]?.subcourse">
-              <ion-col>Degree</ion-col>
-              <ion-col>-</ion-col>
-              <ion-col>{{ bookObj.bookAcademic[0]?.subcourse}}</ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>Branch</ion-col>
-              <ion-col>-</ion-col>
-              <ion-col>{{ bookObj.bookAcademic[0]?.branch}}</ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>Year/Sem</ion-col>
-              <ion-col>-</ion-col>
-              <ion-col><span *ngIf="bookObj.year || bookObj.sem"> {{ bookObj.bookAcademic[0]?.year}} ||
-                  {{ bookObj.bookAcademic[0]?.sem}} </span></ion-col>
-            </ion-row>
-          </div>
-
-          <div style="font-size: 13px;float: right;    margin-top: 8px;"> <span>Posted on - </span><span>{{bookObj.created_date
-              | date:'dd/MM/yyyy' }}</span></div>
-        </div>
-      </div> -->
-      <!-- <div *ngSwitchCase="'sellerInfo'" style="text-align:center;">
-          <div id="sellerinfoDetails">
-          <ion-row>
-              <ion-col>Phone no</ion-col>
-              <ion-col>-</ion-col>
-              <ion-col> {{ bookObj.bookContact[0].phoneNo}} </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>Address</ion-col>
-                <ion-col>-</ion-col>
-                <ion-col> {{ bookObj.bookContact[0].address}} </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>Landmark</ion-col>
-                <ion-col>-</ion-col>
-                <ion-col> {{ bookObj.bookContact[0].landmark}} </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>Pincode</ion-col>
-                <ion-col>-</ion-col>
-                <ion-col> {{ bookObj.bookContact[0].pincode}} </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>College</ion-col>
-                <ion-col>-</ion-col>
-                <ion-col> {{ bookObj.bookContact[0].college}} </ion-col>
-            </ion-row>
-          </div>
-      </div> -->
-      <!-- <div *ngSwitchCase="'sellerInfo'" style="text-align:center;">
-        <div id="sellerinfoDetails" *ngIf="userInfo && userInfo.uid">
-          <ion-row>
-            <ion-col style="text-align: inherit">Phone:</ion-col>
-            <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.phoneNo}}</span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <ion-icon name="call" (click)="call()" *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
-              </ion-icon>
-            </ion-col>
-
-          </ion-row>
-
-          <ion-row>
-            <ion-col style="text-align: inherit">Email:</ion-col>
-            <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.email}}</span>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col style="text-align: inherit">Address:</ion-col>
-            <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.address}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col style="text-align: inherit">Landmark:</ion-col>
-            <ion-col style="text-align: left"><span>{{bookObj.bookContact[0]?.landmark}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col style="text-align: inherit">Pincode:</ion-col>
-            <ion-col style="text-align: left"><span>{{ bookObj.bookContact[0]?.pincode}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col style="text-align: inherit">College:</ion-col>
-            <ion-col style="text-align: left"><span>{{bookObj.bookContact[0]?.college}}</span>
-            </ion-col>
-          </ion-row>
-          <ion-row>&nbsp;</ion-row>
-          <ion-row>
-            <ion-col no-padding>
-              <ion-icon name="mail" (click)="sendEmail() && bookObj.bookContact[0]"></ion-icon>
-            </ion-col>
-            <ion-col no-padding *ngIf="bookObj.bookContact[0] && bookObj.bookContact[0].phoneNo">
-              <ion-icon name="logo-whatsapp" (click)="sendWhatsAppMsg()"></ion-icon>
-            </ion-col>
-            <ion-col no-padding>
-              <ion-icon name="share" (click)="share()"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </div>
-      </div>
-
-    </div> -->
-
   <div *ngIf="showImgSlide" class="imagePopUp">
     <ion-fab class="imgBackFabBtn">
       <button ion-fab mini style="background-color: #488aff73;" (click)="showImgSlide=false">
