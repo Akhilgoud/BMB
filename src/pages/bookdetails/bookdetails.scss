@@ -1,135 +1,165 @@
 page-bookdetails {
-    ion-slides {
-        height: 86%;
-    }
-    .swiper-container {
-        margin-top: 30px;
-    }
-    .slideBookImages{
-       height: 120px;
-       width: 95px;
-    }
-    .book-name {
-       font-size: 16px;
-       color: #444;
-       margin-left:3%;
-       margin-top: 4%;
-       line-height: 1.2em;
-       font-weight:500;
-    }
-    .book-author {
-      font-size: 14px;
-      color: #3a8bbb;
-      margin-left:3%;
-      margin-top: 2%;
-      font-weight: 500;
-    }
-    .seller-name {
-      font-size: 25px;
-      color: #444;
-      margin-left:30%;
-      font-weight:500;
-    }
-    .seller-email {
-      margin-left:30%;
-      margin-top: 2%;
-    }
-    .contact-text{
-      font-weight:500;
-      font-size: 1.0em;
-      padding: 5px;
-    }
-   .a-price-symbol{
-      font-size: 12px;
-      color:#B12704;
-   }
-   .a-price-whole{
+  ion-slides {
+    height: 86%;
+  }
+
+  .swiper-container {
+    margin-top: 30px;
+  }
+
+  .slideBookImages {
+    height: 120px;
+    width: 95px;
+  }
+
+  .book-name {
+    font-size: 16px;
+    color: #444;
+    margin-left: 3%;
+    margin-top: 4%;
+    line-height: 1.2em;
+    font-weight: 500;
+  }
+
+  .book-author {
+    font-size: 14px;
+    color: #3a8bbb;
+    margin-left: 3%;
+    margin-top: 2%;
+    font-weight: 500;
+  }
+
+  .seller-name {
+    font-size: 25px;
+    color: #444;
+    margin-left: 30%;
+    font-weight: 500;
+  }
+
+  .seller-email {
+    margin-left: 30%;
+    margin-top: 2%;
+  }
+
+  .contact-text {
+    font-weight: 500;
+    font-size: 1.0em;
+    padding: 5px;
+  }
+
+  .a-price-symbol {
+    font-size: 12px;
+    color: #B12704;
+  }
+
+  .a-price-whole {
     font-size: 21px;
-    color:#B12704;
+    color: #B12704;
     line-height: 2.2em;
     font-weight: 500;
-   }
-   .a-price-text{
-     margin-left: 7%;
-     font-size: 16px;
-     color: #444;
-     line-height: 1.2em;
-     font-weight: 500;
-   }
-   .book-posted-on {
+  }
+
+  .a-price-text {
+    margin-left: 7%;
+    font-size: 16px;
+    color: #444;
+    line-height: 1.2em;
+    font-weight: 500;
+  }
+
+  .book-posted-on {
     font-size: 13px;
     margin-left: 56%;
     padding: 7px;
-   }
-    .book-info-div-card {
-      border-top:1px solid #dedede;
-      border-bottom:3px solid #dedede;
-    }
-    .book-info-div-card-content{
-      padding: 4%;
-    }
-    .book-info-grid{
-      margin-top: 5%;
-      border-top: 0.4px solid #dedede;
-    }
-    .book-info-grid-header{
-      background-color: #eff1f3;
-      border-bottom: 0.4px solid #dedede;
-      padding: 4%;
-    }
-    .book-info-grid-content{
-      border-bottom: 0.4px solid #dedede;
-      padding: 4%;
-    }
-    ion-col.my-thin-col {
-      flex: 0.4 0 0px;
-    }
-    .buy-book-button{
-       height: 70px;
-    }
+  }
+
+  .book-info-div-card {
+    border-top: 1px solid #dedede;
+    border-bottom: 3px solid #dedede;
+  }
+
+  .book-info-div-card-content {
+    padding: 4%;
+  }
+
+  .book-info-grid {
+    margin-top: 5%;
+    border-top: 0.4px solid #dedede;
+  }
+
+  .book-info-grid-header {
+    background-color: #eff1f3;
+    border-bottom: 0.4px solid #dedede;
+    padding: 4%;
+  }
+
+  .book-info-grid-content {
+    border-bottom: 0.4px solid #dedede;
+    padding: 4%;
+  }
+
+  ion-col.my-thin-col {
+    flex: 0.4 0 0px;
+  }
+
+  .buy-book-button {
+    height: 70px;
+  }
+
   .btn-buy {
     background-image: linear-gradient(to right, rgb(34, 212, 198) 0%, rgb(97, 224, 161) 51%, rgb(14, 199, 134) 100%);
     border-radius: 5px;
     width: 92%;
     margin-left: 4%;
     text-transform: none;
-    }
-  .btn-buy:hover { background-position: right center; }
-  .seller-address{
+  }
+
+  .btn-buy:hover {
+    background-position: right center;
+  }
+
+  .seller-address {
     margin-top: 7%;
     margin-left: 15%;
-    font-weight:500;
+    font-weight: 500;
     font-size: 1.1em;
     padding: 5px;
     line-height: 1.6em;
   }
-  .seller-address-row{
+
+  .seller-address-row {
     padding-left: 10px;
   }
-  .seller-address-row1{
+
+  .seller-address-row1 {
     padding-left: 20px;
   }
+
   .seller-address-head {
     border-bottom: 0.5px solid #dedede;
     width: 60px;
   }
+
   .contact-seller {
     margin-top: 5%;
     margin-left: 10%;
-    font-weight:500;
+    font-weight: 500;
     font-size: 1.1em;
     padding: 5px;
     line-height: 1.6em;
   }
-  .contact-seller-head{
+
+  .contact-seller-head {
     margin-left: 5%;
     border-bottom: 0.5px solid #dedede;
     width: 60px;
   }
-  .contact-seller-options{
+
+  .contact-seller-options {
     padding: 35px;
     font-size: 1.6em;
   }
+
   .fragment {
     font-size: 12px;
     font-family: tahoma;
@@ -137,13 +167,16 @@ page-bookdetails {
     padding: 3%;
     text-decoration: none;
   }
+
   .edit-icon {
     margin-left: 73%;
     margin-top: 5%;
   }
+
   .fab-md {
     background-color: #fff;
   }
+
   .shareButton {
     color: #555;
     font-size: 1.6em;

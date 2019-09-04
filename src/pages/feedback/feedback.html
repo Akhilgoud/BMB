@@ -49,7 +49,11 @@
                         </ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label color="primary" floating>Severity Of Issue </ion-label>
+                        <ion-label color="primary" floating
+                            *ngIf="!feedbackObj.issueType || feedbackObj.issueType == 'COMPLAINT'">Severity Of Issue
+                        </ion-label>
+                        <ion-label color="primary" floating *ngIf="feedbackObj.issueType == 'COMPLIMENT'">Rating
+                        </ion-label>
                         <ion-range color="secondary" pin="true" [(ngModel)]="feedbackObj.severity" min="0" max="5"
                             step="1" snaps="true" formControlName="severity"></ion-range>
                         <!-- <ion-input formControlName="Severity" [(ngModel)]="feedbackObj.Severity" type="number">

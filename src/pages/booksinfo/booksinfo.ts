@@ -142,8 +142,9 @@ export class BooksinfoPage {
     }
   }
 
-  getFreeBooks(isFree) {
-    if (isFree) {
+  getFreeBooks() {
+    this.filterObj.isFree = !this.filterObj.isFree
+    if (this.filterObj.isFree) {
       this.filterBooksService.setFilterObj(this.filterObj);
       var filterConditions: any = {}
       filterConditions["isFree"] = true;

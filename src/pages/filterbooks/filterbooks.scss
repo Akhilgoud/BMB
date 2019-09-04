@@ -54,6 +54,10 @@ filter-books {
     .badgesDiv {
         margin-left: 10%;
     }
+
+    .filterfooter .button-md {
+        text-transform: none;
+    }
 }
 
 /* Popover CSS outside filter books*/

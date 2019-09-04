@@ -28,7 +28,8 @@ export interface IBookObj {
     landmark: string,
     pincode: number,
     college: string,
-    email: string
+    email: string,
+    userName: string
 }
 
 export class IBookObj implements IBookObj {

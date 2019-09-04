@@ -55,8 +55,8 @@ export class FeedbackPage {
     bindForm() {
         this.feedbackForm = this.formBuilder.group({
             issueType: ['', Validators.required],
-            phoneModel: ['', Validators.required],
-            severity: ['', Validators.required],
+            phoneModel: [''],
+            severity: [''],
             description: ['', Validators.required]
         });
     }

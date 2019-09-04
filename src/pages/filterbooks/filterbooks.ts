@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, IonicPage, NavController, NavParams, ViewController, LoadingController, Searchbar } from 'ionic-angular';
+import { Platform, Select, NavController, NavParams, ViewController, LoadingController, Searchbar } from 'ionic-angular';
 import { FilterBooksService } from './filterbooks.service';
 import { BooksInfoApi } from '../../shared/shared';
 import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
@@ -26,6 +26,12 @@ export class FilterBooks {
 
   //@ViewChild('searchbar') searchBar: Searchbar;
   // @ViewChild('searchbar', { read: IonSearchbar }) searchbar: IonSearchbar;
+  @ViewChild('courseselect') courseselect: Select;
+  @ViewChild('degreeselect') degreeselect: Select;
+  @ViewChild('branchselect') branchselect: Select;
+  @ViewChild('yearselect') yearselect: Select;
+  @ViewChild('semselect') semselect: Select;
+
   constructor(
     public platform: Platform, private navParams: NavParams,
     private filterBooksService: FilterBooksService,
@@ -52,6 +58,11 @@ export class FilterBooks {
       );
     }
     this.platform.registerBackButtonAction(() => {
+      this.courseselect.close();
+      this.degreeselect.close();
+      this.branchselect.close();
+      this.yearselect.close();
+      this.semselect.close();
       this.viewController.dismiss();
     });
   }

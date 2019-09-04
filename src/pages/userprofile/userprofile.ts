@@ -65,7 +65,7 @@ export class UserProfilePage {
                             this.validUser(response);
                             var message = 'Profile updated successfully'
                         } else {
-                            var message = 'Something went wrong. Please try again later'
+                            var message = 'Invalid current password'
                         }
                         let toast = this.toastCtrl.create({
                             message: message,
@@ -74,7 +74,8 @@ export class UserProfilePage {
                             dismissOnPageChange: false
                         });
                         toast.present();
-                        this.homePageService.setPage(BooksinfoPage);
+                        if (response)
+                            this.homePageService.setPage(BooksinfoPage);
                         // toast.onDidDismiss(() => {
                         // });
                         loader.dismiss();

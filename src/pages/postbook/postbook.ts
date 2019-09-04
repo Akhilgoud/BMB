@@ -243,7 +243,10 @@ export class PostbookPage {
                     coordinates: [0, 0]
                 };
             }
+
             if (this.bookObj.isFree) this.bookObj.price = 0;
+            else if (!this.bookObj.price) this.bookObj.isFree = true;
+
             var obj = {
                 bookObj: this.bookObj,
                 imageArr: this.photos
@@ -252,6 +255,8 @@ export class PostbookPage {
             if (userobj && userobj.uid) {
                 obj.bookObj.uid = userobj.uid;
                 obj.bookObj.email = userobj.email;
+                obj.bookObj.userName = userobj.name;
+
                 this.postbookApi.postNewBook(obj).subscribe(
                     response => {
                         loader.dismiss();
@@ -294,6 +299,9 @@ export class PostbookPage {
                     coordinates: [0, 0]
                 };
             }
+            if (this.bookObj.isFree) this.bookObj.price = 0;
+            else if (!this.bookObj.price) this.bookObj.isFree = true;
+
             var obj = {
                 bookObj: this.bookObj,
                 imageArr: this.photos
@@ -302,6 +310,7 @@ export class PostbookPage {
             if (userobj && userobj.uid) {
                 obj.bookObj.uid = userobj.uid;
                 obj.bookObj.email = userobj.email;
+                obj.bookObj.userName = userobj.name;
 
 
                 this.postbookApi.updateBookInfo(obj).subscribe(

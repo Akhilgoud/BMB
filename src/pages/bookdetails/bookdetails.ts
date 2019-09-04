@@ -42,6 +42,9 @@ export class BookdetailsPage {
             if (this.showImgSlide) {
                 this.showImgSlide = false;
             }
+            else if (this.showSellerInfo) {
+                this.showSellerInfo = false;
+            }
             else {
                 this.viewCtrl.dismiss();
             }
@@ -68,14 +71,14 @@ export class BookdetailsPage {
     dismiss() {
         this.viewCtrl.dismiss();
     }
-    sellerDetails(){
-     if (!this.userInfo || !this.userInfo.uid) {
-           this.viewCtrl.dismiss();
-          this.homePageService.setPage(LoginPage)
-          ?this.showSellerInfo = true
-          :this.showSellerInfo = false
+
+    sellerDetails() {
+        if (!this.userInfo || !this.userInfo.uid) {
+            this.showSellerInfo = false;
+            this.viewCtrl.dismiss();
+            this.homePageService.setPage(LoginPage);
         } else {
-          this.showSellerInfo = true
+            this.showSellerInfo = true
         }
     }
 
