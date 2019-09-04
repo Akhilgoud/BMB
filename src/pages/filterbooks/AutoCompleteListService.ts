@@ -21,7 +21,7 @@ export class AutoCompleteListService implements AutoCompleteService {
         });
   }
   getAddress(keyword: string) {
-    return this.http.get("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&outFields=Match_addr,Addr_type&countryCode='IND'&singleLine=" + keyword)
+    return this.http.get("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&outFields=Match_addr,Addr_type&sourceCountry='IND'&maxLocations=10&singleLine=" + keyword)
       .map(
         result => {
           return result.json();
