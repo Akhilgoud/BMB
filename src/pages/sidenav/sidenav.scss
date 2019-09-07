@@ -1,45 +1,47 @@
 page-sidenav {
-  .radio-md {
-    position: relative;
-    display: inline-block;
-    padding-top: 13px;
-  }
 
   .app-applications {
     border-top: 1px solid lightgray;
     margin-top: 4%;
-    font-size: 17px;
-    color: darkgrey;
-    font-family: inherit;
-    font-weight: bolder;
   }
 
-  .app-text {
-    padding: 12px 0px 4px 10px;
+ .app-text {
+    padding: 18px 0px 4px 19px;
+    color: #444;
+    font-size: 15px;
+    font-weight: 500;
   }
 
   #menu-material {
-    .menu-header {
-      text-align: center;
-      height: 120px;
-      display: none;
+    .side-nav-icon {
+       color: cadetblue;
+       font-size: 20px;
+       margin-left: 6%;
+       line-height: 20px;
     }
-
-    .user-avatar {
-      padding: .5em;
-      height: 14vh;
+    .side-nav-icon-text{
+        color: #444;
+        margin: 15px;
+        font-family: serif;
+        font-size: 18px;
     }
-
-    .round {
-      border-radius: 50%;
+    .side-nav-welcome-text{
+       color: #555;
+       margin-left: 3%;
     }
-
-    ion-icon {
-      color: #777;
+    .profile-email{
+      color: #3a8bbb;
+      font-size: 10px;
+      margin-left: -33px;
     }
-
-    .side-nav-content {
-      margin-top: 7%;
+    .profile-name{
+      font-size: 18px;
+      margin-left: -33px;
+      margin-top: 3px;
+    }
+    .profile-settings{
+       float: right;
+       margin-top: 12%;
     }
   }
 }

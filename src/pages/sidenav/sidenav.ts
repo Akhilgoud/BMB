@@ -24,7 +24,7 @@ export class SidenavPage {
   userObj: any = {};
   pages: any = [];
   err: any;
-  playStoreURL = ""
+  playStoreURL = "https://play.google.com/apps/internaltest/4700268196536219940";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -44,14 +44,18 @@ export class SidenavPage {
 
     this.pages = [
       // { title: 'Rate App',  icon: 'star', func: this.rateApp},
-      // { title: 'Share this App', icon: 'share',  func: this.shareApp },
+      { title: 'Share this App', icon: 'share',  func: this.shareApp },
       { title: 'Feedback & help', icon: 'paper', func: this.changePage.bind(this, FeedbackPage) },
-      // { title: 'Policy Privacy', icon: 'lock', func: this.changePage.bind(this, FeedbackPage) }
+      { title: 'Policy Privacy', icon: 'lock', func: this.privacyPolicy }
     ];
   }
 
   rateApp() {
 
+  }
+
+  privacyPolicy(){
+     document.location.href ="https://buymybook.flycricket.io/privacy.html";
   }
 
   shareApp() {
