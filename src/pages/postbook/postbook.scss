@@ -26,11 +26,10 @@ page-postbook {
         opacity: .4;
     }
 
-    // #description {
-    //     width: calc(100% - 10px);
-    //     border: 0;
-    //     border-radius: 0;
-    //     background: transparent;
-    // }
+    .btn-postbook {
+      background-image: linear-gradient(to right, #000428 0%, #004e92 51%, #000428 100%);
+      border-radius: 5px;
+      }
+    .btn-postbook:hover { background-position: right center; }
 
 }

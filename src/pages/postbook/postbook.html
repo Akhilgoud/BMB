@@ -1,24 +1,4 @@
 <ion-header>
-
-  <!-- <ion-navbar *ngIf="shownav">
-    <ion-title class="appTitle" *ngIf="!isUpdatePage">Post your book</ion-title>
-    <ion-title class="appTitle" *ngIf="isUpdatePage">Update book details</ion-title>
-  </ion-navbar> -->
-  <!-- <ion-navbar>
-      <ion-buttons left>
-        <button ion-button menuToggle>
-          <ion-icon name="menu" id="menuIcon"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title>
-        <span id="apptitle">Post Your Book</span>
-      </ion-title>
-      <ion-buttons right>
-        <button ion-button >
-            <ion-icon name="home" id="homeIcon" ></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar> -->
 </ion-header>
 
 <ion-content>
@@ -265,9 +245,9 @@
     </ion-row>
     <ion-row>
       <ion-col offset-4>
-        <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" *ngIf="!isUpdatePage">submit</button>
-        <button ion-button (click)="cancel()" *ngIf="isUpdatePage">Cancel</button>
-        <button ion-button (click)="update()" [disabled]="!postbookForm.valid" *ngIf="isUpdatePage">Update</button>
+        <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" *ngIf="!isUpdatePage" class="btn-postbook">submit</button>
+        <button ion-button (click)="cancel()" *ngIf="isUpdatePage" class="btn-postbook">Cancel</button>
+        <button ion-button (click)="update()" [disabled]="!postbookForm.valid" *ngIf="isUpdatePage" class="btn-postbook">Update</button>
         <!-- <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" >submit</button> -->
       </ion-col>
     </ion-row>
