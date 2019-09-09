@@ -50,8 +50,11 @@ export class BooksinfoPage {
     //   }
     // });
 
+    this.filterBooksService.filterObjChange.subscribe(
+      data => {
+        this.filterObj = data;
+      });
     this.filterObj = this.filterBooksService.getFilterObj();
-
 
     this.platform.registerBackButtonAction(() => {
       console.log('in');
@@ -143,18 +146,19 @@ export class BooksinfoPage {
   }
 
   getFreeBooks() {
-    this.filterObj.isFree = !this.filterObj.isFree
+    this.filterObj = this.filterBooksService.getFilterObj();
+    this.filterObj.isFree = !this.filterObj.isFree;
+    this.filterBooksService.setFilterObj(this.filterObj);
+    var filterConditions = this.booksInfoApi.getFilterConditions();
     if (this.filterObj.isFree) {
-      this.filterBooksService.setFilterObj(this.filterObj);
-      var filterConditions: any = {}
       filterConditions["isFree"] = true;
-      this.booksInfoApi.setFilterConditions(filterConditions);
-      this.booksInfoApi.resetOffLimit();
     } else {
-      this.filterBooksService.resetFilterObj();
-      this.booksInfoApi.resetOffLimit();
-      this.booksInfoApi.resetFilters();
+      delete filterConditions["isFree"];
+      // this.filterBooksService.resetFilterObj();
+      // this.booksInfoApi.resetFilters();
     }
+    this.booksInfoApi.setFilterConditions(filterConditions);
+    this.booksInfoApi.resetOffLimit();
     this.getBooks();
   }
 

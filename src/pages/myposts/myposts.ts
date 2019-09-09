@@ -73,7 +73,7 @@ export class MypostsPage {
   getPosts(uid) {
     let loader = this.loadingController.create({
       content: 'Fetching books...',
-      dismissOnPageChange: true
+      dismissOnPageChange: false
     });
     loader.present().then(() => {
       this.booksInfoApi.getPostsById(uid).subscribe(response => {

@@ -38,6 +38,10 @@ export class BooksInfoApi {
         this.configObj.filters = filters;
     }
 
+    getFilterConditions() {
+        return this.configObj.filters;
+    }
+
     getData() {
         let headers = new Headers();
         headers.append('Content-type', 'application/json');

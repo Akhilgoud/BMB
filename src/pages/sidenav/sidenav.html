@@ -7,26 +7,27 @@
         </span>
         <div class="side-nav-profile" *ngIf="userObj.name">
           <ion-row>
-              <ion-col>
-                <ion-avatar>
-                  <img src="assets/imgs/seller.png"  width="50px">
-                </ion-avatar>
-              </ion-col>
-              <ion-col>
-                <ion-row>
-                    <span class="profile-name">{{userObj.name}}</span>
-                </ion-row>
-                <ion-row>
-                    <span class="profile-email">
-                      <ion-icon name="mail">
-                        <span class="contact-text">{{ userObj.email}}</span>
-                      </ion-icon>
-                    </span>
-                </ion-row>
-              </ion-col>
-             <ion-col>
-                <ion-icon name="settings" class="profile-settings" *ngIf="userObj.name" (click)="changePage(userProfilePage)" menuClose></ion-icon>
-             </ion-col>
+            <ion-col>
+              <ion-avatar>
+                <img src="assets/imgs/seller.png" width="50px">
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <ion-row>
+                <span class="profile-name">{{userObj.name}}</span>
+              </ion-row>
+              <ion-row>
+                <span class="profile-email">
+                  <ion-icon name="mail">
+                    <span class="contact-text">{{ userObj.email}}</span>
+                  </ion-icon>
+                </span>
+              </ion-row>
+            </ion-col>
+            <ion-col>
+              <ion-icon name="settings" class="profile-settings" *ngIf="userObj.name"
+                (click)="changePage(userProfilePage)" menuClose></ion-icon>
+            </ion-col>
           </ion-row>
         </div>
       </ion-title>
@@ -34,26 +35,32 @@
   </ion-header>
   <ion-content>
     <ion-list no-lines>
-        <ion-icon menuClose="left" ion-item detail-none (click)="changePage(booksinfoPage)" class="side-nav-icon" size="small" name="home" item-left>
-          <span class="side-nav-icon-text">Home</span>
-        </ion-icon>
-        <ion-icon class="side-nav-icon" size="small" name="add" item-left menuClose="left" ion-item detail-none (click)="changePage(postBookPage)">
-            <span class="side-nav-icon-text">Sell your books</span>
-        </ion-icon>
-        <ion-icon class="side-nav-icon" size="small" name="log-in" item-left ion-item menuClose (click)="changePage(loginPage)" *ngIf="!userObj.email">
-          <span class="side-nav-icon-text">Sign In</span>
-        </ion-icon>
-        <ion-icon class="side-nav-icon" name="book" item-left ion-item menuClose (click)="changePage(mypostsPage)" *ngIf="userObj.email">
-          <span class="side-nav-icon-text">My Books</span>
-        </ion-icon>
-        <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()" *ngIf="userObj.email">
-           <span class="side-nav-icon-text">Sign Out</span>
-        </ion-icon>
+      <ion-icon menuClose="left" ion-item detail-none (click)="changePage(booksinfoPage)" class="side-nav-icon"
+        size="small" name="home" item-left>
+        <span class="side-nav-icon-text">Home</span>
+      </ion-icon>
+      <ion-icon class="side-nav-icon" size="small" name="add" item-left menuClose="left" ion-item detail-none
+        (click)="changePage(postBookPage)">
+        <span class="side-nav-icon-text">Sell my books</span>
+      </ion-icon>
+      <ion-icon class="side-nav-icon" size="small" name="log-in" item-left ion-item menuClose
+        (click)="changePage(loginPage)" *ngIf="!userObj.email">
+        <span class="side-nav-icon-text">Sign In</span>
+      </ion-icon>
+      <ion-icon class="side-nav-icon" name="book" item-left ion-item menuClose (click)="changePage(mypostsPage)"
+        *ngIf="userObj.email">
+        <span class="side-nav-icon-text">My Books</span>
+      </ion-icon>
+      <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()"
+        *ngIf="userObj.email">
+        <span class="side-nav-icon-text">Sign Out</span>
+      </ion-icon>
       <div class="app-applications">
-         <div class="app-text">Applications</div>
-          <ion-icon  class="side-nav-icon" size="small" name="{{p.icon}}" item-left ion-item menuClose *ngFor="let p of pages" (click)="p.func()">
-             <span class="side-nav-icon-text">{{p.title}}</span>
-          </ion-icon>
+        <div class="app-text">Applications</div>
+        <ion-icon class="side-nav-icon" size="small" name="{{p.icon}}" item-left ion-item menuClose
+          *ngFor="let p of pages" (click)="p.func()">
+          <span class="side-nav-icon-text">{{p.title}}</span>
+        </ion-icon>
       </div>
     </ion-list>
   </ion-content>

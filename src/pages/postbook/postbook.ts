@@ -95,7 +95,7 @@ export class PostbookPage {
         if (this.isUpdatePage)
             this.homePageService.setPageTitle('Update Book Details');
         else
-            this.homePageService.setPageTitle('Post My Book');
+            this.homePageService.setPageTitle('Sell My Book');
 
         // this.homePageService.setPageTitle('My Books');
     }

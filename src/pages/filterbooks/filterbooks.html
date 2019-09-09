@@ -128,8 +128,11 @@
     </ion-item>
     <ion-item style="width: 50%;float: right;" [ngClass]="{'disbleOpacity': filterObj.isFree}">
       <ion-label floating>Max₹</ion-label>
-      <ion-input type="number" [(ngModel)]="filterObj.price.upper" [disabled]="filterObj.isFree"></ion-input>
+      <ion-input type="number" [(ngModel)]="filterObj.price.upper" [disabled]="filterObj.isFree">
+      </ion-input>
     </ion-item>
+    <p *ngIf="filterObj.price.upper && filterObj.price.lower && (filterObj.price.upper < filterObj.price.lower)"
+      style="text-align: center;padding: 0px;margin: 0px;color: red;">Max Price is less than Min Price</p>
   </div>
 
   <div>
@@ -164,7 +167,9 @@
   </div>
   <div class="filterfooter" style="float:right; padding: 13px 0px;">
     <button ion-button round (click)="resetFilters()">Clear Filter</button>
-    <button ion-button round (click)="applyFilters()">Apply Filter</button>
+    <button ion-button round (click)="applyFilters()"
+      [disabled]="filterObj.price.upper && filterObj.price.lower && (filterObj.price.upper < filterObj.price.lower)">Apply
+      Filter</button>
   </div>
 </div>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script> -->

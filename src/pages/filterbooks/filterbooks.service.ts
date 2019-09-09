@@ -23,7 +23,8 @@ export class FilterBooksService {
             upper: null
         },
         college: "",
-        address: ""
+        address: "",
+        isFree: null
     };
     filterObjChange: Subject<any> = new Subject<any>();
 
@@ -49,8 +50,11 @@ export class FilterBooksService {
                 upper: null
             },
             college: "",
-            address: ""
+            address: "",
+            isFree: null
         };
+        this.filterObjChange.next(this.filterObj);
+
     }
 
 }
