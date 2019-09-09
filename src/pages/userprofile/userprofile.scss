@@ -2,4 +2,11 @@ page-userprofile{
    .resetPwd.item-md.item-block .item-inner{
         border:none;
     }
+    .btn-update-profile {
+      background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+      border-radius: 5px;
+      width: 92%;
+      margin-left: 4%;
+      }
+    .btn-update-profile:hover { background-position: right center; }
 }
