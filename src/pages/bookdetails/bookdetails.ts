@@ -151,7 +151,7 @@ export class BookdetailsPage {
     sendWhatsAppMsg() {
         if (this.bookObj && this.bookObj.bookContact[0] && this.bookObj.bookContact[0].phoneNo) {
             let phone = this.bookObj.bookContact[0].phoneNo;
-            let img = this.bookObj.bookImages ? this.bookObj.bookImages.image : null;
+            let img = this.bookObj.bookImages ? this.bookObj.bookImages[0].image : null;
             console.log(this.bookObj.bookImages)
             this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, this.getMessageBody(), img, "BMB").then(() => {
                 console.log('success!')
