@@ -27,7 +27,7 @@
             <ion-label>
               <ion-icon name="key"></ion-icon>
             </ion-label>
-            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password">
+            <ion-input minlength="5" formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password">
             </ion-input>
           </ion-item>
         </ion-col>
@@ -94,8 +94,8 @@
         <span>Sign In/Sign Up</span>
       </a>
     </div>
-    <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">Recovery email has been sent to your Email Id</div>
-    <div *ngIf="forgotPwdFailed" class="fgtPwdSuc">Error occured while resetting the password</div>
+    <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">An email has been sent to your Email Id. Please check</div>
+    <div *ngIf="forgotPwdFailed" class="fgtPwdSuc">Please enter your registered email address.</div>
 
   </div>
 </ion-content>
