@@ -20,6 +20,7 @@ export class LoginPage {
     userObj: IUserObj = new IUserObj();
     bookObj: any;
     isRegister = false;
+    isLogin = false;
     authRes: any;
     err: any;
     forgotPwd = false;
