@@ -44,7 +44,7 @@ export class SidenavPage {
 
     this.pages = [
       // { title: 'Rate App',  icon: 'star', func: this.rateApp},
-      { title: 'Share this App', icon: 'share', func: this.shareApp },
+      // { title: 'Share this App', icon: 'share', func: this.shareApp },
       { title: 'Feedback & help', icon: 'paper', func: this.changePage.bind(this, FeedbackPage) },
       { title: 'Policy Privacy', icon: 'lock', func: this.privacyPolicy }
     ];
@@ -59,7 +59,7 @@ export class SidenavPage {
   }
 
   shareApp() {
-    this.socialSharing.share(this.getShareMessageBody(), 'Buy My Book App ', '', this.playStoreURL).then(() => {
+    this.socialSharing.share(this.getShareMessageBody(), 'Buy My Book App ', '', null).then(() => {
       console.log('Share');
     }).catch((err) => {
       console.log('error sharing book');
@@ -73,8 +73,8 @@ export class SidenavPage {
   }
 
   getShareMessageBody() {
-    var msg = "Hi, You can buy or sell old books in Buy My Book app. \n";
-    msg = msg + "Do check it out.";
+    var msg = "Found this great APP.\nYou can buy or sell your old books in 'Buy My Book' app.\n";
+    msg = msg + "Do check it out.\n";
     return msg;
   }
 
