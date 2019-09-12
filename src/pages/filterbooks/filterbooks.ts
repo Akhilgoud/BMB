@@ -309,6 +309,10 @@ export class FilterBooks {
     this.filterObj.college = item;
   }
 
+  minmaxError() {
+    return parseInt(this.filterObj.price.upper) && parseInt(this.filterObj.price.lower) && (parseInt(this.filterObj.price.upper) < parseInt(this.filterObj.price.lower));
+  }
+
 }
     // const legend = new esri.Legend()
 
