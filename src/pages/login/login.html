@@ -1,11 +1,59 @@
-<ion-header>
-  <!-- <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar> -->
-</ion-header>
-
 
 <ion-content padding>
+  <div id="sign-up-form" *ngIf="isRegister">
+    <form [formGroup]="login_signup_form">
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="person"></ion-icon><span class="sign-up-text">Name</span></ion-label>
+          <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text"></ion-input>
+        </ion-item>
+        <ng-container *ngFor="let validation of validation_messages.name">
+          <div class="error-message" *ngIf="signup_form.get('name').hasError(validation.type) && (signup_form.get('name').dirty || signup_form.get('name').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+        <ion-item>
+          <ion-label floating><ion-icon name="mail"></ion-icon><span class="sign-up-text">Email</span></ion-label>
+          <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text"></ion-input>
+        </ion-item>
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message" *ngIf="signup_form.get('email').hasError(validation.type) && (signup_form.get('email').dirty || signup_form.get('email').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+        <ion-item>
+          <ion-label floating><ion-icon name="password"></ion-icon><span class="sign-up-text">Password</span></ion-label>
+          <ion-input formControlName="password" [(ngModel)]="userObj.password" type="text"></ion-input>
+        </ion-item>
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message" *ngIf="signup_form.get('password').hasError(validation.type) && (signup_form.get('password').dirty || signup_form.get('password').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </form>
+    </div>
+    <div id="login-form" *ngIf="isLogin">
+      <form [formGroup]="login_signup_form">
+          <ion-item>
+            <ion-label floating><ion-icon name="mail"></ion-icon><span class="sign-up-text">Email</span></ion-label>
+            <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text"></ion-input>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message" *ngIf="signup_form.get('email').hasError(validation.type) && (signup_form.get('email').dirty || signup_form.get('email').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+          <ion-item>
+            <ion-label floating><ion-icon name="password"></ion-icon><span class="sign-up-text">Password</span></ion-label>
+            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="text"></ion-input>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.password">
+            <div class="error-message" *ngIf="signup_form.get('password').hasError(validation.type) && (signup_form.get('password').dirty || signup_form.get('password').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </form>
+    </div>
   <div *ngIf="!forgotPwd">
     <form [formGroup]="loginForm">
       <ion-row>
