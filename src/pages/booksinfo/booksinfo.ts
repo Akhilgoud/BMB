@@ -23,6 +23,7 @@ export class BooksinfoPage {
 
   lastBack = Date.now();
   allowClose = false;
+  unregisterBackButton: any;
   // pageLimit = 4;
   // pageOffset = 0;
   constructor(public app: App,
@@ -56,30 +57,7 @@ export class BooksinfoPage {
       });
     this.filterObj = this.filterBooksService.getFilterObj();
 
-    this.platform.registerBackButtonAction(() => {
-      console.log('in');
-      const closeDelay = 2000;
-      const spamDelay = 500;
-      if (this.showImgSlide) {
-        this.showImgSlide = false
-        console.log('in if');
-      } else if (Date.now() - this.lastBack > spamDelay && !this.allowClose) {
-        this.allowClose = true;
-        let toast = this.toastCtrl.create({
-          message: 'Press back again to Close',
-          position: 'bottom',
-          duration: closeDelay,
-          dismissOnPageChange: true
-        });
-        toast.onDidDismiss(() => {
-          this.allowClose = false;
-        });
-        toast.present();
-      } else if (Date.now() - this.lastBack < closeDelay && this.allowClose) {
-        this.platform.exitApp();
-      }
-      this.lastBack = Date.now();
-    });
+    this.registerBackButton();
 
 
     // platform.registerBackButtonAction(() => {
@@ -143,6 +121,33 @@ export class BooksinfoPage {
     } else {
       this.getBooks();
     }
+  }
+
+  registerBackButton() {
+    this.unregisterBackButton = this.platform.registerBackButtonAction(() => {
+      console.log('in');
+      const closeDelay = 2000;
+      const spamDelay = 500;
+      if (this.showImgSlide) {
+        this.showImgSlide = false
+        console.log('in if');
+      } else if (Date.now() - this.lastBack > spamDelay && !this.allowClose) {
+        this.allowClose = true;
+        let toast = this.toastCtrl.create({
+          message: 'Press back again to Close',
+          position: 'bottom',
+          duration: closeDelay,
+          dismissOnPageChange: true
+        });
+        toast.onDidDismiss(() => {
+          this.allowClose = false;
+        });
+        toast.present();
+      } else if (Date.now() - this.lastBack < closeDelay && this.allowClose) {
+        this.platform.exitApp();
+      }
+      this.lastBack = Date.now();
+    });
   }
 
   getFreeBooks() {
@@ -211,10 +216,25 @@ export class BooksinfoPage {
   ionViewWillLeave() {
     this.homePageService.setPageTitle('');
   }
+
   openFilterModal(ev) {
+    // this.unregisterBackButton();
     let popover = this.popoverCtrl.create(FilterBooks, {}, { showBackdrop: true, cssClass: 'contact-popover' });
     popover.present({
       ev: ev
+    }).then(() => {
+      var deregisterFunction = this.platform.registerBackButtonAction(() => {
+        // if (this.showImgSlide) {
+        //   this.showImgSlide = false;
+        // }
+        // else {
+        popover.dismiss();
+        // }
+        popover.onWillDismiss(() => {
+          deregisterFunction();
+          // this.registerBackButton()
+        });
+      });
     });
   }
 

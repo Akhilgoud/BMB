@@ -44,7 +44,7 @@ export class SidenavPage {
 
     this.pages = [
       // { title: 'Rate App',  icon: 'star', func: this.rateApp},
-      { title: 'Share this App', icon: 'share',  func: this.shareApp },
+      { title: 'Share this App', icon: 'share', func: this.shareApp },
       { title: 'Feedback & help', icon: 'paper', func: this.changePage.bind(this, FeedbackPage) },
       { title: 'Policy Privacy', icon: 'lock', func: this.privacyPolicy }
     ];
@@ -54,16 +54,28 @@ export class SidenavPage {
 
   }
 
-  privacyPolicy(){
-     document.location.href ="https://buymybook.flycricket.io/privacy.html";
+  privacyPolicy() {
+    document.location.href = "https://buymybook.flycricket.io/privacy.html";
   }
 
   shareApp() {
-    this.socialSharing.share('Download BMB From: ', '', '', this.playStoreURL).then(() => {
-      console.log("app shared")
+    this.socialSharing.share(this.getShareMessageBody(), 'Buy My Book App ', '', this.playStoreURL).then(() => {
+      console.log('Share');
     }).catch((err) => {
       console.log('error sharing book');
     });
+
+    // this.socialSharing.share('Download BMB From: ', '', '', this.playStoreURL).then(() => {
+    //   console.log("app shared")
+    // }).catch((err) => {
+    //   console.log('error sharing book');
+    // });
+  }
+
+  getShareMessageBody() {
+    var msg = "Hi, You can buy or sell old books in Buy My Book app. \n";
+    msg = msg + "Do check it out.";
+    return msg;
   }
 
   changePage(page) {

@@ -57,14 +57,33 @@ export class FilterBooks {
         }
       );
     }
-    this.platform.registerBackButtonAction(() => {
+
+    this.viewController.onDidDismiss(() => {
       this.courseselect.close();
       this.degreeselect.close();
       this.branchselect.close();
       this.yearselect.close();
       this.semselect.close();
-      this.viewController.dismiss();
     });
+    // this.viewController.onWillDismiss(() => {
+    //   this.courseselect.close();
+    //   this.degreeselect.close();
+    //   this.branchselect.close();
+    //   this.yearselect.close();
+    //   this.semselect.close();
+    // });
+    // var deregisterFunction = this.platform.registerBackButtonAction(() => {
+    //   this.courseselect.close();
+    //   this.degreeselect.close();
+    //   this.branchselect.close();
+    //   this.yearselect.close();
+    //   this.semselect.close();
+    //   this.viewController.onWillDismiss(() => {
+    //     deregisterFunction();
+    //     // this.registerBackButton()
+    //   });
+    //   this.viewController.dismiss();
+    // });
   }
 
   // async ngOnInit() {
@@ -73,6 +92,12 @@ export class FilterBooks {
   //   this.googleAutocomplete.addListener('place_changed', () => {
   //     // do whatever here
   //   });
+  // }
+
+
+
+  // ionViewWillLeave() {
+
   // }
 
   segmentChanged(ev: any) {

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import 'rxjs/add/operator/takeWhile';
-import { NavController, PopoverController, NavParams, Searchbar } from 'ionic-angular';
+import { NavController, PopoverController, NavParams, Searchbar, Platform } from 'ionic-angular';
 // import { Keyboard } from 'ionic-native';
 import { PostbookPage, BooksinfoPage, LoginPage, MypostsPage, FilterBooks } from '../pages';
 import { HomePageService } from './home.service';
@@ -23,8 +23,10 @@ export class HomePage {
   private showSearchIcon: boolean = true;
   private showFilterIcon: boolean = true;
   private pageTitle: string = "";
+  private deregisterFunction: any;
 
   constructor(public navCtrl: NavController,
+    public platform: Platform,
     public homePageService: HomePageService,
     public popoverCtrl: PopoverController,
     public booksinfoPageService: BooksinfoPageService,
@@ -48,6 +50,7 @@ export class HomePage {
       title => {
         this.pageTitle = title;
       });
+
   }
 
 
@@ -57,10 +60,17 @@ export class HomePage {
 
   searchBtnClicked() {
     this.showSearchBox = !this.showSearchBox;
-    if (this.showSearchBox)
+    if (this.showSearchBox) {
+      this.deregisterFunction = this.platform.registerBackButtonAction(() => {
+        this.showSearchBox = false;
+        this.deregisterFunction();
+      });
       setTimeout(() => {
         this.searchBar.setFocus();
       }, 100);
+    } else {
+      if (this.deregisterFunction) this.deregisterFunction();
+    }
   }
 
 
@@ -72,7 +82,7 @@ export class HomePage {
 
   }
 
-  ionVieDidLeave() {
+  ionViewDidLeave() {
     this.alive = false;
   }
 

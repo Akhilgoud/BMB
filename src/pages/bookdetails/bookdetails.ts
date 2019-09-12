@@ -125,7 +125,7 @@ export class BookdetailsPage {
     }
 
     share() {
-        this.socialSharing.share(this.getMessageBody(), 'Interested to buy ' + this.bookObj.name, '', 'BMB').then(() => {
+        this.socialSharing.share(this.getShareMessageBody(), 'Interested to buy ' + this.bookObj.name, '', null).then(() => {
             console.log('Share')
         }).catch((err) => {
             console.log('error sharing book');
@@ -151,9 +151,9 @@ export class BookdetailsPage {
     sendWhatsAppMsg() {
         if (this.bookObj && this.bookObj.bookContact[0] && this.bookObj.bookContact[0].phoneNo) {
             let phone = this.bookObj.bookContact[0].phoneNo;
-            let img = this.bookObj.bookImages ? this.bookObj.bookImages[0].image : null;
+            let img = this.bookObj.bookImages[0] ? ('data:image/png;base64,' + this.bookObj.bookImages[0].image.data) : null;
             console.log(this.bookObj.bookImages)
-            this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, this.getMessageBody(), img, "BMB").then(() => {
+            this.socialSharing.shareViaWhatsAppToReceiver('+91' + phone, this.getMessageBody(), img, null).then(() => {
                 console.log('success!')
             }).catch((err) => {
                 // alert(JSON.stringify(err))
@@ -170,11 +170,19 @@ export class BookdetailsPage {
     // }
 
     getMessageBody() {
-        var msg = "Hi, I am interested in buying this Book. ";
-        msg = msg + "Book Name: " + this.bookObj.name + ' ';
-        msg = msg + "Book Price: " + this.bookObj.price + '. ';
+        var msg = "Hi, I am interested in buying this Book. \n";
+        msg = msg + "Book Name: " + this.bookObj.name + ' \n';
+        msg = msg + "Book Price: " + this.bookObj.price + '\n';
         msg = msg + "Please let me know where and how can I collect it.";
         msg = msg + "-Thanks";
+        return msg;
+    }
+
+    getShareMessageBody() {
+        var msg = "Hi, Found a great book in Buy My Book app. \n";
+        msg = msg + "Book Name: " + this.bookObj.name + ' \n';
+        msg = msg + "Book Price: " + this.bookObj.price + '\n';
+        msg = msg + "Do check it out.";
         return msg;
     }
 }
