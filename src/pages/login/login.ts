@@ -15,19 +15,19 @@ import { UserDbProvider } from '../../providers/userdatabase';
     templateUrl: 'login.html',
 })
 export class LoginPage {
-    loginForm: FormGroup;
-    loginFgtPwdForm: FormGroup;
     userObj: IUserObj = new IUserObj();
     bookObj: any;
     isRegister = false;
-    isLogin = false;
+    isLogin = true;
     authRes: any;
     err: any;
     forgotPwd = false;
     forgotPwdEmail = "";
     forgotPwdSuccess = null;
     forgotPwdFailed = null;
-    login_signup_form: FormGroup;
+    login_form: FormGroup;
+    signup_form: FormGroup;
+    forgot_password_form: FormGroup;
     constructor(public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -39,12 +39,12 @@ export class LoginPage {
         private database: UserDbProvider,
         private loadingController: LoadingController) {
 
+        this.isLogin = true;
+        this.isRegister = false;
+        this.forgotPwd = false;
         this.platform.registerBackButtonAction(() => {
             this.homePageService.setPage(BooksinfoPage);
         });
-
-        this.bindForm();
-
     }
 
     ionViewWillEnter() {
@@ -54,27 +54,6 @@ export class LoginPage {
     ionViewWillLeave() {
         this.homePageService.setPageTitle('');
     }
-
-    bindForm() {
-        // this.loginForm = new FormGroup({
-        //     'name': new FormControl(this.userObj.name, [
-        //         Validators.required
-        //     ]),
-        //     'email': new FormControl(this.userObj.email, Validators.required),
-        //     'password': new FormControl(this.userObj.password, Validators.required)
-        // });
-
-        this.loginForm = this.formBuilder.group({
-            name: [''],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
-        });
-
-        this.loginFgtPwdForm = this.formBuilder.group({
-            email: [null, [Validators.required, Validators.email]]
-        });
-    }
-
 
     authorize() {
         let loader = this.loadingController.create({
@@ -175,7 +154,8 @@ export class LoginPage {
     }
 
     ngOnInit() {
-        this.login_signup_form = this.formBuilder.group({
+
+        this.signup_form = this.formBuilder.group({
           name: new FormControl('', Validators.compose([
             Validators.maxLength(20),
             Validators.minLength(4),
@@ -191,7 +171,28 @@ export class LoginPage {
             // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
           ])),
         });
+
+
+       this.login_form = this.formBuilder.group({
+          email: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+          ])),
+          password: new FormControl('', Validators.compose([
+            Validators.required,
+          ])),
+        });
+
+
+        this.forgot_password_form = this.formBuilder.group({
+          email: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+          ])),
+        });
+
     }
+
 
   validation_messages = {
     'name': [
