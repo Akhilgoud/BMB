@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { IUserObj } from './login.model';
-import { BooksinfoPage } from '../pages';
+import { BooksinfoPage, UserProfilePage } from '../pages';
 import { LoginApi } from './login.service';
 import { UserInfoService } from '../../shared/shared';
 import { HomePageService } from '../home/home.service';
@@ -131,6 +131,11 @@ export class LoginPage {
                     //     this.validUser(response);
                     // }
                     this.forgotPwdSuccess = response.accepted && response.accepted.length > 0;
+                    if (this.forgotPwdSuccess) {
+                      setTimeout(() => {
+                        this.homePageService.setPage(UserProfilePage);
+                      }, 3000);
+                    }
                     if (!this.forgotPwdSuccess) this.forgotPwdFailed = true;
                     loader.dismiss();
                 },
