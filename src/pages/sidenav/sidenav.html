@@ -44,15 +44,15 @@
         <span class="side-nav-icon-text">Sell my book</span>
       </ion-icon>
       <ion-icon class="side-nav-icon" size="small" name="log-in" item-left ion-item menuClose
-        (click)="changePage(loginPage)" *ngIf="!userObj.email">
+        (click)="changePage(loginPage)" *ngIf="!userObj.uid">
         <span class="side-nav-icon-text">Sign In</span>
       </ion-icon>
       <ion-icon class="side-nav-icon" name="book" item-left ion-item menuClose (click)="changePage(mypostsPage)"
-        *ngIf="userObj.email">
+        *ngIf="userObj.uid">
         <span class="side-nav-icon-text">My Books</span>
       </ion-icon>
       <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()"
-        *ngIf="userObj.email">
+        *ngIf="userObj.uid">
         <span class="side-nav-icon-text">Sign Out</span>
       </ion-icon>
       <div class="app-applications">

@@ -89,28 +89,28 @@ export class SidenavPage {
 
   logout() {
     let alert = this.alertCtrl.create({
-    message: 'Do you really want to signout?',
-    buttons: [
-      {
-        text: 'No',
-        role: 'cancel',
-        handler: () => {
-          this.changePage(this.booksinfoPage);
-        }
-      },
-      {
-        text: 'Yes',
-        handler: () => {
-          this.database.DeleteUserData().then((data) => {
-          var message = 'Logged out successfully';
-          let toast = this.toastCtrl.create({
-            message: message,
-            position: 'bottom',
-            duration: 3000,
-            dismissOnPageChange: false
-          });
-          toast.present();
-        }, (error) => {
+      message: 'Do you really want to signout?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            this.changePage(this.booksinfoPage);
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.database.DeleteUserData().then((data) => {
+              var message = 'Logged out successfully';
+              let toast = this.toastCtrl.create({
+                message: message,
+                position: 'bottom',
+                duration: 3000,
+                dismissOnPageChange: false
+              });
+              toast.present();
+            }, (error) => {
               console.log(error);
               var message = 'Log out failed';
               let toast = this.toastCtrl.create({
@@ -123,11 +123,12 @@ export class SidenavPage {
             });
             this.userInfoService.clearUserInfo();
             this.changePage(this.booksinfoPage);
-            }
           }
-        ]
-      });
-  alert.present();
+        }
+      ]
+    });
+    if (alert)
+      alert.present();
   }
 
   GetAllUser() {

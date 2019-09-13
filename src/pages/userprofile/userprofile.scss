@@ -1,18 +1,52 @@
-page-userprofile{
-   .resetPwd.item-md.item-block .item-inner{
-        border:none;
-    }
-    .btn-update-profile {
-      background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
-      border-radius: 5px;
-      width: 92%;
-      margin-left: 4%;
-      }
-    .btn-update-profile:hover { background-position: right center; }
-    .error-message {
-        color: red;
-        font-size: 14px;
-        margin-left: 10%;
-        margin-top: 2%;
-    }
+page-userprofile {
+  .resetPwd.item-md.item-block .item-inner {
+    border: none;
+  }
+
+  .btn-update-profile {
+    background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+    border-radius: 5px;
+    width: 92%;
+    margin-left: 4%;
+  }
+
+  .btn-update-profile:hover {
+    background-position: right center;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-left: 10%;
+    margin-top: 2%;
+  }
+
+  .otp {
+    // width: 124px;
+    // height: 48px;
+    // border: 1px solid #999;
+    // margin-left: 29%;
+    width: 124px;
+    height: 48px;
+    border-bottom: 1px solid #d02424;
+    margin-left: 29%;
+    margin-top: 8%;
+  }
+
+  .otp .text-input-md {
+    text-align: center;
+  }
+
+  #partitioned {
+    padding-left: 15px;
+    letter-spacing: 42px;
+    border: 0;
+    background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 50px 1px;
+    background-repeat: repeat-x;
+    background-position-x: 35px;
+    width: 220px;
+  }
+
 }

@@ -1,123 +1,153 @@
 <ion-content padding style="margin-top: 4%">
-	<!-- Sign Up form -->
-	<div id="sign-up-form" *ngIf="isRegister && !forgotPwd && !isLogin">
-		<form [formGroup]="signup_form">
-			<h1 class="authorize-title"><b>Sign Up</b></h1>
-			<ion-item>
-				<ion-label floating>
-					<ion-icon name="person"></ion-icon><span class="sign-up-text">Name</span></ion-label>
-          <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text" class="sign-up-text-input"></ion-input>
-        </ion-item>
-        <ng-container *ngFor="let validation of validation_messages.name">
-          <div class="error-message" *ngIf="signup_form.get('name').hasError(validation.type) && (signup_form.get('name').dirty || signup_form.get('name').touched)">
-            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-          </div>
-        </ng-container>
-        <ion-item>
-          <ion-label floating><ion-icon name="mail"></ion-icon><span class="sign-up-text">Email</span></ion-label>
-          <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text" class="sign-up-text-input"></ion-input>
-        </ion-item>
-        <ng-container *ngFor="let validation of validation_messages.email">
-          <div class="error-message" *ngIf="signup_form.get('email').hasError(validation.type) && (signup_form.get('email').dirty || signup_form.get('email').touched)">
-            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-          </div>
-        </ng-container>
-        <ion-item>
-          <ion-label floating><ion-icon name="key"></ion-icon><span class="sign-up-text">Password</span></ion-label>
-          <ion-input formControlName="password" [(ngModel)]="userObj.password" type="text" class="sign-up-text-input"></ion-input>
-        </ion-item>
-        <ng-container *ngFor="let validation of validation_messages.password">
-          <div class="error-message" *ngIf="signup_form.get('password').hasError(validation.type) && (signup_form.get('password').dirty || signup_form.get('password').touched)">
-            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-          </div>
-        </ng-container>
-        <ion-item>
-          <ion-row>
-              <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!signup_form.valid">Sign Up</button>
-           </ion-row>
-              <ion-row><span style="font-family: serif;color: #999;margin-left: 10%;margin-top: 2%;">Already have an account?</span>
-               <a (click)="isRegister=forgotPwd=false;isLogin=true;" style="color: #663399; margin-left: 5px;margin-top: 6px;">Sign In</a> </ion-row>
-               <ion-row>
-                <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
-             </ion-row>
-           </ion-item>
-      </form>
-    </div>
+  <!-- Sign Up form -->
+  <div id="sign-up-form" *ngIf="isRegister && !forgotPwd && !isLogin">
+    <form [formGroup]="signup_form">
+      <h1 class="authorize-title"><b>Sign Up</b></h1>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="person"></ion-icon><span class="sign-up-text">Name</span>
+        </ion-label>
+        <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text" class="sign-up-text-input"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages?.name">
+        <div class="error-message"
+          *ngIf="signup_form.get('name').hasError(validation.type) && (signup_form.get('name').dirty || signup_form.get('name').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail"></ion-icon><span class="sign-up-text">Email</span>
+        </ion-label>
+        <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text" class="sign-up-text-input">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages?.email">
+        <div class="error-message"
+          *ngIf="signup_form.get('email').hasError(validation.type) && (signup_form.get('email').dirty || signup_form.get('email').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="key"></ion-icon><span class="sign-up-text">Password</span>
+        </ion-label>
+        <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" class="sign-up-text-input">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages?.password">
+        <div class="error-message"
+          *ngIf="signup_form.get('password').hasError(validation.type) && (signup_form.get('password').dirty || signup_form.get('password').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <ion-item>
+        <ion-row>
+          <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!signup_form.valid">Sign
+            Up</button>
+        </ion-row>
+        <ion-row><span style="font-family: serif;color: #999;margin-left: 10%;margin-top: 2%;">Already have an
+            account?</span>
+          <a (click)="isRegister=forgotPwd=false;isLogin=true;"
+            style="color: #663399; margin-left: 5px;margin-top: 6px;">Sign In</a> </ion-row>
+        <ion-row>
+          <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
+        </ion-row>
+      </ion-item>
+    </form>
+  </div>
 
-    <!-- Login form -->
-    <div id="login-form" *ngIf="!isRegister && !forgotPwd">
-      <form [formGroup]="login_form">
-            <h1 class="authorize-title"><b>Login</b></h1>
-          <ion-item>
-            <ion-label floating><ion-icon name="person"></ion-icon><span class="sign-up-text">Email</span></ion-label>
-            <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text" class="sign-up-text-input"></ion-input>
-          </ion-item>
-          <ng-container *ngFor="let validation of validation_messages.email">
-            <div class="error-message" *ngIf="login_form.get('email').hasError(validation.type) && (login_form.get('email').dirty || login_form.get('email').touched)">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-            </div>
-          </ng-container>
-          <ion-item>
-            <ion-label floating><ion-icon name="key"></ion-icon><span class="sign-up-text">Password</span></ion-label>
-            <ion-input formControlName="password" [(ngModel)]="userObj.password" type="text" class="sign-up-text-input"></ion-input>
-          </ion-item>
-          <ng-container *ngFor="let validation of validation_messages.password">
-            <div class="error-message" *ngIf="login_form.get('password').hasError(validation.type) && (login_form.get('password').dirty || login_form.get('password').touched)">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-            </div>
-          </ng-container>
-           <ion-item>
-            <ion-row>
-             <ion-col>
-              <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!login_form.valid"><b>Sign In</b> </button>
-             </ion-col>
-             <ion-col>
-              <button ion-button (click)="isLogin=forgotPwd=false;isRegister=true" full class="signupbtn"> <b>Sign Up</b></button>
-             </ion-col>
-             </ion-row>
-             <ion-row>
-                <span (click)="forgotPwdClicked()" class="forgot-password">Forgot your password?</span>
-             </ion-row>
-             <ion-row>
-                <div *ngIf="authRes == 'NOTFOUND'" class="authError">Email Not Found. Please sign up</div>
-                <div *ngIf="authRes == 'WC'" class="authError">Incorrect email or password</div>
-                <div *ngIf="authRes == '501'" class="authError">Failed to Authorize. Please try again later</div>
-             </ion-row>
-           </ion-item>
-        </form>
-    </div>
+  <!-- Login form -->
+  <div id="login-form" *ngIf="!isRegister && !forgotPwd">
+    <form [formGroup]="login_form">
+      <h1 class="authorize-title"><b>Login</b></h1>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="person"></ion-icon><span class="sign-up-text">Email</span>
+        </ion-label>
+        <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text" class="sign-up-text-input">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages?.email">
+        <div class="error-message"
+          *ngIf="login_form.get('email').hasError(validation.type) && (login_form.get('email').dirty || login_form.get('email').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="key"></ion-icon><span class="sign-up-text">Password</span>
+        </ion-label>
+        <ion-input formControlName="password" [(ngModel)]="userObj.password" type="password" class="sign-up-text-input">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages?.password">
+        <div class="error-message"
+          *ngIf="login_form.get('password').hasError(validation.type) && (login_form.get('password').dirty || login_form.get('password').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!login_form.valid"><b>Sign
+                In</b> </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button (click)="isLogin=forgotPwd=false;isRegister=true" full class="signupbtn"> <b>Sign
+                Up</b></button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <span (click)="forgotPwdClicked()" class="forgot-password">Forgot your password?</span>
+        </ion-row>
+        <ion-row>
+          <div *ngIf="authRes == 'NOTFOUND'" class="authError">Email Not Found. Please sign up</div>
+          <div *ngIf="authRes == 'WC'" class="authError">Incorrect email or password</div>
+          <div *ngIf="authRes == '501'" class="authError">Failed to Authorize. Please try again later</div>
+        </ion-row>
+      </ion-item>
+    </form>
+  </div>
 
-    <!-- Forgot password form -->
-    <div id="forgot-password-form" *ngIf="forgotPwd">
-      <form [formGroup]="forgot_password_form">
-         <h1 class="authorize-title"><b>Forgot Password</b></h1>
-          <ion-item>
-            <ion-label floating><ion-icon name="mail"></ion-icon><span class="sign-up-text">Email</span></ion-label>
-            <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text" class="sign-up-text-input"></ion-input>
-          </ion-item>
-          <ng-container *ngFor="let validation of validation_messages.email">
-            <div class="error-message" *ngIf="forgot_password_form.get('email').hasError(validation.type) && (forgot_password_form.get('email').dirty || forgot_password_form.get('email').touched)">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-            </div>
-          </ng-container>
-          <ion-item>
-           <ion-row>
-              <ion-col>
-                <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn" [disabled]="!forgot_password_form.valid">
-                  Submit
-                </button>
-              </ion-col>
-             </ion-row>
-             <ion-row>
-                <span class="signin-signup" (click)="isLogin=true;isRegister=forgotPwd=false">Sign In</span>
-                <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-                <span style="color:#663399" (click)="isRegister=true;isLogin=forgotPwd=false">Sign Up</span>
-             </ion-row>
-             <ion-row>
-               <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">An email has been sent to your Email Id. <br />Please check!</div>
-               <div *ngIf="forgotPwdFailed" class="fgtPwdSuc">Please enter your registered email address.</div>
-             </ion-row>
-          </ion-item>
-        </form>
-    </div>
+  <!-- Forgot password form -->
+  <div id="forgot-password-form" *ngIf="forgotPwd">
+    <form [formGroup]="forgot_password_form">
+      <h1 class="authorize-title"><b>Forgot Password</b></h1>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail"></ion-icon><span class="sign-up-text">Email</span>
+        </ion-label>
+        <ion-input formControlName="email" [(ngModel)]="userObj.email" type="text" class="sign-up-text-input">
+        </ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages?.email">
+        <div class="error-message"
+          *ngIf="forgot_password_form.get('email').hasError(validation.type) && (forgot_password_form.get('email').dirty || forgot_password_form.get('email').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn"
+              [disabled]="!forgot_password_form.valid">
+              Submit
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <span class="signin-signup" (click)="isLogin=true;isRegister=forgotPwd=false">Sign In</span>
+          <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+          <span style="color:#663399" (click)="isRegister=true;isLogin=forgotPwd=false">Sign Up</span>
+        </ion-row>
+      </ion-item>
+
+      <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">OTP has been sent to your Email. <br>
+        <a (click)="gotoChangePwd()" class="presshere">Press here</a> to redirect to change password page!
+      </div>
+      <div *ngIf="forgotPwdFailed" class="fgtPwdSuc">Please enter your registered email address.</div>
+    </form>
+  </div>
+
 </ion-content>

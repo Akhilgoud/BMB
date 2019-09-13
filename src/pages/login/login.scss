@@ -1,64 +1,84 @@
 page-login {
-    .signinbtn {
-        background-image: linear-gradient(to right, rgb(34, 212, 198) 0%, rgb(97, 224, 161) 51%, rgb(14, 199, 134) 100%);
-        background-position: right center;
-        width: 80%;
-        height: 28px;
-        word-spacing: 4px;
-        font-family: serif;
-        text-transform: none;
-        margin: 15px 0px 9px 20px;
-    }
-    .signupbtn {
-        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
-        background-position: right center;
-        width: 80%;
-        height: 28px;
-        word-spacing: 4px;
-        font-family: serif;
-        text-transform: none;
-        margin: 15px 0px 9px 20px;
-    }
-    .forgot-password {
-        font-family: serif;
-        text-transform: none;
-        color: #999;
-        text-decoration: underline;
-        margin-left: 26%;
-        margin-top: 2%;
-    }
-    .authError {
-        color: rgb(180, 62, 62);
-        letter-spacing: 1px;
-        word-spacing: 2px;
-        font-size: 12px;
-         margin: 15%;
-    }
-    .fgtPwdSuc{
-        font-size: 13px;
-        margin: 16px;
-        color: #0e73ae;
-        letter-spacing: 0.5px;
-    }
-    .error-message {
-        color: red;
-        font-size: 14px;
-        margin-left: 10%;
-        margin-top: 2%;
-    }
-    .sign-up-text {
-      margin-left: 5%;
-      color: #663399;
-    }
-    .sign-up-text-input{
-      padding-left: 7%;
-    }
-    .signin-signup {
-      margin-left: 25%;
-      color: #663399;
-    }
-    .authorize-title{
-      margin-left: 5%;
-      font-size: 19px;
-    }
+  .signinbtn {
+    //       .btn-grad {background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%)}
+    // .btn-grad:hover { background-position: right center; }
+    // background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+    background-color: #13847d;
+    background-position: right center;
+    width: 80%;
+    height: 28px;
+    word-spacing: 4px;
+    font-family: sans-serif;
+    text-transform: none;
+    margin: 15px 0px 9px 20px;
+  }
+
+  .signupbtn {
+    // background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+    background-color: #5e7b9e;
+    background-position: right center;
+    width: 80%;
+    height: 28px;
+    word-spacing: 4px;
+    font-family: sans-serif;
+    text-transform: none;
+    margin: 15px 0px 9px 20px;
+  }
+
+  .forgot-password {
+    font-family: serif;
+    text-transform: none;
+    color: #999;
+    text-decoration: underline;
+    margin-left: 26%;
+    margin-top: 2%;
+  }
+
+  .authError {
+    color: rgb(180, 62, 62);
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    font-size: 12px;
+    margin: 15%;
+  }
+
+  .fgtPwdSuc {
+    margin: 16px;
+    color: #8f8f8f;
+    letter-spacing: 0.5px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-left: 10%;
+    margin-top: 2%;
+  }
+
+  .presshere {
+    color: #2e86e2;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .sign-up-text {
+    margin-left: 5%;
+    color: #663399;
+  }
+
+  .sign-up-text-input {
+    padding-left: 7%;
+  }
+
+  .signin-signup {
+    margin-left: 25%;
+    color: #663399;
+  }
+
+  .authorize-title {
+    margin-left: 5%;
+    font-size: 19px;
+  }
 }
