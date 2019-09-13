@@ -131,7 +131,7 @@ export class LoginPage {
                     //     this.validUser(response);
                     // }
                     this.forgotPwdSuccess = response.accepted && response.accepted.length > 0;
-                     //   this.forgotPwdFailed = true;
+                    if (!this.forgotPwdSuccess) this.forgotPwdFailed = true;
                     loader.dismiss();
                 },
                 error => {
