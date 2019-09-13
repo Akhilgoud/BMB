@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { HomePage, LoginPage, MypostsPage, PostbookPage, BooksinfoPage, UserProfilePage, FeedbackPage } from '../pages';
 import { HomePageService } from '../home/home.service';
 import { UserInfoService } from '../../shared/shared';
@@ -33,7 +33,8 @@ export class SidenavPage {
     private database: UserDbProvider,
     private socialSharing: SocialSharing,
     private postBookDataService: PostBookDataService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
   ) {
     this.rootPage = HomePage;
     this.userInfoService.userInfoChange.subscribe(
@@ -87,29 +88,46 @@ export class SidenavPage {
   }
 
   logout() {
-    this.database.DeleteUserData().then((data) => {
-      console.log(data);
-      var message = 'Logged out successfully';
-      let toast = this.toastCtrl.create({
-        message: message,
-        position: 'bottom',
-        duration: 3000,
-        dismissOnPageChange: false
+    let alert = this.alertCtrl.create({
+    message: 'Do you really want to signout?',
+    buttons: [
+      {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+          this.changePage(this.booksinfoPage);
+        }
+      },
+      {
+        text: 'Yes',
+        handler: () => {
+          this.database.DeleteUserData().then((data) => {
+          var message = 'Logged out successfully';
+          let toast = this.toastCtrl.create({
+            message: message,
+            position: 'bottom',
+            duration: 3000,
+            dismissOnPageChange: false
+          });
+          toast.present();
+        }, (error) => {
+              console.log(error);
+              var message = 'Log out failed';
+              let toast = this.toastCtrl.create({
+                message: message,
+                position: 'bottom',
+                duration: 3000,
+                dismissOnPageChange: false
+              });
+              toast.present();
+            });
+            this.userInfoService.clearUserInfo();
+            this.changePage(this.booksinfoPage);
+            }
+          }
+        ]
       });
-      toast.present();
-    }, (error) => {
-      console.log(error);
-      var message = 'Log out failed';
-      let toast = this.toastCtrl.create({
-        message: message,
-        position: 'bottom',
-        duration: 3000,
-        dismissOnPageChange: false
-      });
-      toast.present();
-    });
-    this.userInfoService.clearUserInfo();
-    this.changePage(this.booksinfoPage);
+  alert.present();
   }
 
   GetAllUser() {

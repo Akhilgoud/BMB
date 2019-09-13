@@ -18,7 +18,7 @@ export class LoginPage {
     userObj: IUserObj = new IUserObj();
     bookObj: any;
     isRegister = false;
-    isLogin = true;
+    isLogin = false;
     authRes: any;
     err: any;
     forgotPwd = false;
@@ -39,16 +39,13 @@ export class LoginPage {
         private database: UserDbProvider,
         private loadingController: LoadingController) {
 
-        this.isLogin = true;
-        this.isRegister = false;
-        this.forgotPwd = false;
         this.platform.registerBackButtonAction(() => {
             this.homePageService.setPage(BooksinfoPage);
         });
     }
 
     ionViewWillEnter() {
-        this.homePageService.setPageTitle('Login/Register');
+        this.homePageService.setPageTitle('Authorize');
     }
 
     ionViewWillLeave() {
@@ -134,7 +131,7 @@ export class LoginPage {
                     //     this.validUser(response);
                     // }
                     this.forgotPwdSuccess = response.accepted && response.accepted.length > 0;
-                        this.forgotPwdFailed = true;
+                     //   this.forgotPwdFailed = true;
                     loader.dismiss();
                 },
                 error => {
@@ -150,11 +147,11 @@ export class LoginPage {
     forgotPwdClicked() {
         if (this.userObj && this.userObj.email)
             this.forgotPwdEmail = this.userObj.email;
-        this.forgotPwd = true;
+            this.forgotPwd = true;
+            this.isLogin = this.isRegister = false;
     }
 
     ngOnInit() {
-
         this.signup_form = this.formBuilder.group({
           name: new FormControl('', Validators.compose([
             Validators.maxLength(20),
