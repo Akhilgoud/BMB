@@ -33,7 +33,7 @@
         </ng-container>
         <ion-item>
           <ion-row>
-              <button ion-button (click)="authorize()" full class="signinbtn">Sign Up</button>
+              <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!signup_form.valid">Sign Up</button>
            </ion-row>
               <ion-row><span style="font-family: serif;color: #999;margin-left: 10%;margin-top: 2%;">Already have an account?</span>
                <a (click)="isRegister=forgotPwd=false;isLogin=true;" style="color: #663399; margin-left: 5px;margin-top: 6px;">Sign In</a> </ion-row>
@@ -69,7 +69,7 @@
            <ion-item>
             <ion-row>
              <ion-col>
-              <button ion-button (click)="authorize()" full class="signinbtn"[disabled]="!login_form.valid"><b>Sign In</b> </button>
+              <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!login_form.valid"><b>Sign In</b> </button>
              </ion-col>
              <ion-col>
               <button ion-button (click)="isLogin=forgotPwd=false;isRegister=true" full class="signupbtn"> <b>Sign Up</b></button>
@@ -103,7 +103,7 @@
           <ion-item>
            <ion-row>
               <ion-col>
-                <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn">
+                <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn" [disabled]="!forgot_password_form.valid">
                   Submit
                 </button>
               </ion-col>
