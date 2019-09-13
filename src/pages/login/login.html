@@ -27,7 +27,8 @@
             <ion-label>
               <ion-icon name="key"></ion-icon>
             </ion-label>
-            <ion-input minlength="5" formControlName="password" [(ngModel)]="userObj.password" type="password" placeholder="Password">
+            <ion-input minlength="5" formControlName="password" [(ngModel)]="userObj.password" type="password"
+              placeholder="Password">
             </ion-input>
           </ion-item>
         </ion-col>
@@ -91,7 +92,8 @@
         <span></span>
       </span>
       <a class="loginRegBtn" (click)="forgotPwd = false">
-        <span>Sign In/Sign Up</span>
+        <span (click)="isRegister= false">Sign In</span>
+        <span (click)="isRegister= true">/Sign Up</span>
       </a>
     </div>
     <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">An email has been sent to your Email Id. Please check</div>

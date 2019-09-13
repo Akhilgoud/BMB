@@ -34,7 +34,8 @@
         <ion-list>
           <ion-item>
             <ion-label floating>Course</ion-label>
-            <ion-select [(ngModel)]="filterObj.course" (ionChange)="courseSelected()" #courseselect>
+            <ion-select [(ngModel)]="filterObj.course" (ionChange)="courseSelected()" #courseselect cancelText="Clear"
+              (ionCancel)="filterObj.course = null">
               <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.COURSE" [value]="obj.key">
                 {{obj.value}}
               </ion-option>
@@ -49,7 +50,8 @@
           </ion-item>
           <ion-item *ngIf="filterObj.course && lookupData?.subcourse?.length">
             <ion-label floating>Degree</ion-label>
-            <ion-select [(ngModel)]="filterObj.subcourse" (ionChange)="degreeSelected()" #degreeselect>
+            <ion-select [(ngModel)]="filterObj.subcourse" (ionChange)="degreeSelected()" #degreeselect
+              cancelText="Clear" (ionCancel)="filterObj.subcourse = null">
               <ion-option *ngFor="let obj of lookupData?.subcourse" [value]="obj.key">
                 {{obj.value}}
               </ion-option>
@@ -61,7 +63,8 @@
           <ion-list> -->
           <ion-item *ngIf="filterObj.course && lookupData?.branch?.length">
             <ion-label floating>Branch</ion-label>
-            <ion-select [(ngModel)]="filterObj.branch" #branchselect>
+            <ion-select [(ngModel)]="filterObj.branch" #branchselect cancelText="Clear"
+              (ionCancel)="filterObj.branch = null">
               <ion-option *ngFor="let obj of lookupData?.branch" [value]="obj.key">
                 {{obj.value}}
               </ion-option>
@@ -78,7 +81,7 @@
           <ion-list> -->
           <ion-item *ngIf="filterObj.course && lookupData?.year?.length">
             <ion-label floating>Year</ion-label>
-            <ion-select [(ngModel)]="filterObj.year" #yearselect>
+            <ion-select [(ngModel)]="filterObj.year" #yearselect cancelText="Clear" (ionCancel)="filterObj.year = null">
               <ion-option *ngFor="let obj of lookupData?.year" [value]="obj">
                 {{obj}}
               </ion-option>
@@ -86,7 +89,7 @@
           </ion-item>
           <ion-item *ngIf="filterObj.course && lookupData?.sem?.length">
             <ion-label floating>Semester</ion-label>
-            <ion-select [(ngModel)]="filterObj.sem" #semselect>
+            <ion-select [(ngModel)]="filterObj.sem" #semselect cancelText="Clear" (ionCancel)="filterObj.sem = null">
               <ion-option *ngFor="let obj of lookupData?.sem" [value]="obj">
                 {{obj}}
               </ion-option>
