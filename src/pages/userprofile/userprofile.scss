@@ -9,4 +9,10 @@ page-userprofile{
       margin-left: 4%;
       }
     .btn-update-profile:hover { background-position: right center; }
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-left: 10%;
+        margin-top: 2%;
+    }
 }

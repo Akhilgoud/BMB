@@ -19,6 +19,11 @@
                         <ion-input formControlName="name" [(ngModel)]="userObj.name" type="text" placeholder="Name">
                         </ion-input>
                     </ion-item>
+                    <ng-container *ngFor="let validation of validation_messages.name">
+                      <div class="error-message" *ngIf="userProfileForm.get('name').hasError(validation.type) && (userProfileForm.get('name').dirty || userProfileForm.get('name').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                      </div>
+                    </ng-container>
                     <ion-item class="resetPwd">
                         <!-- <label class="checkbox-inline">
                             <input type="checkbox" value="isResetPassword" name="isResetPassword"
@@ -48,19 +53,28 @@
                         <ion-label>
                             <ion-icon name="key"></ion-icon>
                         </ion-label>
-                        <ion-input minlength="5" formControlName="newPassword" [(ngModel)]="userObj.newPassword" type="password"
+                        <ion-input formControlName="newPassword" [(ngModel)]="userObj.newPassword" type="password"
                             placeholder="New Password" [disabled]="!userObj.resetPassword">
                         </ion-input>
                     </ion-item>
-
+                    <ng-container *ngFor="let validation of validation_messages.password">
+                      <div class="error-message" *ngIf="userProfileForm.get('newPassword').hasError(validation.type) && (userProfileForm.get('newPassword').dirty || userProfileForm.get('newPassword').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                      </div>
+                    </ng-container>
                     <ion-item>
                         <ion-label>
                             <ion-icon name="key"></ion-icon>
                         </ion-label>
-                        <ion-input minlength="5" formControlName="confirmPassword" [(ngModel)]="userObj.confirmPassword"
+                        <ion-input formControlName="confirmPassword" [(ngModel)]="userObj.confirmPassword"
                             type="password" placeholder="Confirm Password" [disabled]="!userObj.resetPassword">
                         </ion-input>
                     </ion-item>
+                    <ng-container *ngFor="let validation of validation_messages.password">
+                      <div class="error-message" *ngIf="userProfileForm.get('confirmPassword').hasError(validation.type) && (userProfileForm.get('confirmPassword').dirty || userProfileForm.get('confirmPassword').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                      </div>
+                    </ng-container>
                 </form>
             </ion-col>
         </ion-row>

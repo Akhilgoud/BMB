@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform, LoadingController, ToastController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { BooksinfoPage } from '../pages';
 import { UserProfileApi } from './userprofile.service';
 import { UserInfoService } from '../../shared/shared';
@@ -46,11 +46,32 @@ export class UserProfilePage {
             name: ['', Validators.required],
             email: [{ value: '', disabled: true }, Validators.required],
             password: ['', Validators.required],
-            newPassword: ['', Validators.required],
-            confirmPassword: ['', Validators.required],
+            newPassword: new FormControl('', Validators.compose([
+            Validators.minLength(5),
+            Validators.required,
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+          ])),
+            confirmPassword: new FormControl('', Validators.compose([
+            Validators.minLength(5),
+            Validators.required,
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+          ])),
             resetPassword: [false]
         });
     }
+
+    validation_messages = {
+        'name': [
+          { type: 'required', message: 'name is required.' },
+          { type: 'minlength', message: 'name must be at least 4 characters long.' },
+          { type: 'maxlength', message: 'name cannot be more than 20 characters long.' },
+        ],
+        'password': [
+          { type: 'required', message: 'Password is required.' },
+          { type: 'minlength', message: 'Password must be at least 5 characters long.' },
+          // { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+        ],
+      }
 
     udpateProfile() {
         if (this.userObj.newPassword == this.userObj.confirmPassword) {
