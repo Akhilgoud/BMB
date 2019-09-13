@@ -1,44 +1,64 @@
 page-login {
     .signinbtn {
-        background-color: #089398;
-        border-radius: 25px;
-    }
-    .signinbtn .button-inner {
-        letter-spacing: 3px;
-        word-spacing: 8px;
+        background-image: linear-gradient(to right, rgb(34, 212, 198) 0%, rgb(97, 224, 161) 51%, rgb(14, 199, 134) 100%);
+        background-position: right center;
+        width: 80%;
+        height: 28px;
+        word-spacing: 4px;
         font-family: serif;
+        text-transform: none;
+        margin: 15px 0px 9px 20px;
     }
-    .loginRegDiv {
-        text-align: center;
+    .signupbtn {
+        background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+        background-position: right center;
+        width: 80%;
+        height: 28px;
+        word-spacing: 4px;
+        font-family: serif;
+        text-transform: none;
+        margin: 15px 0px 9px 20px;
     }
-
-    .loginRegText {
-        letter-spacing: 1px;
-        font-size: 16px;
-    }
-
-    .loginRegBtn {
-        color: blue;
+    .forgot-password {
+        font-family: serif;
+        text-transform: none;
+        color: #999;
+        text-decoration: underline;
+        margin-left: 26%;
+        margin-top: 2%;
     }
     .authError {
-        color: red;
+        color: rgb(180, 62, 62);
         letter-spacing: 1px;
         word-spacing: 2px;
+        font-size: 12px;
+         margin: 15%;
     }
     .fgtPwdSuc{
-        text-align: center;
-        font-size: 17px;
+        font-size: 13px;
         margin: 16px;
         color: #0e73ae;
-        letter-spacing: 0.9px;
-        word-spacing: 1px;
+        letter-spacing: 0.5px;
     }
-    .fgtPwdTxt {
-        text-align: center;
-        color: #089398;
-        font-size: 17px;
-        letter-spacing: 2px;
-        word-spacing: 5px;
-        padding: 5px;
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-left: 10%;
+        margin-top: 2%;
+    }
+    .sign-up-text {
+      margin-left: 5%;
+      color: #663399;
+    }
+    .sign-up-text-input{
+      padding-left: 7%;
+    }
+    .signin-signup {
+      margin-left: 25%;
+      color: #663399;
+    }
+    .authorize-title{
+      margin-left: 5%;
+      font-size: 19px;
     }
 }

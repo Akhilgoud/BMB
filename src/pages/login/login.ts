@@ -15,17 +15,19 @@ import { UserDbProvider } from '../../providers/userdatabase';
     templateUrl: 'login.html',
 })
 export class LoginPage {
-    loginForm: FormGroup;
-    loginFgtPwdForm: FormGroup;
     userObj: IUserObj = new IUserObj();
     bookObj: any;
     isRegister = false;
+    isLogin = false;
     authRes: any;
     err: any;
     forgotPwd = false;
     forgotPwdEmail = "";
     forgotPwdSuccess = null;
     forgotPwdFailed = null;
+    login_form: FormGroup;
+    signup_form: FormGroup;
+    forgot_password_form: FormGroup;
     constructor(public platform: Platform,
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -40,39 +42,15 @@ export class LoginPage {
         this.platform.registerBackButtonAction(() => {
             this.homePageService.setPage(BooksinfoPage);
         });
-
-        this.bindForm();
-
     }
 
     ionViewWillEnter() {
-        this.homePageService.setPageTitle('Login/Register');
+        this.homePageService.setPageTitle('Authorize');
     }
 
     ionViewWillLeave() {
         this.homePageService.setPageTitle('');
     }
-
-    bindForm() {
-        // this.loginForm = new FormGroup({
-        //     'name': new FormControl(this.userObj.name, [
-        //         Validators.required
-        //     ]),
-        //     'email': new FormControl(this.userObj.email, Validators.required),
-        //     'password': new FormControl(this.userObj.password, Validators.required)
-        // });
-
-        this.loginForm = this.formBuilder.group({
-            name: [''],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
-        });
-
-        this.loginFgtPwdForm = this.formBuilder.group({
-            email: [null, [Validators.required, Validators.email]]
-        });
-    }
-
 
     authorize() {
         let loader = this.loadingController.create({
@@ -169,6 +147,64 @@ export class LoginPage {
     forgotPwdClicked() {
         if (this.userObj && this.userObj.email)
             this.forgotPwdEmail = this.userObj.email;
-        this.forgotPwd = true;
+            this.forgotPwd = true;
+            this.isLogin = this.isRegister = false;
     }
+
+    ngOnInit() {
+        this.signup_form = this.formBuilder.group({
+          name: new FormControl('', Validators.compose([
+            Validators.maxLength(20),
+            Validators.minLength(4),
+            Validators.required
+          ])),
+          email: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+          ])),
+          password: new FormControl('', Validators.compose([
+            Validators.minLength(5),
+            Validators.required,
+            // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+          ])),
+        });
+
+
+       this.login_form = this.formBuilder.group({
+          email: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+          ])),
+          password: new FormControl('', Validators.compose([
+            Validators.required,
+          ])),
+        });
+
+
+        this.forgot_password_form = this.formBuilder.group({
+          email: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+          ])),
+        });
+
+    }
+
+
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'name is required.' },
+      { type: 'minlength', message: 'name must be at least 4 characters long.' },
+      { type: 'maxlength', message: 'name cannot be more than 20 characters long.' },
+    ],
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Please enter a valid email.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' },
+      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
+      // { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
+    ],
+  }
 }

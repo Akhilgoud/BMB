@@ -59,11 +59,11 @@ export class FilterBooks {
     }
 
     this.viewController.onDidDismiss(() => {
-      if (this.courseselect) this.courseselect.close();
-      if (this.degreeselect) this.degreeselect.close();
-      if (this.branchselect) this.branchselect.close();
-      if (this.yearselect) this.yearselect.close();
-      if (this.semselect) this.semselect.close();
+      this.courseselect.close();
+      this.degreeselect.close();
+      this.branchselect.close();
+      this.yearselect.close();
+      this.semselect.close();
     });
     // this.viewController.onWillDismiss(() => {
     //   this.courseselect.close();

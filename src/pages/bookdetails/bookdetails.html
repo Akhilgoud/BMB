@@ -104,7 +104,7 @@
         </div>
       </div>
     </div>
-    <div class="buy-book-button" *ngIf="!showSellerInfo && bookObj.uid != userInfo.uid">
+    <div class="buy-book-button" *ngIf="!showSellerInfo">
       <button ion-button class="btn-buy" (click)="sellerDetails(book)"> Buy This Book</button>
     </div>
 
