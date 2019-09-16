@@ -20,6 +20,7 @@ export class BookdetailsPage {
     userInfo = this.userInfoService.getUserInfo();
     deregisterFunction: any;
     showSellerInfo: boolean = false;
+    bookURL = "https://play.google.com/store/apps/details?id=com.TAGIdeas.BMB";
 
     constructor(public platform: Platform,
         public navCtrl: NavController,
@@ -125,7 +126,7 @@ export class BookdetailsPage {
     }
 
     share() {
-        this.socialSharing.share(this.getShareMessageBody(), 'Interested to buy ' + this.bookObj.name, '', null).then(() => {
+        this.socialSharing.share(this.getShareMessageBody(), 'Interested to buy ' + this.bookObj.name, '', this.bookURL).then(() => {
             console.log('Share')
         }).catch((err) => {
             console.log('error sharing book');
@@ -174,7 +175,7 @@ export class BookdetailsPage {
         msg = msg + "Book Name: " + this.bookObj.name + ' \n';
         msg = msg + "Book Price: " + this.bookObj.price + '\n';
         msg = msg + "Please let me know where and how can I collect it.";
-        msg = msg + "-Thanks";
+        msg = msg + "-Thanks\n";
         return msg;
     }
 
@@ -182,7 +183,7 @@ export class BookdetailsPage {
         var msg = "Hi, Found a great book in Buy My Book app. \n";
         msg = msg + "Book Name: " + this.bookObj.name + ' \n';
         msg = msg + "Book Price: " + this.bookObj.price + '\n';
-        msg = msg + "Do check it out.";
+        msg = msg + "Do check it out.\n";
         return msg;
     }
 }
