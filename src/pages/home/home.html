@@ -19,7 +19,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-searchbar (ionInput)="filterItems($event)" (ionCancel)="showSearchBox = false" *ngIf="showSearchBox"
+  <ion-searchbar (ionInput)="filterItems($event)" (ionCancel)="showSearchBox = false" *ngIf="showSearchBox" (ionCancel)="onCancelSearch($event)"
     #mainSearchbar [(ngModel)]="searchText">
   </ion-searchbar>
 </ion-header>

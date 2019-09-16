@@ -45,7 +45,7 @@
                     <ion-option value="BTECH">B.Tech</ion-option>
                     <ion-option value="DEGREE">Degree</ion-option>
                     <ion-option value="BCOM">B.Com</ion-option>
-  
+
                   </ion-select> -->
           </ion-item>
           <ion-item *ngIf="filterObj.course && lookupData?.subcourse?.length">
@@ -168,7 +168,7 @@
     </ion-list>
     <!-- <ion-searchbar #searchbar></ion-searchbar> -->
   </div>
-  <div class="filterfooter" style="float:right; padding: 13px 0px;">
+  <div class="filterfooter" style="float:right; padding: 20px 5px 35px 0px;">
     <button ion-button round (click)="resetFilters()">Clear Filters</button>
     <button ion-button round (click)="applyFilters()" [disabled]="minmaxError()">Apply
       Filters</button>

@@ -24,6 +24,7 @@ export class HomePage {
   private showFilterIcon: boolean = true;
   private pageTitle: string = "";
   private deregisterFunction: any;
+  private searchText: string = "";
 
   constructor(public navCtrl: NavController,
     public platform: Platform,
@@ -80,6 +81,11 @@ export class HomePage {
     else if (this.rootPage == this.mypostsPage)
       this.myPostsPageService.filterItems(ev);
 
+  }
+
+  onCancelSearch(ev: any) {
+    this.searchText = "";
+    this.filterItems(ev)
   }
 
   ionViewDidLeave() {
