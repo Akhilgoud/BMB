@@ -24,7 +24,7 @@ export class SidenavPage {
   userObj: any = {};
   pages: any = [];
   err: any;
-  playStoreURL = "https://play.google.com/apps/internaltest/4700268196536219940";
+  playStoreURL = "https://play.google.com/store/apps/details?id=com.TAGIdeas.BMB";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -60,7 +60,7 @@ export class SidenavPage {
   }
 
   shareApp() {
-    this.socialSharing.share(this.getShareMessageBody(), 'Buy My Book App ', '', null).then(() => {
+    this.socialSharing.share(this.getShareMessageBody(), 'Buy My Book App ', '', this.playStoreURL).then(() => {
       console.log('Share');
     }).catch((err) => {
       console.log('error sharing book');
