@@ -41,19 +41,17 @@
           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
         </div>
       </ng-container>
-      <ion-item>
         <ion-row>
-          <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!signup_form.valid">Sign
+          <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!signup_form.valid" style="margin-left:12%">Sign
             Up</button>
         </ion-row>
-        <ion-row><span style="font-family: serif;color: #999;margin-left: 10%;margin-top: 2%;">Already have an
+        <ion-row><span style="font-family: serif;color: #999;margin-left: 20%;margin-top: 4%;">Already have an
             account?</span>
           <a (click)="isRegister=forgotPwd=false;isLogin=true;"
-            style="color: #663399; margin-left: 5px;margin-top: 6px;">Sign In</a> </ion-row>
+            style="color: #663399; margin-left: 10px;margin-top: 13px;">Sign In</a> </ion-row>
         <ion-row>
           <div *ngIf="authRes == 'INVALID'" class="authError">Email Already Exits</div>
         </ion-row>
-      </ion-item>
     </form>
   </div>
 
@@ -87,7 +85,6 @@
           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
         </div>
       </ng-container>
-      <ion-item>
         <ion-row>
           <ion-col>
             <button ion-button (click)="authorize()" full class="signinbtn" [disabled]="!login_form.valid"><b>Sign
@@ -106,7 +103,6 @@
           <div *ngIf="authRes == 'WC'" class="authError">Incorrect email or password</div>
           <div *ngIf="authRes == '501'" class="authError">Failed to Authorize. Please try again later</div>
         </ion-row>
-      </ion-item>
     </form>
   </div>
 
@@ -127,10 +123,9 @@
           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
         </div>
       </ng-container>
-      <ion-item>
         <ion-row>
           <ion-col>
-            <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn"
+            <button ion-button (click)="forgotPwdSubmit()" full class="signinbtn" style="margin-left:12%"
               [disabled]="!forgot_password_form.valid">
               Submit
             </button>
@@ -141,7 +136,6 @@
           <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
           <span style="color:#663399" (click)="isRegister=true;isLogin=forgotPwd=false">Sign Up</span>
         </ion-row>
-      </ion-item>
 
       <div *ngIf="forgotPwdSuccess" class="fgtPwdSuc">OTP has been sent to your Email. <br>
         <a (click)="gotoChangePwd()" class="presshere">Press here</a> to redirect to change password page!
