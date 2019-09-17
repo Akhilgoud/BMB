@@ -3,7 +3,7 @@
     <ion-toolbar>
       <ion-title>
         <span class="side-nav-welcome-text" *ngIf="!userObj.name">
-          Hello!
+          Hello. Sign In
         </span>
         <div class="side-nav-profile" *ngIf="userObj.name">
           <ion-row>
@@ -51,12 +51,6 @@
         *ngIf="userObj.uid">
         <span class="side-nav-icon-text">My Books</span>
       </ion-icon>
-      <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()"
-        *ngIf="userObj.uid">
-        <span class="side-nav-icon-text">Sign Out</span>
-      </ion-icon>
-      <div class="app-applications">
-        <div class="app-text">Applications</div>
         <ion-icon class="side-nav-icon" name="share" item-left ion-item menuClose (click)="shareApp()">
           <span class="side-nav-icon-text">Share this App</span>
         </ion-icon>
@@ -64,7 +58,9 @@
           *ngFor="let p of pages" (click)="p.func()">
           <span class="side-nav-icon-text">{{p.title}}</span>
         </ion-icon>
-      </div>
+        <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()" *ngIf="userObj.uid">
+           <span class="side-nav-icon-text">Sign Out</span>
+      </ion-icon>
     </ion-list>
   </ion-content>
 </ion-menu>

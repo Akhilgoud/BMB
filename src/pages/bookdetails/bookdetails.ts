@@ -126,7 +126,7 @@ export class BookdetailsPage {
     }
 
     share() {
-        this.socialSharing.share(this.getShareMessageBody(), 'Interested to buy ' + this.bookObj.name, '', this.bookURL).then(() => {
+        this.socialSharing.share(this.getShareMessageBody(), 'Buy my book ' + this.bookObj.name, '', this.bookURL).then(() => {
             console.log('Share')
         }).catch((err) => {
             console.log('error sharing book');
@@ -137,7 +137,7 @@ export class BookdetailsPage {
         // Check if sharing via email is supported
         let emailTo = this.bookObj.bookContact[0].email;
         this.socialSharing.canShareViaEmail().then(() => {
-            this.socialSharing.shareViaEmail(this.getMessageBody(), 'Interested to buy ' + this.bookObj.name, [emailTo]).then(() => {
+            this.socialSharing.shareViaEmail(this.getMessageBody(), 'Interested in buying ' + this.bookObj.name, [emailTo]).then(() => {
                 console.log('email working')
             }).catch((err) => {
                 // alert(JSON.stringify(err))
@@ -171,11 +171,16 @@ export class BookdetailsPage {
     // }
 
     getMessageBody() {
-        var msg = "Hi, I am interested in buying this Book. \n";
+        var msg = "Hi, " + this.bookObj.bookContact[0].userName + "\n";
+        msg = msg + "I am interested in buying this Book. \n";
         msg = msg + "Book Name: " + this.bookObj.name + ' \n';
         msg = msg + "Book Price: " + this.bookObj.price + '\n';
-        msg = msg + "Please let me know where and how can I collect it.";
-        msg = msg + "-Thanks\n";
+        this.bookObj.price = 0
+           ? msg = msg + "Thank you for giving it for free." + '\n'
+           :""
+        msg = msg + "Please let me know where and how can I collect it." + '\n';
+        msg = msg + "Thanks\n";
+        msg = msg + "- " + this.userInfo.name + "\n";
         return msg;
     }
 
@@ -184,6 +189,8 @@ export class BookdetailsPage {
         msg = msg + "Book Name: " + this.bookObj.name + ' \n';
         msg = msg + "Book Price: " + this.bookObj.price + '\n';
         msg = msg + "Do check it out.\n";
+        msg = msg + "\n";
+        msg = msg + "Get it from: " + this.bookURL;
         return msg;
     }
 }

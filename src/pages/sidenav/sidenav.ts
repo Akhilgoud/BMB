@@ -24,7 +24,7 @@ export class SidenavPage {
   userObj: any = {};
   pages: any = [];
   err: any;
-  playStoreURL = "https://play.google.com/store/apps/details?id=com.TAGIdeas.BMB";
+  playStoreURL: string = "https://play.google.com/store/apps/details?id=com.TAGIdeas.BMB";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -76,6 +76,7 @@ export class SidenavPage {
   getShareMessageBody() {
     var msg = "Found this great APP.\nYou can buy or sell your old books in 'Buy My Book' app.\n";
     msg = msg + "Do check it out.\n";
+    msg = msg + "Download from: " + this.playStoreURL;
     return msg;
   }
 
