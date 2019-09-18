@@ -21,9 +21,9 @@ export class HideContentDirective {
 
   ngOnInit() {
     this.bandHight = this.passContentToHide.clientHeight;
-    this.renderer.setElementStyle(this.passContentToHide, 'webkitTransition', 'top 800ms');
+    this.renderer.setElementStyle(this.passContentToHide, 'webkitTransition', 'top 400ms');
     this.scrollContent = this.element.nativeElement.getElementsByClassName('scroll-content')[0];
-    this.renderer.setElementStyle(this.scrollContent, 'webkitTransition', 'margin-top 800ms');
+    this.renderer.setElementStyle(this.scrollContent, 'webkitTransition', 'margin-top 400ms');
   }
 
   onContentScroll(event) {
