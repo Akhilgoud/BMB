@@ -58,6 +58,34 @@ filter-books {
     .filterfooter .button-md {
         text-transform: none;
     }
+    .filterfooter {
+        float:right;
+        padding: 23px 30px 35px 0px;
+    }
+    .filter-footer-btn-clear {
+        height: 28px;
+        text-transform: none;
+    }
+    .filter-footer-btn-apply {
+        background-color: #13847d;
+        height: 28px;
+        text-transform: none;
+    }
+
+    .filter-items-default, .filter-items-min-max {
+        width: 80%;
+        margin-left: 10%;
+        font-size: 0.9em;
+    }
+    .filter-items-min-max {
+
+    }
+    .filter-items-dropdowns {
+      width: 80%;
+      margin-left: 10%;
+      font-size: 0.9em;
+      margin: 5px 0px 0px 33px;
+    }
 }
 
 /* Popover CSS outside filter books*/
