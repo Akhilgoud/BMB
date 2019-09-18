@@ -51,16 +51,17 @@
         *ngIf="userObj.uid">
         <span class="side-nav-icon-text">My Books</span>
       </ion-icon>
+      <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()"
+        *ngIf="userObj.uid">
+        <span class="side-nav-icon-text">Sign Out</span>
+      </ion-icon>
+      <div style="margin: 0;border-bottom: 1px solid #7eadca;"> </div>
       <ion-icon class="side-nav-icon" name="share" item-left ion-item menuClose (click)="shareApp()">
         <span class="side-nav-icon-text">Share this App</span>
       </ion-icon>
       <ion-icon class="side-nav-icon" size="small" name="{{p.icon}}" item-left ion-item menuClose
         *ngFor="let p of pages" (click)="p.func()">
         <span class="side-nav-icon-text">{{p.title}}</span>
-      </ion-icon>
-      <ion-icon class="side-nav-icon" name="log-out" item-left ion-item menuClose (click)="logout()"
-        *ngIf="userObj.uid">
-        <span class="side-nav-icon-text">Sign Out</span>
       </ion-icon>
     </ion-list>
   </ion-content>
