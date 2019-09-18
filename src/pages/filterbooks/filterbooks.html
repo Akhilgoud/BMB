@@ -30,7 +30,7 @@
             Book</ion-badge>
           <ion-badge item-end class="badges" [ngClass]="{'badgeselected': filterObj.bookType['STUDYMATERIAL'] === true}"
             (click)="bookTypeClicked($event, 'STUDYMATERIAL')">Study Materials</ion-badge> -->
-       <div class="filter-items-dropdowns">
+      <div class="filter-items-dropdowns">
         <ion-list>
           <ion-item>
             <ion-label floating>Select a course from list</ion-label>
@@ -100,7 +100,7 @@
                 <ion-input type="text" [(ngModel)]="filterObj.year"></ion-input>
               </ion-item> -->
         </ion-list>
-       </div>
+      </div>
     </ion-list>
     <ion-list *ngSwitchCase="'N'">
       <div class="badgesDiv">
@@ -158,7 +158,8 @@
         </ion-item> -->
       <ion-item>
         <ion-label floating>Area</ion-label>
-        <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="filterObj.address"></ion-input>
+        <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="filterObj.address"
+          (blur)="autocompleteItems.length = 0"></ion-input>
       </ion-item>
       <ion-list [hidden]="autocompleteItems.length == 0">
         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
@@ -170,7 +171,8 @@
   </div>
   <div class="filterfooter">
     <button ion-button round (click)="resetFilters()" class="filter-footer-btn-clear">Clear</button>
-    <button ion-button round (click)="applyFilters()" [disabled]="minmaxError()" class="filter-footer-btn-apply">Apply</button>
+    <button ion-button round (click)="applyFilters()" [disabled]="minmaxError()"
+      class="filter-footer-btn-apply">Apply</button>
   </div>
 </div>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script> -->

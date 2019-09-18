@@ -86,10 +86,9 @@
               </ion-option>
             </ion-select>
           </ion-item> -->
-          <ion-item>
+          <ion-item *ngIf="bookObj.isAcademic">
             <ion-label color="primary" floating>Book Type*</ion-label>
-            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType"
-              [disabled]="!bookObj.isAcademic">
+            <ion-select formControlName="bookType" interface="popover" [(ngModel)]="bookObj.bookType">
               <ng-container *ngIf="bookObj.isAcademic =='Y'">
                 <ion-option *ngFor="let obj of lookupData?.BOOKTYPES?.ACADEMIC" [value]="obj.key">
                   {{obj.value}}
@@ -210,7 +209,7 @@
           <ion-item>
             <ion-label color="primary" floating>Address</ion-label>
             <ion-input type="text" formControlName="address" (ngModelChange)="updateSearchResults()"
-              [(ngModel)]="bookObj.address"></ion-input>
+              [(ngModel)]="bookObj.address" (blur)="autocompleteItems.length = 0"></ion-input>
           </ion-item>
           <ion-list [hidden]="autocompleteItems.length == 0">
             <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
@@ -222,7 +221,7 @@
             <ion-input type="text" formControlName="landmark" [(ngModel)]="bookObj.landmark"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label color="primary" floating>Pincode*</ion-label>
+            <ion-label color="primary" floating>Pincode</ion-label>
             <ion-input formControlName="pincode" [(ngModel)]="bookObj.pincode" type="number"></ion-input>
           </ion-item>
           <ion-item>
@@ -242,9 +241,11 @@
     </ion-row>
     <ion-row>
       <ion-col offset-4>
-        <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" *ngIf="!isUpdatePage" class="btn-postbook">submit</button>
+        <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" *ngIf="!isUpdatePage"
+          class="btn-postbook">submit</button>
         <button ion-button (click)="cancel()" *ngIf="isUpdatePage" class="btn-postbook">Cancel</button>
-        <button ion-button (click)="update()" [disabled]="!postbookForm.valid" *ngIf="isUpdatePage" class="btn-postbook">Update</button>
+        <button ion-button (click)="update()" [disabled]="!postbookForm.valid" *ngIf="isUpdatePage"
+          class="btn-postbook">Update</button>
         <!-- <button ion-button (click)="submit()" [disabled]="!postbookForm.valid" >submit</button> -->
       </ion-col>
     </ion-row>

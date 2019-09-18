@@ -90,7 +90,6 @@
     <plugin name="cordova-plugin-ios-camera-permissions" spec="^1.2.0" />
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.0" />
-    <plugin name="phonegap-plugin-barcodescanner" spec="~8.0.1" />
     <plugin name="cordova-sqlite-storage" spec="^3.2.1" />
     <engine name="browser" spec="~5.0.3" />
     <engine name="ios" spec="^5.0.1" />

@@ -130,7 +130,7 @@ export class PostbookPage {
             address: new FormControl(false),
             landmark: new FormControl(false),
             pincode: new FormControl({ value: '' },
-                [Validators.required, Validators.minLength(5)]),
+                [Validators.minLength(5)]),
             college: new FormControl(false),
 
         });
@@ -170,7 +170,7 @@ export class PostbookPage {
             phoneNo: [''],
             address: [''],
             landmark: [''],
-            pincode: ['', Validators.required],
+            pincode: [''],
             college: ['']
         });
     }
@@ -358,23 +358,23 @@ export class PostbookPage {
             if (barcodeData) {
                 this.postbookApi.getBookdataFromBarCode(barcodeData.text).subscribe(
                     response => {
-                        if (response.totalItems > 0) {
+                        if (response && response.totalItems > 0 && response.items[0] && response.items[0]["volumeInfo"] && response.items[0]["volumeInfo"]["title"] != 'ISBN Review') {
                             obj.bookObj.name = response.items[0]["volumeInfo"]["title"];
                             obj.bookObj.author = response.items[0]["volumeInfo"]["authors"];
                             obj.bookObj.publisher = response.items[0]["volumeInfo"]["publisher"];
                             obj.bookObj.description = response.items[0]["volumeInfo"]["description"];
                         } else {
-                            obj.bookObj = null;
+                            // obj.bookObj = null;
                             let alert = this.alertCtrl.create({
-                                title: 'message',
-                                subTitle: 'Sorry! Cannot fetch this book!',
+                                title: 'Sorry!',
+                                subTitle: 'Cannot fetch this book!',
                                 buttons: ['Dismiss']
                             });
                             alert.present();
                         }
                     },
                     error => {
-                        obj.bookObj = null;
+                        // obj.bookObj = null;
                         console.log(error)
                     }
                 )
