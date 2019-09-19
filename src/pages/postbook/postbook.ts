@@ -355,7 +355,7 @@ export class PostbookPage {
             bookObj: this.bookObj,
         };
         this.barcodeScanner.scan().then(barcodeData => {
-            if (barcodeData) {
+            if (barcodeData.text) {
                 this.postbookApi.getBookdataFromBarCode(barcodeData.text).subscribe(
                     response => {
                         if (response && response.totalItems > 0 && response.items[0] && response.items[0]["volumeInfo"] && response.items[0]["volumeInfo"]["title"] != 'ISBN Review') {
