@@ -76,7 +76,7 @@ export class SidenavPage {
   getShareMessageBody() {
     var msg = "Found this great APP.\nYou can buy or sell your old books in 'Buy My Book' app.\n";
     msg = msg + "Do check it out.\n";
-    msg = msg + "Download from: " + this.playStoreURL;
+    msg = msg + "Download from: ";
     return msg;
   }
 

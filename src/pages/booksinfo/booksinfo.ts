@@ -266,6 +266,8 @@ export class BooksinfoPage {
   }
 
   doRefresh(refresher) {
+    this.getBooksCount();
+
     console.log('Begin async operation', refresher);
     // this.pageOffset = 0;
     //  this.pageLimit = 4;

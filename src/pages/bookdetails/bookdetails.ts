@@ -174,10 +174,10 @@ export class BookdetailsPage {
         var msg = "Hi, " + this.bookObj.bookContact[0].userName + "\n";
         msg = msg + "I am interested in buying this Book. \n";
         msg = msg + "Book Name: " + this.bookObj.name + ' \n';
-        msg = msg + "Book Price: " + this.bookObj.price + '\n';
+        msg = msg + "Book Price: " + (this.bookObj.price == 0 ? 'FREE' : this.bookObj.price) + '\n';
         this.bookObj.price = 0
-           ? msg = msg + "Thank you for giving it for free." + '\n'
-           :""
+            ? msg = msg + "Thank you for giving it for free." + '\n'
+            : ""
         msg = msg + "Please let me know where and how can I collect it." + '\n';
         msg = msg + "Thanks\n";
         msg = msg + "- " + this.userInfo.name + "\n";
@@ -187,10 +187,10 @@ export class BookdetailsPage {
     getShareMessageBody() {
         var msg = "Hi, Found a great book in Buy My Book app. \n";
         msg = msg + "Book Name: " + this.bookObj.name + ' \n';
-        msg = msg + "Book Price: " + this.bookObj.price + '\n';
+        msg = msg + "Book Price: " + (this.bookObj.price == 0 ? 'FREE' : this.bookObj.price) + '\n';
         msg = msg + "Do check it out.\n";
         msg = msg + "\n";
-        msg = msg + "Get it from: " + this.bookURL;
+        msg = msg + "Get it from: ";
         return msg;
     }
 }
