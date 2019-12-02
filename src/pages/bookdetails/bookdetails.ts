@@ -7,6 +7,9 @@ import { HomePageService } from '../home/home.service';
 import { PostbookPage } from "../postbook/postbook";
 import { PostBookDataService } from "../postbook/postbookdata.service";
 import { LoginPage } from "../login/login";
+import { BooksinfoPageService } from '../booksinfo/booksinfo.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
     selector: 'page-bookdetails',
@@ -28,6 +31,7 @@ export class BookdetailsPage {
         public userInfoService: UserInfoService,
         public homePageService: HomePageService,
         public postBookDataService: PostBookDataService,
+        public booksinfoPageService: BooksinfoPageService,
         public viewCtrl: ViewController,
         private callSvc: CallNumber,
         private socialSharing: SocialSharing) {
@@ -77,6 +81,7 @@ export class BookdetailsPage {
         if (!this.userInfo || !this.userInfo.uid) {
             this.showSellerInfo = false;
             this.viewCtrl.dismiss();
+            this.booksinfoPageService.setLastOpenedBook(this.bookObj);
             this.homePageService.setPage(LoginPage);
         } else {
             this.showSellerInfo = true

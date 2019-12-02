@@ -216,9 +216,12 @@ export class FilterBooks {
         console.log(response);
         this.autocompleteItems = [];
         if (response && response.candidates) {
-          response.candidates.forEach((val) => {
-            this.autocompleteItems.push(val);
-          });
+          this.autocompleteItems = response.candidates;
+          // response.candidates.forEach((val) => {
+          //   var obj;
+          //   obj = val.address;
+          //   this.autocompleteItems.push(obj);
+          // });
         }
       }, error => {
         console.log(error);

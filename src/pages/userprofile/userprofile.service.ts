@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+import { SERVER_URL } from '../../shared/Constants';
+
 
 @Injectable()
 export class UserProfileApi {
 
     constructor(private http: Http) { }
-    private updateProfileUrl = 'https://floating-cliffs-67240.herokuapp.com/updateProfile';
+    private updateProfileUrl = SERVER_URL + '/updateProfile';
 
     updateProfile(obj) {
         let headers = new Headers();

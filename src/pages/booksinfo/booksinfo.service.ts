@@ -6,6 +6,7 @@ export class BooksinfoPageService {
     private booksList: any;
     private tempBooksList: any;
     private booksCount: any;
+    private lastOpenendBook: any;
 
     booksListChange: Subject<any> = new Subject<any>();
 
@@ -67,5 +68,13 @@ export class BooksinfoPageService {
         }
         this.booksListChange.next(this.booksList);
 
+    }
+
+    setLastOpenedBook(book) {
+        this.lastOpenendBook = book;
+    }
+
+    getLastOpenedBook() {
+        return this.lastOpenendBook;
     }
 }

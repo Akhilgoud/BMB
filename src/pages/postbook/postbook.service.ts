@@ -4,14 +4,16 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+import { SERVER_URL } from '../../shared/Constants';
+
 
 @Injectable()
 export class PostbookApi {
 
   constructor(private http: Http) { }
-  private postbookUrl = 'https://floating-cliffs-67240.herokuapp.com/postbook';
-  private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookInfo';
-  private baseUrl = 'https://floating-cliffs-67240.herokuapp.com/';
+  private postbookUrl = SERVER_URL + '/postbook';
+  private updateBookUrl = SERVER_URL + '/updateBookInfo';
+  private baseUrl = SERVER_URL;
 
 
 
@@ -56,7 +58,7 @@ export class PostbookApi {
     headers.append('Content-type', 'application/json');
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(this.baseUrl + 'lookupData', options)
+    return this.http.get(this.baseUrl + '/lookupData', options)
       .map(response => {
         return response.json();
       })

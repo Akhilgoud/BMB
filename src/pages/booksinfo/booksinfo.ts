@@ -51,6 +51,10 @@ export class BooksinfoPage {
     //   }
     // });
 
+    var selectedBook = this.booksinfoPageService.getLastOpenedBook();
+    this.booksinfoPageService.setLastOpenedBook(null);
+    if (selectedBook) this.goToDetailsPage(selectedBook);
+
     this.filterBooksService.filterObjChange.subscribe(
       data => {
         this.filterObj = data;

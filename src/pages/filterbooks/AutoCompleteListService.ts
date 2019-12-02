@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Rx';
+import { SERVER_URL } from '../../shared/Constants';
+
 
 @Injectable()
 export class AutoCompleteListService implements AutoCompleteService {
@@ -29,7 +31,7 @@ export class AutoCompleteListService implements AutoCompleteService {
   }
 
   collegeAutoComplete(keyword: string) {
-    return this.http.get("https://floating-cliffs-67240.herokuapp.com/collegeAutoComplete/" + keyword)
+    return this.http.get(SERVER_URL + "/collegeAutoComplete/" + keyword)
       .map(
         result => {
           return result.json();

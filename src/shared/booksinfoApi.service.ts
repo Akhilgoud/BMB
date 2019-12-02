@@ -4,14 +4,16 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+import { SERVER_URL } from '../shared/Constants';
+
 
 @Injectable()
 export class BooksInfoApi {
 
     constructor(private http: Http) { }
-    private booksinfoUrl = 'https://floating-cliffs-67240.herokuapp.com/booksinfo';
-    private updateBookUrl = 'https://floating-cliffs-67240.herokuapp.com/updateBookStatus';
-    private bookCountUrl = 'https://floating-cliffs-67240.herokuapp.com/getBooksCount';
+    private booksinfoUrl = SERVER_URL + '/booksinfo';
+    private updateBookUrl = SERVER_URL + '/updateBookStatus';
+    private bookCountUrl = SERVER_URL + '/getBooksCount';
 
     offsetConst = 0; limitConst = 6;
 

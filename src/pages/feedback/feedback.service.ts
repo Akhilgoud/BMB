@@ -4,12 +4,13 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+import { SERVER_URL } from '../../shared/Constants';
 
 @Injectable()
 export class FeedbackApi {
 
     constructor(private http: Http) { }
-    private feedbackUrl = 'https://floating-cliffs-67240.herokuapp.com/feedback';
+    private feedbackUrl = SERVER_URL + '/feedback';
 
     postFeedback(obj) {
         let headers = new Headers();

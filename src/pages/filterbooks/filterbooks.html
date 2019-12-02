@@ -158,11 +158,10 @@
         </ion-item> -->
       <ion-item>
         <ion-label floating>Area</ion-label>
-        <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="filterObj.address"
-          (blur)="autocompleteItems.length = 0"></ion-input>
+        <ion-input type="text" (ngModelChange)="updateSearchResults()" [(ngModel)]="filterObj.address"></ion-input>
       </ion-item>
       <ion-list [hidden]="autocompleteItems.length == 0">
-        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+        <ion-item *ngFor="let item of autocompleteItems" (click)="selectSearchResult(item)">
           {{ item.address }}
         </ion-item>
       </ion-list>

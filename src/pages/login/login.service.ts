@@ -4,14 +4,16 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
+import { SERVER_URL } from '../../shared/Constants';
+
 
 @Injectable()
 export class LoginApi {
 
     constructor(private http: Http) { }
-    private authorizeUrl = 'https://floating-cliffs-67240.herokuapp.com/login';
-    private registerUrl = 'https://floating-cliffs-67240.herokuapp.com/register';
-    private baseUrl = 'https://floating-cliffs-67240.herokuapp.com/';
+    private authorizeUrl = SERVER_URL + '/login';
+    private registerUrl = SERVER_URL + '/register';
+    private baseUrl = SERVER_URL;
 
 
     RegisterUser(obj) {
@@ -42,7 +44,7 @@ export class LoginApi {
         headers.append('Content-type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(this.baseUrl + "forgotPwd/" + email, options)
+        return this.http.get(this.baseUrl + "/forgotPwd/" + email, options)
             .map(response => {
                 return response.json();
             })
